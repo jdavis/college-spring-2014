@@ -1,0 +1,126 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{changepage}
+\usepackage{lineno}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength{\floatsep}{100pt}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\algrenewcomment[1]{\hfill // #1}
+
+\setlength\parindent{0pt}
+
+\hypersetup{colorlinks=true}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\solution}{{\large \bfseries Solution}}
+
+\newcommand{\hmwkTitle}{Homework\ \#8}
+\newcommand{\hmwkDueDate}{January 22, 2014}
+\newcommand{\hmwkClass}{Stat330}
+\newcommand{\hmwkClassTime}{Section A}
+\newcommand{\hmwkClassInstructor}{Cory Lanker}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+
+\begin{homeworkProblem}
+
+    \textbf{Part A}
+
+    Evaluate \(\sum_{k=1}^{5} k^2\) and \(\sum_{k=1}^{5} (k - 1)^2\).
+
+    \solution
+
+    \textbf{Part B}
+
+    Find the derivative of \(f(x) = x^4 + 3x^2 - 2\)
+
+    \solution
+
+    \textbf{Part C}
+
+    Find the derivative of \(f(x) = 1 - e^{-\lambda x}\).
+
+    \solution
+
+    \textbf{Part D}
+
+    Evaluate the integrals \(\int_0^1 (1 - x^2) \mathrm{d}x\) and \(\int_1^{\infty} \frac{1}{x^2} \mathrm{d}x\).
+
+    \solution
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\end{document}
