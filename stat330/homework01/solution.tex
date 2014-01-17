@@ -184,10 +184,46 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Examples of sample spaces.
+    \\
 
     \part
 
-    Evaluate \(\sum_{k=1}^{5} k^2\) and \(\sum_{k=1}^{5} (k - 1)^2\).
+    Driving to work and passing through 3 intersections.
+    \\
+
+    \solution
+
+    \[
+        \Omega =  \left\{ ccc, ccs, csc, css, scc, scs, ssc, sss  \right\}
+    \]
+    \\
+
+    \part
+
+    What is the probability that she doesn't stop?
+
+    \[
+        \Pr(\mbox{no stops}) = \frac{\left| \left\{ ccc \right\} \right| }{\left| \Omega \right|} = \frac{1}{8}
+    \]
+    \\
+
+    \part
+
+    Let \(A\) be the event that the commuter stops at the first light. Let
+    \(B\) be the event that the commuter stops at the second light.
+    \\
+
+    \solution
+
+    \begin{enumerate}
+        \item \(A = \left\{ scc, scs, ssc, sss \right\}\)
+        \item \(B = \left\{ csc, css, ssc, sss \right\}\)
+        \item \(\overline{B} = \left\{ ccc, ccs, scc, scs \right\}\)
+        \item \(A \cup B = \left\{ scc, scs, csc, css, ssc, sss \right\}\)
+        \item \(A \cap B = \left\{ ssc, sss \right\}\)
+        \item \(A \cap \overline{B} = \left\{ scc, scs \right\}\)
+    \end{enumerate}
 
 \end{homeworkProblem}
 
