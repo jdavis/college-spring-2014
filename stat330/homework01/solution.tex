@@ -54,7 +54,7 @@
 
 \setcounter{secnumdepth}{0}
 \newcounter{partCounter}
-\newcounter{homeworkProblemCounter}[partCounter]
+\newcounter{homeworkProblemCounter}
 \setcounter{homeworkProblemCounter}{1}
 \nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
 
@@ -168,16 +168,16 @@
     \]
 
     \[
-    \begin{split}
-        \int_1^\infty \frac{1}{x^2} \dx
-        &= \lim_{b \to \infty} \int_1^b \frac{1}{x^2} \dx
-        \\
-        &= \lim_{b \to \infty} \left. - \frac{1}{x} \right|_1^b
-        \\
-        &= \lim_{b \to \infty} - \frac{1}{b} + \frac{1}{1}
-        \\
-        &= 1
-    \end{split}
+        \begin{split}
+            \int_1^\infty \frac{1}{x^2} \dx
+            &= \lim_{b \to \infty} \int_1^b \frac{1}{x^2} \dx
+            \\
+            &= \lim_{b \to \infty} \left. - \frac{1}{x} \right|_1^b
+            \\
+            &= \lim_{b \to \infty} - \frac{1}{b} + \frac{1}{1}
+            \\
+            &= 1
+        \end{split}
     \]
 \end{homeworkProblem}
 
