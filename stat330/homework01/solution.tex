@@ -59,12 +59,12 @@
 
 \newenvironment{homeworkProblem}{
     \section{Problem \arabic{homeworkProblemCounter}}
+    \newcounter{partCounter}
+    \setcounter{partCounter}{1}
     \enterProblemHeader{homeworkProblemCounter}
 }{
     \exitProblemHeader{homeworkProblemCounter}
 }
-
-\newcommand{\solution}{{\large \bfseries Solution}}
 
 \newcommand{\hmwkTitle}{Homework\ \#1}
 \newcommand{\hmwkDueDate}{January 22, 2014}
@@ -85,6 +85,10 @@
 \date{}
 
 \newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#2)}
+\newcommand{\part}[1]{\textbf{Part \Alph{partCounter}}}
+\newcommand{\solution}{{\large \bfseries Solution}}
+
 
 \begin{document}
 
@@ -131,15 +135,33 @@
 
     \solution
 
-    \textbf{Part C}
+    \[
+        \begin{split}
+            \deriv{x^4 + 3x^2 - 2} &=
+            \\
+            &= 4x^3 + 6x
+        \end{split}
+    \]
+
+    \part{D}
 
     Find the derivative of \(f(x) = 1 - \mathrm{e}^{-\lambda x}\).
 
     \solution
 
-    \textbf{Part D}
+    \[
+        \begin{split}
+            \deriv{1 - \mathrm{e}^{-\lambda x}} &=
+            \\
+            &= \lambda \cdot \mathrm{e}^{- \lambda x}
+        \end{split}
+    \]
+
+    \part{D}
 
     Evaluate the integrals \(\int_0^1 (1 - x^2) \mathrm{d}x\) and \(\int_1^{\infty} \frac{1}{x^2} \mathrm{d}x\).
+
+
 
     \solution
 
