@@ -400,4 +400,74 @@
 
 \end{homeworkProblem}
 
+\pagebreak
+
+\begin{homeworkProblem}
+    Employees at a firm, 70\% know C, 60\% know Fortran and 50\% know both.
+    \\
+
+    \part
+
+    Let \(A\) be the event that an employee knows C and \(B\) be the event that
+    employee knows Fortran. Draw a Venn diagram.
+    \\
+
+    \solution
+
+    \vspace{1in}
+
+    \part
+
+    What percentage of programmers do not know Fortran?
+    \\
+
+    \solution
+
+    \[
+        \begin{split}
+            \Pr{(\neg \mbox{F})} &= 1 - \Pr{(\mbox{F})}
+            \\
+            &= 1 - .6
+            \\
+            &= .4
+        \end{split}
+    \]
+
+    \part
+
+    What percentage of programmers do not know Fortran and C?
+    \\
+
+    \solution
+
+    \[
+        \begin{split}
+            \Pr{(\neg \mbox{F} \land \neg \mbox{C})} &= 1 - \Pr(\mbox{F} \lor \mbox{C})
+            \\
+            &= 1 - (\Pr(\mbox{F}) + \Pr(\mbox{C}) - \Pr(\mbox{F} \cap \mbox{C}))
+            \\
+            &= 1 - (.6 + .7 - .5)
+            \\
+            &= .2
+        \end{split}
+    \]
+
+    \part
+
+    What percentage of programmers know Fortran but not C?
+    \\
+
+    \solution
+
+    \[
+        \begin{split}
+            \Pr{(\mbox{F} \land \neg \mbox{C})} &= \Pr{(F)} - \Pr{(\mbox{both})}
+            \\
+            &= .6 - .5
+            \\
+            &= .1
+        \end{split}
+    \]
+\end{homeworkProblem}
+
 \end{document}
