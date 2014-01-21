@@ -12,6 +12,7 @@
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
 \usepackage{hyperref}
+\usepackage{tikz}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -284,7 +285,7 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Venn diagrams.
+    Venn diagrams. The grey areas indicate the solution.
     \\
 
     \part
@@ -294,8 +295,16 @@
 
     \solution
 
-    Solution.
-    \\
+    \begin{tikzpicture}[fill=gray]
+        \begin{scope}
+            \fill (0,0) circle (1);
+            \fill (1,0) circle (1);
+        \end{scope}
+
+        \draw (0,0) circle (1) (0,1)  node [text=black,above] {$A$}
+              (1,0) circle (1) (1,1)  node [text=black,above] {$B$}
+              (-2,-2) rectangle (3,2) node [text=black,above] {};
+    \end{tikzpicture}
 
     \part
 
@@ -304,8 +313,21 @@
 
     \solution
 
-    Solution.
-    \\
+    \begin{tikzpicture}[fill=gray]
+
+        \begin{scope}
+            \fill (-2,-2) rectangle (3,2);
+        \end{scope}
+
+        \begin{scope}
+            \fill[white] (0,0) circle (1)
+                         (1,0) circle (1);
+        \end{scope}
+
+        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
+              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
+              (-2,-2) rectangle (3,2) node [text=black,above] {};
+    \end{tikzpicture}
 
     \part
 
@@ -314,8 +336,22 @@
 
     \solution
 
-    Solution.
-    \\
+    \begin{tikzpicture}[fill=gray]
+
+        \begin{scope}
+            \fill (-2,-2) rectangle (3,2);
+        \end{scope}
+
+        \begin{scope}
+            \fill[white] (0,0) circle (1);
+        \end{scope}
+
+        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
+              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
+              (-2,-2) rectangle (3,2) node [text=black,above] {};
+    \end{tikzpicture}
+
+    \pagebreak
 
     \part
 
@@ -324,7 +360,20 @@
 
     \solution
 
-    Solution.
+    \begin{tikzpicture}[fill=gray]
+
+        \begin{scope}
+            \fill (-2,-2) rectangle (3,2);
+        \end{scope}
+
+        \begin{scope}
+            \fill[white] (1,0) circle (1);
+        \end{scope}
+
+        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
+              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
+              (-2,-2) rectangle (3,2) node [text=black,above] {};
+    \end{tikzpicture}
     \\
 
     \part
@@ -334,7 +383,22 @@
 
     \solution
 
-    Solution.
+    \begin{tikzpicture}[fill=gray]
+
+        \begin{scope}
+            \fill (-2,-2) rectangle (3,2);
+        \end{scope}
+
+        \begin{scope}
+            \fill[white] (0,0) circle (1)
+                         (1,0) circle (1);
+        \end{scope}
+
+        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
+              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
+              (-2,-2) rectangle (3,2) node [text=black,above] {};
+    \end{tikzpicture}
+
 \end{homeworkProblem}
 
 \end{document}
