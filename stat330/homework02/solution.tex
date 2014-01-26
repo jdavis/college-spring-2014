@@ -212,190 +212,53 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Venn diagrams. The grey areas indicate the solution.
+    A group of 4 undergraduates and 5 graduates are available to fill four
+    student government posts.
     \\
 
     \part
 
-    \(A \cup B\)
+    Find the probability that at least three undergraduates will be among the
+    four chosen assuming the selection was random?
     \\
 
     \solution
-
-    \begin{tikzpicture}[fill=gray]
-        \begin{scope}
-            \fill (0,0) circle (1);
-            \fill (1,0) circle (1);
-        \end{scope}
-
-        \draw (0,0) circle (1) (0,1)  node [text=black,above] {$A$}
-              (1,0) circle (1) (1,1)  node [text=black,above] {$B$}
-              (-2,-2) rectangle (3,2) node [text=black,above] {};
-    \end{tikzpicture}
-
-    \part
-
-    \(\overline{A \cup B}\)
-    \\
-
-    \solution
-
-    \begin{tikzpicture}[fill=gray]
-
-        \begin{scope}
-            \fill (-2,-2) rectangle (3,2);
-        \end{scope}
-
-        \begin{scope}
-            \fill[white] (0,0) circle (1)
-                         (1,0) circle (1);
-        \end{scope}
-
-        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
-              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
-              (-2,-2) rectangle (3,2) node [text=black,above] {};
-    \end{tikzpicture}
-
-    \part
-
-    \(\overline{A}\)
-    \\
-
-    \solution
-
-    \begin{tikzpicture}[fill=gray]
-
-        \begin{scope}
-            \fill (-2,-2) rectangle (3,2);
-        \end{scope}
-
-        \begin{scope}
-            \fill[white] (0,0) circle (1);
-        \end{scope}
-
-        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
-              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
-              (-2,-2) rectangle (3,2) node [text=black,above] {};
-    \end{tikzpicture}
-
-    \pagebreak
-
-    \part
-
-    \(\overline{B}\)
-    \\
-
-    \solution
-
-    \begin{tikzpicture}[fill=gray]
-
-        \begin{scope}
-            \fill (-2,-2) rectangle (3,2);
-        \end{scope}
-
-        \begin{scope}
-            \fill[white] (1,0) circle (1);
-        \end{scope}
-
-        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
-              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
-              (-2,-2) rectangle (3,2) node [text=black,above] {};
-    \end{tikzpicture}
     \\
 
     \part
 
-    \(\overline{A} \cap \overline{B}\)
+    What is the probability of no undergraduates being selected again assuming
+    the selection was random?
     \\
 
     \solution
+    \\
 
-    \begin{tikzpicture}[fill=gray]
+    \part
 
-        \begin{scope}
-            \fill (-2,-2) rectangle (3,2);
-        \end{scope}
+    Later we will talk about a \(p\)-value, which represents the probability
+    happening under certain model assumptions. Here our model assumptions are
+    that the selection process was purely random. It is common that if the
+    \(p\)-value is very low, say less than .05, we reject that our model
+    assumptions are true. Our \(p\)-value here is the result from part b. What
+    does this value say about the model statement that the selections were made
+    at random?
+    \\
 
-        \begin{scope}
-            \fill[white] (0,0) circle (1)
-                         (1,0) circle (1);
-        \end{scope}
-
-        \draw (0,0) circle (1) (0,1)  node [text=white,above] {$A$}
-              (1,0) circle (1) (1,1)  node [text=white,above] {$B$}
-              (-2,-2) rectangle (3,2) node [text=black,above] {};
-    \end{tikzpicture}
+    \solution
 
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    Employees at a firm, 70\% know C, 60\% know Fortran and 50\% know both.
-    \\
-
-    \part
-
-    Let \(A\) be the event that an employee knows C and \(B\) be the event that
-    employee knows Fortran. Draw a Venn diagram.
+    Suppose that there are two events \(A\) and \(B\) in \(\Omega\) such that
+    \(\Pr(A) > 0\) and \(\Pr(B) > 0\).  Further, suppose that the two events are
+    mutually exclusive. Can they also be independent? Explain.
     \\
 
     \solution
 
-    \vspace{1in}
-
-    \part
-
-    What percentage of programmers do not know Fortran?
-    \\
-
-    \solution
-
-    \[
-        \begin{split}
-            \Pr{(\neg \mbox{F})} &= 1 - \Pr{(\mbox{F})}
-            \\
-            &= 1 - .6
-            \\
-            &= .4
-        \end{split}
-    \]
-
-    \part
-
-    What percentage of programmers do not know Fortran and C?
-    \\
-
-    \solution
-
-    \[
-        \begin{split}
-            \Pr{(\neg \mbox{F} \land \neg \mbox{C})} &= 1 - \Pr(\mbox{F} \lor \mbox{C})
-            \\
-            &= 1 - (\Pr(\mbox{F}) + \Pr(\mbox{C}) - \Pr(\mbox{F} \cap \mbox{C}))
-            \\
-            &= 1 - (.6 + .7 - .5)
-            \\
-            &= .2
-        \end{split}
-    \]
-
-    \part
-
-    What percentage of programmers know Fortran but not C?
-    \\
-
-    \solution
-
-    \[
-        \begin{split}
-            \Pr{(\mbox{F} \land \neg \mbox{C})} &= \Pr{(F)} - \Pr{(\mbox{both})}
-            \\
-            &= .6 - .5
-            \\
-            &= .1
-        \end{split}
-    \]
 \end{homeworkProblem}
 
 \pagebreak
