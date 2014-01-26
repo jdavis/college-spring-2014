@@ -130,64 +130,83 @@
 \pagebreak
 
 \begin{homeworkProblem}
-
-\end{homeworkProblem}
-
-\pagebreak
-
-\begin{homeworkProblem}
-    Let \(G\) and \(H\) be disjoint events in some sample space \(\Omega\).
+    Simpson's Paradox.
     \\
 
     \part
 
-    Describe the event \(G \cup H\).
+    A black urn contains 5 red and 6 green balls and a white urn contains 3 red
+    and 4 green balls. You are allowed to choose an urn and then choose a ball
+    at random from the urn. Assume that choosing any ball in the urn is equally
+    likely. If you choose a red ball you ge a prize. Which urn should you
+    choose to draw from?
     \\
 
     \solution
 
-    A new event that includes outcomes in \(G\) \textbf{or} in \(H\).
-    \\
-
-    \part
-
-    What is \(P(G \cup H)\) in terms of \(P(G)\) and \(P(H)\)?
-    \\
-
-    \solution
-
-    Since \(G\) and \(H\) are disjoint, \(P(G \cap H) = 0\):
+    For the black urn, the probability of getting a red is:
 
     \[
-        \begin{split}
-            P(G \cup H) &= P(G) + P(H) - P(G \cap H)
-            \\
-            &= P(G) + P(H) - 0
-            \\
-            &= P(G) + P(H)
-        \end{split}
+        \Pr(\mbox{black})
+        = \frac{5 \mbox{ red}}{5 + 6 \mbox{ total}}
+        = \frac{5}{11} \approx .455
     \]
+
+    \[
+        \Pr(\mbox{white})
+        = \frac{3 \mbox{ red}}{3 + 4 \mbox{ total}}
+        = \frac{3}{7} \approx .429
+    \]
+
+    Therefore we have a higher probability of getting a red from the black urn
+    and should choose from that one.
     \\
 
     \part
 
-    Describe the event \(G \cap H\).
+    A second black urn contains 6 red and 3 green balls and a second white urn
+    contains 9 red and 5 green balls.
     \\
 
     \solution
 
-    A new event that includes the outcomes that happen in event
-    \(G\) \textbf{and} in \(H\).
+    \[
+        \Pr(\mbox{2nd black})
+        = \frac{6 \mbox{ red}}{6 + 3 \mbox{ total}}
+        = \frac{6}{9} \approx .667
+    \]
+
+    \[
+        \Pr(\mbox{2nd white})
+        = \frac{9 \mbox{ red}}{9 + 5 \mbox{ total}}
+        = \frac{9}{14} \approx .643
+    \]
+
+    The 2nd black has a higher probability than the 2nd white so we should
+    choose from that one.
     \\
 
     \part
 
-    What is the probability of event \(G \cap H\)?
+    The two black urns are combined as well as the two white urns.
     \\
 
     \solution
 
-    The probability of \(G \cap H = 0\) because the two events are disjoint.
+    \[
+        \Pr(\mbox{combined black})
+        = \frac{5 + 6 \mbox{ red}}{11 + 9 \mbox{ total}}
+        = \frac{11}{20} \approx .55
+    \]
+
+    \[
+        \Pr(\mbox{combined white})
+        = \frac{3 + 9 \mbox{ red}}{7 + 14 \mbox{ total}}
+        = \frac{12}{21} \approx .571
+    \]
+
+    The combined white urn has a higher probability of getting a red so we
+    should choose that one.
 \end{homeworkProblem}
 
 \pagebreak
