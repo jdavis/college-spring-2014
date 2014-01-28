@@ -298,7 +298,13 @@
     \\
 
     \solution
-    \\
+
+    \[
+        \Pr(A \mid B)
+        = \frac{\Pr(A \cap B)}{\Pr(B)}
+        = \frac{.7}{.8}
+        = .875
+    \]
 
     \part
 
@@ -306,7 +312,11 @@
     \\
 
     \solution
-    \\
+
+    \[
+        \Pr(A)
+        = .75
+    \]
 
     \part
 
@@ -314,6 +324,9 @@
     \\
 
     \solution
+
+    No, \(A\) and \(B\) are not independent because \(\Pr(A \mid B) \ne
+    \Pr(A)\) as our previous parts show.
     \\
 
     \part
@@ -322,15 +335,49 @@
     \\
 
     \solution
-    \\
+
+    \[
+        \Pr(B \mid A)
+        = \frac{\Pr(A \cap B)}{\Pr(A)}
+        = \frac{.7}{.75}
+        \approx .933
+    \]
 
     \part
 
-    Show that \(\Pr(A \mid B) \cdot \Pr(B) = \Pr(B \mid A) \cdot \Pr(A)\).
+    Show that \(\Pr(A \mid B) \Pr(B) = \Pr(B \mid A) \Pr(A)\).
     \\
 
     \solution
-    \\
+
+    \begin{proof}
+        \[
+            \begin{split}
+                \Pr(A \mid B) \Pr(B)
+                &= \frac{\Pr(A \cap B)}{\Pr(B)} \Pr(B)
+                \\
+                &= \Pr(A \cap B)
+                \\
+                &= \frac{\Pr(A \cap B)}{\Pr(A)} \Pr(A)
+                \\
+                &= \Pr(B \mid A) \Pr(A)
+            \end{split}
+        \]
+    \end{proof}
+
+    Using our values:
+
+    \[
+        \begin{split}
+            \Pr(A \mid B) \Pr(B)
+            = (.875)(.8)
+            \approx .700
+            \\
+            \Pr(B \mid A) \Pr(A)
+            = (.933)(.75)
+            \approx .700
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
