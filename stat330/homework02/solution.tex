@@ -223,7 +223,15 @@
     \\
 
     \solution
-    \\
+
+    \[
+        \frac{\mbox{at least 3 undergrads}}{\mbox{total possibilities}}
+        = \frac{\mbox{exactly 3 } + \mbox{ 4 undergrads}}{\mbox{total possibilities}}
+        = \frac{\binom{4}{3} \binom{5}{1} + \binom{4}{4} \binom{5}{0}}{\binom{9}{5}}
+        = \frac{4 \cdot 5 + 1 \cdot 1}{126}
+        = \frac{21}{126}
+        \approx .167
+    \]
 
     \part
 
@@ -232,7 +240,13 @@
     \\
 
     \solution
-    \\
+
+    \[
+        \frac{\mbox{no undergrads}}{\mbox{total possibilities}}
+        = \frac{\binom{4}{0} \binom{5}{4}}{\binom{9}{5}}
+        = \frac{1 \cdot 5}{126}
+        \approx .040
+    \]
 
     \part
 
@@ -247,9 +261,10 @@
 
     \solution
 
+    Since our result from part b was \(\approx .040\) and since that is lower
+    than .05, this says that our assumption that the selection process was
+    purely random was false.
 \end{homeworkProblem}
-
-\pagebreak
 
 \begin{homeworkProblem}
     Suppose that there are two events \(A\) and \(B\) in \(\Omega\) such that
@@ -259,64 +274,15 @@
 
     \solution
 
-\end{homeworkProblem}
-
-\pagebreak
-
-\begin{homeworkProblem}
-    Total 60 students attending University. 9 were living off campus, 36 were
-    undergrads, 3 were undergrads living off campus.
+    We know that \(\Pr(A) > 0\), \(\Pr(B) > 0\), and that \(A\) and \(B\) are
+    mutually exclusive which means that \(A \cap B = \{\}\). So that probability
+    of \(\Pr(A \cap B) = 0\) is by definition.
     \\
 
-    Let \(A\) be the event denoting undergraduates and \(B\) denote living off campus.
-    \[
-        \begin{split}
-            A &= 36
-            \\
-            B &= 9
-            \\
-            \overline{A} &= 60 - 36 = 24
-            \\
-            \overline{B} &= 60 - 9 = 51
-            \\
-            A \cap B &= 3
-        \end{split}
-    \]
-
-    \part
-
-    Number of students who were undergrads living on campus.
-    \\
-
-    \solution
-
-    \[
-        \begin{split}
-            A \cap \overline{B} &= A \setminus B
-            \\
-            &= 36 - 9 + 3
-            \\
-            &= 30
-        \end{split}
-    \]
-    \\
-
-    \part
-
-    Number of students who were graduate students living on campus.
-    \\
-
-    \solution
-
-    \[
-        \begin{split}
-            \overline{A} \cap \overline{B} &= \overline{A} \setminus B
-            \\
-            &= 24 - 9 + 3
-            \\
-            &= 18
-        \end{split}
-    \]
+    The definition of independent events means that \(\Pr(A \cap B) = \Pr(A)
+    \Pr(B)\). This cannot be true because we know that \(\Pr(A \cap B) = 0\)
+    and thus one of the probabilities of the events must be zero, which goes
+    against the assumption. So no, they cannot also be independent.
 \end{homeworkProblem}
 
 \pagebreak
@@ -365,6 +331,34 @@
 
     \solution
     \\
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Suppose that \(A\) and \(B\) are independent events with \(\Pr(A) > 0\) and \(\Pr(B) > 0\). Show that
+    \(\overline{A}\) and \(B\) are also independent.
+    \\
+
+    \solution
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    In a bag there are two standard dice. One of the dice is fair and the other
+    is loaded so that the die rolls a 6 exactly half of the time. You reach
+    into the bag, randomly select a dice, and roll a 6. What is the probability
+    that you selected the loaded die?
+    \\
+
+    \solution
+
 \end{homeworkProblem}
 
 \end{document}
