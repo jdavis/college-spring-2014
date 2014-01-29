@@ -416,6 +416,43 @@
 
     \solution
 
+    Let \(A\) be the event that we pick the loaded die and let \(B\) be the
+    event that we roll a 6.
+    \\
+
+    Since there are two dice in the bag, \(\Pr(A) = .5\) because we are drawing
+    at random. We also know that \(\Pr(B \mid A) = .5\) and \(\Pr(B \mid
+    \overline{A}) = .167\) based on the problem description.
+    \\
+
+    We want to find the probability that we picked the loaded die given
+    that we rolled a six which is \(\Pr(A \mid B)\).
+    \\
+
+    Using Bayes Rule and the law of total probability:
+
+    \[
+        \begin{split}
+            \Pr(A \mid B) &=
+            \\
+            &= \frac{\Pr(B \mid A) \Pr(A)}{\Pr(B)}
+            \\
+            &= \frac{
+                \Pr(B \mid A) \Pr(A)
+            }{
+                \Pr(B \mid A) \Pr(A) + \Pr(B \mid \overline{A}) \Pr(\overline{A})
+            }
+            \\
+            &= \frac{
+                (.5) (.5)
+            }{
+                (.5) (.5) + (.167) (1 - .5)
+            }
+            \\
+            &\approx .750
+        \end{split}
+    \]
+
 \end{homeworkProblem}
 
 \end{document}
