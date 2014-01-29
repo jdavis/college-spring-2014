@@ -384,20 +384,42 @@
 
 \begin{homeworkProblem}
     Suppose that \(A\) and \(B\) are independent events with \(\Pr(A) > 0\) and
-    \(\Pr(B) > 0\). Show that \(\overline{A}\) and \(B\) are also independent.
+    \(\Pr(B) > 0\). Show that \(\overline{A}\) and \(\overline{B}\) are also
+    independent.
     \\
 
     \solution
 
-    We know that \(A\) and \(B\) are events with probability \(\Pr(A) > 0\) and
-    \(\Pr(B) > 0\). The events are also independent, which means that \(\Pr(A
-    \cap B) = \Pr(A) \Pr(B)\).
-    \\
+    \begin{proof}
+        Suppose that \(A\) and \(B\) are events with probability \(\Pr(A) > 0\) and
+        \(\Pr(B) > 0\). And that the events are also independent, which means
+        that \(\Pr(A \cap B) = \Pr(A) \Pr(B)\).
+        \\
 
-    We want to show that \(\overline{A}\) and \(\overline{B}\) are independent
-    which will mean that \(\Pr(\overline{A} \cap \overline{B}) =
-    \Pr(\overline{A}) \Pr(\overline{B})\).
+        We want to show that \(\overline{A}\) and \(B\) are independent or in other
+        words, we want to show that \(\Pr(\overline{A} \cap B) = \Pr(\overline{A})
+        \Pr(B)\).
+        \\
 
+        Since \(B = (A \cap B) \cup (\overline{A} \cap B)\), then \(\Pr(B) = \Pr(A
+        \cap B) + \Pr(\overline{A} \cap B)\). Which gives us:
+
+        \[
+            \begin{split}
+                \Pr(\overline{A} \cap B) &= \Pr(B) - \Pr(A \cap B)
+                \\
+                &= \Pr(B) - \Pr(A) \Pr(B) \mbox{ because of independence}
+                \\
+                &= \Pr(B) (1 - \Pr(A))
+                \\
+                &= \Pr(B) \Pr(\overline{A})
+            \end{split}
+        \]
+
+        Thus by assuming that \(A\) and \(B\) are independent, we have shown that
+        \(\overline{A}\) and \(B\) are also independent, or \(\Pr(\overline{A} \cap
+        B) = \Pr(\overline{A}) \Pr(B)\). Thus the proof is complete.
+    \end{proof}
 \end{homeworkProblem}
 
 \pagebreak
