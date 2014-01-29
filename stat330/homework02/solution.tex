@@ -403,6 +403,56 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Firing based on positive drug use. Was she fired unjustly?
+    \\
+
+    Let \(A\) be the event that the person is a drug user and let \(B\) be the
+    event that the person tested positive for drugs. We have the following
+    equations:
+
+    \[
+        \begin{split}
+            \Pr(A) &= .02
+            \\
+            \Pr(\overline{A}) &= .08
+            \\
+            \Pr(B \mid A) &= .99
+            \\
+            \Pr(B \mid \overline{A}) &= .01
+        \end{split}
+    \]
+
+    \solution
+
+    We want to determine what the probability that she was not a drug user
+    given that she tested positive, or \(\Pr(\overline{A} \mid B)\). By using
+    Bayes Rule and the law of total probability we get:
+
+    \[
+            \begin{split}
+                \Pr(\overline{A} \mid B) &=
+                \\
+                &= \frac{\Pr(B \mid \overline{A}) \Pr(\overline{A})}{\Pr(B)}
+                \\
+                &= \frac{
+                    \Pr(B \mid \overline{A}) \Pr(\overline{A})
+                }{
+                    \Pr(B \mid \overline{A}) \Pr(\overline{A}) + \Pr(B \mid A) \Pr(A)
+                }
+                \\
+                &= \frac{
+                    (.01) (.08)
+                }{
+                    (.01) (.08) + (.99) (.02)
+                }
+                \\
+                &\approx 4\%
+            \end{split}
+    \]
+
+    Considering the possibility that the test is accurate is 99\% and the
+    possibility that she is not a drug user given she tests positive (a false
+    positive) is 4\%, I'd say she doesn't have a legitimate claim.
 \end{homeworkProblem}
 
 \pagebreak
