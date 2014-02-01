@@ -1,0 +1,181 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{changepage}
+\usepackage{lineno}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength{\floatsep}{100pt}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+\algrenewcomment[1]{\hfill // #1}
+
+\setlength\parindent{0pt}
+
+\hypersetup{colorlinks=true}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{February 7, 2014}
+\newcommand{\hmwkClass}{ComS 573}
+\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassInstructor}{Professor De Brabanter}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Answer the following questions using the table below.
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c | c c c | c}
+            Observation & \(X_1\) & \(X_2\) & \(X_3\) & \(Y\) \\
+            \hline
+            1 & 0 & 3 & 0 & Red
+            \\
+            2 & 2 & 0 & 0 & Red
+            \\
+            3 & 0 & 1 & 3 & Red
+            \\
+            4 & 0 & 1 & 2 & Green
+            \\
+            5 & -1 & 0 & 1 & Green
+            \\
+            6 & 1 & 1 & 1 & Red
+        \end{tabular}
+    \end{table}
+
+    \part
+
+    Compute the Euclidean distance between each observation and the test point,
+    \(X_1 = X_2 = X_3 = 0\).
+    \\
+
+    \solution
+
+    The equation for Euclidean distance is:
+
+    \[
+        \mbox{dist} = \sqrt{
+            {(x_1 - 0)}^2 +
+            {(x_2 - 0)}^2 +
+            {(x_3 - 0)}^2
+        }
+    \]
+
+    Thus giving us:
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c | c | c}
+            Observation & Equation & Result \\
+            1 & \(\sqrt{0^2 + 3^2 + 0^2}\) & 3
+            \\
+            2 & \(\sqrt{2^2 + 0^2 + 0^2}\) & 2
+            \\
+            3 & \(\sqrt{0^2 + 1^2 + 3^2}\) & 3.16
+            \\
+            4 & \(\sqrt{0^2 + 1^2 + 2^2}\) & 2.24
+            \\
+            5 & \(\sqrt{{-1}^2 + 0^2 + 1^2}\) & 0
+            \\
+            6 & \(\sqrt{1^2 + 1^2 + 1^2}\) & 1.73
+            \\
+        \end{tabular}
+    \end{table}
+
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+\end{homeworkProblem}
+
+\end{document}
