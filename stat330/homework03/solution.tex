@@ -270,7 +270,6 @@
     \solution
 
     Expectation:
-
     \[
         \begin{split}
             \E [X] &= \sum_0^2 xP(x)
@@ -284,12 +283,11 @@
     \]
 
     Variance:
-
     \[
         \begin{split}
-            \Var [X] &= \E X^2 + {(\E X)}^2
+            \Var [X] &= \E X^2 - {(\E X)}^2
             \\
-            &= (0)(.7) + (1)(.2^2) + (2)(.1^2) - .4^2
+            &= (0^2)(.7) + (1^2)(.2) + (2^2)(.1) - .4^2
             \\
             &= .4 + .2 - .16
             \\
@@ -319,7 +317,27 @@
 
     \solution
 
-    Solution.
+    Expectation:
+    \[
+        \begin{split}
+            \E [X] &= \sum_0^2 xP(x)
+            \\
+            &= (1)(1/6) + (2)(1/6) + (3)(1/6) + (4)(1/6) + (5)(1/6) + (6)(1/6)
+            \\
+            &= 3.5
+        \end{split}
+    \]
+
+    Variance:
+    \[
+        \begin{split}
+            \Var [X] &= \E X^2 - {(\E X)}^2
+            \\
+            &= (1^2)(1/6) + (2^2)(1/6) + (3^2)(1/6) + (4^2)(1/6) + (5^2)(1/6) + (6^2)(1/6) - (3.5)^2
+            \\
+            &= 2.92
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \end{document}
