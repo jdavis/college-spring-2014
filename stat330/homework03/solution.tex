@@ -13,6 +13,9 @@
 \usepackage{algpseudocode}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{pgfplots}
+
+\usetikzlibrary{calc}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -92,13 +95,21 @@
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
+\pgfmathdeclarefunction{problem3}{1}{%
+  \pgfmathparse{%
+    (and(   1,    #1<0)*(0)            +%
+    (and(#1>= 1,  #1< 2)*(0.1)          +%
+    (and(#1>= 2,  #1< 3)*(0.3)          +%
+    (and(#1>= 3,  #1< 4)*(0.6) +%
+    (and(#1>= 4,    1  )*(1)%
+    }%
+}
 
 \begin{document}
 
 \maketitle
 
 \pagebreak
-
 
 \begin{homeworkProblem}
     Define a discrete random variable and the sample space.
@@ -177,9 +188,9 @@
     \[
         P(x) = \left\{
             \begin{array}{ll}
-                \frac{x}{10} & \quad x = 1,2,3,4
+                x/10 & \quad x = 1,2,3,4
                 \\
-                0 & \quad \mbox{ any other } x
+                0 & \quad \mbox{any other } x
             \end{array}
         \right.
     \]
@@ -190,7 +201,46 @@
 
     \solution
 
-    Solution
+    \[
+        F(x) = \left\{
+            \begin{array}{ll}
+                0 & \quad x < 1
+                \\
+                1/10 & \quad 1 \leq x < 2
+                \\
+                3/10 & \quad 2 \leq x < 3
+                \\
+                6/10 & \quad 3 \leq x < 4
+                \\
+                1 & \quad x = 4
+                \\
+                1 & \quad x > 4
+            \end{array}
+        \right.
+    \]
+
+    \begin{figure}[!h]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}
+                \foreach \xStart/\xEnd  in {0/1, 1/2, 2/3, 3/4, 4/5} {
+                    \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {problem3(x)};
+                }
+
+                \draw [draw=blue, fill=white, thick] (axis cs: 1, 0) circle (2.0pt);
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 1, 0.1) circle (2.0pt);
+
+                \draw [draw=blue, fill=white, thick] (axis cs: 2, .1) circle (2.0pt);
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 2, 0.3) circle (2.0pt);
+
+                \draw [draw=blue, fill=white, thick] (axis cs: 3, .3) circle (2.0pt);
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 3, 0.6) circle (2.0pt);
+
+                \draw [draw=blue, fill=white, thick] (axis cs: 4, .6) circle (2.0pt);
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 4, 1) circle (2.0pt);
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
 \end{homeworkProblem}
 
 \pagebreak
