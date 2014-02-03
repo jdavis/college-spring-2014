@@ -95,6 +95,10 @@
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+
 \pgfmathdeclarefunction{problem3}{1}{%
   \pgfmathparse{%
     (and(   1,    #1<0)*(0)            +%
@@ -265,7 +269,33 @@
 
     \solution
 
-    Solution.
+    Expectation:
+
+    \[
+        \begin{split}
+            \E [X] &= \sum_0^2 xP(x)
+            \\
+            &= (0)(.7) + (1)(.2) + (2)(.1)
+            \\
+            &= 0 + .2 + .2
+            \\
+            &= .4
+        \end{split}
+    \]
+
+    Variance:
+
+    \[
+        \begin{split}
+            \Var [X] &= \E X^2 + {(\E X)}^2
+            \\
+            &= (0)(.7) + (1)(.2^2) + (2)(.1^2) - .4^2
+            \\
+            &= .4 + .2 - .16
+            \\
+            &= .44
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
