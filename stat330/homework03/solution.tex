@@ -226,7 +226,10 @@
     \begin{figure}[!h]
         \centering
         \begin{tikzpicture}
-            \begin{axis}
+            \begin{axis}[
+                xlabel = {\(X\)},
+                ylabel = {Total probability, \(F(x)\)},
+            ]
                 \foreach \xStart/\xEnd  in {0/1, 1/2, 2/3, 3/4, 4/5} {
                     \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {problem3(x)};
                 }
