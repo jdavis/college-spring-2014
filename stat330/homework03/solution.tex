@@ -305,10 +305,48 @@
 
     \solution
 
-    Solution.
-\end{homeworkProblem}
+    Using the probability distribution:
 
-\pagebreak
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c || c | c | c | c}
+            \(x\) & 1 & 2 & 3 & 4
+            \\
+            \hline
+            \(P(x)\) & 1/10 & 2/10 & 3/10 & 4/10
+        \end{tabular}
+    \end{table}
+
+    Expectation:
+    \[
+        \begin{split}
+            \E [X] &= \sum_0^2 xP(x)
+            \\
+            &= (1)(1/10) + (2)(2/10) + (3)(3/10) + (4)(4/10)
+            \\
+            &= \frac{1}{10} + \frac{4}{10} + \frac{9}{10} + \frac{16}{10}
+            \\
+            &= \frac{30}{10}
+            \\
+            &= 3
+        \end{split}
+    \]
+
+    Variance:
+    \[
+        \begin{split}
+            \Var [X] &= \E X^2 - {(\E X)}^2
+            \\
+            &= (1^2)(1/10) + (2^2)(2/10) + (3^2)(3/10) + (4^2)(4/10) - (3)^2
+            \\
+            &= \frac{1}{10} + \frac{8}{10} + \frac{27}{10} + \frac{64}{10} - 9
+            \\
+            &= \frac{100}{10} - 9
+            \\
+            &= 1
+        \end{split}
+    \]
+\end{homeworkProblem}
 
 \begin{homeworkProblem}
     A single fair die is tossed once. Let \(Y\) be the number facing up. Find
