@@ -1,10 +1,21 @@
 #
-# Read in Data
+# ComS 573 Homework 1
 #
+
+# Download data if it doesn't exist
+if (!file.exists('./College.csv')) {
+    download.file('http://www-bcf.usc.edu/~gareth/ISL/College.csv', destfile = './College.csv')
+}
+
+#
+# Part A:
+#
+
+# Read in Data
 college = read.csv('./College.csv', header = TRUE)
 
 #
-# View the data
+# Part B:
 #
 
 # View/edit the data
@@ -17,20 +28,29 @@ college = read.csv('./College.csv', header = TRUE)
 college <- college[,-1]
 
 #
+# Part C:
+#
+
+#
 # Part I:
 # Show a summary
+
 summary(college)
 
 #
 # Part II:
-# Basic scatterplot
+#
+
 pairs(college[,1:10])
 
 #
 # Part III:
-# TODO: plot() Outstate vs Private
-# plot()
+#
 
+plot(college$Private, college$Outstate,
+     main='Outstate Colleges vs Private Colleges',
+     xlab='Private College',
+     ylab='Number of Outstate Colleges')
 #
 # Part IV:
 # Divide Elite colleges
@@ -43,5 +63,7 @@ college <- data.frame(college, Elite)
 # Show number of elite vs non-elite colleges
 summary(college)
 
-# TODO: plot() Outstate vs Elite
-# plot()
+plot(college$Elite, college$Outstate,
+     main='Outstate Colleges vs Elite Colleges',
+     xlab='Elite College',
+     ylab='Number of Outstate Colleges')
