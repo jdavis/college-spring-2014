@@ -9,6 +9,7 @@ if (!file.exists('./College.csv')) {
 
 #
 # Part A:
+# Read in the data from the CSV file.
 #
 
 # Read in Data
@@ -16,6 +17,7 @@ college = read.csv('./College.csv', header = TRUE)
 
 #
 # Part B:
+# Look up the data using various functions.
 #
 
 # View/edit the data
@@ -33,18 +35,21 @@ college <- college[,-1]
 
 #
 # Part I:
-# Show a summary
+# Show a summary of the college data.
+#
 
 summary(college)
 
 #
 # Part II:
+# Show a scatterplot of the first 10 columns of college.
 #
 
 pairs(college[,1:10])
 
 #
 # Part III:
+# Produce side-by-side boxplots of Outstate vs Private.
 #
 
 plot(college$Private, college$Outstate,
@@ -53,8 +58,10 @@ plot(college$Private, college$Outstate,
      ylab='Number of Outstate Colleges')
 #
 # Part IV:
-# Divide Elite colleges
+# Create a new qualitative variable for Elite colleges. Show various statistics
+# for the Elite colleges.
 #
+
 Elite <- rep('No', nrow(college))
 Elite[college$Top10perc > 50] <- 'Yes'
 Elite <- as.factor(Elite)
@@ -63,7 +70,23 @@ college <- data.frame(college, Elite)
 # Show number of elite vs non-elite colleges
 summary(college)
 
+# Show boxplot for Outstate vs Elite
 plot(college$Elite, college$Outstate,
      main='Outstate Colleges vs Elite Colleges',
      xlab='Elite College',
      ylab='Number of Outstate Colleges')
+
+#
+# Part V:
+# Show some histograms with differing numbers of bins for a few quantitative
+# variables.
+#
+
+# hist()
+
+#
+# Part VI:
+# Continue exploring the data.
+#
+
+# TODO
