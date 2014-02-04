@@ -163,6 +163,42 @@
     noted. Find the probability distribution for the following.
     \\
 
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c c | c c || c c | c c || c c | c c || c c | c c}
+            1st & 2nd & Max & Avg &
+            1st & 2nd & Max & Avg &
+            1st & 2nd & Max & Avg &
+            1st & 2nd & Max & Avg
+            \\
+            \hline
+            1 & 3 & 3 & 2 &
+            1 & 5 & 5 & 3 &
+            1 & 7 & 7 & 4 &
+            1 & 9 & 9 & 5
+            \\
+            3 & 1 & 3 & 2 &
+            3 & 5 & 5 & 4 &
+            3 & 7 & 7 & 5 &
+            3 & 9 & 9 & 6
+            \\
+            5 & 1 & 5 & 3 &
+            5 & 3 & 5 & 4 &
+            5 & 7 & 7 & 6 &
+            5 & 9 & 9 & 7
+            \\
+            7 & 1 & 7 & 4 &
+            7 & 3 & 7 & 5 &
+            7 & 5 & 7 & 6 &
+            7 & 9 & 9 & 8
+            \\
+            9 & 1 & 9 & 5 &
+            9 & 3 & 9 & 6 &
+            9 & 5 & 9 & 7 &
+            9 & 7 & 9 & 8
+        \end{tabular}
+    \end{table}
+
     \part
 
     The \textit{largest} of the two sampled numbers.
@@ -170,8 +206,23 @@
 
     \solution
 
-    Solution.
-    \\
+    \[
+        P(x) = \left\{
+            \begin{array}{ll}
+                0 & \quad x = 1
+                \\
+                2/20 = .1 & \quad x = 3
+                \\
+                4/20 = .2 & \quad x = 5
+                \\
+                6/20 = .3 & \quad x = 7
+                \\
+                8/20 = .4 & \quad x = 9
+                \\
+                0 & \quad \mbox{any other } x
+            \end{array}
+        \right.
+    \]
 
     \part
 
@@ -180,7 +231,25 @@
 
     \solution
 
-    Solution.
+    \[
+        P(x) = \left\{
+            \begin{array}{ll}
+                0 & \quad x = 2
+                \\
+                0 & \quad x = 3
+                \\
+                0 & \quad x = 4
+                \\
+                0 & \quad x = 6
+                \\
+                0 & \quad x = 7
+                \\
+                0 & \quad x = 8
+                \\
+                0 & \quad \mbox{any other } x
+            \end{array}
+        \right.
+    \]
 \end{homeworkProblem}
 
 \pagebreak
