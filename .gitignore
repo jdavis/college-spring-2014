@@ -3,6 +3,9 @@
 *.py[co]
 *.out
 
+# R stuff
+*.csv
+
 # Bah, LaTeX junk
 *.aux
 *.log
