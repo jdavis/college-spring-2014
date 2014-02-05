@@ -53,9 +53,9 @@ pairs(college[,1:10])
 #
 
 plot(college$Private, college$Outstate,
-     main='Outstate Colleges vs Private Colleges',
-     xlab='Private College',
-     ylab='Number of Outstate Colleges')
+     main = 'Out of State Tuition vs Private Colleges',
+     xlab = 'Private College',
+     ylab = 'Out of State Tuition')
 #
 # Part IV:
 # Create a new qualitative variable for Elite colleges. Show various statistics
@@ -72,9 +72,9 @@ summary(college)
 
 # Show boxplot for Outstate vs Elite
 plot(college$Elite, college$Outstate,
-     main='Outstate Colleges vs Elite Colleges',
-     xlab='Elite College',
-     ylab='Number of Outstate Colleges')
+     main = 'Out of State Tuition vs Elite Colleges',
+     xlab = 'Elite College',
+     ylab = 'Out of State Tuition')
 
 #
 # Part V:
