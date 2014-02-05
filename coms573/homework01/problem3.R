@@ -82,7 +82,19 @@ plot(college$Elite, college$Outstate,
 # variables.
 #
 
-# hist()
+par(mfrow=c(2,2))
+hist(college$Apps, 20,
+     main = 'Histogram of Number of College Applications Recieved',
+     xlab = 'Number of Applications Received')
+hist(college$Accept, 10,
+     main = 'Histogram of Number of Applicants Accepted',
+     xlab = 'Number of Applicants Accepted')
+hist(college$S.F.Ratio, 10,
+     main = 'Histogram of Student to Faculty Ratio',
+     xlab = 'Student to Faculty Ratio')
+hist(college$PhD, 10,
+     main = 'Histogram of Percent of Faculty with a PhD',
+     xlab = 'Percent of Faculty with a PhD')
 
 #
 # Part VI:
