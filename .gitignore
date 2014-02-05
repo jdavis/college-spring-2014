@@ -18,3 +18,4 @@
 *.blg
 *.bib
 .Rproj.user
+.Rhistory
