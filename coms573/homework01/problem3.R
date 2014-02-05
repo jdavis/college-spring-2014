@@ -1,5 +1,5 @@
 #
-# ComS 573 Homework 1
+# Problem 3
 #
 
 # Download data if it doesn't exist
@@ -17,7 +17,7 @@ college = read.csv('./College.csv', header = TRUE)
 
 #
 # Part B:
-# Look up the data using various functions.
+# Look at the data using various functions.
 #
 
 # View/edit the data
