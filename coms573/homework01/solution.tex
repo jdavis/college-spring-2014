@@ -13,6 +13,7 @@
 \usepackage{algpseudocode}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{listings}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -204,7 +205,12 @@
 
 \pagebreak
 
+\lstset{
+    breaklines=true,
+    basicstyle=\footnotesize
+}
 \begin{homeworkProblem}
+    \lstinputlisting[language=R]{problem3.R}
 \end{homeworkProblem}
 
 \pagebreak
