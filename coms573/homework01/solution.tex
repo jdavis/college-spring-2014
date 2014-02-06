@@ -88,6 +88,7 @@
 
 \newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 \newcommand{\dx}{\mathrm{d}x}
 \newcommand{\solution}{\textbf{\large Solution}}
 
@@ -218,8 +219,48 @@
 
     \solution
 
-    Solution.
-    \\
+    To find the least squares estimator, we should minimize our Residual Sum
+    of Squares, RSS:
+
+    \[
+        \begin{split}
+            RSS &= \sum_{i = 1}^{n} {(Y_i - \hat{Y_i})}^2
+            \\
+            &= \sum_{i = 1}^{n} {(Y_i - \hat{\beta_1} x_i)}^2
+        \end{split}
+    \]
+
+    By taking the partial derivative in respect to \(\hat{\beta_1}\), we get:
+
+    \[
+        \begin{split}
+            \pderiv{\hat{\beta_1}}{RSS} &= -2 \sum_{i = 1}^{n} {x_i (Y_i - \hat{\beta_1} x_i)} = 0
+        \end{split}
+    \]
+
+    This gives us:
+
+    \[
+        \begin{split}
+            \sum_{i = 1}^{n} {x_i (Y_i - \hat{\beta_1} x_i)}
+            &= \sum_{i = 1}^{n} {x_i Y_i} - \sum_{i = 1}^{n} \hat{\beta_1} x_i^2
+            \\
+            &= \sum_{i = 1}^{n} {x_i Y_i} - \hat{\beta_1}\sum_{i = 1}^{n} x_i^2
+        \end{split}
+    \]
+
+    Solving for \(\hat{\beta_1}\) gives the final estimator for \(\beta_1\):
+
+    \[
+        \begin{split}
+            \hat{\beta_1}
+            &= \frac{
+                \sum {x_i Y_i}
+            }{
+                \sum x_i^2
+            }
+        \end{split}
+    \]
 
     \part
 
