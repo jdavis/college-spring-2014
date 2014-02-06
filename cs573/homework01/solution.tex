@@ -280,6 +280,15 @@
     basicstyle=\footnotesize
 }
 \begin{homeworkProblem}
+
+<<>>=
+college <- read.csv("./College.csv", header = TRUE)
+
+plot(college$Private, college$Outstate,
+     main = 'Out of State Tuition vs Private Colleges',
+     xlab = 'Private College',
+     ylab = 'Out of State Tuition')
+@
     \lstinputlisting[language=R]{problem3.R}
 \end{homeworkProblem}
 
