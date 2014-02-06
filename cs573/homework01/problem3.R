@@ -98,7 +98,10 @@ hist(college$PhD, 10,
 
 #
 # Part VI:
-# Continue exploring the data.
+# Continue exploring the data and report what you find.
 #
 
 # TODO
+#   - Simple linear model
+#   - Few more graphs
+#   - Maybe other cool features or some of the stuff we've talked about
