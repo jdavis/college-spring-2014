@@ -210,7 +210,7 @@
 
 \begin{homeworkProblem}
     Suppose we would like to fit a straight line through the origin, i.e.,
-    \(Y_i = \beta_1 x_1 + e_i\) with \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
+    \(Y_i = \beta_1 x_i + e_i\) with \(i = 1, \ldots, n\), \(\E [e_i] = 0\),
     and \(\Var [e_i] = \sigma^2_e\) and \(\Cov[e_i, e_j] = 0, \forall i \neq
     j\).
     \\
@@ -265,6 +265,8 @@
             }
         \end{split}
     \]
+
+    \pagebreak
 
     \part
 
@@ -424,6 +426,26 @@
     = \sigma^2_e\), and \(\Cov[e_i, e_j] = 0, \forall i \neq j\).
     \\
 
+    As in class, our estimator for \(\beta_1\) is:
+
+    \[
+        \hat{\beta_1}
+        = \frac{
+            \sum {(x_i - \bar{x})(y_i - \bar{y})}
+        }{
+            \sum {(x_i - \bar{x})^2}
+        }
+    \]
+
+    which gives us:
+
+    \[
+        \hat{\beta_0} = \bar{y} - \hat{\beta_1}
+    \]
+
+    as the two estimators for our line as given in the book and in lecture.
+    \\
+
     \part
 
     Calculate the bias for the estimator of the intercept \(\hat{\beta_0}\).
@@ -431,8 +453,39 @@
 
     \solution
 
-    Solution
+    In class, we determined that \(\hat{\beta_1}\) is unbiased and thus
+    \(\E[\hat{\beta_1}] = \beta_1\).
     \\
+
+    Our expectation for \(\hat{\beta_0}\) is thus:
+
+    \[
+        \begin{split}
+            \E[\hat{\beta_0}]
+            &= \E[\bar{y} - \hat{\beta_1} \bar{x}]
+            \\
+            &= \E[\bar{y}] - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \frac{1}{n} \sum \E[y_i] - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \frac{1}{n} \sum (\beta_0 + \beta_1 x_i) - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \beta_0 + \frac{1}{n} \sum (\beta_1 x_i) - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \beta_0 + \beta_1 \frac{1}{n} \sum (x_i) - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \beta_0 + \beta_1 \bar{x} - \E[\hat{\beta_1} \bar{x}]
+            \\
+            &= \beta_0 + \beta_1 \bar{x} - \beta_1 \bar{x}
+            \\
+            &= \beta_0
+        \end{split}
+    \]
+
+    which shows that our estimator \(\hat{\beta_1}\) is unbiased.
+    \\
+
+    \pagebreak
 
     \part
 
@@ -441,7 +494,78 @@
 
     \solution
 
-    Solution.
+    \[
+        \begin{split}
+            \Var[\hat{\beta_0}]
+            &= \Var[\bar{y} - \hat{\beta_1} \bar{x}]
+            \\
+            &= \Var[\bar{y}] + \Var[- \hat{\beta_1} \bar{x}] + 2 \Cov[\bar{y}, - \hat{\beta_1} \bar{x}]
+        \end{split}
+    \]
+
+    but by our assumption 3:
+
+    \[
+        \begin{split}
+            \Var[\hat{\beta_0}]
+            &= \Var[\bar{y}] + \Var[- \hat{\beta_1} \bar{x}] + 0
+            \\
+            &= \frac{1}{n^2} \sum (\Var[y_i]) + \Var[- \hat{\beta_1} \bar{x}]
+            \\
+            &= \frac{n \sigma^2}{n^2} + \Var[-\hat{\beta_1} \bar{x}]
+            \\
+            &= \frac{\sigma^2}{n} + \Var[\hat{\beta_1} \bar{x}]
+            \\
+            &= \frac{\sigma^2}{n} + \bar{x}^2 \Var[\hat{\beta_1}]
+            \\
+            &= \frac{\sigma^2}{n}
+            + \bar{x}^2 \Var \left[\frac{
+                \sum {(x_i - \bar{x})(y_i - \bar{y})}
+            }{
+                \sum {(x_i - \bar{x})^2}
+            }
+            \right]
+            \\
+            &= \frac{\sigma^2}{n}
+            +
+            \bar{x}^2
+            \left( \frac{1}{\sum {(x_i - \bar{x})^2}} \right)^2
+            \Var \left[ \sum {(x_i - \bar{x})(y_i - \bar{y})} \right]
+            \\
+            &= \frac{\sigma^2}{n}
+            +
+            \bar{x}^2
+            \left( \frac{1}{\sum (x_i - \bar{x})^2} \right)^2
+            \left( \sum (x_i - \bar{x})^2 \right)
+            \left( \Var[y_i - \bar{y}] \right)
+            \\
+            &= \frac{\sigma^2}{n}
+            +
+            \bar{x}^2
+            \left( \frac{1}{\sum (x_i - \bar{x})^2} \right)^2
+            \left( \sum (x_i - \bar{x})^2 \right)
+            \sigma^2
+            \\
+            &= \frac{\sigma^2}{n}
+            +
+            \bar{x}^2
+            \left( \frac{1}{\sum (x_i - \bar{x})^2} \right)
+            \sigma^2
+            \\
+            &= \frac{\sigma^2}{n}
+            +
+            \frac{\bar{x}^2 \sigma^2}{\sum (x_i - \bar{x})^2}
+            \\
+            &= \sigma^2
+            \left(
+                \frac{1}{n}
+                +
+                \frac{\bar{x}^2}{\sum (x_i - \bar{x})^2}
+            \right)
+        \end{split}
+    \]
+
+    which agrees with equations 3.8 on page 66 of the textbook.
 \end{homeworkProblem}
 
 \end{document}
