@@ -41,7 +41,10 @@ college <- college[,-1]
 #
 
 partI <- function() {
-    summary(college)
+    college.summary <- capture.output(summary(college))
+    cat(college.summary,
+        file = 'partI.txt',
+        sep = '\n')
 }
 
 #
