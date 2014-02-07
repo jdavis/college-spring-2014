@@ -17,6 +17,7 @@
 \usepackage{graphics}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{fancyvrb}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -375,28 +376,34 @@
 \begin{homeworkProblem}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.88\textwidth]{partII}
+        \caption{Summary from Part I}
+        \VerbatimInput{partI.txt}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
         \caption{Pairs plot from Part II}
+        \includegraphics[width=.88\textwidth]{partII}
     \end{figure}
 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.50\textwidth]{partIII}
         \caption{Boxplot of Outstate vs Private in Part III}
+        \includegraphics[width=.50\textwidth]{partIII}
     \end{figure}
 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.50\textwidth]{partIV}
         \caption{Boxplot of Elite colleges vs Outstate in Part IV}
+        \includegraphics[width=.50\textwidth]{partIV}
     \end{figure}
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.80\textwidth]{partV}
         \caption{Various histograms from Part V}
+        \includegraphics[width=.80\textwidth]{partV}
     \end{figure}
 
     Below is my exploration of the data. I wanted to see if there were a few
@@ -413,8 +420,8 @@
 
     \begin{figure}[H]
         \centering
+        \caption{Part VI Exploration}
         \includegraphics[width=.68\textwidth]{partVI}
-        \caption{Part VI}
     \end{figure}
 \end{homeworkProblem}
 
