@@ -15,7 +15,7 @@ data <- function() {
 #
 
 # Read in Data
-college = read.csv('./College.csv', header = TRUE)
+college <- read.csv('./College.csv', header = TRUE)
 
 #
 # Part B:
@@ -50,7 +50,7 @@ partI <- function() {
 #
 
 partII <- function() {
-    pdf('partII.pdf')
+    png('partII.png')
     pairs(college[,1:10])
     dev.off()
 }
@@ -70,7 +70,6 @@ partIII <- function() {
 }
 
 #
-# Part IV:
 # Create a new qualitative variable for Elite colleges. Show various statistics
 # for the Elite colleges.
 #
@@ -122,6 +121,35 @@ partV  <- function() {
 # Continue exploring the data and report what you find.
 #
 
+partVI <- function() {
+    pdf('partVI.pdf')
+
+    par(mfrow=c(2,1))
+    df <- data.frame(x = college$PhD)
+    df$y <- college$Books
+
+    T <- lm(y~x,data=df)
+
+    plot(college$PhD, college$Books,
+         main = 'Book Costs vs Percent of PhD Professors',
+         xlab = 'Percent of PhD Professors',
+         ylab = 'Estimated Book Cost')
+    abline(T)
+
+    df <- data.frame(x = college$Accept)
+    df$y <- college$Top10perc
+
+    T <- lm(y~x,data=df)
+
+    plot(college$Accept, college$Top10perc,
+         main = 'Number of Applications Accepted vs Top 10% New Students',
+         xlab = 'Applications Accepted',
+         ylab = 'Top 10% New Students')
+    abline(T)
+
+    dev.off()
+}
+
 # TODO
 #   - Simple linear model
 #   - Few more graphs
@@ -135,4 +163,5 @@ run <- function() {
     partIII()
     partIV()
     partV()
+    partVI()
 }
