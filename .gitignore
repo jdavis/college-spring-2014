@@ -5,6 +5,7 @@
 
 # R stuff
 *.csv
+Rplots.pdf
 
 # Bah, LaTeX junk
 *.aux
