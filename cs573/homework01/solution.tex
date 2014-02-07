@@ -14,6 +14,7 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{listings}
+\usepackage{graphics}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -275,21 +276,30 @@
 
 \pagebreak
 
-\lstset{
-    breaklines=true,
-    basicstyle=\footnotesize
-}
 \begin{homeworkProblem}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.48\textwidth]{partII}
+        \caption{Part II}
+    \end{figure}
 
-<<>>=
-college <- read.csv("./College.csv", header = TRUE)
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.48\textwidth]{partIII}
+        \caption{Part III}
+    \end{figure}
 
-plot(college$Private, college$Outstate,
-     main = 'Out of State Tuition vs Private Colleges',
-     xlab = 'Private College',
-     ylab = 'Out of State Tuition')
-@
-    \lstinputlisting[language=R]{problem3.R}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.48\textwidth]{partIV}
+        \caption{Part IV}
+    \end{figure}
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=.48\textwidth]{partV}
+        \caption{Part V}
+    \end{figure}
 \end{homeworkProblem}
 
 \pagebreak
