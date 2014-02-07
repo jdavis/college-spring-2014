@@ -3,8 +3,10 @@
 #
 
 # Download data if it doesn't exist
-if (!file.exists('./College.csv')) {
-    download.file('http://www-bcf.usc.edu/~gareth/ISL/College.csv', destfile = './College.csv')
+data <- function() {
+    if (!file.exists('./College.csv')) {
+        download.file('http://www-bcf.usc.edu/~gareth/ISL/College.csv', destfile = './College.csv')
+    }
 }
 
 #
@@ -38,43 +40,58 @@ college <- college[,-1]
 # Show a summary of the college data.
 #
 
-summary(college)
+partI <- function() {
+    summary(college)
+}
 
 #
 # Part II:
 # Show a scatterplot of the first 10 columns of college.
 #
 
-pairs(college[,1:10])
+partII <- function() {
+    pdf('partII.pdf')
+    pairs(college[,1:10])
+    dev.off()
+}
 
 #
 # Part III:
 # Produce side-by-side boxplots of Outstate vs Private.
 #
 
-plot(college$Private, college$Outstate,
-     main = 'Out of State Tuition vs Private Colleges',
-     xlab = 'Private College',
-     ylab = 'Out of State Tuition')
+partIII <- function() {
+    pdf('partIII.pdf')
+    plot(college$Private, college$Outstate,
+         main = 'Out of State Tuition vs Private Colleges',
+         xlab = 'Private College',
+         ylab = 'Out of State Tuition')
+    dev.off()
+}
+
 #
 # Part IV:
 # Create a new qualitative variable for Elite colleges. Show various statistics
 # for the Elite colleges.
 #
 
-Elite <- rep('No', nrow(college))
-Elite[college$Top10perc > 50] <- 'Yes'
-Elite <- as.factor(Elite)
-college <- data.frame(college, Elite)
+partIV <- function() {
+    pdf('partIV.pdf')
+    Elite <- rep('No', nrow(college))
+    Elite[college$Top10perc > 50] <- 'Yes'
+    Elite <- as.factor(Elite)
+    college <- data.frame(college, Elite)
 
-# Show number of elite vs non-elite colleges
-summary(college)
+    # Show number of elite vs non-elite colleges
+    summary(college)
 
-# Show boxplot for Outstate vs Elite
-plot(college$Elite, college$Outstate,
-     main = 'Out of State Tuition vs Elite Colleges',
-     xlab = 'Elite College',
-     ylab = 'Out of State Tuition')
+    # Show boxplot for Outstate vs Elite
+    plot(college$Elite, college$Outstate,
+         main = 'Out of State Tuition vs Elite Colleges',
+         xlab = 'Elite College',
+         ylab = 'Out of State Tuition')
+    dev.off()
+}
 
 #
 # Part V:
@@ -82,19 +99,23 @@ plot(college$Elite, college$Outstate,
 # variables.
 #
 
-par(mfrow=c(2,2))
-hist(college$Apps, 20,
-     main = 'Histogram of Number of College Applications Recieved',
-     xlab = 'Number of Applications Received')
-hist(college$Accept, 10,
-     main = 'Histogram of Number of Applicants Accepted',
-     xlab = 'Number of Applicants Accepted')
-hist(college$S.F.Ratio, 10,
-     main = 'Histogram of Student to Faculty Ratio',
-     xlab = 'Student to Faculty Ratio')
-hist(college$PhD, 10,
-     main = 'Histogram of Percent of Faculty with a PhD',
-     xlab = 'Percent of Faculty with a PhD')
+partV  <- function() {
+    pdf('partV.pdf')
+    par(mfrow=c(2,2))
+    hist(college$Apps, 20,
+         main = 'Number of College Applications Recieved',
+         xlab = 'Number of Applications Received')
+    hist(college$Accept, 10,
+         main = 'Number of Applicants Accepted',
+         xlab = 'Number of Applicants Accepted')
+    hist(college$S.F.Ratio, 10,
+         main = 'Student to Faculty Ratio',
+         xlab = 'Student to Faculty Ratio')
+    hist(college$PhD, 10,
+         main = 'Percent of Faculty with a PhD',
+         xlab = 'Percent of Faculty with a PhD')
+    dev.off()
+}
 
 #
 # Part VI:
@@ -105,3 +126,13 @@ hist(college$PhD, 10,
 #   - Simple linear model
 #   - Few more graphs
 #   - Maybe other cool features or some of the stuff we've talked about
+
+# Runs all of the parts of the homework
+run <- function() {
+    data()
+    partI()
+    partII()
+    partIII()
+    partIV()
+    partV()
+}
