@@ -15,6 +15,8 @@
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage{graphics}
+\usepackage{subcaption}
+\usepackage{float}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -96,6 +98,7 @@
 \newcommand{\E}{\mathrm{E}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
@@ -271,34 +274,145 @@
 
     \solution
 
-    Solution.
+    For the bias, we need to calculate the expected value
+    \(\E[\hat{\beta_1}]\):
+
+    \[
+        \begin{split}
+            \E[\hat{\beta_1}]
+            &= \E \left[ \frac{
+                \sum {x_i Y_i}
+            }{
+                \sum x_i^2
+            }\right]
+            \\
+            &= \frac{
+                \sum {x_i \E[Y_i]}
+            }{
+                \sum x_i^2
+            }
+            \\
+            &= \frac{
+                \sum {x_i (\beta_1 x_i)}
+            }{
+                \sum x_i^2
+            }
+            \\
+            &= \frac{
+                \sum {x_i^2 \beta_1}
+            }{
+                \sum x_i^2
+            }
+            \\
+            &= \beta_1 \frac{
+                \sum {x_i^2 \beta_1}
+            }{
+                \sum x_i^2
+            }
+            \\
+            &= \beta_1
+        \end{split}
+    \]
+
+    Thus since our estimator's expected value is \(\beta_1\), we can conclude
+    that the bias of our estimator is 0.
+    \\
+
+    For the variance:
+
+    \[
+        \begin{split}
+            \Var[\hat{\beta_1}]
+            &= \Var \left[ \frac{
+                \sum {x_i Y_i}
+            }{
+                \sum x_i^2
+            }\right]
+            \\
+            &=
+            \frac{
+                \sum {x_i^2}
+            }{
+                \sum x_i^2 \sum x_i^2
+            } \Var[Y_i]
+            \\
+            &=
+            \frac{
+                \sum {x_i^2}
+            }{
+                \sum x_i^2 \sum x_i^2
+            } \Var[Y_i]
+            \\
+            &=
+            \frac{
+                1
+            }{
+                \sum x_i^2
+            } \Var[Y_i]
+            \\
+            &=
+            \frac{
+                1
+            }{
+                \sum x_i^2
+            } \sigma^2
+            \\
+            &=
+            \frac{
+                \sigma^2
+            }{
+                \sum x_i^2
+            }
+        \end{split}
+    \]
+
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    \begin{figure}[h!]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=.48\textwidth]{partII}
-        \caption{Part II}
+        \includegraphics[width=.88\textwidth]{partII}
+        \caption{Pairs plot from Part II}
     \end{figure}
 
-    \begin{figure}[h!]
+
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=.48\textwidth]{partIII}
-        \caption{Part III}
+        \includegraphics[width=.50\textwidth]{partIII}
+        \caption{Boxplot of Outstate vs Private in Part III}
     \end{figure}
 
-    \begin{figure}[h!]
+
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=.48\textwidth]{partIV}
-        \caption{Part IV}
+        \includegraphics[width=.50\textwidth]{partIV}
+        \caption{Boxplot of Elite colleges vs Outstate in Part IV}
     \end{figure}
 
-    \begin{figure}[h!]
+    \begin{figure}[H]
         \centering
-        \includegraphics[width=.48\textwidth]{partV}
-        \caption{Part V}
+        \includegraphics[width=.80\textwidth]{partV}
+        \caption{Various histograms from Part V}
+    \end{figure}
+
+    Below is my exploration of the data. I wanted to see if there were a few
+    different relationships between a few different sets of the data.
+    \\
+
+    As you can see, there seems to be a relationship between number of
+    applications accepted and the percent of students coming from the top 10\%
+    of high school class.
+    \\
+
+    However, there doesn't seem to be a relationship between book costs vs the
+    percent of professors with a PhD.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.68\textwidth]{partVI}
+        \caption{Part VI}
     \end{figure}
 \end{homeworkProblem}
 
