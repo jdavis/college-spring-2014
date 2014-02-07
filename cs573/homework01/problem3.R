@@ -153,11 +153,6 @@ partVI <- function() {
     dev.off()
 }
 
-# TODO
-#   - Simple linear model
-#   - Few more graphs
-#   - Maybe other cool features or some of the stuff we've talked about
-
 # Runs all of the parts of the homework
 run <- function() {
     data()
