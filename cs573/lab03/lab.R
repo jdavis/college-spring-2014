@@ -54,3 +54,36 @@ vif(fit.all)
 # Linear model without a predictor
 fit.some <- lm(medv ~ . - age, data = Boston)
 summary(fit.some)
+
+#
+# Non-Linear Transformations of the Predictors
+#
+
+fit.lstat2 <- lm(medv ~ lstat + I(lstat^2), data = Boston)
+summary(fit.lstat2)
+
+# Compare fits
+fit.lstat <- lm(medv ~ lstat, data = Boston)
+anova(fit.lstat, fit.lstat2)
+
+par(mfrow = c(2, 4))
+plot(fit.lstat)
+plot(fit.lstat2)
+
+# Polynomial fits
+fit.lstat5 <- lm(medv ~ poly(lstat, 5), data = Boston)
+summary(fit.lstat5)
+
+# Log fits
+fit.log = lm(medv ~ log(rm), data = Boston)
+summary(fit.log)
+
+#
+# Qualitative Predictors
+#
+
+# View Carseats data
+summary(Carseats)
+names(Carseats)
+contrasts(Carseats$ShelveLoc)
+
