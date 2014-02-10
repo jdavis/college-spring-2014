@@ -80,7 +80,7 @@
 \newcommand{\E}{\mathrm{E}}
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
-\newcommand{\dist}[1]{\mathrm{#1}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
 
 \begin{document}
 
@@ -132,15 +132,12 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    In \textit{Monopoly}, a player in jail gets out by rolling doubles on their
-    turn. Since the only outcome that allows the player to move his piece is
-    doubles, the player will be less interested in the sume of the two dice and
-    more interested in whether or not that he/she rolls doubles.
+    Considering the game of \textit{Monopoly}, answer the following questions.
     \\
 
     Let \(X\) be the outcome of a single roll of the dice, with ``success''
     considered to be rolling doubles and ``failure'' rolling anything else.
-    Then \(X ~ \dist{Bernoulli}(p)\).
+    Then \(X \dist{Bernoulli}(p)\).
     \\
 
     \part
