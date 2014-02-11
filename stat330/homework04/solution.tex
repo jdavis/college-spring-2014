@@ -289,9 +289,10 @@
 
     No, it isn't possible to get 2.5 questions right on the exam. This doesn't
     matter because the expectation is how many someone would expect to get
-    right on 10 questions for guessing C over and over again. Thus it makes
-    more sense that over a 20 question exam, the guesser would be expected to
-    get 5 right.
+    right on 10 questions for guessing C over and over again for a very long
+    time. It isn't the number he \textbf{will} get right, but rather the number
+    he \textbf{should} get right. Thus it makes more sense that over a 20
+    question exam, the guesser would be expected to get 5 right.
     \\
 
     \part
@@ -301,8 +302,22 @@
 
     \solution
 
-    Solution.
-    \\
+    In this case, \(n = 10\) questions and given our values of \(p = .25\) and \(q = .75\).
+    We want to see the probability of him getting 0 questions right. Thus the value
+    we are looking for is when \(x = 0\) because \(x\). Thus given our pmf,
+    \(p(x) = \binom{n}{x}p^x q^{n - x}\). Inserting our values gives us:
+
+    \[
+        \begin{split}
+            P[X = 0] = p(0) &= \binom{10}{0} p^0 q^{10 - 0}
+            \\
+            &= \frac{10!}{0! 10!} 1 (.75)^10
+            \\
+            &= 1 \cdot 1 \cdot .75^10
+            \\
+            &\approx .056
+        \end{split}
+    \]
 
     \part
 
@@ -312,7 +327,24 @@
 
     \solution
 
-    Solution.
+    Using the above equation, we want to see the probability of \(P[X \geq 6]\).
+    Which gives us the following:
+
+    \[
+        \begin{split}
+            P[X \geq 6] &= p(6) + p(7) + p(8) + p(9) + p(10)
+            \\
+            &= \sum_{x = 6}^{10} \binom{10}{x} p^x q^{10 - x}
+            \\
+            &= 1 - P[X < 6]
+            \\
+            &= 1 - P[X \leq 5] \quad \mbox{because its discrete}
+            \\
+            &\approx 1 - .980 \quad \mbox{using the cdf function, } F(x)
+            \\
+            &\approx .020
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
