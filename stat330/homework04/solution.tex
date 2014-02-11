@@ -475,7 +475,29 @@
 
     \solution
 
-    Solution.
+    If we think about attend as a success and missing lecture as a failure,
+    then this takes the form of a Binomial distribution.
+    \\
+
+    This gives us the equation of \(p(x) = \binom{30}{x} p^x q^{30 - x}\)
+    where \(p = .95\) and thus \(q = .05\).
+    \\
+
+    The probability of missing 2 or more lectures is the same as attending
+    less than 29 lectures. Thus we can write it as \(P[X \leq 28]\). This can
+    also be written as: \(1 - P[X > 28]\):
+
+    \[
+        \begin{split}
+            P[X \leq 28] &= 1 - P[X > 28]
+            \\
+            &= 1 - p(29) - p(30)
+            \\
+            &\approx 1 - .339 - .215 \quad \mbox{by using the equation above}
+            \\
+            &\approx .446
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \end{document}
