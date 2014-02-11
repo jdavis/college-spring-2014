@@ -461,10 +461,28 @@
 
     \solution
 
-    Solution.
-\end{homeworkProblem}
+    This problem takes the form of the Poisson distribution. We have a rate
+    and a value that has one of the units of the rate. Thus we can calculate
+    our lambda, \(\lambda = 1.5 * 0.4 = .6\) occurences (blemishes).
+    \\
 
-\pagebreak
+    We know the pmf of a Poisson distribution is: \(P(x) =
+    e^{-\lambda}\frac{\lambda^x}{x!}\). We want to find the probability that we
+    get at least one blemish which is \(P[X \geq 1]\). Then:
+
+    \[
+        \begin{split}
+            P[X \geq 1] &= 1 - P[X < 1]
+            \\
+            &= 1 - P[X = 0]
+            \\
+            &\approx 1 - .549 \quad \mbox{by using the equation above}
+            \\
+            &\approx .451
+        \end{split}
+    \]
+
+\end{homeworkProblem}
 
 \begin{homeworkProblem}
     The probability that you attend lecture is .95. If there are 30 lectures
