@@ -95,7 +95,7 @@
     discrete uniform variable on \([a, b]\). The pmf of \(X\) is:
 
     \[
-        p(x) = \left\{
+        p_X(x) = \left\{
             \begin{array}{ll}
                 \frac{
                     1
@@ -115,18 +115,49 @@
 
     \solution
 
-    Solution.
-    \\
+    The expected value is the sum of the probabilities multiplied by the \(x\)
+    value:
+
+    \[
+        \begin{split}
+            \E[X] &= \sum_{x = a}^{b} x \cdot p_X(x)
+            \\
+            &= \sum_{x = a}^{b} x \cdot \frac{1}{b - a + 1}
+            \\
+            &= \frac{1}{b - a + 1} \sum_{x = a}^{b} x
+            \\
+            &= \frac{1}{b - a + 1} \left[
+                \sum_{x = a}^{b} x - \sum_{x = 1}^{a - 1} x
+            \right]
+            \\
+            &= \frac{1}{b - a + 1} \left[
+                \frac{b}{2}(b + 1) - \frac{a - 1}{2}(a - 1 + 1)
+            \right]
+            \\
+            &= \frac{1}{b - a + 1} \cdot \frac{1}{2} \cdot \left[
+                b^2 + b - a^2 + a
+            \right]
+        \end{split}
+    \]
 
     \part
 
-    Suppose \(c\) is an integer between \(a\) and \(b\). How does \(p_x(c)\)
+    Suppose \(c\) is an integer between \(a\) and \(b\). How does \(p_X(c)\)
     change as \(a\) and \(b\) move further away from each other?
     \\
 
     \solution
 
-    Solution.
+    Since since it is a uniform distribution, the value of \(p_X(c)\) will be
+    dependent on the distance of \(a\) and \(b\) which is given as \(\frac{1}{b
+    - a + 1}\). Thus as \(a\) and \(b\) get farther from each other, that is
+    making the denominator of the fraction bigger, thus the probability
+    decreases.
+    \\
+
+    The highest the probability can be is when \(a = b\) which would make the
+    fraction be \(1 / 1\). Thus, again, it makes sense that it decreases as
+    \(a\) and \(b\) grow apart.
 \end{homeworkProblem}
 
 \pagebreak
