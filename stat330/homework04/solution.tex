@@ -5,6 +5,8 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -81,6 +83,14 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
+
+\pgfmathdeclarefunction{problem2}{1}{%
+  \pgfmathparse{
+    (and(   1,    #1<0)*(0) +
+    (and(#1>= 0,  #1< 1)*(0.833) +
+    (and(#1>= 1,  #1< 2)*(1)
+    }
+}
 
 \begin{document}
 
@@ -207,7 +217,7 @@
 
     Since our distribution is a Bernoulli distribution, the expectation of
     such a distribution is \(\E[X] = p\), so with probability \(p \approx
-    .167\), the expectation is thus \(\E[X] = p\).
+    .167\), the expectation is thus \(\E[X] = .167\).
     \\
 
     Similarly, the variance for a Bernoulli distribution is defined as
@@ -222,8 +232,26 @@
 
     \solution
 
-    Solution.
-    \\
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel = {\(X\)},
+                ylabel = {Total probability, \(F(x)\)},
+            ]
+                \foreach \xStart/\xEnd  in {-1/0, 0/1, 1/2} {
+                    \addplot[domain=\xStart:\xEnd, blue, samples=10, ultra thick] {problem2(x)};
+                }
+
+                \draw [draw=blue, fill=white,  thick] (axis cs: 0, 0) circle (2.0pt);
+
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 0, .833) circle (2.0pt);
+                \draw [draw=blue, fill=white, thick] (axis cs: 1, .833) circle (2.0pt);
+
+                \draw [draw=blue, fill=blue,  thick] (axis cs: 1, 1) circle (2.0pt);
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
 
     Now let's take a look at the number of turns that are needed until doubles
     are rolled.  Let \(Y\) be the random variable representing the number of
@@ -233,12 +261,14 @@
     \part
 
     Using your answers for 2a for \(p\), what is the expected number of turns a
-    player will need to get out of jail? (Hint: this is \(\E[Y]\)).
+    player will need to get out of jail?
     \\
 
     \solution
 
-    Solution.
+    Since it is Geometric, the expected value for a geometric distribution is
+    \(\E[Y] = 1/p\), plugging in our values gives us \(\E[Y] = 1/.167 \approx
+    5.99\) turns.
     \\
 
     \part
