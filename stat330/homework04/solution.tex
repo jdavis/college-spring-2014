@@ -231,9 +231,9 @@
     \\
 
     \solution
+    \\
 
     \begin{figure}[h]
-        \centering
         \begin{tikzpicture}
             \begin{axis}[
                 xlabel = {\(X\)},
@@ -279,7 +279,22 @@
 
     \solution
 
-    Solution
+    By needing four or more rolls to get out of jail will mean the complement
+    of not getting doubles in 4 rolls. Thus:
+
+    \[
+        \begin{split}
+            P[Y \geq 4]
+            &= 1 - P[Y < 4]
+            \\
+            &= 1 - P(3) - P(2) - P(1)
+            \\
+            &\approx 1 - .116 - .139 - .167 \quad
+            \mbox{using the pdf function, } P(x)
+            \\
+            &\approx .578
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
