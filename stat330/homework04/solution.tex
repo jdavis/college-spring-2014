@@ -225,15 +225,15 @@
     Solution.
     \\
 
-    Now let's take a look at the number of turns that are needed until doubles are rolled.
-    Let \(Y\) be the random variable representing the number of rolls of the dice
-    until doubles comes up. Then \(Y \dist{Geometric}(p)\).
+    Now let's take a look at the number of turns that are needed until doubles
+    are rolled.  Let \(Y\) be the random variable representing the number of
+    rolls of the dice until doubles comes up. Then \(Y \dist{Geometric}(p)\).
     \\
 
     \part
 
-    Using your answers for 2a for \(p\), what ist he expected number of turns a player will
-    need to get out of jail? (Hint: this is \(\E[Y]\)).
+    Using your answers for 2a for \(p\), what is the expected number of turns a
+    player will need to get out of jail? (Hint: this is \(\E[Y]\)).
     \\
 
     \solution
@@ -371,7 +371,7 @@
 
 \begin{homeworkProblem}
     Fred Hoiberg had a free throw shooting percentage of 85.4\%. Suppose that in
-    pratice one day he shoots free throws utnil his first miss. Let \(X\) be
+    pratice one day he shoots free throws until his first miss. Let \(X\) be
     the number of shots he takes.
     \\
 
@@ -383,19 +383,29 @@
 
     \solution
 
-    Solution.
+    The probability distribution that this problem will take is the Geometric
+    distribution on the random variable \(X\) where \(X\) is the number of
+    shots.  The parameters just need to be \(x\), the number of shots until a
+    success and \(p\), the probability of making a shot which was given, thus
+    \(p = .854\).
+    \\
+
+    The equation for the probability distribution is then \(P(x) = (1 - p)^{x -
+    1} p\).
     \\
 
     \part
 
-    What is the probability that Hoiberg makes his first two shorts but misses
+    What is the probability that Hoiberg makes his first two shots but misses
     his third short?
     \\
 
     \solution
 
-    Solution.
-    \\
+    The probability of two successes and a failure would be:
+    \[
+        p \cdot p \cdot (1 - p) = (.854) (.854) (.146) = .106
+    \]
 
     \part
 
@@ -435,7 +445,15 @@
 
     \solution
 
-    Solution.
+    This problem takes the form of the Poisson distribution. We have a rate
+    and a value that has one of the units of the rate. Thus we can calculate
+    our lambda, \(\lambda = (12 / 10) (3) = 3.6\) occurences (earthquakes).
+    \\
+
+    We know the pmf of a Poisson distribution is: \(P(x) =
+    e^{-\lambda}\frac{\lambda^x}{x!}\). We want to find the probability that
+    there are no severe earthquakes or \(P[X = 0]\). Using the above equation,
+    \(P[X = 0] = .027\).
     \\
 
     \part
@@ -446,10 +464,22 @@
 
     \solution
 
-    Solution.
-\end{homeworkProblem}
+    Using the above information, we want to know \(P[X \geq 3]\) so
+    we can calculate it as follows:
 
-\pagebreak
+    \[
+        \begin{split}
+            P[X \geq 3]
+            &= 1 - P[X < 3]
+            \\
+            &= 1 - P[X = 0] - P[X = 1] - P[X = 2]
+            \\
+            &\approx 1 - .027 - .098 - .177 \quad \mbox{using the above formula}
+            \\
+            &\approx .698
+        \end{split}
+    \]
+\end{homeworkProblem}
 
 \begin{homeworkProblem}
     A type of photo paper has on average 1.5 blemishes per square foot. You can
