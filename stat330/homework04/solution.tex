@@ -392,8 +392,6 @@
     \]
 \end{homeworkProblem}
 
-\pagebreak
-
 \begin{homeworkProblem}
     In some city, the probability of rain on any day is 0.60, determined using
     historical climate records. It is known that on rainy days the number of
@@ -408,7 +406,62 @@
 
     \solution
 
-    Solution.
+    Let there be two events, event \(R\) that it rained that day and \(E\) that there
+    were 8 accidents that day. We know that \(\Pr(R) = .6\) and
+    \(\Pr(\overline{R}) = .4\).
+    \\
+
+    We want to know what the probability that given there were 8 accidents that it was a
+    rainy day, or \(\Pr(R \mid E)\).
+    \\
+
+    We also know that the probability that there were 8 accidents given that it rained
+    follows a Poisson distribution with \(\lambda = 4\). In other words,
+    \(\Pr(E \mid R) \dist{Poisson}(4)\). Thus this gives us:
+
+    \[
+        \Pr(E \mid R) \dist{Poisson}(4) = p(8) = e^{-4}\frac{4^8}{8!} \approx .030
+    \]
+
+    We know that Baye's Rule is that \(\Pr(E \mid R) \Pr(R) = \Pr(R \mid E)
+    \Pr(E)\). Since we are looking for \(\Pr(R \mid E)\), we get the following:
+
+    \[
+        \begin{split}
+            \Pr(R \mid E)
+            &= \frac{
+                \Pr(E \mid R) \Pr(R)
+            }{
+                \Pr(E)
+            }
+        \end{split}
+    \]
+
+    Using the law of total probability
+    \[
+        \begin{split}
+            \Pr(R \mid E)
+            &= \frac{
+                \Pr(E \mid R) \Pr(R)
+            }{
+                \Pr(E \mid R) \Pr(R) + \Pr(E \mid \overline{R}) \Pr(\overline{R})
+            }
+            \\
+            &= \frac{
+                (.030) (.6)
+            }{
+                (.030) (.6) + (1 - .030) (.4)
+            }
+            \\
+            &= \frac{
+                .018
+            }{
+                .406
+            }
+            \\
+            &\approx .044
+        \end{split}
+    \]
 
 \end{homeworkProblem}
 
@@ -430,9 +483,9 @@
 
     The probability distribution that this problem will take is the Geometric
     distribution on the random variable \(X\) where \(X\) is the number of
-    shots.  The parameters just need to be \(x\), the number of shots until a
-    success and \(p\), the probability of making a shot which was given, thus
-    \(p = .854\).
+    shots until he misses. The parameters just need to be \(x\), but
+    counterintuitively, our ``success'' isn't really a success, but rather a
+    miss. Thus our \(p\) will be \(p = 1 - .854 = .146\).
     \\
 
     The equation for the probability distribution is then \(P(x) = (1 - p)^{x -
@@ -447,9 +500,11 @@
 
     \solution
 
-    The probability of two successes and a failure would be:
+    We are looking for the probability that the first miss will happen after
+    three shots, or or \(P[X = 3]\). This gives:
+
     \[
-        p \cdot p \cdot (1 - p) = (.854) (.854) (.146) = .106
+        P[X = 3] = P(3) = (1 - p)^{3 - 1}p = (.854)^{2}(.146) \approx .106
     \]
 
     \part
@@ -459,8 +514,13 @@
 
     \solution
 
-    Solution.
+    We want the probability that he makes 15 shots in a row until his first miss,
+    or \(P[X = 16]\). This gives:
     \\
+
+    \[
+        P[X = 16] = P(16) = (1 - p)^{16 - 1}p = (.854)^{15}(.146) \approx .014
+    \]
 
     \part
 
@@ -470,7 +530,23 @@
 
     \solution
 
-    Solution.
+    We want the probability that he can make between 2 and four shots. This is
+    \(P[2 \leq X \leq 4]\). Giving us:
+
+    \[
+        \begin{split}
+            P[2 \leq X \leq 4]
+            &= P(2) + P(3) + P(4)
+            \\
+            &= (1 - p)^{2 - 1}p + (1 - p)^{3 - 1}p + (1 - p)^{4 - 1}p
+            \\
+            &= (.854)^{1}(.146) + (.854)^{2}(.146) + (.854)^{3}(.146)
+            \\
+            &= .125 + .106 + .091
+            \\
+            &\approx .322
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
