@@ -110,6 +110,96 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Using a created simulated data, answer the questions regarding simple
+    linear regression.
+    \\
+
+    \part
+
+    Write out the form of the linear model. What are the regression
+    coefficients?
+    \\
+
+    \solution
+
+    Solution
+    \\
+
+    \part
+
+    What is the correlation between \(x1\) and \(x2\)? Create a scatterplot
+    displaying the relationship between the variables.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Using the data, fit a least squares regression to predict \(Y\) using
+    \(x1\) and \(x2\). Describe the results obtained. What are
+    \(\hat{\beta_0}\) and \(\hat{\beta_1}\), and \(\hat{\beta_2}\)? How do
+    these relate to the true \(\beta_0\), \(\beta_1\), \(\beta_2\)? Can you
+    reject the null hypothesis \(H_0 : \beta_1 = 0\)? How about \(H_0 : \beta_2
+    = 0\)?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Now fit a least squares regression to predict \(Y\) using only \(x1\).
+    Comment on your results. Can you reject the null hypothesis \(H_0 : \beta_1
+    = 0\)?
+    \\
+
+    \solution
+
+    Solution.
+    \\\
+
+    \part
+
+    Now fit a least squares regression to predict \(Y\) using only \(x2\).
+    Comment on your results. Can you reject the null hypothesis \(H_0 : \beta_1
+    = 0\)?
+    \\
+
+    \part
+
+    Do the results obtained in c-e contradict each other? Explain your answer.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Now suppose we obtain one additional observation, which was unfortunately
+    mismeasured.
+
+    \begin{verbatim}
+> x1 <- c(x1, 0.1)
+> x2 <- c(x2, 0.8)
+> y <- c(y, 6)
+    \end{verbatim}
+
+    Re-fit the lienar models from c-e using this new data. What effects does
+    this new observation have on each of the models? In each model, is this
+    observation an outlier? A high leverage point?  Both? Explain your answers
+    and make suitable plots.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
