@@ -1,0 +1,224 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#5}
+\newcommand{\hmwkDueDate}{February 19, 2014}
+\newcommand{\hmwkClass}{Stat330}
+\newcommand{\hmwkClassTime}{Section A}
+\newcommand{\hmwkClassInstructor}{Mr. Lanker}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    The time in minutes for a certain system to reboot can be modeled
+    with a continous random variable \(T\) that has the following pdf:
+
+    \[
+        f(t) = \left\{
+            \begin{split}
+                    {C(2 - t)}^2 \quad & 0 \leq t \leq 2
+                    \\
+                    0 \quad & \mbox{any other } t
+            \end{split}
+        \right.
+    \]
+
+    \part
+
+    Compute \(C\).
+    \\
+
+    \solution
+
+    Since this is a probability density, we know that the total area of any
+    probability density, is equal to one. Thus we get:
+
+    \[
+        \begin{split}
+            F(x) &= \int_0^2 C \cdot {(2 - t)}^2 \dx
+            \\
+            &= C \left[ \int_0^2 t^2 - 4t + 4\ \dx \right]
+            \\
+            &= C \left[ \frac{1}{3}t^3 - 2t^2 + 4t + c \right|_0^2
+            \\
+            &= C \left[ \frac{1}{3}(2)^3 - 2(2)^2 + 4(2) + c \right]
+            - \left[ \frac{1}{3}(0)^3 - 2(0)^2 + 4(0) + c \right]
+            \\
+            &= C \left[
+                (\frac{8}{3} - 8 + 8 + c) - (c)
+            \right]
+            \\
+            &= C \frac{8}{3}
+        \end{split}
+    \]
+
+    Since this is equal to 1, we can see that \(C = 3/8\).
+    \\
+
+    \part
+
+    Compute \(\E[T]\).
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Compute \(\Var[T]\).
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Compute the probability that it takes between 1 and 2 minutes to reboot.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\end{document}
