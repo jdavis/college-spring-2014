@@ -104,17 +104,17 @@
             \hline
             \multicolumn{2}{|c||}{} & \multicolumn{3}{c|}{$x$} &
             \\
-            \cline{3-5}
+            \cline{3-6}
             \multicolumn{2}{|c||}{$P(x, y)$} & 0 & 1 & 2 & $P_X(x)$
             \\
             \hline
             \hline
             \multirow{3}{*}{$y$} & 0 & 0.52 & 0.20 & 0.04 & 0.76
             \\
-            \cline{2-5}
+            \cline{2-6}
             & 1 & 0.14 & 0.02 & 0.01 & 0.17
             \\
-            \cline{2-5}
+            \cline{2-6}
             & 2 & 0.06 & 0.01 & 0.00 & 0.07
             \\
             \hline
@@ -138,12 +138,13 @@
     This gives us:
 
     \[
-        P_X(X \geq 1) + P_Y(Y \geq 1) = 1 - P(X = 0, Y = 0) = 1 - 0.52 = .48
+        P_X(X \geq 1) + P_Y(Y \geq 1) = 1 - P(X = 0, Y = 0) = 1 - 0.52 = 0.48
     \]
 
     \part
 
-    From the given distribution, are \(X\) and \(Y\) independent? Why or why not?
+    From the given distribution, are \(X\) and \(Y\) independent? Why or why
+    not?
     \\
 
     \solution
@@ -153,10 +154,13 @@
     for both \(P_X(x)\) and \(P_Y(y)\).
     \\
 
-    Thus using our table, we have:
-    \[
-        P(x, y) = P_X(x) P_Y(y)
-    \]
+    Thus using our table, we just have to check if the following equation holds
+    \(P(x, y) = P_X(x) P_Y(y)\) for each part in the table. Just by looking at
+    the first cell, \(P(0, 0) = 0.52 \neq 0.547 = P_X(0) P_Y(0)\).
+    \\
+
+    Thus our variables, \(X\) and \(Y\), aren't independent, they are
+    dependent.
 \end{homeworkProblem}
 
 \pagebreak
