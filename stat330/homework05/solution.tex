@@ -5,8 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{tikz}
-\usepackage{pgfplots}
+\usepackage{multirow}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -92,7 +91,72 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Problem 3.15 from Baron.
+    \\
 
+    Let \(X\) and \(Y\) be the number of hardware failures in two computer labs
+    in a given month.  The joint distribution of \(X\) and \(Y\) is givin in
+    the table below:
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{|c | c || c | c | c | c |}
+            \hline
+            \multicolumn{2}{|c||}{} & \multicolumn{3}{c|}{$x$} &
+            \\
+            \cline{3-5}
+            \multicolumn{2}{|c||}{$P(x, y)$} & 0 & 1 & 2 & $P_X(x)$
+            \\
+            \hline
+            \hline
+            \multirow{3}{*}{$y$} & 0 & 0.52 & 0.20 & 0.04 & 0.76
+            \\
+            \cline{2-5}
+            & 1 & 0.14 & 0.02 & 0.01 & 0.17
+            \\
+            \cline{2-5}
+            & 2 & 0.06 & 0.01 & 0.00 & 0.07
+            \\
+            \hline
+            \multicolumn{2}{|c||}{$P_Y(y)$} & 0.72 & 0.23 & 0.05 & 1.00
+            \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \part
+
+    Compute the probability of at least one hardware failure.
+    \\
+
+    \solution
+
+    This means that either one component in either lab fails. Thus it would be
+    equal to the complement of the probability that \textbf{no} components fail.
+    \\
+
+    This gives us:
+
+    \[
+        P_X(X \geq 1) + P_Y(Y \geq 1) = 1 - P(X = 0, Y = 0) = 1 - 0.52 = .48
+    \]
+
+    \part
+
+    From the given distribution, are \(X\) and \(Y\) independent? Why or why not?
+    \\
+
+    \solution
+
+    To determine if joint probabilities are independent, we just need to see
+    if the probability of \(P_{XY}(x, y)\) is equal to the separate probabilties
+    for both \(P_X(x)\) and \(P_Y(y)\).
+    \\
+
+    Thus using our table, we have:
+    \[
+        P(x, y) = P_X(x) P_Y(y)
+    \]
 \end{homeworkProblem}
 
 \pagebreak
