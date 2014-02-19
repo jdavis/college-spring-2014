@@ -233,7 +233,8 @@
 
     \begin{table}[ht]
         \centering
-        \begin{tabular}{c || c | c | c | c | c | c | c}
+        \begin{tabular}{| c || c | c | c | c | c | c | c |}
+            \hline
             \(u\) & -2 & -1 & 0 & 1 & 2 & 3 & 4
             \\
             \hline
@@ -267,6 +268,8 @@
             & 0.3
             & 0
             & 0.1
+            \\
+            \hline
         \end{tabular}
     \end{table}
 
@@ -414,7 +417,7 @@
 
     \[
         \begin{split}
-            \E[f(t)] &= \frac{3}{8} \int_0^2 t \cdot {(2 - t)}^2 \dt
+            \E[T] &= \frac{3}{8} \int_0^2 t \cdot {(2 - t)}^2 \dt
             \\
             &= \frac{3}{8} \left[ \int_0^2 t^3 - 4t^2 + 4t\ \dt \right]
             \\
@@ -440,7 +443,7 @@
 
     \[
         \begin{split}
-            \Var[f(t)] &= \frac{3}{8} \int_0^2 t^2 \cdot {(2 - t)}^2 \dt - \left(\frac{1}{2}\right)^2
+            \Var[T] &= \frac{3}{8} \int_0^2 t^2 \cdot {(2 - t)}^2 \dt - \left(\frac{1}{2}\right)^2
             \\
             &= \frac{3}{8} \left[ \int_0^2 t^4 - 4t^3 + 4t^2\ \dt \right] - \frac{1}{4}
             \\
