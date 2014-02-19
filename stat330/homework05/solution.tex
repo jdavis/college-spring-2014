@@ -679,6 +679,8 @@
     coins.
     \\
 
+    Let \(X\) be the random variable for household income.
+
     \part
 
     A recent economic reform made households with the income below 640 coins
@@ -688,8 +690,20 @@
 
     \solution
 
-    Solution.
-    \\
+    We are looking for \(P(X < 640)\). Standardizing gives us:
+
+    \[
+        \begin{split}
+            P(X < 640)
+            &= P \left( \frac{X - \mu}{\sigma} < \frac{640 - \mu}{\sigma} \right)
+            \\
+            &= P \left( Z < \frac{-260}{200} \right)
+            \\
+            &= P \left( Z < -1.3 \right)
+            \\
+            &= 0.0968
+        \end{split}
+    \]
 
     \part
 
@@ -700,7 +714,9 @@
 
     \solution
 
-    Solution.
+    We are looking for \(P(Z < c) = .05\). Using the table, we know that \(c =
+    -1.6\). Standardizing gives us \(-1.6 \cdot 200 + 900 = 580\) as their
+    income.
 \end{homeworkProblem}
 
 \pagebreak
@@ -739,7 +755,6 @@
             &= 0.0985
         \end{split}
     \]
-    \\
 
     \part
 
