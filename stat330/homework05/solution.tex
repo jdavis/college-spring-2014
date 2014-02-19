@@ -707,8 +707,12 @@
 
 \begin{homeworkProblem}
     The average height of professional basketball players is around 6 feet and
-    7 inches, and the standard deviation is 3.89 inches. Assuming Normal
+    7 inches (79 inches), and the standard deviation is 3.89 inches. Assuming Normal
     distribution of heights within this group:
+    \\
+
+    Let \(X\) be the random variable for the height of the basketball players
+    in inches.
     \\
 
     \part
@@ -718,7 +722,23 @@
 
     \solution
 
-    Solution.
+    Solution is
+    \[
+        \begin{split}
+            P(X > 84)
+            &= 1 - P(X \leq 84)
+            \\
+            &= 1 - P \left( \frac{X - \mu}{\sigma} < \frac{84 - \mu}{\sigma} \right)
+            \\
+            &= 1 - P \left( Z < \frac{5}{3.89} \right)
+            \\
+            &= 1 - P \left( Z < 1.29 \right)
+            \\
+            &= 1 - 0.9015
+            \\
+            &= 0.0985
+        \end{split}
+    \]
     \\
 
     \part
@@ -729,7 +749,9 @@
 
     \solution
 
-    Solution.
+    We are looking for when \(P(Z > c) = 0.20\) on the standard normal table.
+    This is \(1 - P(Z < c) = 0.20\) or \(P(Z < c) = 0.80\). Using the table,
+    \(c = 0.85\). Standardizing this gives us \(0.85 \cdot 3.89 + 79 = 82.3\).
 \end{homeworkProblem}
 
 \pagebreak
