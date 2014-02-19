@@ -513,8 +513,28 @@
 
     \solution
 
-    Solution.
+    The problem description gives us \(\lambda = .5\) and \(t\) is the interval
+    size. We want the probability that less than 2 jobs arrive, or \(P(X <
+    2)\).
     \\
+
+    Our interval time is then \(t = 4\), so \(X \dist{Poisson}(\frac{1}{2}
+    \cdot 4) = X \dist{Poisson}(2)\). Our distribution function is then:
+    \(P(x) = e^{-\lambda} \frac{\lambda^x}{x!}\).
+    \\
+
+    This is:
+
+    \[
+        \begin{split}
+            P[X < 2]
+            &= P(X = 0) + P(X = 1)
+            \\
+            &\approx .1353 + .2707
+            \\
+            &\approx .4060
+        \end{split}
+    \]
 
     \part
 
@@ -525,16 +545,130 @@
 
     \solution
 
-    Solution.
+    Since we want the time between events, if we let \(T\) be the random
+    variable for time between jobs, then we know that \(T
+    \dist{Exponential}(\lambda)\). Since we know \(\lambda = 0.5\), we get:
+    \(T \dist{Exponential}(.5)\). The cdf is: \(F(x) = 1 - e^{-\lambda x}\).
+    \\
+
+    We want to find the probability that \(T\) is less
+    than 1.5 minutes, thus \(P(I < 1.5)\) which is:
+
+    \[
+        \begin{split}
+            P(I < 1.5) &= 1 - e^{-.5 \cdot 1.5}
+            \\
+            &= 1 - e^{-.75}
+            \\
+            &\approx 0.5276
+        \end{split}
+    \]
+
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
+    The memoryless property of the exponential.
+    \\
 
+    \part
+
+    Using your answer to (4b), if a print job as just arrived, calculate the
+    probability that the next print job arrives after 1.5 minutes.
+    \\
+
+    \solution
+
+    Now we want the probability of \(P(I > 1.5)\), which is equal to:
+
+    \[
+        \begin{split}
+            P(I > 1.5)
+            &= 1 - P(I < 1.5)
+            \\
+            &= 1 - 0.5276
+            \\
+            &\approx 0.4724
+        \end{split}
+    \]
+
+    \part
+
+    Similarly if a print job has just arrived, calculate the probability that
+    the next print job arrives after 3 minutes.
+    \\
+
+    \solution
+
+    Now we want the probability of \(P(I > 3)\), which is equal to:
+
+    \[
+        \begin{split}
+            P(I > 3)
+            &= 1 - P(I < 3)
+            \\
+            &= 1 - (1 - e^{-.5 \cdot 3})
+            \\
+            &= e^{-.5 \cdot 3}
+            \\
+            &\approx 0.2231
+        \end{split}
+    \]
+
+    \part
+
+    Calculate the conditional probability that the next print job arrives after
+    3 minutes given that the job does not arrive in the first 1.5 minutes.  To
+    start you on your answer, let \(I\) represent the time until the next
+    arrival:
+
+    \[
+        \begin{split}
+            P(I > 3.0 \mid I > 1.5)
+            &= \frac{
+                P(I > 3.0 \mbox{ and } I > 1.5)
+            }{
+                P(I > 1.5)
+            }
+            \\
+            &= \frac{
+                P(I > 3.0)
+            }{
+                P(I > 1.5)
+            }
+        \end{split}
+    \]
+
+    with the simplification in the numerator due to the fact if \(I > 3.0\)
+    then it is automatically greater than 1.5 minutes, so the last part can be
+    ignored.
+    \\
+
+    \solution
+
+    Using the derivation and the probability from our previous parts, we get:
+
+    \[
+        \frac{P(I > 3.0)}{P(I > 1.5)} = \frac{0.2231}{0.4724} = 0.4724
+    \]
+
+    THAT'S AWESOME!
+    \\
+
+    \part
+
+    Why is the exponential probability distribution called memoryless? Compare
+    your answers for (5a) and (5c).
+    \\
+
+    \solution
+
+    The exponential probability distribution is called memoryless because given
+    the conditional that an event happened in the past, the probability of that
+    event doesn't depend on the conditional. Instead it just depends on the
+    time between the two events.
 \end{homeworkProblem}
-
-\pagebreak
 
 \begin{homeworkProblem}
     Problem 4.16 from Baron.
