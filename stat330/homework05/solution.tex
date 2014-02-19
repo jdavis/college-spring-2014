@@ -517,18 +517,17 @@
     \solution
 
     \begin{enumerate}[(a)]
-        \item \(P(Z < 1.25)\)
-        \item \(P(Z \leq 1.25)\)
-        \item \(P(Z > 1.25)\)
-        \item \(P(\left| Z \right| \leq 1.25)\)
-        \item \(P(Z < 6.0)\)
-        \item \(P(Z > 6.0)\)
+        \item \(P(Z < 1.25)\) = 0.8944
+        \item \(P(Z \leq 1.25)\) = 0.8944
+        \item \(P(Z > 1.25)\) = \(1 - P(Z \leq 1.25) = 1 - 0.8944 = 0.1056\)
+        \item \(P(\left| Z \right| \leq 1.25) = P(Z \leq 1.25) - P(Z \leq -1.25) = 0.8944 - 0.1056 = 0.7888\)
+        \item \(P(Z < 6.0) = 1.0\)
+        \item \(P(Z > 6.0) = 1 - P(Z < 6.0) = 0\)
         \item With probability 0.8, variable \(Z\) does not exceed what value?
+            \(P(Z < c) = 0.8\) where \(c = 0.85\).
     \end{enumerate}
 
 \end{homeworkProblem}
-
-\pagebreak
 
 \begin{homeworkProblem}
     Problem 4.17 from Baron.
@@ -541,13 +540,14 @@
     \solution
 
     \begin{enumerate}[(a)]
-        \item \(P(Z \geq 0.99)\)
-        \item \(P(Z \geq -0.99)\)
-        \item \(P(Z < 0.99)\)
-        \item \(P(\left| Z \right| > 0.99)\)
-        \item \(P(Z < 10.0)\)
-        \item \(P(Z > 10.0)\)
+        \item \(P(Z \geq 0.99) = 1 - P(Z < 0.99) = 0.1611\)
+        \item \(P(Z \geq -0.99) = 1 - P(Z < -0.99) = 0.8389\)
+        \item \(P(Z < 0.99) = 0.8389\)
+        \item \(P(\left| Z \right| > 0.99) = 1 - \left[P(Z > -0.99) - P(Z > 0.99) \right] = 1 - 0.6778 = 0.3222\)
+        \item \(P(Z < 10.0) = 1\)
+        \item \(P(Z > 10.0) = 1 - P(Z < 10.0) = 0\)
         \item With probability 0.9, variable \(Z\) is less than what?
+            \(P(Z < c) = 0.9\) where \(c = 1.29\).
     \end{enumerate}
 
 
@@ -662,7 +662,7 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    The average height of professinoal basketball players is around 6 feet and
+    The average height of professional basketball players is around 6 feet and
     7 inches, and the standard deviation is 3.89 inches. Assuming Normal
     distribution of heights within this group:
     \\
