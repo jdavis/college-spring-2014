@@ -276,8 +276,19 @@
 
     \solution
 
-    Solution.
-    \\
+    Since it is a discrete random variable, our expected value is:
+
+    \[
+        \begin{split}
+            \E[U] &= \sum_{u = -2}^{4} u P(u)
+            \\
+            &= -2(0) + -1(0) + 0(0.4) + 1(0.2) + 2(0.3) + 3(0) + 4(0.1)
+            \\
+            &= 1.2
+        \end{split}
+    \]
+
+    \pagebreak
 
     \part
 
@@ -288,7 +299,23 @@
 
     \solution
 
-    Solution.
+    Using the properties on page 49, we get:
+
+    \[
+        \begin{split}
+            \E[U] &= \E[2X - Y]
+            \\
+            &= \E[2X] - \E[Y]
+            \\
+            &= 2\E[X] - \E[Y]
+            \\
+            &= 2(.8) - (.4)
+            \\
+            &= 1.2
+        \end{split}
+    \]
+
+    which agrees with part (b).
     \\
 
     \part
@@ -298,7 +325,33 @@
 
     \solution
 
-    Solution.
+    We want to find the probability that given \(U \geq 2\), that \(X = 2\).
+    Using our table, this gives us:
+
+    \[
+        \begin{split}
+            P(X = 2 \mid U \geq 2)
+            &= \frac{
+                P(X = 2 \cap U \geq 2)
+            }{
+                P(U \geq 2)
+            }
+            \\
+            &= \frac{
+                P(2, 2) + P(2, 1) + P(2, 0)
+            }{
+                P(U = 2) + P(U = 3) + P(U = 4)
+            }
+            \\
+            &= \frac{
+                0.1 + 0.1 + 0.1
+            }{
+                0.3 + 0 + 0.1
+            }
+            \\
+            &= 0.75
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
