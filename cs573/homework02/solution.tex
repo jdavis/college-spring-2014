@@ -64,8 +64,8 @@
 \setcounter{homeworkProblemCounter}{1}
 \nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
 
-\newenvironment{homeworkProblem}{
-    \section{Problem \arabic{homeworkProblemCounter}}
+\newenvironment{homeworkProblem}[1][]{
+    \section{Problem \arabic{homeworkProblemCounter} \; \large{#1}}
     \setcounter{partCounter}{1}
     \enterProblemHeader{homeworkProblemCounter}
 }{
@@ -100,6 +100,7 @@
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
@@ -111,8 +112,8 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Using a created simulated data, answer the questions regarding simple
-    linear regression.
+    From ISLR: Chapter 3, Problem 14. Using a created simulated data, answer
+    the questions regarding simple linear regression.
     \\
 
     \part
@@ -131,14 +132,35 @@
 
     \part
 
-    What is the correlation between \(x1\) and \(x2\)? Create a scatterplot
+    What is the correlation between \(X_1\) and \(X_2\)? Create a scatterplot
     displaying the relationship between the variables.
     \\
 
     \solution
 
-    Solution.
-    \\
+    We can measure the correlation between the two variables by calculating the
+    covariance as well as the correlation coefficient. Using our linear model, we
+    can calculate the covariance as follows:
+
+    \[
+        \begin{split}
+            \Cov(X_1, X_2) &= \E[X_1 X_2] - \E[X_1] \E[X_2]
+        \end{split}
+    \]
+
+    This also gives us a correlation coefficient, \(\rho\) of:
+
+    \[
+        \begin{split}
+            \rho = \frac{
+                \Cov(X_1, X_2)
+            }{
+                (\Std X) (\Std Y)
+            }
+        \end{split}
+    \]
+
+    The scatter plot is then:
 
     \part
 
