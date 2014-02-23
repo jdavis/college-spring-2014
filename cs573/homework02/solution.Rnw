@@ -38,9 +38,6 @@
 \renewcommand\footrulewidth{0.4pt}
 
 \setlength{\floatsep}{100pt}
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\algrenewcomment[1]{\hfill // #1}
 
 \setlength\parindent{0pt}
 
@@ -113,7 +110,6 @@
 \begin{homeworkProblem}
     From ISLR: Chapter 3, Problem 14. Using a created simulated data, answer
     the questions regarding simple linear regression.
-    \\
 
 <<>>=
 set.seed(1)
@@ -123,6 +119,9 @@ x1 <- runif(100)
 
 # Normal distribution for second input
 x2 <- 0.5 * x1 + rnorm(100) / 10
+
+# Our Linear Model
+y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
 @
 
 
@@ -172,15 +171,12 @@ x2 <- 0.5 * x1 + rnorm(100) / 10
 
     The scatter plot is then:
 
-<<foo, fig.height=4>>=
+<<p1b, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
 plot(x1, x2,
      main = 'Correlation of X1 and X2',
      xlab = 'X1',
      ylab = 'X2')
 @
-
-When fig.cap needs to use objects in the current chunk, we need to set the eval.after options so the objects are available when fig.cap is used.
-
 
     \part
 
@@ -194,8 +190,28 @@ When fig.cap needs to use objects in the current chunk, we need to set the eval.
 
     \solution
 
-    Solution.
-    \\
+    First let's fit a linear model to it using R's \textbf{lm()} function.
+<<>>=
+data <- data.frame(x1 = x1, x2 = x2, y = y)
+fit <- lm(y ~ x1 + x2, data = data)
+fit.coef <- coefficients(fit)
+summary(fit)
+
+@
+
+    This gives the following estimators:
+
+    \[
+        \hat{\beta_0} = \Sexpr{fit.coef[1]},
+        \quad
+        \hat{\beta_1} = \Sexpr{fit.coef[2]},
+        \quad
+        \hat{\beta_2} = \Sexpr{fit.coef[3]}
+    \]
+
+<<p1c, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
+plot(data)
+@
 
     \part
 
@@ -218,7 +234,8 @@ When fig.cap needs to use objects in the current chunk, we need to set the eval.
 
     \part
 
-    Do the results obtained in c-e contradict each other? Explain your answer.
+    Do the results obtained in (c-e) contradict each other? Explain your
+    answer.
     \\
 
     \solution
@@ -231,13 +248,13 @@ When fig.cap needs to use objects in the current chunk, we need to set the eval.
     Now suppose we obtain one additional observation, which was unfortunately
     mismeasured.
 
-    \begin{verbatim}
-> x1 <- c(x1, 0.1)
-> x2 <- c(x2, 0.8)
-> y <- c(y, 6)
-    \end{verbatim}
+<<>>=
+x1 <- c(x1, 0.1)
+x2 <- c(x2, 0.8)
+Y <- c(Y, 6)
+@
 
-    Re-fit the lienar models from c-e using this new data. What effects does
+    Re-fit the lienar models from (c-e) using this new data. What effects does
     this new observation have on each of the models? In each model, is this
     observation an outlier? A high leverage point?  Both? Explain your answers
     and make suitable plots.
