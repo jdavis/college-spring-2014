@@ -124,7 +124,6 @@ x2 <- 0.5 * x1 + rnorm(100) / 10
 y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
 @
 
-
     \part
 
     Write out the form of the linear model. What are the regression
@@ -191,12 +190,12 @@ plot(x1, x2,
     \solution
 
     First let's fit a linear model to it using R's \textbf{lm()} function.
+
 <<>>=
 data <- data.frame(x1 = x1, x2 = x2, y = y)
 fit <- lm(y ~ x1 + x2, data = data)
 fit.coef <- coefficients(fit)
 summary(fit)
-
 @
 
     This gives the following estimators:
@@ -222,8 +221,13 @@ plot(data)
 
     \solution
 
-    Solution.
-    \\\
+    Fitting only \(x1\) gives us:
+
+<<>>=
+fit.x1 <- lm(y ~ x1, data = data)
+fit.x1.coef <- coefficients(fit.x1)
+summary(fit.x1)
+@
 
     \part
 
@@ -231,6 +235,16 @@ plot(data)
     Comment on your results. Can you reject the null hypothesis \(H_0 : \beta_1
     = 0\)?
     \\
+
+    \solution
+
+    Fitting only \(x2\) gives us:
+
+<<>>=
+fit.x2 <- lm(y ~ x2, data = data)
+fit.x2.coef <- coefficients(fit.x2)
+summary(fit.x2)
+@
 
     \part
 
@@ -251,7 +265,7 @@ plot(data)
 <<>>=
 x1 <- c(x1, 0.1)
 x2 <- c(x2, 0.8)
-Y <- c(Y, 6)
+y <- c(y, 6)
 @
 
     Re-fit the lienar models from (c-e) using this new data. What effects does
