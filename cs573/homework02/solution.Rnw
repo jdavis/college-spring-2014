@@ -336,7 +336,96 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    We want to predict whether or not that a company will issue a dividend this year
+    given that its percentage profit was 4.
+    \\
+
+    This gives us two classes, or \(K = 2\). Where the classes are whether a
+    company issued a dividend or not. We can assign values to these such that
+    \(k_1 =\) issued a dividend, and \(k_2 =\) did not issue a dividend.
+    \\
+
+    By taking the values that we get out of the problem statement, we know we
+    are given \(\sigma = 6\), \(\mu_1 = 10\) when issued a dividend, and
+    \(\mu_2 = 0\) when a dividend isn't given. We also know that the total
+    probability of companies that issued dividends, or \(\pi_1 = 0.80\) and thus
+    \(\pi_2 = 0.20\).
+    \\
+
+    By using Bayes' Theorem, this gives us:
+
+    \[
+        \begin{split}
+            \Pr(Y = 1 \mid X = 4)
+            &= \frac{
+                \pi_1 f_k(x)
+            }{
+                \sum_{l = 1}^K \pi_l f_l(x)
+            }
+            \\
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \sum_{l = 1}^2 \pi_l f_l(4)
+            }
+            \\
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \pi_1 f_1(4) + \pi_2 f_2(4)
+            }
+        \end{split}
+    \]
+
+    by substituting in our values and formulas, we get:
+
+    \[
+        \begin{split}
+            \Pr(Y = 1 \mid X = 4)
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \pi_1 f_1(4) + \pi_2 f_2(4)
+            }
+            \\
+            &= \frac{
+                (0.80) f_1(4)
+            }{
+                (0.80) f_1(4) + (.20) f_2(4)
+            }
+            \\
+            &= \frac{
+                \frac{
+                    0.80
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 10)^2/2(36)}
+            }{
+                \frac{
+                    0.80
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 10)^2/2(36)}
+                +
+                \frac{
+                    0.20
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 0)^2/2(36)}
+            }
+            \\
+            &= \frac{
+                (0.80) (0.0403)
+            }{
+                (0.80) (0.0403) + (0.20) (0.0532)
+            }
+            \\
+            &= .7519
+        \end{split}
+    \]
+
+    Thus there is an 75.2\% chance that the company will issue a dividend with a
+    percentage profit of 4.
 \end{homeworkProblem}
 
 \pagebreak
