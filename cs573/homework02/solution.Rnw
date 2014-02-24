@@ -313,7 +313,7 @@ y <- c(y, 6)
 \pagebreak
 
 \begin{homeworkProblem}
-    From ISLR: Chapter 7, Problem 7 (Conceptual).
+    From ISLR: Chapter 4, Problem 7 (Conceptual).
     \\
 
     Suppose that you wish to predict whether a given stock will issue a
@@ -326,6 +326,13 @@ y <- c(y, 6)
     distribution, predict the probability that a company will issue a dividend
     this year given that its percentage profit was \(X = 4\) last year.
     \\
+
+    \textit{Hint: Recall that the density function of a normal random variable
+    is below. You will need to use Bayes' Theorem.}
+
+    \[
+        f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(x - \mu)^2 / 2\sigma^2}
+    \]
 
     \solution
 
