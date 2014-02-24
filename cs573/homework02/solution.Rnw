@@ -108,8 +108,11 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    From ISLR: Chapter 3, Problem 14. Using a created simulated data, answer
-    the questions regarding simple linear regression.
+    From ISLR: Chapter 3, Problem 14.
+    \\
+
+    Using a created simulated data, answer the questions regarding simple
+    linear regression.
 
 <<>>=
 set.seed(1)
@@ -282,16 +285,19 @@ y <- c(y, 6)
 \pagebreak
 
 \begin{homeworkProblem}
-    From ISLR: Chapter 4, Problem 3 (Conceptual). This problem relates to the
-    QDA model, in which the obesrvations within each class are drawn from a
-    normal distribution with a class specific mean vector and a class specific
-    covariance matrix. We consider the simple case where \(p = 1\), there is
-    only one feature. Suppose that we have \(K\) classes, and if an observation
-    belongs to the \(kth\) class then \(X\) comes from a one-dimensional normal
-    distribution, \(X \dist{N}(\mu_k, \sigma_k^2)\).  Recall that the density
-    function for the one-dimensional normal distribution is given in Eq. 4.11
-    in the text.  Prove that in this case, the Bayes classifier is not linear.
-    Argue that it is in fact quadract.
+    From ISLR: Chapter 4, Problem 3 (Conceptual).
+    \\
+
+    This problem relates to the QDA model, in which the obesrvations within
+    each class are drawn from a normal distribution with a class specific mean
+    vector and a class specific covariance matrix. We consider the simple case
+    where \(p = 1\), there is only one feature. Suppose that we have \(K\)
+    classes, and if an observation belongs to the \(kth\) class then \(X\)
+    comes from a one-dimensional normal distribution, \(X \dist{N}(\mu_k,
+    \sigma_k^2)\).  Recall that the density function for the one-dimensional
+    normal distribution is given in Eq. 4.11 in the text.  Prove that in this
+    case, the Bayes classifier is not linear.  Argue that it is in fact
+    quadratic.
     \\
 
     \solution
@@ -302,16 +308,18 @@ y <- c(y, 6)
 \pagebreak
 
 \begin{homeworkProblem}
-    From ISLR: Chapter 7, Problem 7 (Conceptual). Suppose that you wish to
-    predict whether a given stock will issue a dividend this year based on
-    \(X\), last year's percent profit. We examine a large number of companies
-    and discover that the mean value of \(X\) for companies is issued a
-    dividend was \(\overline{X} = 10\), while the mean for those that didn't
-    was \(\overline{X} = 0\). In addition, the variance of \(X\) for these two
-    sets of companies was \(\sigma^2 = 36\). Finally, 80\% of companies issued
-    dividends.  Assuming that \(X\) follows a normal distribution, predict the
-    probability that a company will issue a dividend this year given that its
-    percentage profit was \(X = 4\) last year.
+    From ISLR: Chapter 7, Problem 7 (Conceptual).
+    \\
+
+    Suppose that you wish to predict whether a given stock will issue a
+    dividend this year based on \(X\), last year's percent profit. We examine a
+    large number of companies and discover that the mean value of \(X\) for
+    companies is issued a dividend was \(\overline{X} = 10\), while the mean
+    for those that didn't was \(\overline{X} = 0\). In addition, the variance
+    of \(X\) for these two sets of companies was \(\sigma^2 = 36\). Finally,
+    80\% of companies issued dividends.  Assuming that \(X\) follows a normal
+    distribution, predict the probability that a company will issue a dividend
+    this year given that its percentage profit was \(X = 4\) last year.
     \\
 
     \solution
@@ -322,11 +330,13 @@ y <- c(y, 6)
 \pagebreak
 
 \begin{homeworkProblem}
-    From ISLR: Chapter 4, Problem 10 (Applied). This question should be
-    answered using the Weekly data set, which is part of the ISLR package. This
-    data is similar in nature to the \textit{Smarket} data from this chapter's
-    lab, except that it contains 1,089 weekly returns for 21 years, from the
-    beginning of 1990 to the end of 2010.
+    From ISLR: Chapter 4, Problem 10 (Applied).
+    \\
+
+    This question should be answered using the Weekly data set, which is part
+    of the ISLR package. This data is similar in nature to the \textit{Smarket}
+    data from this chapter's lab, except that it contains 1,089 weekly returns
+    for 21 years, from the beginning of 1990 to the end of 2010.
     \\
 
     \part
