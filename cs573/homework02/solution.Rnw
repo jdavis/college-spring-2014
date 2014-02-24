@@ -300,6 +300,11 @@ y <- c(y, 6)
     quadratic.
     \\
 
+    \textit{Hint: For this problem, you should follow the arguments laid out in
+    Section 4.4.2, but without making the assumption that \(\sigma_1^2 =
+    \ldots = \sigma_K^2\).}
+    \\
+
     \solution
 
     Solution.
