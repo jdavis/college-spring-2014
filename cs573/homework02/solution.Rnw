@@ -453,8 +453,13 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
-    \\
+<<>>=
+summary(Weekly)
+@
+
+<<p4a, fig.pos="H", fig.height=5, fig.cap="Pairs of Weekly data.", dev="png">>=
+pairs(Weekly)
+@
 
     \part
 
@@ -467,8 +472,12 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
-    \\
+<<>>=
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary(fit.glm)
+@
 
     \part
 
@@ -478,7 +487,17 @@ y <- c(y, 6)
     \\
 
     \solution
+<<>>=
+prediction <- predict.glm(fit.glm,
+                          Weekly,
+                          type = c('response'))
 
+classes <- rep(0, dim(Weekly)[1])
+classes[prediction >= 0.5] <- 1
+
+# Make matrix
+table(Weekly$Direction, classes)
+@
     Solution.
     \\
 
