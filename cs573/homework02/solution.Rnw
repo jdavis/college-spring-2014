@@ -8,12 +8,6 @@
 \usepackage{amsfonts}
 \usepackage{changepage}
 \usepackage{lineno}
-\usepackage[plain]{algorithm}
-\usepackage{algpseudocode}
-\usepackage{hyperref}
-\usepackage{tikz}
-\usepackage{listings}
-\usepackage{graphics}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{fancyvrb}
@@ -32,7 +26,7 @@
 \chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
 \rhead{\firstxmark}
 \lfoot{\lastxmark}
-\cfoot{}
+\cfoot{\thepage}
 
 \renewcommand\headrulewidth{0.4pt}
 \renewcommand\footrulewidth{0.4pt}
@@ -40,8 +34,6 @@
 \setlength{\floatsep}{100pt}
 
 \setlength\parindent{0pt}
-
-\hypersetup{colorlinks=true}
 
 \newcommand{\enterProblemHeader}[1]{
     \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
@@ -72,21 +64,20 @@
 \newcommand{\hmwkDueDate}{February 28, 2014}
 \newcommand{\hmwkClass}{ComS 573}
 \newcommand{\hmwkClassTime}{10am}
-\newcommand{\hmwkClassInstructor}{Professor De Brabanter}
+\newcommand{\hmwkClassInstructor}{De Brabanter}
 \newcommand{\hmwkAuthorName}{Josh Davis}
 
 \title{
     \vspace{2in}
     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{0.1in}\large{\textit{Professor\ \hmwkClassInstructor\ at\ \hmwkClassTime}}
     \vspace{3in}
 }
 
 \author{\textbf{\hmwkAuthorName}}
 \date{}
 
-\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 \newcommand{\dx}{\mathrm{d}x}
