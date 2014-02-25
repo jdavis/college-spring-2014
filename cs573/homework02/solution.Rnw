@@ -103,6 +103,10 @@
 
 \begin{document}
 
+<<echo=FALSE>>=
+library('ISLR')
+@
+
 \maketitle
 
 \pagebreak
