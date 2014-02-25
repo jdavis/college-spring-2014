@@ -369,9 +369,10 @@ summary.lm(fit.x2)
     mismeasured.
 
 <<>>=
-x1 <- c(x1, 0.1)
-x2 <- c(x2, 0.8)
-y <- c(y, 6)
+new.x1 <- c(x1, 0.1)
+new.x2 <- c(x2, 0.8)
+new.y <- c(y, 6)
+new.data <- data.frame(x1 = new.x1, x2 = new.x2, y = new.y)
 @
 
     Re-fit the lienar models from (c-e) using this new data. What effects does
@@ -382,7 +383,110 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    Fitting a combined linear model to it from part (c) gives us:
+
+<<>>=
+new.fit <- lm(y ~ x1 + x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.coef <- coefficients(new.fit)
+@
+
+    This gives the following estimators:
+
+    \[
+        \hat{\beta_0} = \Sexpr{new.fit.coef[1]},
+        \quad
+        \hat{\beta_1} = \Sexpr{new.fit.coef[2]},
+        \quad
+        \hat{\beta_2} = \Sexpr{new.fit.coef[3]}
+    \]
+
+    The significance of these estimators is then:
+
+<<>>=
+summary.lm(new.fit)
+@
+
+    This changed from our previous model because only our \(X_1\) estimate was
+    significant but now it isn't anymore. Instead the \(X_2\) estimator is
+    significant.
+    \\
+
+    Fitting a single linear model for \(x_1\) like from part (d) we get:
+
+<<>>=
+new.fit.x1 <- lm(y ~ x1, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x1.coef <- coefficients(new.fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x1)
+@
+
+    This hasn't changed our single regression model for \(X_1\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    Now fitting a single linear model for \(x_2\) like from part (e) we get:
+
+<<>>=
+new.fit.x2 <- lm(y ~ x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x2.coef <- coefficients(new.fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x2)
+@
+
+    This hasn't changed our single regression model for \(X_2\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    To determine if the added points are outliers or leverage points, let's
+    take a look at graphs for each new model:
+    \\
+
+    \pagebreak
+
+    \subsection{\(X_1\) and \(X_2\) Model}
+
+<<p1g1, fig.pos="H", fig.cap="X1 and X2 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit)
+@
+
+    \pagebreak
+
+    \subsection{\(X_1\) Model}
+
+<<p1g2, fig.pos="H", fig.cap="X1 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x1)
+@
+
+    \pagebreak
+
+    \subsection{\(X_2\) Model}
+
+<<p1g3, fig.pos="H", fig.cap="X2 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x2)
+@
+
 \end{homeworkProblem}
 
 \pagebreak
