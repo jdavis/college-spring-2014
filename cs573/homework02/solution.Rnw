@@ -135,9 +135,15 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
 
     The model that we created is just \(Y = 2 + 2 X_1 + 0.3 X_2 + \epsilon\).
     Thus given we have two predictors, our model is \(Y = \beta_0 + \beta_1 X_1
-    + \beta_2 X_2 + \epsilon\). Giving the values of \(\beta_0 = 2\), \(\beta_1
-    = 2\), and \(\beta_2 = 0.3\).
-    \\
+    + \beta_2 X_2 + \epsilon\). This gives us:
+
+    \[
+        \beta_0 = 2,
+        \quad
+        \beta_1 = 2,
+        \quad
+        \beta_2 = 0.3
+    \]
 
     \part
 
@@ -148,8 +154,8 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
     \solution
 
     We can measure the correlation between the two variables by calculating the
-    covariance as well as the correlation coefficient. Using our linear model, we
-    can calculate the covariance as follows:
+    covariance. Using our linear model, we can calculate the covariance as
+    follows:
 
     \[
         \begin{split}
@@ -157,7 +163,21 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
         \end{split}
     \]
 
-    This also gives us a correlation coefficient, \(\rho\) of:
+    We can calculate the expected value of our random variables by using
+    the \textbf{mean()} function in R. This gives us:
+
+<<>>=
+mean(x1 * x2) - mean(x1) * mean(x2)
+@
+
+    Or we can use the \textbf{cov()} function in R:
+
+<<>>=
+cov(x1, x2)
+@
+
+    We can scale this value to be dimensionless if we didn't know the magnitude
+    of our values. This value is \(\rho\) and is calculated as:
 
     \[
         \begin{split}
@@ -169,7 +189,29 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
         \end{split}
     \]
 
-    The scatter plot is then:
+    Using R, we can determine that our \(\Std X\) and the \(\Std Y\) are:
+
+<<>>=
+sd(x1)
+sd(x2)
+@
+
+    Substituting our values gives us:
+
+    \[
+        \begin{split}
+            \rho &= \frac{
+                0.0380
+            }{
+                (0.2676) (0.1702)
+            }
+            \\
+            &= .8343
+        \end{split}
+    \]
+
+    This suggests that \(X_1\) and \(X_2\) are pretty colinear. Let's visualize
+    this by using a scatter plot:
 
 <<p1b, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
 plot(x1, x2,
@@ -195,8 +237,10 @@ plot(x1, x2,
 <<>>=
 data <- data.frame(x1 = x1, x2 = x2, y = y)
 fit <- lm(y ~ x1 + x2, data = data)
+@
+
+<<echo=FALSE>>=
 fit.coef <- coefficients(fit)
-summary(fit)
 @
 
     This gives the following estimators:
@@ -209,9 +253,29 @@ summary(fit)
         \hat{\beta_2} = \Sexpr{fit.coef[3]}
     \]
 
-<<p1c, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
-plot(data)
+    The values of our estimators are off by a wee bit but pretty close.
+    \\
+
+    If we look at the significance of our estimated values, we get the
+    following:
+
+<<>>=
+summary.lm(fit)
 @
+
+    Taking this into account, our \pval for \(X_1\) is then 0.049. This is just
+    barely under the standard of 0.05. Thus we can consider it significant.
+    \\
+
+    This means we can reject \(H_0: \beta_1 = 0\) and thus can accept the
+    alternative hypothesis. Our conclusion is that \(X_1\) does have an effect
+    on our predictor.
+    \\
+
+    However the \pval for \(X_2\) is 0.375. This means we can't reject the
+    \(H_0: \beta_2 = 0\) and it isn't apparent that \(X_2\) has a significant
+    effect on our predictor.
+    \\
 
     \part
 
@@ -226,9 +290,23 @@ plot(data)
 
 <<>>=
 fit.x1 <- lm(y ~ x1, data = data)
-fit.x1.coef <- coefficients(fit.x1)
-summary(fit.x1)
 @
+
+<<echo=FALSE>>=
+fit.x1.coef <- coefficients(fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x1)
+@
+
+    Since our \tstat is large enough, our accompanying \pval is small (\(<
+    0.05\)) and thus it means we can reject the \(H_0: \beta_1 = 0\) for this
+    model.
+    \\
 
     \part
 
@@ -243,9 +321,23 @@ summary(fit.x1)
 
 <<>>=
 fit.x2 <- lm(y ~ x2, data = data)
-fit.x2.coef <- coefficients(fit.x2)
-summary(fit.x2)
 @
+
+<<echo=FALSE>>=
+fit.x2.coef <- coefficients(fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x2)
+@
+
+    Just like our previous linear model, the \tstat is large and thus our
+    \pval is small enough (\(< 0.05\)) and we can reject the \(H_0: \beta_1 =
+    0\).
+    \\
 
     \part
 
@@ -255,7 +347,20 @@ summary(fit.x2)
 
     \solution
 
-    Solution.
+    No, they don't contradict each other. In this case, we know from part (b)
+    that our two predictors are correlated. The combined model, part (c), can't
+    take this into account. Each regression coefficient \(\beta_j\), estimates
+    the expected change in \(Y\) per unit change in \(X_j\) with all other
+    predictors held fixed.
+    \\
+
+    Since changing \(X_1\) affects \(X_2\), this changes our combined model.
+    Thus our models from part (d-e) are a better reflection of how they affect
+    our response variable, \(Y\).
+    \\
+
+    This is one of the "woes" of interpreting regression coefficients according
+    to \textit{Data Analysis \& Regression} by Mosteller and Tukey, 1977.
     \\
 
     \part
