@@ -119,6 +119,7 @@ library('ISLR')
     linear regression.
 
 <<>>=
+# Ensure consistent values
 set.seed(1)
 
 # Create uniform distribution for first input
@@ -428,7 +429,7 @@ y <- c(y, 6)
         \end{split}
     \]
 
-    Thus there is an 75.2\% chance that the company will issue a dividend with a
+    Thus there is a 75.2\% chance that the company will issue a dividend with a
     percentage profit of 4.
 \end{homeworkProblem}
 
