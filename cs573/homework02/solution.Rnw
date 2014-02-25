@@ -89,6 +89,8 @@
 \newcommand{\Bias}{\mathrm{Bias}}
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value }
+\newcommand{\tstat}{\(t\)-statistic }
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
