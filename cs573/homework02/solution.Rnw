@@ -8,12 +8,6 @@
 \usepackage{amsfonts}
 \usepackage{changepage}
 \usepackage{lineno}
-\usepackage[plain]{algorithm}
-\usepackage{algpseudocode}
-\usepackage{hyperref}
-\usepackage{tikz}
-\usepackage{listings}
-\usepackage{graphics}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{fancyvrb}
@@ -32,7 +26,7 @@
 \chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
 \rhead{\firstxmark}
 \lfoot{\lastxmark}
-\cfoot{}
+\cfoot{\thepage}
 
 \renewcommand\headrulewidth{0.4pt}
 \renewcommand\footrulewidth{0.4pt}
@@ -40,8 +34,6 @@
 \setlength{\floatsep}{100pt}
 
 \setlength\parindent{0pt}
-
-\hypersetup{colorlinks=true}
 
 \newcommand{\enterProblemHeader}[1]{
     \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
@@ -72,21 +64,20 @@
 \newcommand{\hmwkDueDate}{February 28, 2014}
 \newcommand{\hmwkClass}{ComS 573}
 \newcommand{\hmwkClassTime}{10am}
-\newcommand{\hmwkClassInstructor}{Professor De Brabanter}
+\newcommand{\hmwkClassInstructor}{De Brabanter}
 \newcommand{\hmwkAuthorName}{Josh Davis}
 
 \title{
     \vspace{2in}
     \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{0.1in}\large{\textit{Professor\ \hmwkClassInstructor\ at\ \hmwkClassTime}}
     \vspace{3in}
 }
 
 \author{\textbf{\hmwkAuthorName}}
 \date{}
 
-\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 \newcommand{\dx}{\mathrm{d}x}
@@ -98,10 +89,17 @@
 \newcommand{\Bias}{\mathrm{Bias}}
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
 \begin{document}
+
+<<echo=FALSE>>=
+library('ISLR')
+library('MASS')
+@
 
 \maketitle
 
@@ -115,6 +113,7 @@
     linear regression.
 
 <<>>=
+# Ensure consistent values
 set.seed(1)
 
 # Create uniform distribution for first input
@@ -137,9 +136,15 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
 
     The model that we created is just \(Y = 2 + 2 X_1 + 0.3 X_2 + \epsilon\).
     Thus given we have two predictors, our model is \(Y = \beta_0 + \beta_1 X_1
-    + \beta_2 X_2 + \epsilon\). Giving the values of \(\beta_0 = 2\), \(\beta_1
-    = 2\), and \(\beta_2 = 0.3\).
-    \\
+    + \beta_2 X_2 + \epsilon\). This gives us:
+
+    \[
+        \beta_0 = 2,
+        \quad
+        \beta_1 = 2,
+        \quad
+        \beta_2 = 0.3
+    \]
 
     \part
 
@@ -150,8 +155,8 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
     \solution
 
     We can measure the correlation between the two variables by calculating the
-    covariance as well as the correlation coefficient. Using our linear model, we
-    can calculate the covariance as follows:
+    covariance. Using our linear model, we can calculate the covariance as
+    follows:
 
     \[
         \begin{split}
@@ -159,7 +164,21 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
         \end{split}
     \]
 
-    This also gives us a correlation coefficient, \(\rho\) of:
+    We can calculate the expected value of our random variables by using
+    the \textbf{mean()} function in R. This gives us:
+
+<<>>=
+mean(x1 * x2) - mean(x1) * mean(x2)
+@
+
+    Or we can use the \textbf{cov()} function in R:
+
+<<>>=
+cov(x1, x2)
+@
+
+    We can scale this value to be dimensionless if we didn't know the magnitude
+    of our values. This value is \(\rho\) and is calculated as:
 
     \[
         \begin{split}
@@ -171,7 +190,29 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
         \end{split}
     \]
 
-    The scatter plot is then:
+    Using R, we can determine that our \(\Std X\) and the \(\Std Y\) are:
+
+<<>>=
+sd(x1)
+sd(x2)
+@
+
+    Substituting our values gives us:
+
+    \[
+        \begin{split}
+            \rho &= \frac{
+                0.0380
+            }{
+                (0.2676) (0.1702)
+            }
+            \\
+            &= .8343
+        \end{split}
+    \]
+
+    This suggests that \(X_1\) and \(X_2\) are pretty colinear. Let's visualize
+    this by using a scatter plot:
 
 <<p1b, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
 plot(x1, x2,
@@ -197,8 +238,10 @@ plot(x1, x2,
 <<>>=
 data <- data.frame(x1 = x1, x2 = x2, y = y)
 fit <- lm(y ~ x1 + x2, data = data)
+@
+
+<<echo=FALSE>>=
 fit.coef <- coefficients(fit)
-summary(fit)
 @
 
     This gives the following estimators:
@@ -211,9 +254,29 @@ summary(fit)
         \hat{\beta_2} = \Sexpr{fit.coef[3]}
     \]
 
-<<p1c, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
-plot(data)
+    The values of our estimators are off by a wee bit but pretty close.
+    \\
+
+    If we look at the significance of our estimated values, we get the
+    following:
+
+<<>>=
+summary.lm(fit)
 @
+
+    Taking this into account, our \pval\ for \(X_1\) is then 0.049. This is just
+    barely under the standard of 0.05. Thus we can consider it significant.
+    \\
+
+    This means we can reject \(H_0: \beta_1 = 0\) and thus can accept the
+    alternative hypothesis. Our conclusion is that \(X_1\) does have an effect
+    on our predictor.
+    \\
+
+    However the \pval\ for \(X_2\) is 0.375. This means we can't reject the
+    \(H_0: \beta_2 = 0\) and it isn't apparent that \(X_2\) has a significant
+    effect on our predictor.
+    \\
 
     \part
 
@@ -228,9 +291,23 @@ plot(data)
 
 <<>>=
 fit.x1 <- lm(y ~ x1, data = data)
-fit.x1.coef <- coefficients(fit.x1)
-summary(fit.x1)
 @
+
+<<echo=FALSE>>=
+fit.x1.coef <- coefficients(fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x1)
+@
+
+    Since our \tstat is large enough, our accompanying \pval\ is small (\(<
+    0.05\)) and thus it means we can reject the \(H_0: \beta_1 = 0\) for this
+    model.
+    \\
 
     \part
 
@@ -245,9 +322,23 @@ summary(fit.x1)
 
 <<>>=
 fit.x2 <- lm(y ~ x2, data = data)
-fit.x2.coef <- coefficients(fit.x2)
-summary(fit.x2)
 @
+
+<<echo=FALSE>>=
+fit.x2.coef <- coefficients(fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x2)
+@
+
+    Just like our previous linear model, the \tstat is large and thus our
+    \pval\ is small enough (\(< 0.05\)) and we can reject the \(H_0: \beta_1 =
+    0\).
+    \\
 
     \part
 
@@ -257,7 +348,20 @@ summary(fit.x2)
 
     \solution
 
-    Solution.
+    No, they don't contradict each other. In this case, we know from part (b)
+    that our two predictors are correlated. The combined model, part (c), can't
+    take this into account. Each regression coefficient \(\beta_j\), estimates
+    the expected change in \(Y\) per unit change in \(X_j\) with all other
+    predictors held fixed.
+    \\
+
+    Since changing \(X_1\) affects \(X_2\), this changes our combined model.
+    Thus our models from part (d-e) are a better reflection of how they affect
+    our response variable, \(Y\).
+    \\
+
+    This is one of the "woes" of interpreting regression coefficients according
+    to \textit{Data Analysis \& Regression} by Mosteller and Tukey, 1977.
     \\
 
     \part
@@ -266,9 +370,10 @@ summary(fit.x2)
     mismeasured.
 
 <<>>=
-x1 <- c(x1, 0.1)
-x2 <- c(x2, 0.8)
-y <- c(y, 6)
+new.x1 <- c(x1, 0.1)
+new.x2 <- c(x2, 0.8)
+new.y <- c(y, 6)
+new.data <- data.frame(x1 = new.x1, x2 = new.x2, y = new.y)
 @
 
     Re-fit the lienar models from (c-e) using this new data. What effects does
@@ -279,7 +384,113 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    Fitting a combined linear model to it from part (c) gives us:
+
+<<>>=
+new.fit <- lm(y ~ x1 + x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.coef <- coefficients(new.fit)
+@
+
+    This gives the following estimators:
+
+    \[
+        \hat{\beta_0} = \Sexpr{new.fit.coef[1]},
+        \quad
+        \hat{\beta_1} = \Sexpr{new.fit.coef[2]},
+        \quad
+        \hat{\beta_2} = \Sexpr{new.fit.coef[3]}
+    \]
+
+    The significance of these estimators is then:
+
+<<>>=
+summary.lm(new.fit)
+@
+
+    This changed from our previous model because only our \(X_1\) estimate was
+    significant but now it isn't anymore. Instead the \(X_2\) estimator is
+    significant.
+    \\
+
+    Fitting a single linear model for \(x_1\) like from part (d) we get:
+
+<<>>=
+new.fit.x1 <- lm(y ~ x1, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x1.coef <- coefficients(new.fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x1)
+@
+
+    This hasn't changed our single regression model for \(X_1\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    Now fitting a single linear model for \(x_2\) like from part (e) we get:
+
+<<>>=
+new.fit.x2 <- lm(y ~ x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x2.coef <- coefficients(new.fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x2)
+@
+
+    This hasn't changed our single regression model for \(X_2\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    To determine if the added points are outliers or leverage points, let's
+    take a look at graphs for each new model:
+    \\
+
+    \pagebreak
+
+    \subsection{\(X_1\) and \(X_2\) Model}
+
+<<p1g1, fig.pos="H", fig.cap="X1 and X2 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit)
+@
+
+    Based on this, the added point looks to be a outlier because the Cook's
+    Distance is > 1.
+
+    \pagebreak
+
+    \subsection{\(X_1\) Model}
+
+<<p1g2, fig.pos="H", fig.cap="X1 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x1)
+@
+
+    \pagebreak
+
+    \subsection{\(X_2\) Model}
+
+<<p1g3, fig.pos="H", fig.cap="X2 Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x2)
+@
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -424,7 +635,7 @@ y <- c(y, 6)
         \end{split}
     \]
 
-    Thus there is an 75.2\% chance that the company will issue a dividend with a
+    Thus there is a 75.2\% chance that the company will issue a dividend with a
     percentage profit of 4.
 \end{homeworkProblem}
 
@@ -448,7 +659,28 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    A basic summary of our data:
+
+<<>>=
+summary(Weekly)
+@
+
+    Looking at the data might be helpful:
+
+<<p4a, fig.pos="H", fig.height=5, fig.cap="Pairs of Weekly data.", dev="png">>=
+pairs(Weekly)
+@
+
+    Lastly, let's look at some of the correlation coefficients to see if there's
+    anything interesting:
+
+<<>>=
+cor(Weekly[1:8])
+@
+
+
+    Most of them are small with the exception of \textbf{Volume} and
+    \textbf{Year} which suggests that they might be correlated.
     \\
 
     \part
@@ -462,7 +694,15 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+<<>>=
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary.glm(fit.glm)
+@
+
+    According to the results of the summary, the \tstat\ for \textbf{Lag2} is
+    large and is considered significant based on the \pval.
     \\
 
     \part
@@ -474,7 +714,40 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    To calculate our confusion matrix, we need to assign our predictions to
+    classes. We can do this using the following code:
+
+<<>>=
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary.glm(fit.glm)
+@
+
+<<>>=
+# Compute our prediction from our logistic model
+pred.glm <- predict.glm(fit.glm,
+                        Weekly,
+                        type = 'response')
+
+# Predicted classes
+classes <- rep("Down", dim(Weekly)[1])
+classes[pred.glm >= 0.5] <- "Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly$Direction, classes, dnn = c('Predicted:', ''))
+@
+    Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\).
+    \\
+
+    The confusion matrix is telling us how many predicted classes were right
+    and how many were wrong. Therefore when the classes match, it means it was
+    correctly classified. If they don't match, then they were classified
+    incorrectly.
     \\
 
     \part
@@ -487,7 +760,43 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    Using a subset of the data, we generate our model like so:
+
+<<>>=
+# Select the subset of the data we want
+Weekly.train <- subset(Weekly, Year <= 2008)
+Weekly.test <- subset(Weekly, Year > 2008)
+
+# Create our new logistic model
+fit.glm.lag2 <- glm(Direction ~ Lag2,
+              data = Weekly.train,
+              family = binomial())
+
+# Let's take a gander at it...
+summary.glm(fit.glm.lag2)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.glm.lag2 <- predict.glm(fit.glm.lag2,
+                          Weekly.test,
+                          type = 'response')
+
+# Predicted classes for the subset
+classes <- rep("Down", dim(Weekly.test)[1])
+classes[pred.glm.lag2 >= 0.5] <- "Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, classes, dnn = c('Predicted:', ''))
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
     \\
 
     \part
@@ -497,7 +806,31 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    We'll use the subset of the Weekly data and run LDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.lda <- lda(formula = Direction ~ Lag2, data = Weekly.train)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.lda <- predict(fit.lda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.lda$class, dnn = c('Predicted:', ''))
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
     \\
 
     \part
@@ -507,7 +840,31 @@ y <- c(y, 6)
 
     \solution
 
-    Solution.
+    We'll use the subset of the Weekly data and run QDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.qda <- qda(formula = Direction ~ Lag2, data = Weekly.train)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.qda <- predict(fit.qda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
+@
+
+    Giving us the fraction of: \((0 + 61)/(0 + 43 + 0 + 61) = 0.587\).
     \\
 
     \part
