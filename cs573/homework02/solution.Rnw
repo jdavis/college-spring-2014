@@ -470,6 +470,9 @@ par(mfrow = c(2, 2))
 plot(new.fit)
 @
 
+    Based on this, the added point looks to be a outlier because the Cook's
+    Distance is > 1.
+
     \pagebreak
 
     \subsection{\(X_1\) Model}
@@ -656,13 +659,29 @@ plot(new.fit.x2)
 
     \solution
 
+    A basic summary of our data:
+
 <<>>=
 summary(Weekly)
 @
 
+    Looking at the data might be helpful:
+
 <<p4a, fig.pos="H", fig.height=5, fig.cap="Pairs of Weekly data.", dev="png">>=
 pairs(Weekly)
 @
+
+    Lastly, let's look at some of the correlation coefficients to see if there's
+    anything interesting:
+
+<<>>=
+cor(Weekly[1:8])
+@
+
+
+    Most of them are small with the exception of \textbf{Volume} and
+    \textbf{Year} which suggests that they might be correlated.
+    \\
 
     \part
 
@@ -679,8 +698,12 @@ pairs(Weekly)
 fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
               data = Weekly,
               family = binomial())
-summary(fit.glm)
+summary.glm(fit.glm)
 @
+
+    According to the results of the summary, the \tstat\ for \textbf{Lag2} is
+    large and is considered significant based on the \pval.
+    \\
 
     \part
 
@@ -690,18 +713,42 @@ summary(fit.glm)
     \\
 
     \solution
+
+    To calculate our confusion matrix, we need to assign our predictions to
+    classes. We can do this using the following code:
+
 <<>>=
-prediction <- predict.glm(fit.glm,
-                          Weekly,
-                          type = c('response'))
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary.glm(fit.glm)
+@
 
-classes <- rep(0, dim(Weekly)[1])
-classes[prediction >= 0.5] <- 1
+<<>>=
+# Compute our prediction from our logistic model
+pred.glm <- predict.glm(fit.glm,
+                        Weekly,
+                        type = 'response')
 
+# Predicted classes
+classes <- rep("P-Down", dim(Weekly)[1])
+classes[pred.glm >= 0.5] <- "P-Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
 # Make matrix
 table(Weekly$Direction, classes)
 @
-    Solution.
+    Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\).
+    \\
+
+    The confusion matrix is telling us how many predicted classes were right
+    and how many were wrong.  P-Down is the predicted down class and P-Up is
+    the predicted up class. Therefore when the classes match, it means it was
+    correctly classified. If they don't match, then they were classified
+    incorrectly.
     \\
 
     \part
@@ -714,7 +761,43 @@ table(Weekly$Direction, classes)
 
     \solution
 
-    Solution.
+    Using a subset of the data, we generate our model like so:
+
+<<>>=
+# Select the subset of the data we want
+Weekly.train <- subset(Weekly, Year <= 2008)
+Weekly.test <- subset(Weekly, Year > 2008)
+
+# Create our new logistic model
+fit.glm.lag2 <- glm(Direction ~ Lag2,
+              data = Weekly.train,
+              family = binomial())
+
+# Let's take a gander at it...
+summary.glm(fit.glm.lag2)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.glm.lag2 <- predict.glm(fit.glm.lag2,
+                          Weekly.test,
+                          type = 'response')
+
+# Predicted classes for the subset
+classes <- rep("P-Down", dim(Weekly.test)[1])
+classes[pred.glm.lag2 >= 0.5] <- "P-Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, classes)
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
     \\
 
     \part
@@ -724,7 +807,34 @@ table(Weekly$Direction, classes)
 
     \solution
 
-    Solution.
+    We'll use the subset of the Weekly data and run LDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.lda <- lda(formula = Direction ~ Lag2, data = Weekly.train)
+
+# Let's take a gander at it...
+#summary(fit.lda)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.lda <- predict(fit.lda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.lda$class)
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
     \\
 
     \part
