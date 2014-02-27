@@ -3,7 +3,6 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{extramarks}
-\usepackage[usenames,dvipsnames]{color}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
@@ -374,39 +373,127 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    The code has been appended to the end of this PDF.
+    From ISLR: Chapter 2, Problem 8. Use the data set called \textit{College}
+    to answer the following questions.
+    \\
 
-    \begin{figure}[H]
-        \centering
-        \caption{Summary from Part I}
-        \VerbatimInput{partI.txt}
-    \end{figure}
+    \part
 
-    \begin{figure}[H]
-        \centering
-        \caption{Pairs plot from Part II}
-        \includegraphics[width=.88\textwidth]{partII}
-    \end{figure}
+    Read in the data using \textbf{read.csv()}.
 
+<<>>=
+# Download data if it doesn't exist
+if (!file.exists('./College.csv')) {
+    download.file('http://www-bcf.usc.edu/~gareth/ISL/College.csv', destfile = './College.csv')
+}
 
-    \begin{figure}[H]
-        \centering
-        \caption{Boxplot of Outstate vs Private in Part III}
-        \includegraphics[width=.50\textwidth]{partIII}
-    \end{figure}
+# Read in Data
+college <- read.csv('./College.csv', header = TRUE)
+@
 
+    \part
 
-    \begin{figure}[H]
-        \centering
-        \caption{Boxplot of Elite colleges vs Outstate in Part IV}
-        \includegraphics[width=.50\textwidth]{partIV}
-    \end{figure}
+    Look at the data and and remove the first column.
+<<>>=
+# View/edit the data
+# fix(college)
 
-    \begin{figure}[H]
-        \centering
-        \caption{Various histograms from Part V}
-        \includegraphics[width=.80\textwidth]{partV}
-    \end{figure}
+# View the data
+# View(college)
+
+# Remove first column according to page 55
+college <- college[,-1]
+@
+
+    \part
+    \\
+
+    \textbf{Part I}
+
+    Use the \textbf{summary()} function to produce a numerical summary of the
+    variables.
+
+<<>>=
+summary(college)
+@
+
+    \pagebreak
+
+    \textbf{Part II}
+
+    Use the \textbf{pairs()} function to produce a scatterplot of the first 10
+    columns.
+
+<<pII, fig.pos="H", fig.height=5, fig.cap="Part II plot.", dev="png">>=
+pairs(college[,1:10])
+@
+
+    \pagebreak
+
+    \textbf{Part III}
+
+    Use the \textbf{plot()} function to create boxplots of Outstate vs.
+    Private.
+
+<<pIII, fig.pos="H", fig.height=4, fig.cap="Part III plot.">>=
+plot(college$Private, college$Outstate,
+     main = 'Out of State Tuition vs Private Colleges',
+     xlab = 'Private College',
+     ylab = 'Out of State Tuition')
+@
+
+    \textbf{Part IV}
+
+    Create a new qualitative variable called Elite. Use the \textbf{summary()}
+    function and \textbf{plot()} function to display the info.
+
+<<>>=
+Elite <- rep('No', nrow(college))
+Elite[college$Top10perc > 50] <- 'Yes'
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+
+# Show number of elite vs non-elite colleges
+summary(college)
+@
+
+    \pagebreak
+
+<<pIV, fig.pos="H", fig.height=4, fig.cap="Part IV plot.">>=
+# Show boxplot for Outstate vs Elite
+plot(college$Elite, college$Outstate,
+     main = 'Out of State Tuition vs Elite Colleges',
+     xlab = 'Elite College',
+     ylab = 'Out of State Tuition')
+@
+
+    \pagebreak
+
+    \textbf{Part V}
+
+    Use the \textbf{hist()} function to produce histograms.
+
+<<pV, fig.pos="H", fig.cap="Part V plot.">>=
+par(mfrow=c(2,2))
+hist(college$Apps, 20,
+     main = 'Number of College Applications Recieved',
+     xlab = 'Number of Applications Received')
+hist(college$Accept, 10,
+     main = 'Number of Applicants Accepted',
+     xlab = 'Number of Applicants Accepted')
+hist(college$S.F.Ratio, 10,
+     main = 'Student to Faculty Ratio',
+     xlab = 'Student to Faculty Ratio')
+hist(college$PhD, 10,
+     main = 'Percent of Faculty with a PhD',
+     xlab = 'Percent of Faculty with a PhD')
+@
+
+    \pagebreak
+
+    \textbf{Part VI}
+
+    Continue exploring and report your results.
 
     Below is my exploration of the data. I wanted to see if there were a few
     different relationships between a few different sets of the data.
@@ -420,11 +507,30 @@
     However, there doesn't seem to be a relationship between book costs vs the
     percent of professors with a PhD.
 
-    \begin{figure}[H]
-        \centering
-        \caption{Part VI Exploration}
-        \includegraphics[width=.68\textwidth]{partVI}
-    \end{figure}
+<<pVI, fig.pos="H", fig.cap="Part VI plot.">>=
+par(mfrow=c(2,1))
+df <- data.frame(x = college$PhD)
+df$y <- college$Books
+
+T <- lm(y~x,data=df)
+
+plot(college$PhD, college$Books,
+     main = 'Book Costs vs Percent of PhD Professors',
+     xlab = 'Percent of PhD Professors',
+     ylab = 'Estimated Book Cost')
+abline(T)
+
+df <- data.frame(x = college$Accept)
+df$y <- college$Top10perc
+
+T <- lm(y~x,data=df)
+
+plot(college$Accept, college$Top10perc,
+     main = 'Number of Applications Accepted vs Top 10% New Students',
+     xlab = 'Applications Accepted',
+     ylab = 'Top 10% New Students')
+abline(T)
+@
 \end{homeworkProblem}
 
 \pagebreak
