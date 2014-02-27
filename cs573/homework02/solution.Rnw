@@ -89,8 +89,8 @@
 \newcommand{\Bias}{\mathrm{Bias}}
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
-\newcommand{\pval}{\(p\)-value }
-\newcommand{\tstat}{\(t\)-statistic }
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
@@ -263,7 +263,7 @@ fit.coef <- coefficients(fit)
 summary.lm(fit)
 @
 
-    Taking this into account, our \pval for \(X_1\) is then 0.049. This is just
+    Taking this into account, our \pval\ for \(X_1\) is then 0.049. This is just
     barely under the standard of 0.05. Thus we can consider it significant.
     \\
 
@@ -272,7 +272,7 @@ summary.lm(fit)
     on our predictor.
     \\
 
-    However the \pval for \(X_2\) is 0.375. This means we can't reject the
+    However the \pval\ for \(X_2\) is 0.375. This means we can't reject the
     \(H_0: \beta_2 = 0\) and it isn't apparent that \(X_2\) has a significant
     effect on our predictor.
     \\
@@ -303,7 +303,7 @@ fit.x1.coef <- coefficients(fit.x1)
 summary.lm(fit.x1)
 @
 
-    Since our \tstat is large enough, our accompanying \pval is small (\(<
+    Since our \tstat is large enough, our accompanying \pval\ is small (\(<
     0.05\)) and thus it means we can reject the \(H_0: \beta_1 = 0\) for this
     model.
     \\
@@ -335,7 +335,7 @@ summary.lm(fit.x2)
 @
 
     Just like our previous linear model, the \tstat is large and thus our
-    \pval is small enough (\(< 0.05\)) and we can reject the \(H_0: \beta_1 =
+    \pval\ is small enough (\(< 0.05\)) and we can reject the \(H_0: \beta_1 =
     0\).
     \\
 
