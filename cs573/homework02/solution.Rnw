@@ -731,22 +731,21 @@ pred.glm <- predict.glm(fit.glm,
                         type = 'response')
 
 # Predicted classes
-classes <- rep("P-Down", dim(Weekly)[1])
-classes[pred.glm >= 0.5] <- "P-Up"
+classes <- rep("Down", dim(Weekly)[1])
+classes[pred.glm >= 0.5] <- "Up"
 @
 
     And our confusion matrix is thus:
 
 <<>>=
 # Make matrix
-table(Weekly$Direction, classes)
+table(Weekly$Direction, classes, dnn = c('Predicted:', ''))
 @
     Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\).
     \\
 
     The confusion matrix is telling us how many predicted classes were right
-    and how many were wrong.  P-Down is the predicted down class and P-Up is
-    the predicted up class. Therefore when the classes match, it means it was
+    and how many were wrong. Therefore when the classes match, it means it was
     correctly classified. If they don't match, then they were classified
     incorrectly.
     \\
@@ -786,15 +785,15 @@ pred.glm.lag2 <- predict.glm(fit.glm.lag2,
                           type = 'response')
 
 # Predicted classes for the subset
-classes <- rep("P-Down", dim(Weekly.test)[1])
-classes[pred.glm.lag2 >= 0.5] <- "P-Up"
+classes <- rep("Down", dim(Weekly.test)[1])
+classes[pred.glm.lag2 >= 0.5] <- "Up"
 @
 
     And our confusion matrix is thus:
 
 <<>>=
 # Make matrix
-table(Weekly.test$Direction, classes)
+table(Weekly.test$Direction, classes, dnn = c('Predicted:', ''))
 @
 
     Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
@@ -813,9 +812,6 @@ table(Weekly.test$Direction, classes)
 <<>>=
 # Create our new logistic model
 fit.lda <- lda(formula = Direction ~ Lag2, data = Weekly.train)
-
-# Let's take a gander at it...
-#summary(fit.lda)
 @
 
     Then we can use this model for predictions:
@@ -831,7 +827,7 @@ pred.lda <- predict(fit.lda,
 
 <<>>=
 # Make matrix
-table(Weekly.test$Direction, pred.lda$class)
+table(Weekly.test$Direction, pred.lda$class, dnn = c('Predicted:', ''))
 @
 
     Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
@@ -844,7 +840,31 @@ table(Weekly.test$Direction, pred.lda$class)
 
     \solution
 
-    Solution.
+    We'll use the subset of the Weekly data and run QDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.qda <- qda(formula = Direction ~ Lag2, data = Weekly.train)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.qda <- predict(fit.qda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
+@
+
+    Giving us the fraction of: \((0 + 61)/(0 + 43 + 0 + 61) = 0.587\).
     \\
 
     \part
