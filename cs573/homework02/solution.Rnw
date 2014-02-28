@@ -734,8 +734,8 @@ plot(new.fit.x2)
                 \delta_k(x)
                 &=
                 - \frac{x^2}{2 \sigma^2_k}
-                - \frac{\mu_k}{\sigma^2_k}
-                + \frac{\mu_k^2}{2 \sigma^2_k}
+                + \frac{\mu_k}{\sigma^2_k}
+                - \frac{\mu_k^2}{2 \sigma^2_k}
                 + \log(\pi_k)
                 + \log(\sigma_k)
             \end{split}
