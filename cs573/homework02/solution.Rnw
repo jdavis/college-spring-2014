@@ -1,16 +1,12 @@
 \documentclass{article}
 
 \usepackage{fancyhdr}
-\usepackage{lastpage}
 \usepackage{extramarks}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{changepage}
-\usepackage{lineno}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{fancyvrb}
 
 \topmargin=-0.45in
 \evensidemargin=0in
