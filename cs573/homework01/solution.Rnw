@@ -6,14 +6,6 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{changepage}
-\usepackage{lineno}
-\usepackage[plain]{algorithm}
-\usepackage{algpseudocode}
-\usepackage{hyperref}
-\usepackage{tikz}
-\usepackage{listings}
-\usepackage{graphics}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{fancyvrb}
@@ -37,14 +29,7 @@
 \renewcommand\headrulewidth{0.4pt}
 \renewcommand\footrulewidth{0.4pt}
 
-\setlength{\floatsep}{100pt}
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\algrenewcomment[1]{\hfill // #1}
-
 \setlength\parindent{0pt}
-
-\hypersetup{colorlinks=true}
 
 \newcommand{\enterProblemHeader}[1]{
     \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
@@ -424,7 +409,7 @@ summary(college)
     Use the \textbf{pairs()} function to produce a scatterplot of the first 10
     columns.
 
-<<pII, fig.pos="H", fig.height=5, fig.cap="Part II plot.", dev="png">>=
+<<pII, fig.pos="H", fig.cap="Part II plot.", dev="png">>=
 pairs(college[,1:10])
 @
 
@@ -435,12 +420,14 @@ pairs(college[,1:10])
     Use the \textbf{plot()} function to create boxplots of Outstate vs.
     Private.
 
-<<pIII, fig.pos="H", fig.height=4, fig.cap="Part III plot.">>=
+<<pIII, fig.pos="H", fig.cap="Part III plot.">>=
 plot(college$Private, college$Outstate,
      main = 'Out of State Tuition vs Private Colleges',
      xlab = 'Private College',
      ylab = 'Out of State Tuition')
 @
+
+    \pagebreak
 
     \textbf{Part IV}
 
@@ -459,7 +446,7 @@ summary(college)
 
     \pagebreak
 
-<<pIV, fig.pos="H", fig.height=4, fig.cap="Part IV plot.">>=
+<<pIV, fig.pos="H", fig.cap="Part IV plot.">>=
 # Show boxplot for Outstate vs Elite
 plot(college$Elite, college$Outstate,
      main = 'Out of State Tuition vs Elite Colleges',
