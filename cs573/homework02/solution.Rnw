@@ -205,8 +205,14 @@ sd(x2)
         \end{split}
     \]
 
-    This suggests that \(X_1\) and \(X_2\) are pretty colinear. Let's visualize
-    this by using a scatter plot:
+    R can do this as well automatically with the \textbf{cor()} function:
+
+<<>>=
+cor(x1, x2)
+@
+
+    Which checks out with our value.  This suggests that \(X_1\) and \(X_2\)
+    are pretty colinear. Let's visualize this by using a scatter plot:
 
 <<p1b, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
 plot(x1, x2,
@@ -290,7 +296,7 @@ fit.x1 <- lm(y ~ x1, data = data)
 fit.x1.coef <- coefficients(fit.x1)
 @
 
-    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{fit.x1.coef[2]}\).
     Looking at the significance of this estimator:
 
 <<>>=
@@ -321,7 +327,7 @@ fit.x2 <- lm(y ~ x2, data = data)
 fit.x2.coef <- coefficients(fit.x2)
 @
 
-    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{fit.x2.coef[2]}\).
     Looking at the significance of this estimator:
 
 <<>>=
@@ -353,8 +359,9 @@ summary.lm(fit.x2)
     our response variable, \(Y\).
     \\
 
-    This is one of the "woes" of interpreting regression coefficients according
-    to \textit{Data Analysis \& Regression} by Mosteller and Tukey, 1977.
+    This is one of the ``woes'' of interpreting regression coefficients
+    according to \textit{Data Analysis \& Regression} by Mosteller and Tukey,
+    1977.
     \\
 
     \part
@@ -417,7 +424,7 @@ new.fit.x1 <- lm(y ~ x1, data = new.data)
 new.fit.x1.coef <- coefficients(new.fit.x1)
 @
 
-    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x1.coef[1]}\).
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{new.fit.x1.coef[2]}\).
     Looking at the significance of this estimator:
 
 <<>>=
@@ -438,7 +445,7 @@ new.fit.x2 <- lm(y ~ x2, data = new.data)
 new.fit.x2.coef <- coefficients(new.fit.x2)
 @
 
-    This gives us the estimator \(\hat{\beta_0} = \Sexpr{fit.x2.coef[1]}\).
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{new.fit.x2.coef[2]}\).
     Looking at the significance of this estimator:
 
 <<>>=
@@ -457,32 +464,46 @@ summary.lm(new.fit.x2)
 
     \subsection{\(X_1\) and \(X_2\) Model}
 
-<<p1g1, fig.pos="H", fig.cap="X1 and X2 Plots.">>=
+<<p1g1, fig.pos="H", fig.cap="$X_1$ and $X_2$ Plots.">>=
 par(mfrow = c(2, 2))
 plot(new.fit)
 @
 
-    Based on this, the added point looks to be a outlier because the Cook's
-    Distance is > 1.
+    \subsubsection{Interpretation}
+
+    Based on these plots, the point doesn't look like an outlier but it does
+    look like a leverage point. This is because it reaches high levels of
+    Cook's Distance on the last plot.
 
     \pagebreak
 
     \subsection{\(X_1\) Model}
 
-<<p1g2, fig.pos="H", fig.cap="X1 Plots.">>=
+<<p1g2, fig.pos="H", fig.cap="$X_1$ Plots.">>=
 par(mfrow = c(2, 2))
 plot(new.fit.x1)
 @
+
+    \subsubsection{Interpretation}
+
+    Based on these plots, the value of the standardized residual in the Normal
+    Q-Q plot makes it appear that the point that was added makes it an outlier
+    but not a leverage point because of the distance from the line.
 
     \pagebreak
 
     \subsection{\(X_2\) Model}
 
-<<p1g3, fig.pos="H", fig.cap="X2 Plots.">>=
+<<p1g3, fig.pos="H", fig.cap="$X_2$ Plots.">>=
 par(mfrow = c(2, 2))
 plot(new.fit.x2)
 @
 
+    \subsubsection{Interpretation}
+
+    Based on these plots, the point doesn't look like an outlier but it does
+    look like it has a little bit of leverage although not as much as our first
+    model.
 \end{homeworkProblem}
 
 \pagebreak
