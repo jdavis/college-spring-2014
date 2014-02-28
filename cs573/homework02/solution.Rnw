@@ -135,7 +135,6 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
     The model that we created is just \(Y = 2 + 2 X_1 + 0.3 X_2 + \epsilon\).
     Thus given we have two predictors, our model is \(Y = \beta_0 + \beta_1 X_1
     + \beta_2 X_2 + \epsilon\). This gives us:
-
     \[
         \beta_0 = 2,
         \quad
@@ -155,7 +154,6 @@ y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
     We can measure the correlation between the two variables by calculating the
     covariance. Using our linear model, we can calculate the covariance as
     follows:
-
     \[
         \begin{split}
             \Cov(X_1, X_2) &= \E[X_1 X_2] - \E[X_1] \E[X_2]
@@ -177,7 +175,6 @@ cov(x1, x2)
 
     We can scale this value to be dimensionless if we didn't know the magnitude
     of our values. This value is \(\rho\) and is calculated as:
-
     \[
         \begin{split}
             \rho = \frac{
@@ -196,7 +193,6 @@ sd(x2)
 @
 
     Substituting our values gives us:
-
     \[
         \begin{split}
             \rho &= \frac{
@@ -243,7 +239,6 @@ fit.coef <- coefficients(fit)
 @
 
     This gives the following estimators:
-
     \[
         \hat{\beta_0} = \Sexpr{fit.coef[1]},
         \quad
@@ -393,7 +388,6 @@ new.fit.coef <- coefficients(new.fit)
 @
 
     This gives the following estimators:
-
     \[
         \hat{\beta_0} = \Sexpr{new.fit.coef[1]},
         \quad
@@ -562,7 +556,6 @@ plot(new.fit.x2)
     \\
 
     By using Bayes' Theorem, this gives us:
-
     \[
         \begin{split}
             \Pr(Y = 1 \mid X = 4)
@@ -587,7 +580,6 @@ plot(new.fit.x2)
     \]
 
     by substituting in our values and formulas, we get:
-
     \[
         \begin{split}
             \Pr(Y = 1 \mid X = 4)
