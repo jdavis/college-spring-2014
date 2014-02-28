@@ -92,9 +92,11 @@
 
 \begin{document}
 
-<<echo=FALSE>>=
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
 library('ISLR')
 library('MASS')
+library('MVN')
+library('class')
 @
 
 \maketitle
@@ -871,8 +873,25 @@ table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
 
     \solution
 
-    Solution.
+    QDA and LDA share the same first assumption. And that assumption is that
+    all the classes come from a multivariate normal.
     \\
+
+    First we should check to make sure that the class means are significantly
+    different.
+
+<<>>=
+manova.qda <- manova(formula = Direction ~ Lag2, data = Weekly.train)
+summary(manova.qda, test="Wilks")
+@
+
+    To ensure that this is the case, we can use the \textbf{HZ.test()} function
+    like so:
+
+<<>>=
+# Check to ensure MVN for each variable of our classifier
+HZ.test(Weekly.test$Lag2, cov = TRUE, plot = TRUE)
+@
 
     \part
 
@@ -881,7 +900,25 @@ table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
 
     \solution
 
-    Solution.
+    We need to create some matrices for our test and training data:
+
+<<>>=
+train.knn <- as.matrix(Weekly.train$Lag2)
+test.knn <- as.matrix(Weekly.test$Lag2)
+@
+
+    Now we can use our data as well a KNN to predict our test data:
+
+<<>>=
+pred.knn <- knn(train.knn, test.knn, Weekly.train$Direction, k = 1)
+@
+
+    This gives us the confusion matrix of:
+
+<<>>=
+table(pred.knn, Weekly.test$Direction)
+@
+    Giving us the fraction of: \((21 + 31)/(21 + 30 + 22 + 31) = 0.500\).
     \\
 
     \part
