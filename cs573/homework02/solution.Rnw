@@ -987,8 +987,11 @@ classes[pred.glm >= 0.5] <- "Up"
 <<>>=
 # Make matrix
 table(Weekly$Direction, classes, dnn = c('Predicted:', ''))
+m <- mean(classes == Weekly$Direction)
+m
 @
-    Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\).
+    Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\) and
+    in R: \(\Sexpr{m}\).
     \\
 
     The confusion matrix is telling us how many predicted classes were right
@@ -1041,9 +1044,12 @@ classes[pred.glm.lag2 >= 0.5] <- "Up"
 <<>>=
 # Make matrix
 table(Weekly.test$Direction, classes, dnn = c('Predicted:', ''))
+m.glm <- mean(classes == Weekly.test$Direction)
+m.glm
 @
 
-    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\) and in R:
+    \(\Sexpr{m.glm}\).
     \\
 
     \part
@@ -1075,9 +1081,12 @@ pred.lda <- predict(fit.lda,
 <<>>=
 # Make matrix
 table(Weekly.test$Direction, pred.lda$class, dnn = c('Predicted:', ''))
+m.lda <- mean(pred.lda$class == Weekly.test$Direction)
+m.lda
 @
 
-    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\).
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\) and in R:
+    \(\Sexpr{m.lda}\).
     \\
 
     \part
@@ -1109,9 +1118,12 @@ pred.qda <- predict(fit.qda,
 <<>>=
 # Make matrix
 table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
+m.qda <- mean(pred.qda$class == Weekly.test$Direction)
+m.qda
 @
 
-    Giving us the fraction of: \((0 + 61)/(0 + 43 + 0 + 61) = 0.587\).
+    Giving us the fraction of: \((0 + 61)/(0 + 43 + 0 + 61) = 0.587\) and in R:
+    \(\Sexpr{m.qda}\).
     \\
 
     \part
@@ -1166,8 +1178,11 @@ pred.knn <- knn(train.knn, test.knn, Weekly.train$Direction, k = 1)
 
 <<>>=
 table(pred.knn, Weekly.test$Direction)
+m.knn <- mean(pred.knn == Weekly.test$Direction)
+m.knn
 @
-    Giving us the fraction of: \((21 + 31)/(21 + 30 + 22 + 31) = 0.500\).
+    Giving us the fraction of: \((21 + 31)/(21 + 30 + 22 + 31) = 0.500\) and in
+    R: \(\Sexpr{m.knn}\).
     \\
 
     \part
@@ -1177,7 +1192,16 @@ table(pred.knn, Weekly.test$Direction)
 
     \solution
 
-    Solution.
+    Based on all the methods that we ran, we got the following values:
+
+    \begin{enumerate}
+        \item Logistic Regression: \(\Sexpr{m.glm}\)
+        \item LDA: \(\Sexpr{m.lda}\)
+        \item QDA: \(\Sexpr{m.qda}\)
+        \item KNN: \(\Sexpr{m.knn}\)
+    \end{enumerate}
+
+    Thus Logistic Regression and LDA had the highest correct classifications.
     \\
 
     \part
@@ -1187,7 +1211,9 @@ table(pred.knn, Weekly.test$Direction)
 
     \solution
 
-    Solution.
+    One way that might improve the classifier is to use Naive Bayes. Although
+    whether or not Naive Bayes will improve it is dependent on many factors, as
+    we discussed in class, the robustness of Naive Bayes might do pretty well.
 \end{homeworkProblem}
 
 \end{document}
