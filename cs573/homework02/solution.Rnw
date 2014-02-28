@@ -510,7 +510,243 @@ plot(new.fit.x2)
 
     \solution
 
-    Solution.
+    \begin{proof}
+        We want to show that when taking a single dimension classification problem
+        and don't assume that \(\sigma_1^2 = \ldots = \sigma_K^2\), that we will
+        end up with a quadratic function, not a linear one as we do with LDA.
+        \\
+
+        If we have \(K\) classes and we want to see if an observation comes from
+        the \(k\)th class, then we can use \textit{Bayes' Theorem} for this which
+        is (Equation 4.10 from ISLR):
+        \[
+            \Pr(Y = K \mid X = x) = \frac{
+                \pi_k f_k(x)
+            }{
+                \sum_{l = 1}^{K} \pi_l f_l(x)
+            }
+        \]
+
+        Since we are given that \(X\) comes from a one-dimensional normal
+        distribution, we know that the following is the density for a given \(x\)
+        and the \(k\) class:
+        \[
+            f_k(x) = \frac{
+                1
+            }{
+                \sqrt{2 \pi} \sigma_k
+            }
+            \exp
+            \left(
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x - \mu_k)^2
+            \right)
+        \]
+
+        where \(\mu_k\) and \(\sigma^2_k\) are the mean and variance parameters for
+        the \(k\)th class.
+        \\
+
+        Given these two formulas, we can now create a function, \(p_k(x)\) which
+        will represent the posterior probability of being in the \(k\)th class:
+        \[
+            p_k(x) = \frac{
+                \pi_k
+                \frac{
+                    1
+                }{
+                    \sqrt{2 \pi} \sigma_k
+                }
+                \exp
+                \left(
+                    - \frac{
+                        1
+                    }{
+                        2 \sigma^2_k
+                    }
+                    (x - \mu_k)^2
+                \right)
+            }{
+                \sum_{l = 1}^{K} \pi_l
+                \frac{
+                    1
+                }{
+                    \sqrt{2 \pi} \sigma_l
+                }
+                \exp
+                \left(
+                    - \frac{
+                        1
+                    }{
+                        2 \sigma^2_l
+                    }
+                    (x - \mu_l)^2
+                \right)
+            }
+        \]
+
+        By taking the log of both sides of the equation, we let \(\delta_k(x) =
+        \log(p_k(x))\) we get:
+        \[
+            \begin{split}
+                \delta_k(x) &= \log \left[
+                    \frac{
+                        \pi_k
+                        \frac{
+                            1
+                        }{
+                            \sqrt{2 \pi} \sigma_k
+                        }
+                        \exp
+                        \left(
+                            - \frac{
+                                1
+                            }{
+                                2 \sigma^2_k
+                            }
+                            (x - \mu_k)^2
+                        \right)
+                    }{
+                        \sum_{l = 1}^{K} \pi_l
+                        \frac{
+                            1
+                        }{
+                            \sqrt{2 \pi} \sigma_l
+                        }
+                        \exp
+                        \left(
+                            - \frac{
+                                1
+                            }{
+                                2 \sigma^2_l
+                            }
+                            (x - \mu_l)^2
+                        \right)
+                    }
+                \right]
+            \end{split}
+        \]
+
+        Since log is monotonic and we are trying to maximize the posterior
+        probability, our denominator doesn't depend on the class we want, \(k\).
+        Therefore we want to maximize our numerator (also known as maximum a
+        posteriori estimation) and we get:
+        \[
+            \begin{split}
+                \delta_k(x)
+                &= \log
+                \left[
+                    \frac{
+                        \pi_k
+                    }{
+                        \sqrt{2 \pi} \sigma_k
+                    }
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log
+                \left[
+                    \frac{
+                        \pi_k
+                    }{
+                        \sqrt{2 \pi} \sigma_k
+                    }
+                \right]
+                +
+                \log
+                \left[
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log(\pi_k)
+                - \log(\sqrt{2 \pi} \sigma_k)
+                + \log
+                \left[
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log(\pi_k)
+                - \log(\sqrt{2 \pi} \sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x - \mu_k)^2
+                \\
+                &= \log(\pi_k)
+                - \frac{1}{2}\log(2 \pi)
+                + \log(\sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x^2 - \mu_k - \mu_k + \mu_k^2)
+                \\
+                &= \log(\pi_k)
+                - \frac{1}{2}\log(2 \pi)
+                + \log(\sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x^2 - 2 \mu_k + \mu_k^2)
+            \end{split}
+        \]
+
+        By further maximizing and only considering the values that allow us to
+        maximize our value based on \(k\), we get:
+        \[
+            \begin{split}
+                \delta_k(x)
+                &=
+                - \frac{x^2}{2 \sigma^2_k}
+                - \frac{\mu_k}{\sigma^2_k}
+                + \frac{\mu_k^2}{2 \sigma^2_k}
+                + \log(\pi_k)
+                + \log(\sigma_k)
+            \end{split}
+        \]
+
+        Thus we can see that by not assuming that \(\sigma_1^2 = \ldots =
+        \sigma_K^2\), our discriminant function isn't linear in terms of \(x\),
+        instead it is quadratic. Therefore when neglecting the second
+        assumption of LDA with a single dimensional problem, we end up with a
+        quadratic discrimination function.
+    \end{proof}
 \end{homeworkProblem}
 
 \pagebreak
