@@ -1136,23 +1136,37 @@ m.qda
 
     QDA and LDA share the same first assumption. And that assumption is that
     all the classes come from a multivariate normal.
-    \\
+
+    \subsection{Class Mean Difference}
 
     First we should check to make sure that the class means are significantly
-    different.
+    different. Since we are only using a single class, we are fine.
 
-<<>>=
-manova.qda <- manova(formula = Direction ~ Lag2, data = Weekly.train)
-summary(manova.qda, test="Wilks")
-@
+    \subsection{Size of the Training Set}
 
+    Another thing to consider with using QDA is how big our training set is. If
+    there isn't a lot of data to use for training, it might be a better idea to
+    not use QDA.  The number of data points we have is
+    \(\Sexpr{length(Weekly.train$Lag2)}\). Thus we should have enough to do
+    QDA.
+
+    \subsection{Assumption 1}
+
+    The first assumption is that each class comes from a multivariate normal.
     To ensure that this is the case, we can use the \textbf{HZ.test()} function
     like so:
 
-<<>>=
+<<p4, fig.pos="H", fig.height=4>>=
 # Check to ensure MVN for each variable of our classifier
 HZ.test(Weekly.test$Lag2, cov = TRUE, plot = TRUE)
 @
+
+    Based on these results, we can see that we can't reject that our class
+    comes from multivariate normal. Thus it must be multivariate normal.
+    \\
+
+    Taking all of these into account, we should be justified in using QDA.
+    \\
 
     \part
 
@@ -1213,7 +1227,8 @@ m.knn
 
     One way that might improve the classifier is to use Naive Bayes. Although
     whether or not Naive Bayes will improve it is dependent on many factors, as
-    we discussed in class, the robustness of Naive Bayes might do pretty well.
+    we discussed in class, the robustness of Naive Bayes might do pretty well
+    in a surprising fashion.
 \end{homeworkProblem}
 
 \end{document}
