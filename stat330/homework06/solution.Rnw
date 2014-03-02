@@ -1,0 +1,1234 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{float}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength{\floatsep}{100pt}
+
+\setlength\parindent{0pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}[1][]{
+    \section{Problem \arabic{homeworkProblemCounter} \; \large{#1}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#2}
+\newcommand{\hmwkDueDate}{February 28, 2014}
+\newcommand{\hmwkClass}{ComS 573}
+\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassInstructor}{De Brabanter}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{Professor\ \hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\begin{document}
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+library('ISLR')
+library('MASS')
+library('MVN')
+library('class')
+@
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    From ISLR: Chapter 3, Problem 14.
+    \\
+
+    Using a created simulated data, answer the questions regarding simple
+    linear regression.
+
+<<>>=
+# Ensure consistent values
+set.seed(1)
+
+# Create uniform distribution for first input
+x1 <- runif(100)
+
+# Normal distribution for second input
+x2 <- 0.5 * x1 + rnorm(100) / 10
+
+# Our Linear Model
+y <- 2 + (2 * x1) + (.3 * x2) + rnorm(100)
+@
+
+    \part
+
+    Write out the form of the linear model. What are the regression
+    coefficients?
+    \\
+
+    \solution
+
+    The model that we created is just \(Y = 2 + 2 X_1 + 0.3 X_2 + \epsilon\).
+    Thus given we have two predictors, our model is \(Y = \beta_0 + \beta_1 X_1
+    + \beta_2 X_2 + \epsilon\). This gives us:
+    \[
+        \beta_0 = 2,
+        \quad
+        \beta_1 = 2,
+        \quad
+        \beta_2 = 0.3
+    \]
+
+    \part
+
+    What is the correlation between \(X_1\) and \(X_2\)? Create a scatterplot
+    displaying the relationship between the variables.
+    \\
+
+    \solution
+
+    We can measure the correlation between the two variables by calculating the
+    covariance. Using our linear model, we can calculate the covariance as
+    follows:
+    \[
+        \begin{split}
+            \Cov(X_1, X_2) &= \E[X_1 X_2] - \E[X_1] \E[X_2]
+        \end{split}
+    \]
+
+    We can calculate the expected value of our random variables by using
+    the \textbf{mean()} function in R. This gives us:
+
+<<>>=
+mean(x1 * x2) - mean(x1) * mean(x2)
+@
+
+    Or we can use the \textbf{cov()} function in R:
+
+<<>>=
+cov(x1, x2)
+@
+
+    We can scale this value to be dimensionless if we didn't know the magnitude
+    of our values. This value is \(\rho\) and is calculated as:
+    \[
+        \begin{split}
+            \rho = \frac{
+                \Cov(X_1, X_2)
+            }{
+                (\Std X) (\Std Y)
+            }
+        \end{split}
+    \]
+
+    Using R, we can determine that our \(\Std X\) and the \(\Std Y\) are:
+
+<<>>=
+sd(x1)
+sd(x2)
+@
+
+    Substituting our values gives us:
+    \[
+        \begin{split}
+            \rho &= \frac{
+                0.0380
+            }{
+                (0.2676) (0.1702)
+            }
+            \\
+            &= .8343
+        \end{split}
+    \]
+
+    R can do this as well automatically with the \textbf{cor()} function:
+
+<<>>=
+cor(x1, x2)
+@
+
+    Which checks out with our value.  This suggests that \(X_1\) and \(X_2\)
+    are pretty colinear. Let's visualize this by using a scatter plot:
+
+<<p1b, fig.pos="H", fig.height=4, fig.cap="Correlation of given predictors.">>=
+plot(x1, x2,
+     main = 'Correlation of X1 and X2',
+     xlab = 'X1',
+     ylab = 'X2')
+@
+
+    \part
+
+    Using the data, fit a least squares regression to predict \(Y\) using
+    \(x1\) and \(x2\). Describe the results obtained. What are
+    \(\hat{\beta_0}\) and \(\hat{\beta_1}\), and \(\hat{\beta_2}\)? How do
+    these relate to the true \(\beta_0\), \(\beta_1\), \(\beta_2\)? Can you
+    reject the null hypothesis \(H_0 : \beta_1 = 0\)? How about \(H_0 : \beta_2
+    = 0\)?
+    \\
+
+    \solution
+
+    First let's fit a linear model to it using R's \textbf{lm()} function.
+
+<<>>=
+data <- data.frame(x1 = x1, x2 = x2, y = y)
+fit <- lm(y ~ x1 + x2, data = data)
+@
+
+<<echo=FALSE>>=
+fit.coef <- coefficients(fit)
+@
+
+    This gives the following estimators:
+    \[
+        \hat{\beta_0} = \Sexpr{fit.coef[1]},
+        \quad
+        \hat{\beta_1} = \Sexpr{fit.coef[2]},
+        \quad
+        \hat{\beta_2} = \Sexpr{fit.coef[3]}
+    \]
+
+    The values of our estimators are off by a wee bit but pretty close.
+    \\
+
+    If we look at the significance of our estimated values, we get the
+    following:
+
+<<>>=
+summary.lm(fit)
+@
+
+    Taking this into account, our \pval\ for \(X_1\) is then 0.049. This is just
+    barely under the standard of 0.05. Thus we can consider it significant.
+    \\
+
+    This means we can reject \(H_0: \beta_1 = 0\) and thus can accept the
+    alternative hypothesis. Our conclusion is that \(X_1\) does have an effect
+    on our predictor.
+    \\
+
+    However the \pval\ for \(X_2\) is 0.375. This means we can't reject the
+    \(H_0: \beta_2 = 0\) and it isn't apparent that \(X_2\) has a significant
+    effect on our predictor.
+    \\
+
+    \part
+
+    Now fit a least squares regression to predict \(Y\) using only \(x1\).
+    Comment on your results. Can you reject the null hypothesis \(H_0 : \beta_1
+    = 0\)?
+    \\
+
+    \solution
+
+    Fitting only \(x1\) gives us:
+
+<<>>=
+fit.x1 <- lm(y ~ x1, data = data)
+@
+
+<<echo=FALSE>>=
+fit.x1.coef <- coefficients(fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{fit.x1.coef[2]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x1)
+@
+
+    Since our \tstat is large enough, our accompanying \pval\ is small (\(<
+    0.05\)) and thus it means we can reject the \(H_0: \beta_1 = 0\) for this
+    model.
+    \\
+
+    \part
+
+    Now fit a least squares regression to predict \(Y\) using only \(x2\).
+    Comment on your results. Can you reject the null hypothesis \(H_0 : \beta_1
+    = 0\)?
+    \\
+
+    \solution
+
+    Fitting only \(x2\) gives us:
+
+<<>>=
+fit.x2 <- lm(y ~ x2, data = data)
+@
+
+<<echo=FALSE>>=
+fit.x2.coef <- coefficients(fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{fit.x2.coef[2]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(fit.x2)
+@
+
+    Just like our previous linear model, the \tstat is large and thus our
+    \pval\ is small enough (\(< 0.05\)) and we can reject the \(H_0: \beta_1 =
+    0\).
+    \\
+
+    \part
+
+    Do the results obtained in (c-e) contradict each other? Explain your
+    answer.
+    \\
+
+    \solution
+
+    No, they don't contradict each other. In this case, we know from part (b)
+    that our two predictors are correlated. The combined model, part (c), can't
+    take this into account. Each regression coefficient \(\beta_j\), estimates
+    the expected change in \(Y\) per unit change in \(X_j\) with all other
+    predictors held fixed.
+    \\
+
+    Since changing \(X_1\) affects \(X_2\), this changes our combined model.
+    Thus our models from part (d-e) are a better reflection of how they affect
+    our response variable, \(Y\).
+    \\
+
+    This is one of the ``woes'' of interpreting regression coefficients
+    according to \textit{Data Analysis \& Regression} by Mosteller and Tukey,
+    1977.
+    \\
+
+    \part
+
+    Now suppose we obtain one additional observation, which was unfortunately
+    mismeasured.
+
+<<>>=
+new.x1 <- c(x1, 0.1)
+new.x2 <- c(x2, 0.8)
+new.y <- c(y, 6)
+new.data <- data.frame(x1 = new.x1, x2 = new.x2, y = new.y)
+@
+
+    Re-fit the lienar models from (c-e) using this new data. What effects does
+    this new observation have on each of the models? In each model, is this
+    observation an outlier? A high leverage point?  Both? Explain your answers
+    and make suitable plots.
+    \\
+
+    \solution
+
+    Fitting a combined linear model to it from part (c) gives us:
+
+<<>>=
+new.fit <- lm(y ~ x1 + x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.coef <- coefficients(new.fit)
+@
+
+    This gives the following estimators:
+    \[
+        \hat{\beta_0} = \Sexpr{new.fit.coef[1]},
+        \quad
+        \hat{\beta_1} = \Sexpr{new.fit.coef[2]},
+        \quad
+        \hat{\beta_2} = \Sexpr{new.fit.coef[3]}
+    \]
+
+    The significance of these estimators is then:
+
+<<>>=
+summary.lm(new.fit)
+@
+
+    This changed from our previous model because only our \(X_1\) estimate was
+    significant but now it isn't anymore. Instead the \(X_2\) estimator is
+    significant.
+    \\
+
+    Fitting a single linear model for \(x_1\) like from part (d) we get:
+
+<<>>=
+new.fit.x1 <- lm(y ~ x1, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x1.coef <- coefficients(new.fit.x1)
+@
+
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{new.fit.x1.coef[2]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x1)
+@
+
+    This hasn't changed our single regression model for \(X_1\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    Now fitting a single linear model for \(x_2\) like from part (e) we get:
+
+<<>>=
+new.fit.x2 <- lm(y ~ x2, data = new.data)
+@
+
+<<echo=FALSE>>=
+new.fit.x2.coef <- coefficients(new.fit.x2)
+@
+
+    This gives us the estimator \(\hat{\beta_1} = \Sexpr{new.fit.x2.coef[2]}\).
+    Looking at the significance of this estimator:
+
+<<>>=
+summary.lm(new.fit.x2)
+@
+
+    This hasn't changed our single regression model for \(X_2\). The estimator
+    was significant before and after the added data point.
+    \\
+
+    To determine if the added points are outliers or leverage points, let's
+    take a look at graphs for each new model:
+    \\
+
+    \pagebreak
+
+    \subsection{\(X_1\) and \(X_2\) Model}
+
+<<p1g1, fig.pos="H", fig.cap="$X_1$ and $X_2$ Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit)
+@
+
+    \subsubsection{Interpretation}
+
+    Based on these plots, the point doesn't look like an outlier but it does
+    look like a leverage point. This is because it reaches high levels of
+    Cook's Distance on the last plot.
+
+    \pagebreak
+
+    \subsection{\(X_1\) Model}
+
+<<p1g2, fig.pos="H", fig.cap="$X_1$ Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x1)
+@
+
+    \subsubsection{Interpretation}
+
+    Based on these plots, the value of the standardized residual in the Normal
+    Q-Q plot makes it appear that the point that was added makes it an outlier
+    but not a leverage point because of the distance from the line.
+
+    \pagebreak
+
+    \subsection{\(X_2\) Model}
+
+<<p1g3, fig.pos="H", fig.cap="$X_2$ Plots.">>=
+par(mfrow = c(2, 2))
+plot(new.fit.x2)
+@
+
+    \subsubsection{Interpretation}
+
+    Based on these plots, the point doesn't look like an outlier but it does
+    look like it has a little bit of leverage although not as much as our first
+    model.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    From ISLR: Chapter 4, Problem 3 (Conceptual).
+    \\
+
+    This problem relates to the QDA model, in which the obesrvations within
+    each class are drawn from a normal distribution with a class specific mean
+    vector and a class specific covariance matrix. We consider the simple case
+    where \(p = 1\), there is only one feature. Suppose that we have \(K\)
+    classes, and if an observation belongs to the \(k\)th class then \(X\)
+    comes from a one-dimensional normal distribution, \(X \dist{N}(\mu_k,
+    \sigma_k^2)\).  Recall that the density function for the one-dimensional
+    normal distribution is given in Eq. 4.11 in the text.  Prove that in this
+    case, the Bayes classifier is not linear.  Argue that it is in fact
+    quadratic.
+    \\
+
+    \textit{Hint: For this problem, you should follow the arguments laid out in
+    Section 4.4.2, but without making the assumption that \(\sigma_1^2 =
+    \ldots = \sigma_K^2\).}
+    \\
+
+    \solution
+
+    \begin{proof}
+        We want to show that when taking a single dimension classification problem
+        and don't assume that \(\sigma_1^2 = \ldots = \sigma_K^2\), that we will
+        end up with a quadratic function, not a linear one as we do with LDA.
+        \\
+
+        If we have \(K\) classes and we want to see if an observation comes from
+        the \(k\)th class, then we can use \textit{Bayes' Theorem} for this which
+        is (Equation 4.10 from ISLR):
+        \[
+            \Pr(Y = K \mid X = x) = \frac{
+                \pi_k f_k(x)
+            }{
+                \sum_{l = 1}^{K} \pi_l f_l(x)
+            }
+        \]
+
+        Since we are given that \(X\) comes from a one-dimensional normal
+        distribution, we know that the following is the density for a given \(x\)
+        and the \(k\) class:
+        \[
+            f_k(x) = \frac{
+                1
+            }{
+                \sqrt{2 \pi} \sigma_k
+            }
+            \exp
+            \left(
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x - \mu_k)^2
+            \right)
+        \]
+
+        where \(\mu_k\) and \(\sigma^2_k\) are the mean and variance parameters for
+        the \(k\)th class.
+        \\
+
+        Given these two formulas, we can now create a function, \(p_k(x)\) which
+        will represent the posterior probability of being in the \(k\)th class:
+        \[
+            p_k(x) = \frac{
+                \pi_k
+                \frac{
+                    1
+                }{
+                    \sqrt{2 \pi} \sigma_k
+                }
+                \exp
+                \left(
+                    - \frac{
+                        1
+                    }{
+                        2 \sigma^2_k
+                    }
+                    (x - \mu_k)^2
+                \right)
+            }{
+                \sum_{l = 1}^{K} \pi_l
+                \frac{
+                    1
+                }{
+                    \sqrt{2 \pi} \sigma_l
+                }
+                \exp
+                \left(
+                    - \frac{
+                        1
+                    }{
+                        2 \sigma^2_l
+                    }
+                    (x - \mu_l)^2
+                \right)
+            }
+        \]
+
+        By taking the log of both sides of the equation, we let \(\delta_k(x) =
+        \log(p_k(x))\) we get:
+        \[
+            \begin{split}
+                \delta_k(x) &= \log \left[
+                    \frac{
+                        \pi_k
+                        \frac{
+                            1
+                        }{
+                            \sqrt{2 \pi} \sigma_k
+                        }
+                        \exp
+                        \left(
+                            - \frac{
+                                1
+                            }{
+                                2 \sigma^2_k
+                            }
+                            (x - \mu_k)^2
+                        \right)
+                    }{
+                        \sum_{l = 1}^{K} \pi_l
+                        \frac{
+                            1
+                        }{
+                            \sqrt{2 \pi} \sigma_l
+                        }
+                        \exp
+                        \left(
+                            - \frac{
+                                1
+                            }{
+                                2 \sigma^2_l
+                            }
+                            (x - \mu_l)^2
+                        \right)
+                    }
+                \right]
+            \end{split}
+        \]
+
+        Since log is monotonic and we are trying to maximize the posterior
+        probability, our denominator doesn't depend on the class we want, \(k\).
+        Therefore we want to maximize our numerator (also known as maximum a
+        posteriori estimation) and we get:
+        \[
+            \begin{split}
+                \delta_k(x)
+                &= \log
+                \left[
+                    \frac{
+                        \pi_k
+                    }{
+                        \sqrt{2 \pi} \sigma_k
+                    }
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log
+                \left[
+                    \frac{
+                        \pi_k
+                    }{
+                        \sqrt{2 \pi} \sigma_k
+                    }
+                \right]
+                +
+                \log
+                \left[
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log(\pi_k)
+                - \log(\sqrt{2 \pi} \sigma_k)
+                + \log
+                \left[
+                    \exp
+                    \left(
+                        - \frac{
+                            1
+                        }{
+                            2 \sigma^2_k
+                        }
+                        (x - \mu_k)^2
+                    \right)
+                \right]
+                \\
+                &=
+                \log(\pi_k)
+                - \log(\sqrt{2 \pi} \sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x - \mu_k)^2
+                \\
+                &= \log(\pi_k)
+                - \frac{1}{2}\log(2 \pi)
+                + \log(\sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x^2 - \mu_k - \mu_k + \mu_k^2)
+                \\
+                &= \log(\pi_k)
+                - \frac{1}{2}\log(2 \pi)
+                + \log(\sigma_k)
+                - \frac{
+                    1
+                }{
+                    2 \sigma^2_k
+                }
+                (x^2 - 2 \mu_k + \mu_k^2)
+            \end{split}
+        \]
+
+        By further maximizing and only considering the values that allow us to
+        maximize our value based on \(k\), we get:
+        \[
+            \begin{split}
+                \delta_k(x)
+                &=
+                - \frac{x^2}{2 \sigma^2_k}
+                + \frac{\mu_k}{\sigma^2_k}
+                - \frac{\mu_k^2}{2 \sigma^2_k}
+                + \log(\pi_k)
+                + \log(\sigma_k)
+            \end{split}
+        \]
+
+        Thus we can see that by not assuming that \(\sigma_1^2 = \ldots =
+        \sigma_K^2\), our discriminant function isn't linear in terms of \(x\),
+        instead it is quadratic. Therefore when neglecting the second
+        assumption of LDA with a single dimensional problem, we end up with a
+        quadratic discrimination function.
+    \end{proof}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    From ISLR: Chapter 4, Problem 7 (Conceptual).
+    \\
+
+    Suppose that you wish to predict whether a given stock will issue a
+    dividend this year based on \(X\), last year's percent profit. We examine a
+    large number of companies and discover that the mean value of \(X\) for
+    companies is issued a dividend was \(\overline{X} = 10\), while the mean
+    for those that didn't was \(\overline{X} = 0\). In addition, the variance
+    of \(X\) for these two sets of companies was \(\sigma^2 = 36\). Finally,
+    80\% of companies issued dividends.  Assuming that \(X\) follows a normal
+    distribution, predict the probability that a company will issue a dividend
+    this year given that its percentage profit was \(X = 4\) last year.
+    \\
+
+    \textit{Hint: Recall that the density function of a normal random variable
+    is below. You will need to use Bayes' Theorem.}
+
+    \[
+        f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-(x - \mu)^2 / 2\sigma^2}
+    \]
+
+    \solution
+
+    We want to predict whether or not that a company will issue a dividend this year
+    given that its percentage profit was 4.
+    \\
+
+    This gives us two classes, or \(K = 2\). Where the classes are whether a
+    company issued a dividend or not. We can assign values to these such that
+    \(k_1 =\) issued a dividend, and \(k_2 =\) did not issue a dividend.
+    \\
+
+    By taking the values that we get out of the problem statement, we know we
+    are given \(\sigma = 6\), \(\mu_1 = 10\) when issued a dividend, and
+    \(\mu_2 = 0\) when a dividend isn't given. We also know that the total
+    probability of companies that issued dividends, or \(\pi_1 = 0.80\) and thus
+    \(\pi_2 = 0.20\).
+    \\
+
+    By using Bayes' Theorem, this gives us:
+    \[
+        \begin{split}
+            \Pr(Y = 1 \mid X = 4)
+            &= \frac{
+                \pi_1 f_k(x)
+            }{
+                \sum_{l = 1}^K \pi_l f_l(x)
+            }
+            \\
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \sum_{l = 1}^2 \pi_l f_l(4)
+            }
+            \\
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \pi_1 f_1(4) + \pi_2 f_2(4)
+            }
+        \end{split}
+    \]
+
+    by substituting in our values and formulas, we get:
+    \[
+        \begin{split}
+            \Pr(Y = 1 \mid X = 4)
+            &= \frac{
+                \pi_1 f_1(4)
+            }{
+                \pi_1 f_1(4) + \pi_2 f_2(4)
+            }
+            \\
+            &= \frac{
+                (0.80) f_1(4)
+            }{
+                (0.80) f_1(4) + (.20) f_2(4)
+            }
+            \\
+            &= \frac{
+                \frac{
+                    0.80
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 10)^2/2(36)}
+            }{
+                \frac{
+                    0.80
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 10)^2/2(36)}
+                +
+                \frac{
+                    0.20
+                }{
+                    \sqrt{2\pi (36)}
+                } e^{-(4 - 0)^2/2(36)}
+            }
+            \\
+            &= \frac{
+                (0.80) (0.0403)
+            }{
+                (0.80) (0.0403) + (0.20) (0.0532)
+            }
+            \\
+            &= .7519
+        \end{split}
+    \]
+
+    Thus there is a 75.2\% chance that the company will issue a dividend with a
+    percentage profit of 4.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    From ISLR: Chapter 4, Problem 10 (Applied).
+    \\
+
+    This question should be answered using the Weekly data set, which is part
+    of the ISLR package. This data is similar in nature to the \textit{Smarket}
+    data from this chapter's lab, except that it contains 1,089 weekly returns
+    for 21 years, from the beginning of 1990 to the end of 2010.
+    \\
+
+    \part
+
+    Produce some numerical and graphical summaries of the Weekly data. Do there
+    appear to be any patterns?
+    \\
+
+    \solution
+
+    A basic summary of our data:
+
+<<>>=
+summary(Weekly)
+@
+
+    Looking at the data might be helpful:
+
+<<p4a, fig.pos="H", fig.height=5, fig.cap="Pairs of Weekly data.", dev="png">>=
+pairs(Weekly)
+@
+
+    Lastly, let's look at some of the correlation coefficients to see if there's
+    anything interesting:
+
+<<>>=
+cor(Weekly[1:8])
+@
+
+
+    Most of them are small with the exception of \textbf{Volume} and
+    \textbf{Year} which suggests that they might be correlated.
+    \\
+
+    \part
+
+    Use the full data set to perform a logistic regression with
+    \textit{Direction} as the response and the five lag variables plus
+    \textit{Volume} as predictors. Use the summary function to print the
+    results. Do any of the predictors appear to be statistically significant?
+    If so, which ones?
+    \\
+
+    \solution
+
+<<>>=
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary.glm(fit.glm)
+@
+
+    According to the results of the summary, the \tstat\ for \textbf{Lag2} is
+    large and is considered significant based on the \pval.
+    \\
+
+    \part
+
+    Compute the confusion matrix and overall fraction of correct predictions.
+    Explain what the confusion matrix is telling you about the types of
+    mistakes made by logistic regression.
+    \\
+
+    \solution
+
+    To calculate our confusion matrix, we need to assign our predictions to
+    classes. We can do this using the following code:
+
+<<>>=
+fit.glm <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume,
+              data = Weekly,
+              family = binomial())
+summary.glm(fit.glm)
+@
+
+<<>>=
+# Compute our prediction from our logistic model
+pred.glm <- predict.glm(fit.glm,
+                        Weekly,
+                        type = 'response')
+
+# Predicted classes
+classes <- rep("Down", dim(Weekly)[1])
+classes[pred.glm >= 0.5] <- "Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly$Direction, classes, dnn = c('Predicted:', ''))
+m <- mean(classes == Weekly$Direction)
+m
+@
+    Giving us the fraction of: \((54 + 557)/(54 + 430 + 48 + 557) = 0.561\) and
+    in R: \(\Sexpr{m}\).
+    \\
+
+    The confusion matrix is telling us how many predicted classes were right
+    and how many were wrong. Therefore when the classes match, it means it was
+    correctly classified. If they don't match, then they were classified
+    incorrectly.
+    \\
+
+    \part
+
+    Now fit the logistic regression model using a training data period from
+    1990 to 2008, with \textit{Lag2} as the only predictor. Compute the
+    confusion matrix and the overall fraction of correct predictions for the
+    held out data (that is, the data from 2009 and 2010).
+    \\
+
+    \solution
+
+    Using a subset of the data, we generate our model like so:
+
+<<>>=
+# Select the subset of the data we want
+Weekly.train <- subset(Weekly, Year <= 2008)
+Weekly.test <- subset(Weekly, Year > 2008)
+
+# Create our new logistic model
+fit.glm.lag2 <- glm(Direction ~ Lag2,
+              data = Weekly.train,
+              family = binomial())
+
+# Let's take a gander at it...
+summary.glm(fit.glm.lag2)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.glm.lag2 <- predict.glm(fit.glm.lag2,
+                          Weekly.test,
+                          type = 'response')
+
+# Predicted classes for the subset
+classes <- rep("Down", dim(Weekly.test)[1])
+classes[pred.glm.lag2 >= 0.5] <- "Up"
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, classes, dnn = c('Predicted:', ''))
+m.glm <- mean(classes == Weekly.test$Direction)
+m.glm
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\) and in R:
+    \(\Sexpr{m.glm}\).
+    \\
+
+    \part
+
+    Repeat (d) using LDA.
+    \\
+
+    \solution
+
+    We'll use the subset of the Weekly data and run LDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.lda <- lda(formula = Direction ~ Lag2, data = Weekly.train)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.lda <- predict(fit.lda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.lda$class, dnn = c('Predicted:', ''))
+m.lda <- mean(pred.lda$class == Weekly.test$Direction)
+m.lda
+@
+
+    Giving us the fraction of: \((9 + 56)/(9 + 34 + 5 + 56) = 0.625\) and in R:
+    \(\Sexpr{m.lda}\).
+    \\
+
+    \part
+
+    Repeat (d) using QDA.
+    \\
+
+    \solution
+
+    We'll use the subset of the Weekly data and run QDA on it. This can be done
+    with the following code:
+
+<<>>=
+# Create our new logistic model
+fit.qda <- qda(formula = Direction ~ Lag2, data = Weekly.train)
+@
+
+    Then we can use this model for predictions:
+
+<<>>=
+# Compute our prediction from our subset logistic model
+pred.qda <- predict(fit.qda,
+                    Weekly.test,
+                    type = 'response')
+@
+
+    And our confusion matrix is thus:
+
+<<>>=
+# Make matrix
+table(Weekly.test$Direction, pred.qda$class, dnn = c('Predicted:', ''))
+m.qda <- mean(pred.qda$class == Weekly.test$Direction)
+m.qda
+@
+
+    Giving us the fraction of: \((0 + 61)/(0 + 43 + 0 + 61) = 0.587\) and in R:
+    \(\Sexpr{m.qda}\).
+    \\
+
+    \part
+
+    Is it justified to use QDA? Use appropriate hypothesis test(s) we've seen
+    in class.
+    \\
+
+    \solution
+
+    QDA and LDA share the same first assumption. And that assumption is that
+    all the classes come from a multivariate normal.
+
+    \subsection{Class Mean Difference}
+
+    First we should check to make sure that the class means are significantly
+    different. Since we are only using a single class, we are fine.
+
+    \subsection{Size of the Training Set}
+
+    Another thing to consider with using QDA is how big our training set is. If
+    there isn't a lot of data to use for training, it might be a better idea to
+    not use QDA.  The number of data points we have is
+    \(\Sexpr{length(Weekly.train$Lag2)}\). Thus we should have enough to do
+    QDA.
+
+    \subsection{Assumption 1}
+
+    The first assumption is that each class comes from a multivariate normal.
+    To ensure that this is the case, we can use the \textbf{HZ.test()} function
+    like so:
+
+<<p4, fig.pos="H", fig.height=4>>=
+# Check to ensure MVN for each variable of our classifier
+HZ.test(Weekly.test$Lag2, cov = TRUE, plot = TRUE)
+@
+
+    Based on these results, we can see that we can't reject that our class
+    comes from multivariate normal. Thus it must be multivariate normal.
+    \\
+
+    Taking all of these into account, we should be justified in using QDA.
+    \\
+
+    \part
+
+    Repeat (d) using KNN with \(K = 1\).
+    \\
+
+    \solution
+
+    We need to create some matrices for our test and training data:
+
+<<>>=
+train.knn <- as.matrix(Weekly.train$Lag2)
+test.knn <- as.matrix(Weekly.test$Lag2)
+@
+
+    Now we can use our data as well a KNN to predict our test data:
+
+<<>>=
+pred.knn <- knn(train.knn, test.knn, Weekly.train$Direction, k = 1)
+@
+
+    This gives us the confusion matrix of:
+
+<<>>=
+table(pred.knn, Weekly.test$Direction)
+m.knn <- mean(pred.knn == Weekly.test$Direction)
+m.knn
+@
+    Giving us the fraction of: \((21 + 31)/(21 + 30 + 22 + 31) = 0.500\) and in
+    R: \(\Sexpr{m.knn}\).
+    \\
+
+    \part
+
+    Which of these methods appears to provide the best results on this data?
+    \\
+
+    \solution
+
+    Based on all the methods that we ran, we got the following values:
+
+    \begin{enumerate}
+        \item Logistic Regression: \(\Sexpr{m.glm}\)
+        \item LDA: \(\Sexpr{m.lda}\)
+        \item QDA: \(\Sexpr{m.qda}\)
+        \item KNN: \(\Sexpr{m.knn}\)
+    \end{enumerate}
+
+    Thus Logistic Regression and LDA had the highest correct classifications.
+    \\
+
+    \part
+
+    Could you create a better classifier? How would you do this?
+    \\
+
+    \solution
+
+    One way that might improve the classifier is to use Naive Bayes. Although
+    whether or not Naive Bayes will improve it is dependent on many factors, as
+    we discussed in class, the robustness of Naive Bayes might do pretty well
+    in a surprising fashion.
+\end{homeworkProblem}
+
+\end{document}
