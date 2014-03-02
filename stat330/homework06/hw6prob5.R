@@ -38,29 +38,29 @@ tracks <- matrix(data=-9, nrow=N, ncol=P)   # creates a matrix with -9 everywher
 tracks[,1] <- 2
 
 for (k in 1:(P-1)){
-	# First decide where the park rabbits go next
-	in.park <- (tracks[,k] == 2)
-	if (sum(in.park)){
-		tracks[in.park,k+1] <- sample(c(1,3), sum(in.park), replace=TRUE, prob=c(p21, p23))
-	}
-	
-	# Then decide where the field rabbits go next
-	in.field <- (tracks[,k] == 3)
-	if (sum(in.field)){
-		tracks[in.field,k+1] <- sample(c(2,4), sum(in.field), replace=TRUE, prob=c(p32, p34))
-	}
-	
-	# Finally decide the fate of the road rabbits
-	in.road <- (tracks[,k] == 1)
-	if (sum(in.road)){
-		tracks[in.road,k+1] <- sample(c(0,2), sum(in.road), replace=TRUE, prob=c(p10, p12))
-	}
-	
-	# If there were no rabbits in the park, field, or road, then all rabbits have
-	#  found a final place, so exit this for loop
-	if (length(c(in.park, in.field, in.road)) == 0){
-		break
-	}
+    # First decide where the park rabbits go next
+    in.park <- (tracks[,k] == 2)
+    if (sum(in.park)){
+        tracks[in.park,k+1] <- sample(c(1,3), sum(in.park), replace=TRUE, prob=c(p21, p23))
+    }
+
+    # Then decide where the field rabbits go next
+    in.field <- (tracks[,k] == 3)
+    if (sum(in.field)){
+        tracks[in.field,k+1] <- sample(c(2,4), sum(in.field), replace=TRUE, prob=c(p32, p34))
+    }
+
+    # Finally decide the fate of the road rabbits
+    in.road <- (tracks[,k] == 1)
+    if (sum(in.road)){
+        tracks[in.road,k+1] <- sample(c(0,2), sum(in.road), replace=TRUE, prob=c(p10, p12))
+    }
+
+    # If there were no rabbits in the park, field, or road, then all rabbits have
+    #  found a final place, so exit this for loop
+    if (length(c(in.park, in.field, in.road)) == 0){
+        break
+    }
 }
 
 {

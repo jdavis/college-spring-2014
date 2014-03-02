@@ -11,6 +11,6 @@ U = matrix(runif(n=N*P, min=0, max=1), N, P)
 S = rowSums(U) - P/2
 
 for (k in -3:3){
-	print(sprintf('Proportion under %g: %0.5f.  P(Z < %g) = %0.5f', 
-	   k, sum(S < k)/N, k, pnorm(k, mean=0, sd=1)))
+    print(sprintf('Proportion under %g: %0.5f.  P(Z < %g) = %0.5f',
+       k, sum(S < k)/N, k, pnorm(k, mean=0, sd=1)))
 }
