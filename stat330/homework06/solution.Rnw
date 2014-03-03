@@ -115,7 +115,17 @@ library('class')
 
     \solution
 
-    Solution.
+
+    Given the problem description, we can let \(X\) be the random variable
+    where \(X = \) number of minutes it takes to download a file. We know that \(\mu = 15\) and \(\sigma^2 =
+    16\). Then we also know that in order to download 82 files in 20 minutes,
+    each file must download in 0.244 minutes (or 14.6 seconds for easier
+    understanding).
+    \\
+
+    If \(X\) is the random variable assigned to our sample, then we want the
+    probability that our sample mean is less than 0.244 mi, \(\bar{X}\)
+
 \end{homeworkProblem}
 
 \pagebreak
