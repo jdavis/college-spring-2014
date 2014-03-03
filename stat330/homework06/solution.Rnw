@@ -5,8 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amsfonts}
-\usepackage{subcaption}
-\usepackage{float}
+\usepackage{enumerate}
 
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -141,8 +140,8 @@ library('class')
     \\
 
     \solution
-
     Solution.
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -176,7 +175,7 @@ library('class')
     \part
 
     Get an estimate for \(\Pr(X \leq Y)\) to three decimals using a simulation
-    study.
+    study. Use the R code posted (hw6prob4.R) with this part.
     \\
 
     \solution
@@ -186,13 +185,85 @@ library('class')
 
     \part
 
-    Get...
+    Get an exact answer for \(\Pr(X \geq Y)\) by using the law of total
+    probability and the cumulative probability function for the geometric
+    distribution. Hint:
+    \[
+        \Pr(X \geq Y)
+        = \sum_{k = 1}^{\infty} \Pr(X \geq Y \mid Y = k) \Pr(Y = k)
+        = \sum_{k = 1}^{\infty} \Pr(X \geq k) \Pr_Y(k)
+    \]
+
+    using the positive integers as a partition for \(Y\).
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Suppose that a rabbit is trying to get to its home in the field.  There are
+    three places the rabbit can be: the field, the park, or the road. The
+    rabbit starts in the park. Estimate the probability that the rabbit finds
+    home before finding a car's tire.
+    \\
+
+    A rabbit in the field will find its home with probability 0.40 and will
+    otherwise return to the park.
+    \\
+
+    A rabbit in the park will find its way to the field with probability 0.80,
+    and will go on the road with probability 0.20.
+    \\
+
+    A rabbit on the road will successfully get back to the park with
+    probability 0.50. Otherwise, it won't be a good ending for the bunny.
+    \\
+
+    Using the provided code (hw6prob5.R), insert the correct probabilities, run
+    a simulation of 1,000 rabbits. How many will find their way to their home?
+    \\
+
+    (We will learn how to solve this problem in Chapter 6.)
     \\
 
     \solution
 
     Solution.
+\end{homeworkProblem}
 
+\pagebreak
+
+\begin{homeworkProblem}
+    Draw 100,000 random values from the sum of 12 Uniform(0, 1) values minus 6.
+    \\
+
+    That is, let \(U_i \dist{Uniform}(0, 1)\) random variables for \(i = 1, 2,
+    \ldots, 12\) and let \(X = U_1 + U_2 + \cdots + U_{12} - 6\) such that
+    \(\E[X] = 0\) and \(\Var[X] = 1\) and the shape of \(X\) is approximately
+    normal.
+    \\
+
+    \begin{enumerate}[(a)]
+        \item -3:
+        \item -2:
+        \item -1:
+        \item 0:
+        \item 1:
+        \item 2:
+        \item 3:
+    \end{enumerate}
+
+    How do these differe from the true probabilities \(\Pr(Z < z)\) for each of
+    these cases?  See the posted R code (hw6prob6.R) with the assignment for
+    assistance in doing this simulation.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
