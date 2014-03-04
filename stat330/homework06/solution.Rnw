@@ -252,7 +252,14 @@
 
     \solution
 
-    Solution.
+    Running the R code provided, we get:
+<<>>=
+base::source('./hw6prob5.R')
+@
+
+    Thus the probability was \(\Sexpr{H/N}\) which means that \(\Sexpr{H}\) found
+    their way home and the rest died.
+
 \end{homeworkProblem}
 
 \pagebreak
