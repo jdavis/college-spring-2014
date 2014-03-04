@@ -91,13 +91,6 @@
 
 \begin{document}
 
-<<echo=FALSE, warning=FALSE, message=FALSE>>=
-library('ISLR')
-library('MASS')
-library('MVN')
-library('class')
-@
-
 \maketitle
 
 \pagebreak
