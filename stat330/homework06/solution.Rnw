@@ -179,7 +179,38 @@
 
     \solution
 
-    Solution
+    Let \(X \dist{Exponential}(\lambda)\), where \(\lambda = 5 \mbox{
+    min}^{-1}\). We know that \(n = 70\), \(\mu = 1/\lambda\), and \(\sigma^2 =
+    1/\lambda^2\), or \(\sigma = 1/\lambda\). Once again, using the Central
+    Limit Theorem, we want to calculate the time to transmit all \(n\)
+    messages. Thus \(S_n = X_1 + \cdots + X_n\), and letting \(n \to \infty\),
+    we get:
+    \[
+        \begin{split}
+            \Pr\{\mbox{transmits in 12 mins}\}
+            &= \Pr\{S_n \leq 12\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                S_n - n \mu
+            }{
+                \sigma \sqrt{n}
+            }
+            \leq
+            \frac{
+                12 - (70) (1/5)
+            }{
+                (1/5) \sqrt{70}
+            }
+            \right\}
+            \\
+            &= \Pr \{z \leq -1.20\}
+            \\
+            &= \Phi(-1.20)
+            \\
+            &= 0.115
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
