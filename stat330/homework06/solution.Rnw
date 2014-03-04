@@ -138,7 +138,7 @@
             }
             \right\}
             \\
-            &= \Pr \{ Z \leq -0.828\}
+            &= \Pr \{ z \leq -0.828\}
             \\
             &= \Phi(-0.828)
             \\
@@ -159,7 +159,36 @@
 
     \solution
 
-    Solution.
+    Let \(X = \) number of hours a component lasts. We know that \(n = 400\),
+    \(\mu = 5000\), and \(\sigma = 100\). Once again, using the Central Limit
+    Theorem, we get \(S_n = X_1 + \cdots + X_n\), and letting \(n \to \infty\),
+    we get:
+    \[
+        \begin{split}
+            \Pr\{\mbox{lasts 5012 hours}\}
+            &= \Pr\{S_n \geq 5012\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                S_n - n \mu
+            }{
+                \sigma \sqrt{n}
+            }
+            \geq
+            \frac{
+                5012 - (400) (5000)
+            }{
+                (100) \sqrt{400}
+            }
+            \right\}
+            \\
+            &= \Pr \{\}
+            \\
+            &= \Phi()
+            \\
+            &= 0
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
