@@ -115,14 +115,14 @@
     download in 0.244 minutes (or 14.6 seconds for easier understanding).
     \\
 
-    Let \(S_n = X_1 + X_1 + \cdots + X_n\). Given this, we know that using the
+    Let \(S_n = X_1 + X_2 + \cdots + X_n\). Given this, we know that using the
     Central Limit Theorem, we can determine that given enough samples, or
     \(n\), the distribution will converge to the Standard Normal. This gives
     us:
     \[
         \begin{split}
-            \Pr\{\mbox{installed in 20 minutes})
-            &= \Pr\{S_n \leq 20)
+            \Pr\{\mbox{installed in 20 minutes}\}
+            &= \Pr\{S_n \leq 20\}
             \\
             &= \Pr \left\{
             \frac{
@@ -146,8 +146,6 @@
         \end{split}
     \]
 \end{homeworkProblem}
-
-\pagebreak
 
 \begin{homeworkProblem}
     Problem 4.23 from Baron.
