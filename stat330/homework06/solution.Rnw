@@ -140,8 +140,8 @@ library('class')
     \\
 
     \solution
-    Solution.
 
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
@@ -195,6 +195,7 @@ library('class')
     \]
 
     using the positive integers as a partition for \(Y\).
+    \\
 
     \solution
 
