@@ -7,11 +7,11 @@
 # Denote these stages with 4=home, 3=field, 2=park, 1=road, 0=death
 #
 # List the probabilities here:
-p34 <- .3
+p34 <- .4
 p32 <- 1 - p34
-p23 <- .5
+p23 <- .8
 p21 <- 1 - p23
-p12 <- .7
+p12 <- .5
 p10 <- 1 - p12
 
 # Each row will track the movement of a single rabbit.
