@@ -17,8 +17,8 @@
 \linespread{1.1}
 
 \pagestyle{fancy}
-\lhead{\hmwkAuthorName}
-\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\lhead{\hwAuthor}
+\chead{\hwClass\ (\hwInstructor\ \hwSection): \hwTitle}
 \rhead{\firstxmark}
 \lfoot{\lastxmark}
 \cfoot{\thepage}
@@ -55,23 +55,23 @@
     \exitProblemHeader{homeworkProblemCounter}
 }
 
-\newcommand{\hmwkTitle}{Homework\ \#6}
-\newcommand{\hmwkDueDate}{March 5, 2014}
-\newcommand{\hmwkClass}{Stat 330}
-\newcommand{\hmwkClassTime}{Section A}
-\newcommand{\hmwkClassInstructor}{Mr. Lanker}
-\newcommand{\hmwkAuthorName}{Josh Davis}
+\newcommand{\hwTitle}{Homework\ \#6}
+\newcommand{\hwDueDate}{March 5, 2014}
+\newcommand{\hwDueTime}{3:00pm}
+\newcommand{\hwClass}{Stat 330}
+\newcommand{\hwSection}{Section A}
+\newcommand{\hwInstructor}{Mr. Lanker}
+\newcommand{\hwAuthor}{Josh Davis}
 
 \title{
     \vspace{2in}
-    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
-    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \textmd{\textbf{\hwClass:\ \hwTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hwDueDate\ at\ \hwDueTime}\\
+    \vspace{0.1in}\large{\textit{\hwInstructor, \hwSection}}
     \vspace{3in}
 }
 
-\author{\textbf{\hmwkAuthorName}}
-\date{}
+\author{\textbf{\hwAuthor}}
 
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
