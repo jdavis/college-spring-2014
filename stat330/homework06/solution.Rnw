@@ -72,6 +72,7 @@
 }
 
 \author{\textbf{\hwAuthor}}
+\date{}
 
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
