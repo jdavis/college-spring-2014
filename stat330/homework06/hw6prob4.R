@@ -2,9 +2,9 @@
 #    of the proportion of X >= Y to 3 decimals precision
 #    by comparing 20 million random draws for X and Y
 
-N <- 100000   # 100000 random draws for X and Y
-px <- .4    # probability of success for r.v. X (MUST CHANGE THIS)
-py <- .3    # probability of success for r.v. Y (MUST CHANGE THIS)
+N <- 200000   # 100000 random draws for X and Y
+px <- .2    # probability of success for r.v. X (MUST CHANGE THIS)
+py <- .1    # probability of success for r.v. Y (MUST CHANGE THIS)
 
 # we will run this simulation K=100 times to get K estimates for the proportion of X >= Y
 
