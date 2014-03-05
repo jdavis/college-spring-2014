@@ -160,33 +160,42 @@
     \solution
 
     Let \(X = \) number of hours a component lasts. We know that \(n = 400\),
-    \(\mu = 5000\), and \(\sigma = 100\). Once again, using the Central Limit
-    Theorem, we get \(S_n = X_1 + \cdots + X_n\), and letting \(n \to \infty\),
-    we get:
+    \(\mu = 5000\), and \(\sigma = 100\). Like before, we will be using the
+    Central Limit Theorem, however, instead we are looking at the sample mean,
+    not the \(S_n\). We know that for the sum, \(S_n \dist{Normal}(\mbox{mean }
+    = n\mu, \mbox{var } = \sigma^2/n^2)\). Thus we want the mean of the sum
+    which gives us \(\overline{X} \dist{Normal}(\mbox{mean } = \mu, \mbox{var }
+    = \sigma^2/n)\)
+    \\
+
+    Now we want the probability that \(\overline{X}\) lasts 5012 hours. This
+    gives us:
     \[
         \begin{split}
             \Pr\{\mbox{lasts 5012 hours}\}
-            &= \Pr\{S_n \geq 5012\}
+            &= \Pr\{\overline{X} \geq 5012\}
             \\
             &= \Pr \left\{
             \frac{
-                S_n - n \mu
+                \overline{X} - \mu
             }{
-                \sigma \sqrt{n}
+                \sqrt{\sigma^2/n^2}
             }
             \geq
             \frac{
-                5012 - (400) (5000)
+                5012 - (5000)
             }{
-                (100) \sqrt{400}
+                \sqrt{100^2/400^2}
             }
             \right\}
             \\
-            &= \Pr \{\}
+            &= \Pr \{Z \geq 2.4\}
             \\
-            &= \Phi()
+            &= 1 -\Pr \{Z < 2.4\}
             \\
-            &= 0
+            &= 1 - 0.0082
+            \\
+            &= 0.9918
         \end{split}
     \]
 \end{homeworkProblem}
