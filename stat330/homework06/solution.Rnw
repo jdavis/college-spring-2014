@@ -189,7 +189,8 @@
     variable is greater than or equal to another Geometric random variable.
     \\
 
-    Let \(X \dist{Geometric}(p = 0.2)\) and \(Y \dist{Geometric}(p = 0.1)\).
+    Let \(X \dist{Geometric}(p_x = 0.2)\) and \(Y \dist{Geometric}(p_y =
+    0.1)\).
     \\
 
     \part
@@ -200,7 +201,11 @@
 
     \solution
 
-    Solution.
+<<problem4, echo=F, results='hide', cache=T>>=
+base::source('./hw6prob4.R')
+@
+
+    Our estimate based off of running the code ran is \(\Sexpr{est.mean}\).
     \\
 
     \part
@@ -219,7 +224,42 @@
 
     \solution
 
-    Solution.
+    Knowing that \(X\) and \(Y\) are Geometric, we know that the cdf of the
+    distribution is \(F(x) = Pr(X \leq x) = 1 - (1 - p)^x\).
+    \\
+
+    Given the hint, this becomes:
+    \[
+        \begin{split}
+            \Pr(X \geq Y)
+            &= \sum_{k = 1}^{\infty} \Pr(X \geq k) \Pr_Y(k)
+            \\
+            &= \sum_{k = 1}^{\infty} (1 - \Pr(X < k)) \Pr_Y(k)
+            \\
+            &= \sum_{k = 1}^{\infty} (1 - (1 - (1 - p_x)^k)) \Pr_Y(k)
+            \\
+            &= \sum_{k = 1}^{\infty} (1 - p_x)^k \Pr_Y(k)
+            \\
+            &= \sum_{k = 1}^{\infty} (1 - p_x)^k \cdot p_y(1 - p_y)^{k - 1}
+        \end{split}
+    \]
+
+    Rearranging and simplifying gives us the following:
+    \[
+        \begin{split}
+            \Pr(X \geq Y)
+            &= \sum_{k = 1}^{\infty} p_y(1 - p_x)^k (1 - p_y)^{k - 1}
+            \\
+            &= \sum_{k = 1}^{\infty} (0.1) (1 - 0.2)^k (1 - 0.1)^{k - 1}
+            \\
+            &= (0.1) \sum_{k = 1}^{\infty} (0.8)^k (0.9)^{k - 1}
+            \\
+            &= (0.1) \sum_{k = 1}^{\infty} (0.8) (0.8)^{k - 1} (0.9)^{k - 1}
+            \\
+            &= (0.08) \sum_{k = 1}^{\infty} (0.72)^{k - 1}
+        \end{split}
+    \]
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -255,7 +295,8 @@ base::source('./hw6prob5.R')
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
-    Draw 100,000 random values from the sum of 12 Uniform(0, 1) values minus 6.
+    Draw 100,000 random values from the sum of 12 uniform random variables
+    values minus 6.
     \\
 
     That is, let \(U_i \dist{Uniform}(0, 1)\) random variables for \(i = 1, 2,
@@ -270,8 +311,8 @@ base::source('./hw6prob5.R')
 
     \solution
 
-    Running the R code provided, we see the simulated results as well as the
-    true results:
+    Running the R code provided, we see the simulated results, the
+    true results, and the difference in the two values:
 
 <<>>=
 base::source('./hw6prob6.R')
