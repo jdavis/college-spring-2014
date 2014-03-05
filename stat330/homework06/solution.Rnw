@@ -108,7 +108,6 @@
 
     \solution
 
-
     Given the problem description, we can let \(X\) be the random variable
     where \(X = \) number of minutes it takes to download a file. We know that
     \(n = 82\), \(\mu = 15\), \(\sigma^2 = 16\), so \(\sigma = 4\). Then we
@@ -250,8 +249,6 @@
     \]
 \end{homeworkProblem}
 
-\pagebreak
-
 \begin{homeworkProblem}
     In this problem, we will esimate the probability that a Geometric random
     variable is greater than or equal to another Geometric random variable.
@@ -263,7 +260,7 @@
 
     \part
 
-    Get an estimate for \(\Pr(X \leq Y)\) to three decimals using a simulation
+    Get an estimate for \(\Pr(X \geq Y)\) to three decimals using a simulation
     study. Use the R code posted (hw6prob4.R) with this part.
     \\
 
@@ -306,7 +303,7 @@ base::source('./hw6prob4.R')
             \\
             &= \sum_{k = 1}^{\infty} (1 - (1 - (1 - p_x)^k)) \Pr_Y(k)
             \\
-            &= \sum_{k = 1}^{\infty} (1 - p_x)^k \Pr_Y(k)
+            &= \sum_{k = 1}^{\infty} (1 - p_x)^k ()
             \\
             &= \sum_{k = 1}^{\infty} (1 - p_x)^k \cdot p_y(1 - p_y)^{k - 1}
         \end{split}
@@ -318,13 +315,37 @@ base::source('./hw6prob4.R')
             \Pr(X \geq Y)
             &= \sum_{k = 1}^{\infty} p_y(1 - p_x)^k (1 - p_y)^{k - 1}
             \\
-            &= \sum_{k = 1}^{\infty} (0.1) (1 - 0.2)^k (1 - 0.1)^{k - 1}
+            &= \sum_{k = 1}^{\infty} p_y(1 - p_x) (1 - p_x)^{k - 1} (1 - p_y)^{k - 1}
             \\
-            &= (0.1) \sum_{k = 1}^{\infty} (0.8)^k (0.9)^{k - 1}
+            &= p_y(1 - p_x) \left[1 + (1 - p_x)^{1} (1 - p_y)^{1} + (1 - p_x)^{2} (1 - p_y)^{2} + \ldots \right]
             \\
-            &= (0.1) \sum_{k = 1}^{\infty} (0.8) (0.8)^{k - 1} (0.9)^{k - 1}
+            &= p_y(1 - p_x) \left( \frac{1 - x}{x} \right) \left( \frac{1 - y}{y} \right)
+        \end{split}
+    \]
+
+    Our final equation is below and substituting our values gives us:
+    \[
+        \begin{split}
+            \Pr(X \geq Y)
+            &= \frac{
+                p_x (1 - p_y)(p_x p_y)
+            }{
+                p_x + p_y - p_x p_y
+            }
             \\
-            &= (0.08) \sum_{k = 1}^{\infty} (0.72)^{k - 1}
+            &= \frac{
+                (0.1) (0.8)(0.1 \cdot 0.2)
+            }{
+                (0.1) + (0.2) - (0.1) (0.2)
+            }
+            \\
+            &= \frac{
+                0.1
+            }{
+                0.28
+            }
+            \\
+            &= 0.3571
         \end{split}
     \]
 
