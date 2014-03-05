@@ -305,7 +305,7 @@ base::source('./hw6prob4.R')
             &= \sum_{k = 1}^{\infty} (1 - (1 - (1 - p_y)^k)) \Pr_Y(k)
             + \sum_{k = 1}^{\infty} \Pr(X = k) \Pr_Y(k)
             \\
-            &= \sum_{k = 1}^{\infty} (1 - p_x)^k \Pr_Y(k)
+            &= \sum_{k = 1}^{\infty} (1 - p_y)^k \Pr_Y(k)
             + \sum_{k = 1}^{\infty} \Pr(X = k) \Pr_Y(k)
             \\
             &= \sum_{k = 1}^{\infty} (1 - p_y)^k p_x(1 - p_x)^{k - 1}
