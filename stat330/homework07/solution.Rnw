@@ -112,8 +112,15 @@
 
     \solution
 
-    Solution.
-    \\
+    The transition probability matrix, \(P\), is:
+
+    \[
+        P = \begin{pmatrix}
+            0.6 & 0.4
+            \\
+            0.2 & 0.8
+        \end{pmatrix}
+    \]
 
     \part
 
@@ -122,7 +129,27 @@
 
     \solution
 
-    Solution.
+    We know that Rex is \(P^0\), his child is \(P^1\), then his grandchild is
+    \(P^2\).  This gives us:
+
+    \[
+        P^2 = \begin{pmatrix}
+            0.6 & 0.4
+            \\
+            0.2 & 0.8
+        \end{pmatrix}^2
+        = \begin{pmatrix}
+            0.44 & 0.56
+            \\
+            0.28 & 0.72
+        \end{pmatrix}
+    \]
+
+    We want to know the probability that Rex's grandchild is black which is
+    \(P^2_{i,j}\) where \(i\) and \(j\) indicate the location in the matrix. We
+    know Rex is brown, which is the second row, \(i = 2\), and we want the
+    probability that the pup is black, which is the first column, \(j = 1\).
+    Thus this gives us \(P^2_{2,1}\) which is \(0.28\).
     \\
 
     \part
@@ -130,14 +157,34 @@
     Using the R code, \textbf{hw7code.R}, use it to do the rest.
     \\
 
+<<echo=F>>=
+dog <- function (K) {
+    val <- c(.6, .2, .4, .8)
+    P <- matrix(val, nrow=2, ncol=2)
+
+    pr <- c(0, 1)
+
+    for (k in 1:K){
+        pr <- pr %*% P
+
+        if (k == K){
+            print(sprintf('The state probabilities (1=black, 2=brown) after %i generations are:', k))
+            print(pr)
+        }
+    }
+}
+
+@
+
     Compute the probability that a dog of the 4th generation
-    (gret-great-grand-pup?) is black.
+    (great-great-grand-pup?) is black.
     \\
 
     \solution
 
-    Solution.
-    \\
+<<echo=F>>=
+dog(4)
+@
 
     \part
 
@@ -146,8 +193,9 @@
 
     \solution
 
-    Solution.
-    \\
+<<echo=F>>=
+dog(20)
+@
 
     \part
 
@@ -156,8 +204,9 @@
 
     \solution
 
-    Solution.
-    \\
+<<echo=F>>=
+dog(100)
+@
 
     \part
 
@@ -166,7 +215,7 @@
 
     \solution
 
-    Solution.
+    Based off of this, I think that \(\pi = \left(\frac{1}{3}, \frac{2}{3}\right)\).
     \\
 
     \part
@@ -176,7 +225,18 @@
 
     \solution
 
-    Solution.
+    \[
+        P^\infty = \begin{pmatrix}
+            \pi_1 & \pi_2
+            \\[6pt]
+            \pi_1 & \pi_2
+        \end{pmatrix}
+        = \begin{pmatrix}
+            \frac{1}{3} & \frac{2}{3}
+            \\[6pt]
+            \frac{1}{3} & \frac{2}{3}
+        \end{pmatrix}
+    \]
 \end{homeworkProblem}
 
 \end{document}
