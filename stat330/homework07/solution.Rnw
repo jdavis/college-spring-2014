@@ -113,7 +113,6 @@
     \solution
 
     The transition probability matrix, \(P\), is:
-
     \[
         P = \begin{pmatrix}
             0.6 & 0.4
@@ -131,7 +130,6 @@
 
     We know that Rex is \(P^0\), his child is \(P^1\), then his grandchild is
     \(P^2\).  This gives us:
-
     \[
         P^2 = \begin{pmatrix}
             0.6 & 0.4
@@ -224,7 +222,6 @@ dog(100)
     \\
 
     \solution
-
     \[
         P^\infty = \begin{pmatrix}
             \pi_1 & \pi_2
@@ -237,6 +234,53 @@ dog(100)
             \frac{1}{3} & \frac{2}{3}
         \end{pmatrix}
     \]
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 6.7 from Baron.
+    \\
+
+    Given the transition probability matrix answer the questions:
+    \[
+        P = \begin{pmatrix}
+            0.3 & \ldots & 0
+            \\
+            0 & 0 & \ldots
+            \\
+            1 & \ldots & \ldots
+        \end{pmatrix}
+    \]
+
+    \part
+
+    Fill in the blanks.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Show that this is a regular Markov chain
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Compute the steady-state probabilities using a system of equations.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
