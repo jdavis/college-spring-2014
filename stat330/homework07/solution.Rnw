@@ -511,5 +511,37 @@ lab <- function (K) {
     Solution.
 \end{homeworkProblem}
 
+\pagebreak
+
+\begin{homeworkProblem}
+    Confirm in R that for \(Y \dist{Exponential}(\lambda = \frac{1}{2})\) that
+    \(P(Y \leq 1) = 0.3935\):
+
+<<>>=
+pexp(1, rate=0.5)
+@
+
+    Let \(X \dist{Gamma}(\alpha = 5, \lambda = \frac{1}{2})\), that is time to
+    5th occurrence with rate of 1 every 2 time units. Calculate \(\Pr(X \leq
+    x)\) in R using:
+
+<<echo=F>>=
+p5 <- function (x) {
+    pgamma(x, shape=5, rate=0.5)
+}
+@
+
+<<eval=F>>=
+pgamma(x, shape=5, rate=0.5)
+@
+
+    \begin{enumerate}[(a)]
+        \item \(P(X \leq 1) = \Sexpr{p5(1)}\)
+        \item \(P(X \leq 2.5) = \Sexpr{p5(2.5)}\)
+        \item \(P(X \leq 5) = \Sexpr{p5(5)}\)
+        \item \(P(X > 12.5) = 1 - P(X \leq 12.5) = 1 - \Sexpr{p5(12.5)} = \Sexpr{1- p5(12.5)}\)
+    \end{enumerate}
+\end{homeworkProblem}
+
 
 \end{document}
