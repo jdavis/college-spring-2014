@@ -359,7 +359,7 @@ dog(100)
 \pagebreak
 
 \begin{homeworkProblem}
-    Problem 6.3 from Baron.
+    Problem 6.1 from Baron.
     \\
 
     A small computer lab has 2 terminals. The number of students working in
@@ -402,6 +402,114 @@ dog(100)
     \solution
 
     Solution.
+    \\
+
+    \part
+
+    List the absorbing zone for this chain.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Use Problem 4 from the \textbf{hw7code.R} for the following parts.
+    \\
+
+<<echo=F>>=
+val <- c()
+
+lab <- function (K) {
+    P <- matrix(val, nrow=3, ncol=3)
+
+    # 2. enter starting state probabilities
+    pr <- c( )
+
+    for (k in 1:max(K)){
+        pr <- pr %*% P
+
+        if (k %in% K){
+            print(sprintf('The state probabilities (1=no students, 2=one student, 3=two students) after %i generations are:', k))
+            print(pr)
+        }
+    }
+}
+@
+
+    \part
+
+    Write the transition probability matrix.
+    \\
+
+    \solution
+
+    The probability matrix will look like:
+    \[
+        P = \begin{pmatrix}
+            0.5 & 0.5 & 0
+            \\
+            0 & 0.5 & 0.5
+            \\
+            0 & 0.5 & 0.5
+        \end{pmatrix}
+    \]
+
+    \part
+
+    Is this a regular Markov chain? Justify your answer.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Suppose there is nobody in the lab at 7am. Give the probabilities that
+    there are 0, 1, or 2 students working in the lab at 10am.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Suppose there is nobody in the lab at 7am. Give the probabilities that
+    there are 0, 1, or 2 students working in the lab at 7pm.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Suppose there is nobody in the lab at 7am. Give the probabilities that
+    there are 0, 1, or 2 students working in the lab at 7am the next morning.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Based on your last answers, give the steady-state probabilities \(\pi\).
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
 
 \end{document}
