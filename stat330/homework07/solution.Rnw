@@ -242,17 +242,6 @@ dog(100)
     Problem 6.7 from Baron.
     \\
 
-    Given the transition probability matrix answer the questions:
-    \[
-        P = \begin{pmatrix}
-            0.3 & \ldots & 0
-            \\
-            0 & 0 & \ldots
-            \\
-            1 & \ldots & \ldots
-        \end{pmatrix}
-    \]
-
     \part
 
     Fill in the blanks.
@@ -279,7 +268,7 @@ dog(100)
     \solution
 
     To show that this Markov chain is regular, there must be a point when
-    \(P^{(h)}_{i,j}\) for all \(i, j\) and some \(h\) where all the probability
+    \(P^{(h)}_{i,j}\) for all \(i, j\) and some \(h\) where the probability
     at point \((i, j)\) is greater than 0.
     \\
 
@@ -323,6 +312,7 @@ dog(100)
 
     At \(P^4\), we can see that all the probabilities are non-zero thus showing
     that our Markov chain is regular.
+    \\
 
     \part
 
@@ -364,6 +354,54 @@ dog(100)
     \[
         \pi_1 = .4167, \quad \pi_2 = .2917, \quad \pi_3 = .2917
     \]
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 6.3 from Baron.
+    \\
+
+    A small computer lab has 2 terminals. The number of students working in
+    this lab is recoreded at the end of every hour. A computer assistant
+    notices the following pattern:
+
+    \begin{enumerate}
+        \item If there are 0 or 1 students in a lab, then the number of students
+            in 1 hour has a 50\% chance to increase by 1 or remain unchanged.
+        \item If there are 2 students in a lab, then the number of students in 1 hour
+            has a 50\% chance to decrease by 1 or reamin unchanged.
+    \end{enumerate}
+
+    \part
+
+    Write the transition probability matrix for this Markov chain.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Is this a regular Markov chain? Justify your answer.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Suppose there is nobody in the lab at 7am. What is the probability of
+    nobody workin g in the lab at 10am?
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
