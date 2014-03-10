@@ -260,8 +260,16 @@ dog(100)
 
     \solution
 
-    Solution.
-    \\
+    The filled in matrix looks like:
+    \[
+        P = \begin{pmatrix}
+            0.3 & 0.7 & 0
+            \\
+            0 & 0 & 1
+            \\
+            1 & 0 & 0
+        \end{pmatrix}
+    \]
 
     \part
 
@@ -270,8 +278,51 @@ dog(100)
 
     \solution
 
-    Solution.
+    To show that this Markov chain is regular, there must be a point when
+    \(P^{(h)}_{i,j}\) for all \(i, j\) and some \(h\) where all the probability
+    at point \((i, j)\) is greater than 0.
     \\
+
+    Let's continue the Markov chain to see if we can reach a transition matrix
+    that satisfies the above:
+
+    \[
+        P =
+        \begin{pmatrix}
+            0.3 & 0.7 & 0
+            \\
+            0 & 0 & 1
+            \\
+            1 & 0 & 0
+        \end{pmatrix}, \quad
+        P^2 =
+        \begin{pmatrix}
+            0.09 & 0.21 & 0.7
+            \\
+            1 & 0 & 0
+            \\
+            .3 & .7 & 0
+        \end{pmatrix}, \quad
+        P^3 =
+        \begin{pmatrix}
+            0.727 & 0.063 & 0.21
+            \\
+            0.3 & 0.7 & 0
+            \\
+            0.09 & 0.21 & 0.7
+        \end{pmatrix}, \quad
+        P^4 =
+        \begin{pmatrix}
+            0.4281 & 0.5089 & 0.063
+            \\
+            0.09 & 0.21 & 0.7
+            \\
+            0.727 & 0.063 & 0.21
+        \end{pmatrix}
+    \]
+
+    At \(P^4\), we can see that all the probabilities are non-zero thus showing
+    that our Markov chain is regular.
 
     \part
 
@@ -280,7 +331,39 @@ dog(100)
 
     \solution
 
-    Solution.
+    Using the fact that \(\pi P = \pi\), we want to do the following:
+    \[
+            (\pi_1, \pi_2, \pi_3)
+            = (\pi_1, \pi_2, \pi_3)
+            \begin{pmatrix}
+                0.3 & 0.7 & 0
+                \\
+                0 & 0 & 1
+                \\
+                1 & 0 & 0
+            \end{pmatrix}
+            = (0.3\pi_1 + 0\pi_2 + 1\pi_3, 0.7\pi_1 + 0\pi_2 + 0\pi_3, 0\pi_1 + 1\pi_2 + 0\pi_3)
+    \]
+
+    This gives us the equations:
+    \[
+        \left\{
+        \begin{split}
+                0.3\pi_1 + \pi_3 &= \pi_1
+                \\
+                0.7\pi_1 &= \pi_2
+                \\
+                \pi_2 &= \pi_3
+                \\
+                \pi_1 + \pi_2 + \pi_3 &= 1
+        \end{split}
+        \right.
+    \]
+
+    Using algebra to solve the equations, this gives us the steady state probabilities of:
+    \[
+        \pi_1 = .4167, \quad \pi_2 = .2917, \quad \pi_3 = .2917
+    \]
 \end{homeworkProblem}
 
 \end{document}
