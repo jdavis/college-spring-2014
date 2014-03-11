@@ -155,7 +155,7 @@
     Using the R code, \textbf{hw7code.R}, use it to do the rest.
     \\
 
-<<echo=F>>=
+<<echo=FALSE>>=
 dog <- function (K) {
     val <- c(.6, .2, .4, .8)
     P <- matrix(val, nrow=2, ncol=2)
@@ -180,7 +180,7 @@ dog <- function (K) {
 
     \solution
 
-<<echo=F>>=
+<<echo=FALSE>>=
 dog(4)
 @
 
@@ -191,7 +191,7 @@ dog(4)
 
     \solution
 
-<<echo=F>>=
+<<echo=FALSE>>=
 dog(20)
 @
 
@@ -202,7 +202,7 @@ dog(20)
 
     \solution
 
-<<echo=F>>=
+<<echo=FALSE>>=
 dog(100)
 @
 
@@ -420,7 +420,7 @@ dog(100)
     Use Problem 4 from the \textbf{hw7code.R} for the following parts.
     \\
 
-<<echo=F>>=
+<<echo=FALSE>>=
 val <- c()
 
 lab <- function (K) {
@@ -525,13 +525,13 @@ pexp(1, rate=0.5)
     5th occurrence with rate of 1 every 2 time units. Calculate \(\Pr(X \leq
     x)\) in R using:
 
-<<echo=F>>=
+<<echo=FALSE>>=
 p5 <- function (x) {
     pgamma(x, shape=5, rate=0.5)
 }
 @
 
-<<eval=F>>=
+<<eval=FALSE>>=
 pgamma(x, shape=5, rate=0.5)
 @
 
