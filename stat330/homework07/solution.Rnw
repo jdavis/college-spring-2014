@@ -168,8 +168,10 @@ dog <- function (K) {
         if (k == K){
             print(sprintf('The state probabilities (1=black, 2=brown) after %i generations are:', k))
             print(pr)
+            return(pr[1,1])
         }
     }
+
 }
 
 @
@@ -181,8 +183,11 @@ dog <- function (K) {
     \solution
 
 <<echo=FALSE>>=
-dog(4)
+x <- dog(4)
 @
+    This gives the probability that the 4th generation is black as
+    \(\Sexpr{x}\).
+    \\
 
     \part
 
@@ -192,8 +197,12 @@ dog(4)
     \solution
 
 <<echo=FALSE>>=
-dog(20)
+x <- dog(20)
 @
+
+    This gives the probability that the 20th generation is black as
+    \(\Sexpr{x}\).
+    \\
 
     \part
 
@@ -203,8 +212,11 @@ dog(20)
     \solution
 
 <<echo=FALSE>>=
-dog(100)
+x <- dog(100)
 @
+    This gives the probability that the 100th generation is black as
+    \(\Sexpr{x}\).
+    \\
 
     \part
 
