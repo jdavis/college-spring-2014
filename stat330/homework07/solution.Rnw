@@ -302,7 +302,7 @@ x <- dog(100)
             \\
             1 & 0 & 0
             \\
-            .3 & .7 & 0
+            0.3 & 0.7 & 0
         \end{pmatrix}, \quad
         P^3 =
         \begin{pmatrix}
@@ -364,7 +364,7 @@ x <- dog(100)
 
     Using algebra to solve the equations, this gives us the steady state probabilities of:
     \[
-        \pi_1 = .4167, \quad \pi_2 = .2917, \quad \pi_3 = .2917
+        \pi_1 = 0.4167, \quad \pi_2 = 0.2917, \quad \pi_3 = 0.2917
     \]
 \end{homeworkProblem}
 
