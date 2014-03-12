@@ -543,5 +543,70 @@ pgamma(x, shape=5, rate=0.5)
     \end{enumerate}
 \end{homeworkProblem}
 
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 4.12 from Baron.
+    \\
+
+    A computer processes tasks in the order they are received. Each task takes
+    an Exponential amount of time with the average of 2 minutes. Compute the
+    probability that a package of 5 tasks is processed in less than 8 minutes.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 6.20 from Baron.
+    \\
+
+    Power outages are unexpected rare events occurring according to a Poisson
+    process with the average rate of 3 outages per month. Compute the
+    probability of more than 5 power outages during three summer months.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 6.21 from Baron.
+    \\
+
+    Telephone calls a customer service center according to a Poisson process
+    with the rate of 1 call every 3 minutes. Compute the probability of
+    receiving more than 5 calls during the 12 minutes.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Superfan Todd O’Connor (played by the late Chris Farley) has a heart attack
+    on average once every 4 years. Todd has his first ever physical exam due to
+    new insurance regulations. His doctor is horrified at his low beef
+    fat-to-pork fat ratio, and his doctor tells him that he must change his
+    diet. Todd resists, but agrees to change his diet after three heart
+    attacks. What is the probability that Todd will not have to change his diet
+    for at least 10 years? Assume a Poisson process is the correct model for
+    Todd’s heart attacks.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
 
 \end{document}
