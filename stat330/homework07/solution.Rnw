@@ -392,8 +392,14 @@ x <- dog(100)
 
     \solution
 
-    Solution.
-    \\
+    The transition probability matrix, \(P\), is:
+    \[
+        P = \begin{pmatrix}
+            0.50 & 0.50 & 0
+            \\
+            0 & 0.50 & 0.50
+        \end{pmatrix}
+    \]
 
     \part
 
@@ -433,20 +439,25 @@ x <- dog(100)
     \\
 
 <<echo=FALSE>>=
-val <- c()
+val <- c(0.5, 0.5, 0,
+         0, 0.5, 0.5,
+         0, 0.5, 0.5
+         )
 
 lab <- function (K) {
     P <- matrix(val, nrow=3, ncol=3)
 
     # 2. enter starting state probabilities
-    pr <- c( )
+    pr <- c(0.5, 0.5, 0)
 
-    for (k in 1:max(K)){
+    for (k in 1:K){
         pr <- pr %*% P
 
-        if (k %in% K){
-            print(sprintf('The state probabilities (1=no students, 2=one student, 3=two students) after %i generations are:', k))
+        if (k == K){
+            print('The state probabilities (1=no students, 2=one student, 3=two students')
+            print(sprintf('after %i generations are:', k))
             print(pr)
+            return(pr)
         }
     }
 }
@@ -488,7 +499,11 @@ lab <- function (K) {
 
     \solution
 
-    Solution.
+<<echo=FALSE>>=
+x <- lab(3)
+@
+    Thus this gives the probabilities of 0 students as \(\Sexpr{x[1,1]}\) as 1
+    student \(\Sexpr{x[1,2]}\) as 2 student \(\Sexpr{x[1,3]}\).
     \\
 
     \part
@@ -499,7 +514,12 @@ lab <- function (K) {
 
     \solution
 
-    Solution.
+<<echo=FALSE>>=
+x <- lab(12)
+@
+
+    Thus this gives the probabilities of 0 students as \(\Sexpr{x[1,1]}\) as 1
+    student \(\Sexpr{x[1,2]}\) as 2 student \(\Sexpr{x[1,3]}\).
     \\
 
     \part
@@ -510,7 +530,11 @@ lab <- function (K) {
 
     \solution
 
-    Solution.
+<<echo=FALSE>>=
+x <- lab(24)
+@
+    Thus this gives the probabilities of 0 students as \(\Sexpr{x[1,1]}\) as 1
+    student \(\Sexpr{x[1,2]}\) as 2 student \(\Sexpr{x[1,3]}\).
     \\
 
     \part
@@ -520,7 +544,10 @@ lab <- function (K) {
 
     \solution
 
-    Solution.
+    Based of these answers, I think the steady-state probabilities are:
+    \[
+        \pi_1 = \Sexpr{x[1,1]}, \quad \pi_2 = \Sexpr{x[1,2]}, \quad \pi_3 = \Sexpr{x[1,3]}
+    \]
 \end{homeworkProblem}
 
 \pagebreak
