@@ -690,7 +690,18 @@ pgamma(x, shape=5, rate=0.5)
 
     \solution
 
-    Solution.
+    Given the information, we know that \(\lambda = 3 \text{ month}^{-1}\).
+    We want to calculate the probabilty that 5 outages occur in 3 months. This
+    gives us the value of \(t = 3\) and we want \(\Pr(X > 5)\) where \(X
+    \dist{Poisson}(\lambda t)\) which is:
+    \[
+        \Pr(X > 5)
+        = 1 - \Pr(X \leq 5)
+        = 1 - e^{-9} \sum^5_{i = 0} \frac{9^i}{i!}
+        = 1 - e^{-9}
+        \left( \frac{9^0}{0!} + \frac{9^1}{1!} + \frac{9^2}{2!} + \frac{9^3}{3!} + \frac{9^4}{4!} + \frac{9^5}{5!} \right)
+        \approx 0.8843
+    \]
 \end{homeworkProblem}
 
 \pagebreak
