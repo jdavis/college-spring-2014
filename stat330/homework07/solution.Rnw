@@ -751,7 +751,20 @@ pgamma(x, shape=5, rate=0.5)
 
     \solution
 
-    Solution.
+    Given the information, we know that \(\lambda = 0.25 \text{ year}^{-1}\).
+    Let \(T = \text{time in years until kth heart attack}\). We know that this
+    means that \(T \dist{Gamma}(k, \lambda)\) where \(k = 3\). Thus we want the
+    probability that \(\Pr(T = 10)\). Using R, we know that this is:
+
+<<eval=FALSE>>=
+dgamma(10, shape = 3, rate = 0.25)
+
+<<echo=FALSE>>=
+x <- dgamma(10, shape = 3, rate = 0.25)
+@
+
+    Thus this gives us the probability that Todd won't have to change his diet
+    as \(\Sexpr{x}\). Poor Todd\ldots
 \end{homeworkProblem}
 
 \end{document}
