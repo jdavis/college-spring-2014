@@ -397,6 +397,8 @@ x <- dog(100)
             0.50 & 0.50 & 0
             \\
             0 & 0.50 & 0.50
+            \\
+            0 & 0.50 & 0.50
         \end{pmatrix}
     \]
 
@@ -406,6 +408,20 @@ x <- dog(100)
     \\
 
     \solution
+
+    No, it is not a regular Markov chain. By looking at how the matrix
+    multiplication works out, we can see that for \(P_{2,1}\) and \(P_{3,1}\),
+    they will always be zero. This is because of the following:
+    \[
+        P_{2,1} = 0 (0.5) + (0.5) 0 + (0.5) 0\,
+        \quad
+        P_{3,1} = 0 (0.5) + (0.5) 0 + (0.5) 0\,
+    \]
+
+    Thus we can see that since we are only multiplying by \(P\), we will never
+    satisfy the regular Markov Chain requirement because \(P_{2,1}\) and
+    \(P_{3,1}\) will always be 0.
+    \\
 
 
     \part
@@ -437,7 +453,7 @@ x <- dog(100)
 
 <<echo=FALSE>>=
 val <- c(0.5, 0.5, 0,
-         0, 0.5, 0.5,
+         0.5, 0, 0.5,
          0, 0.5, 0.5
          )
 
@@ -472,7 +488,7 @@ lab <- function (K) {
         P = \begin{pmatrix}
             0.5 & 0.5 & 0
             \\
-            0 & 0.5 & 0.5
+            0.5 & 0 & 0.5
             \\
             0 & 0.5 & 0.5
         \end{pmatrix}
@@ -485,18 +501,29 @@ lab <- function (K) {
 
     \solution
 
-    No, it is not a regular Markov chain. By looking at how the matrix
-    multiplication works out, we can see that for \(P_{2,1}\) and \(P_{3,1}\),
-    they will always be zero. This is because of the following:
+    Let's continue the Markov chain to see if we can reach a transition matrix
+    that satisfies the above:
     \[
-        P_{2,1} = 0 (0.5) + (0.5) 0 + (0.5) 0\,
-        \quad
-        P_{3,1} = 0 (0.5) + (0.5) 0 + (0.5) 0\,
+        P =
+        \begin{pmatrix}
+            0.5 & 0.5 & 0
+            \\
+            0.5 & 0 & 0.5
+            \\
+            0 & 0.5 & 0.5
+        \end{pmatrix}, \quad
+        P^2 =
+        \begin{pmatrix}
+            0.5 & 0.25 & 0.25
+            \\
+            0.25 & 0.5 & 0.25
+            \\
+            0.25 & 0.25 & 0.5
+        \end{pmatrix},
     \]
 
-    Thus we can see that since we are only multiplying by \(P\), we will never
-    satisfy the regular Markov Chain requirement because \(P_{2,1}\) and
-    \(P_{3,1}\) will always be 0.
+    At \(P^2\), we can see that all the probabilities are non-zero thus showing
+    that our Markov chain is regular.
     \\
 
     \part
