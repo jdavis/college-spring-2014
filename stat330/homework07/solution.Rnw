@@ -629,8 +629,6 @@ x <- lab(24)
     \]
 \end{homeworkProblem}
 
-\pagebreak
-
 \begin{homeworkProblem}
     Confirm in R that for \(Y \dist{Exponential}(\lambda = \frac{1}{2})\) that
     \(P(Y \leq 1) = 0.3935\):
@@ -737,6 +735,8 @@ pgamma(x, shape=5, rate=0.5)
         \approx 0.2149
     \]
 \end{homeworkProblem}
+
+\pagebreak
 
 \begin{homeworkProblem}
     Superfan Todd O’Connor (played by the late Chris Farley) has a heart attack
