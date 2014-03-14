@@ -158,6 +158,7 @@
 <<echo=FALSE>>=
 dog <- function (K) {
     val <- c(.6, .2, .4, .8)
+
     P <- matrix(val, nrow=2, ncol=2)
 
     pr <- c(0, 1)
@@ -185,6 +186,7 @@ dog <- function (K) {
 <<echo=FALSE>>=
 x <- dog(4)
 @
+
     This gives the probability that the 4th generation is black as
     \(\Sexpr{x}\).
     \\
@@ -214,6 +216,7 @@ x <- dog(20)
 <<echo=FALSE>>=
 x <- dog(100)
 @
+
     This gives the probability that the 100th generation is black as
     \(\Sexpr{x}\).
     \\
@@ -672,16 +675,22 @@ pgamma(x, shape=5, rate=0.5)
 
     Given the information, we know that \(\lambda = 0.5 \text{ minute}^{-1}\).
     We want the probability that a package of 5 tasks is processed in less than
-    8 minutes. This gives us \(t = 8\) then \(\lambda t = 4\), we know that
-    there is an Exponential distribution between each task. This means that if
-    we let \(X = \text{\# of tasks in interval 8 minutes}\), then \(X
-    \dist{Poisson}(4)\) and we want \(\Pr(X = 5)\) which is:
-    \[
-        \Pr(X = 5)
-        = e^{-\lambda} \frac{\lambda^x}{x!}
-        = e^{-4} \frac{4^5}{5!}
-        \approx 0.1563
-    \]
+    8 minutes. This gives us \(k = 5\), we know that there is an Exponential
+    distribution between each task. This means that if we let \(T = \text{time
+    until kth task processed}\), then \(T \dist{Gamma}(k, \lambda)\) and we want
+    \(\Pr(X < 8)\) which is:
+
+<<>>=
+q = c(0, 1, 2, 3, 4, 5, 6, 7)
+X <- pgamma(q, shape = 5, rate = 0.5)
+sum(X)
+<<echo=FALSE>>=
+q = c(0, 1, 2, 3, 4, 5, 6, 7)
+X <- pgamma(q, shape = 5, rate = 0.5)
+x <- sum(X)
+@
+
+    Thus this gives us the probability of \(\Sexpr{x}\).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
