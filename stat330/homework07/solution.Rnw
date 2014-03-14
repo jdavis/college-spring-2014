@@ -680,14 +680,10 @@ pgamma(x, shape=5, rate=0.5)
     until kth task processed}\), then \(T \dist{Gamma}(k, \lambda)\) and we want
     \(\Pr(X < 8)\) which is:
 
-<<>>=
-q = c(0, 1, 2, 3, 4, 5, 6, 7)
-X <- pgamma(q, shape = 5, rate = 0.5)
-sum(X)
+<<eval=FALSE>>=
+pgamma(8, shape = 5, rate = 0.5)
 <<echo=FALSE>>=
-q = c(0, 1, 2, 3, 4, 5, 6, 7)
-X <- pgamma(q, shape = 5, rate = 0.5)
-x <- sum(X)
+x <- pgamma(8, shape = 5, rate = 0.5)
 @
 
     Thus this gives us the probability of \(\Sexpr{x}\).
@@ -766,10 +762,10 @@ x <- sum(X)
     probability that \(\Pr(T = 10)\). Using R, we know that this is:
 
 <<eval=FALSE>>=
-dgamma(10, shape = 3, rate = 0.25)
+pgamma(10, shape = 3, rate = 0.25)
 
 <<echo=FALSE>>=
-x <- dgamma(10, shape = 3, rate = 0.25)
+x <- pgamma(10, shape = 3, rate = 0.25)
 @
 
     Thus this gives us the probability that Todd won't have to change his diet
