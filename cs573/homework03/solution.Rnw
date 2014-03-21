@@ -85,9 +85,13 @@
 \newcommand{\Bias}{\mathrm{Bias}}
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\N}{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
+
+\newcommand{\X}{{\bold X}}
+\newcommand{\Y}{{\bold Y}}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
@@ -210,17 +214,19 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    Describe how you can efficiently solve the least squares linear system \(\) (i.e., by
-    not calculating an interverse) where \(\) has \(p\) linearly independent columns, \(\beta \in\)
-    and \(\)?
+    Describe how you can efficiently solve the least squares linear system
+    \((\X^T \X)\beta = \X^T \Y\) (i.e., by not calculating an interverse) where
+    \(\X \in \R^{n \times p}\) has \(p\) linearly independent columns, \(\beta
+    \in \R^p\) and \(\Y \in \R^{n \times 1}\)?
     \\
 
     \textit{Hint:} Think in terms of matrix decompositions (it's not SVD!). Use
-    Wikipedia.  \end{homeworkProblem}
+    Wikipedia.
     \\
 
     \solution
 
     Solution.
+\end{homeworkProblem}
 
 \end{document}
