@@ -15,7 +15,6 @@
 \textheight=9.0in
 \headsep=0.25in
 
-\setlength{\parskip}{\baselineskip}
 \setlength\parindent{0pt}
 
 \linespread{1.1}
