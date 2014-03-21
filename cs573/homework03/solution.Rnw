@@ -136,4 +136,43 @@
 
 \end{homeworkProblem}
 
+\pagebreak
+
+\begin{homeworkProblem}
+    Suppose we estimate some statistics (e.g. median) based on a sample \(X\).
+
+    \part
+
+    Carefully describe how you might estimate the standard deviation of the
+    median of the statistic.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Write R code that calculates the standard deviation of the median given a
+    sample \(X\).
+    \\
+
+    \part
+
+    Suppose you were interested in a \(100(1 - \alpha)\) (pointwise) confidence
+    interval for the correlation coefficient of a sample of \(X\) and \(Y\)
+    (the joint distribution of \(X\) and \(Y\) is not bivariate normal).
+    Clearly explain and derive how you would do this? Write R code that
+    calculates the 95\% confidence interval for the correlation coefficient in
+    case of the lawstate.dat data.
+    \\
+
+    \solution
+
+    Solution
+\end{homeworkProblem}
+
+\pagebreak
+
 \end{document}
