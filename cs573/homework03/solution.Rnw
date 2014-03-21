@@ -1,0 +1,140 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{float}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\setlength{\parskip}{\baselineskip}
+\setlength\parindent{0pt}
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength{\floatsep}{100pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}[1][]{
+    \section{Problem \arabic{homeworkProblemCounter} \; \large{#1}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#3}
+\newcommand{\hmwkDueDate}{March 28, 2014}
+\newcommand{\hmwkClass}{ComS 573}
+\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassInstructor}{De Brabanter}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{Professor\ \hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\begin{document}
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+@
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+    Suppose that \(Y_i = \beta_0 + \sum_{j = 1}^p x_{ij} \beta_j + e_i\) where
+    \(e_1, \ldots, e_n\) are i.i.d. distributed from a \(\N(0, \sigma^2_e)\).
+    \\
+
+    \part
+
+    Write out the likelihood for the data and show that it is equivalent to
+    using ordinary least squares.
+    \\
+
+    \solution
+
+    This is the solution.
+    \\
+
+    \part
+
+    Assume the following prior for \(\beta\): \(\beta_1, \ldots, \beta_p\), are
+    i.i.d. according to a Laplace distribution with mean zero and common scale
+    parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \left\| \beta \right\| / c \right)\).
+    \\
+
+    Write out the posterior for \(\beta\) in this setting. Argue that the LASSO
+    estimate is the mode for \(\beta\) i.e., the most likely value for
+    \(\beta\), under this posterior distribution. Determine the value for the
+    parameter \(\lambda\) in the LASSO cost function.
+    \\
+
+    \solution
+
+    Solution.
+
+\end{homeworkProblem}
+
+\end{document}
