@@ -158,6 +158,11 @@
     sample \(X\).
     \\
 
+    \solution
+
+    Solution.
+    \\
+
     \part
 
     Suppose you were interested in a \(100(1 - \alpha)\) (pointwise) confidence
@@ -174,5 +179,48 @@
 \end{homeworkProblem}
 
 \pagebreak
+
+\begin{homeworkProblem}
+    Using the Boston Housing data set (in the MASS library) complete the following.
+    \\
+
+    \part
+
+    Try out some of the regression methods explore in Chapter 6 of the
+    textbook. These include best subset selection, the lasso, ridge regression,
+    and PCR. Present and discuss results for the approaches that you consider.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Propose a model (or a set of models) that seem to perform well on this data
+    set, and justify your answer. Clearly explain what you will do.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Describe how you can efficiently solve the least squares linear system \(\) (i.e., by
+    not calculating an interverse) where \(\) has \(p\) linearly independent columns, \(\beta \in\)
+    and \(\)?
+    \\
+
+    \textit{Hint:} Think in terms of matrix decompositions (it's not SVD!). Use
+    Wikipedia.  \end{homeworkProblem}
+    \\
+
+    \solution
+
+    Solution.
 
 \end{document}
