@@ -98,6 +98,15 @@
 \begin{document}
 
 <<echo=FALSE, warning=FALSE, message=FALSE>>=
+library('MASS')
+
+<<>>
+# For Best Subset Selection
+library('leaps')
+
+<<>>
+# For Ridge Regression
+library('glmnet')
 @
 
 \maketitle
@@ -196,6 +205,37 @@
     \\
 
     \solution
+
+    \subsubsection{Best Subset Selection}
+
+<<>>=
+fit.full <- regsubsets(medv ~ ., Boston)
+summary(fit.full)
+@
+
+    \subsubsubsection{Forward Stepwise Selection}
+
+<<>>=
+fit.full <- regsubsets(medv ~ ., Boston, method="forward")
+summary(fit.full)
+@
+
+    \subsubsubsection{Backward Stepwise Selection}
+
+<<>>=
+fit.full <- regsubsets(medv ~ ., Boston, method="backward")
+summary(fit.full)
+@
+
+    \subsubsection{LASSO}
+
+    Solution.
+
+    \subsubsection{Ridge Regression}
+
+    Solution.
+
+    \subsubsection{PCR}
 
     Solution.
     \\
