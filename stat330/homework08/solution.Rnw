@@ -183,6 +183,7 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Queuing theory simulation problem. (To be added by March 25.)
 \end{homeworkProblem}
 
 \end{document}
