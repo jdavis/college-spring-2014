@@ -173,6 +173,53 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Suppose that the average number of telephone calls arriving at the switchboard
+    of a small corporation is 30 calls per hour. Assume that the arriving calls follows
+    a Poisson process.
+
+    \part
+
+    What is the probability that no calls will arrive in a 3-minute period?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    What is the probability that four or mroe calls will arrive in a 5-minute interval?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    What is the probability that one minute will pass before the next incoming call?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    If you need to go refill your coffee, which will take two minutes to do,
+    what is the probability you will have missed at most two calls during that
+    trip to the coffeemaker? (\textit{Hint}: find the probability that the third
+    incoming call occurs after two minutes.)
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
 \end{homeworkProblem}
 
 \pagebreak
