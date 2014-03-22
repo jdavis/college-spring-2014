@@ -110,7 +110,7 @@
         Y = \frac{S}{33} - 10.5
     \]
 
-    \part
+    \solution
 
     Determine the probability (using CLT) that:
 
@@ -142,6 +142,32 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    In Happyland, the weather each day is characterized by these three state:
+    let state 1=a sunny day, state 2=a cloudy day, and state 3=a rainy day.
+    \\
+
+    The weather from one day to the next has the following transition
+    probabilities:
+
+    \begin{enumerate}
+        \item If today is sunny, the probability that it is sunny tomorrow is
+            0.4 and the probability that it is rainy tomorrow is 0.2.
+        \item If today is cloudy, the probability that it is sunny tomorrow is
+            0.5 and equal probability that it is cloudy or rainy tomorrow.
+        \item If today is rainy, the probability that it is rainy again
+            tomorrow is 0.25, with no chance of it being sunny tomorrow.
+    \end{enumerate}
+
+    Use the concept of steady-state probabilities to get the probability of a rainy day
+    this time next year in Happyland. Your answer should be in the form of a fraction.
+    \\
+
+    You may check your work using a simluation, but it is not required.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
