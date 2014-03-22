@@ -225,6 +225,79 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    \textit{A university barbershop}. The campus barbershop has only one barber but
+    unlimited chairs waiting for customers. No matter how many customers are in the shop,
+    arriving customers always choose to wait.
+
+    \begin{enumerate}
+        \item The customers arrive according to a Poisson process. The average
+            time between arrivals is 30 minutes.
+        \item The lone barber completes servering a customer at a rate of \(x\)
+            per hour, where \(x\) is the number of customers in the barbershop.
+    \end{enumerate}
+
+    Assume that inter-arrival times and service times are independent
+    exponential random variables.
+    \\
+
+    \part
+
+    Draw a state diagram with possible states and corresponding birth/death rates. Since
+    there are an infinite number of states, show enough states to show the pattern or arrival
+    and service rates.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    What is the (large t) probability that the shop is empty? (Note: \(e^x =
+    \sum\limits_{k = 0}^{\infty} \frac{x^k}{k!})\))
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Let \(X\) be the number of customers in the store. Determine the "large t"
+    probability function for the different states of \(X\). What probability
+    distribution is this, and what is the value of the parameter in that
+    distribution?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    What is the "large t" probability that a customer arrives when the
+    barbershop has more than two persons waiting?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    What is the expected number of customers in the barbershop at any time (for
+    "large t" time)?  \textit{Hint:} Use the properties of the known
+    probability distribution.
+    \\
+
+    \solution
+
+    Solution.
+
 \end{homeworkProblem}
 
 \pagebreak
