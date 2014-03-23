@@ -167,7 +167,96 @@
 
     \solution
 
-    Solution.
+    Using the information, we can get the following transition probability
+    matrix:
+    \[
+        P = \begin{pmatrix}
+            0.4 & 0.4 & 0.2
+            \\
+            0.5 & 0.25 & 0.25
+            \\
+            0 & 0.75 & 0.25
+        \end{pmatrix}
+    \]
+
+    Using the fact that \(\pi P = \pi\), we want to do the following:
+    \[
+            (\pi_1, \pi_2, \pi_3)
+            = (\pi_1, \pi_2, \pi_3)
+            \begin{pmatrix}
+                0.4 & 0.4 & 0.2
+                \\
+                0.5 & 0.25 & 0.25
+                \\
+                0 & 0.75 & 0.25
+            \end{pmatrix}
+            = (0.4\pi_1 + 0.5\pi_2 + 0\pi_3, 0.4\pi_1 + 0.25\pi_2 + 0.75\pi_3, 0.2\pi_1 + 0.25\pi_2 + 0.25\pi_3)
+    \]
+
+    This gives us the equations:
+    \[
+        \left\{
+        \begin{split}
+                0.5\pi_2 &= 0.6\pi_1
+                \\
+                0.4\pi_1 + 0.75\pi_3 &= 0.75\pi_2
+                \\
+                0.2\pi_1 + 0.25\pi_2 &= 0.75\pi_3
+                \\
+                \pi_1 + \pi_2 + \pi_3 &= 1
+        \end{split}
+        \right.
+    \]
+
+    Using algebra to solve the equations, this gives us the steady state
+    probabilities of:
+    \[
+        \pi_1 = 0.3488, \quad \pi_2 = 0.4186, \quad \pi_3 = 0.2326
+    \]
+
+    Thus the probability of a rainy day (state 3) this time next year in happy
+    land is 0.2326.
+    \\
+
+    \pagebreak
+
+    \subsection{Simulation}
+
+    Let's verify this with a simluation function in R below:
+
+<<>>=
+val <- c(0.4, 0.5, 0,
+         0.4, 0.25, 0.75,
+         0.2, 0.25, 0.25
+         )
+
+happyland <- function (K) {
+    P <- matrix(val, nrow=3, ncol=3)
+
+    print(P)
+
+    # 2. enter starting state probabilities
+    pr <- c(0.4, 0.4, 0.2)
+
+    for (k in 1:K){
+        pr <- pr %*% P
+
+        if (k == K){
+            print('The state probabilities (1=sunny day, 2=cloudy day, 3=rainy day')
+            print(sprintf('after %i days are:', k))
+            print(pr)
+            return(pr)
+        }
+    }
+}
+@
+
+    We want a year from today, so this gives:
+<<>>=
+# 365 days later
+happyland(356)
+@
+
 \end{homeworkProblem}
 
 \pagebreak
