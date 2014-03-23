@@ -262,9 +262,11 @@ happyland(356)
 \pagebreak
 
 \begin{homeworkProblem}
-    Suppose that the average number of telephone calls arriving at the switchboard
-    of a small corporation is 30 calls per hour. Assume that the arriving calls follows
-    a Poisson process.
+    Suppose that the average number of telephone calls arriving at the
+    switchboard of a small corporation is 30 calls per hour or \(\lambda =
+    30\text{ hour}^{-1}\) or \(\lambda = 0.5 \text{ min}^{-1}\). Assume that
+    the arriving calls follows a Poisson process.
+    \\
 
     \part
 
@@ -273,22 +275,63 @@ happyland(356)
 
     \solution
 
-    Solution.
-    \\
+    Let \(T = \text{time until the first occurrence}\). We know that \(T
+    \dist{Exp}(\lambda)\) and want to the probability that no calls arrive in a
+    3-minute period or when \(\Pr(T \geq 3)\). This gives us \(T
+    \dist{Exp}(0.5)\) where the cdf is \(F(x) = 1 - e^{-\lambda x}\).
+    \[
+        \begin{split}
+            P(T \geq 3) &= 1 - P(T < 3)
+            \\
+            &= 1 - (1 - e^{-0.5 \cdot 3})
+            \\
+            &= e^{-1.5}
+            \\
+            &\approx 0.2231
+        \end{split}
+    \]
 
     \part
 
-    What is the probability that four or mroe calls will arrive in a 5-minute interval?
+    What is the probability that four or more calls will arrive in a 5-minute
+    interval?
     \\
 
     \solution
 
-    Solution.
-    \\
+    Let \(X = \text{\# occurrences in time } t\). We know that \(X
+    \dist{Poisson}(\lambda t)\) and \(t = 5\). We want to the probability that
+    four or more calls arrive in a 5-minute period or when \(\Pr(X \geq 5)\).
+    This gives us \(X \dist{Poisson}(0.5 \cdot 5)\) where the pdf is \(P(x) =
+    e^{-\lambda}\frac{\lambda^x}{x!}\) this gives us:
+    \[
+        \begin{split}
+            \Pr[X \geq 5]
+            &= 1 - \Pr[X < 5]
+            \\
+            &= 1
+            - \Pr[X = 0]
+            - \Pr[X = 1]
+            - \Pr[X = 2]
+            - \Pr[X = 3]
+            - \Pr[X = 4]
+            \\
+            &\approx 1
+            - 0.082
+            - 0.205
+            - 0.257
+            - 0.213
+            - 0.134
+            \quad \mbox{using the above formula}
+            \\
+            &\approx 0.109
+        \end{split}
+    \]
 
     \part
 
-    What is the probability that one minute will pass before the next incoming call?
+    What is the probability that one minute will pass before the next incoming
+    call?
     \\
 
     \solution
