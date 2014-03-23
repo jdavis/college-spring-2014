@@ -7,6 +7,9 @@
 \usepackage{amsfonts}
 \usepackage{enumerate}
 
+\usepackage{tikz}
+\usetikzlibrary{automata,positioning}
+
 \topmargin=-0.45in
 \evensidemargin=0in
 \oddsidemargin=0in
@@ -395,7 +398,7 @@ happyland(356)
 
     \begin{enumerate}
         \item The customers arrive according to a Poisson process. The average
-            time between arrivals is 30 minutes.
+            time between arrivals is 30 minutes, or \(\lambda = \frac{1}{2}\).
         \item The lone barber completes servering a customer at a rate of \(x\)
             per hour, where \(x\) is the number of customers in the barbershop.
     \end{enumerate}
@@ -406,20 +409,48 @@ happyland(356)
 
     \part
 
-    Draw a state diagram with possible states and corresponding birth/death rates. Since
-    there are an infinite number of states, show enough states to show the pattern or arrival
-    and service rates.
+    Draw a state diagram with possible states and corresponding birth/death
+    rates. Since there are an infinite number of states, show enough states to
+    show the pattern or arrival and service rates.
     \\
 
     \solution
 
-    Solution.
-    \\
+    \begin{figure}[here]
+        \centering
+        \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+            \node[state, initial] (q_0)   {$q_0$};
+            \node[state] (q_1) [right=of q_0] {$q_1$};
+            \node[state] (q_2) [right=of q_1] {$q_2$};
+            \node[state] (q_3) [right=of q_2] {$q_3$};
+            \node[state] (q_4) [right=of q_3] {$q_4$};
+            \node[state, draw=white] (invis) [right of=q_4] {$\cdots$};
+            \path[->]
+                (q_0)
+                    edge [bend right=-30] node {$\lambda$} (q_1)
+                (q_1)
+                    edge [bend right=-30] node {$\lambda$} (q_2)
+                    edge [bend left] node {$\mu_1 = 1$} (q_0)
+                (q_2)
+                    edge [bend right=-30] node {$\lambda$} (q_3)
+                    edge [bend left] node {$\mu_2 = 2$} (q_1)
+                (q_3)
+                    edge [bend right=-30] node {$\lambda$} (q_4)
+                    edge [bend left] node {$\mu_3 = 3$} (q_2)
+                (q_4)
+                    edge [bend left] node {$\mu_4 = 4$} (q_3)
+                    edge [bend right=-30] node {$\cdots$} (invis)
+                (invis)
+                    edge [bend left] node {$\cdots$} (q_4);
+        \end{tikzpicture}
+        \caption{State Diagram for a Barbershop}
+        \label{fig:fig1}
+    \end{figure}
 
     \part
 
     What is the (large t) probability that the shop is empty? (Note: \(e^x =
-    \sum\limits_{k = 0}^{\infty} \frac{x^k}{k!})\))
+    \sum\limits_{k = 0}^{\infty} \frac{x^k}{k!}\))
     \\
 
     \solution
@@ -429,10 +460,10 @@ happyland(356)
 
     \part
 
-    Let \(X\) be the number of customers in the store. Determine the "large t"
-    probability function for the different states of \(X\). What probability
-    distribution is this, and what is the value of the parameter in that
-    distribution?
+    Let \(X\) be the number of customers in the store. Determine the ``large
+    t'' probability function for the different states of \(X\). What
+    probability distribution is this, and what is the value of the parameter in
+    that distribution?
     \\
 
     \solution
@@ -442,7 +473,7 @@ happyland(356)
 
     \part
 
-    What is the "large t" probability that a customer arrives when the
+    What is the ``large t'' probability that a customer arrives when the
     barbershop has more than two persons waiting?
     \\
 
@@ -454,7 +485,7 @@ happyland(356)
     \part
 
     What is the expected number of customers in the barbershop at any time (for
-    "large t" time)?  \textit{Hint:} Use the properties of the known
+    ``large t'' time)?  \textit{Hint:} Use the properties of the known
     probability distribution.
     \\
 
