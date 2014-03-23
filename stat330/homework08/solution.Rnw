@@ -103,21 +103,53 @@
     of \(\frac{b^2 - 1}{12}\).
     \\
 
-    Suppose you roll this die 33 times. Let \(S\) be the sum of these 33 roled
-    values and let \(Y\) be the random variable that represents the mean of
-    these 33 values minus the overal mean of 10.5:
+    Suppose you roll this die 33 times, \(n = 33\). Let \(S\) be the sum of
+    these 33 roled values and let \(Y\) be the random variable that represents
+    the mean of these 33 values minus the overall mean of 10.5:
     \[
         Y = \frac{S}{33} - 10.5
     \]
 
     \solution
 
-    Determine the probability (using CLT) that:
+    Given the information, we know we can determine probabilities using the
+    Central Limit Theorem. CLT states that \(Z_n = \frac{S - n\mu}{\sigma
+    \sqrt{n}}\). This gives us:
+    \[
+        Y = \frac{S}{33} - 10.5 = \frac{S - 10.5n}{33} = \frac{S - 10.5n}{5.744\sqrt{n}}
+    \]
 
-    \begin{enumerate}[(a)]
-        \item \(Y\) is less than -0.5
-        \item \(Y\) is less than -2.5
-    \end{enumerate}
+    where \(n = 33\), \(\mu = 10.5\) and \(\sigma = 5.744\).
+    \\
+
+    \part
+
+    Determine the \(\Pr\{Y < -0.5\}\):
+    \[
+        \Pr\{Y < -0.5\}
+        = \Pr \left\{
+        \frac{
+            S_n - n \mu
+        }{
+            \sigma \sqrt{n}
+        }
+        \leq
+        \frac{
+            -0.5 - 33 (10.5)
+        }{
+            5.744 \sqrt{33}
+        }
+        \right\}
+        = \Pr \{ z < -0.5\}
+        = \Phi(-0.5)
+        = 0.0000
+    \]
+
+    \part
+
+    Determine the \(\Pr\{Y < -2.5\}\):
+
+    \part
 
     Let \(Z\) be a standard normal random variable, determine the probability
     that:
