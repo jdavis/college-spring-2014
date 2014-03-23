@@ -100,11 +100,9 @@
 <<echo=FALSE, warning=FALSE, message=FALSE>>=
 library('MASS')
 
-<<>>
 # For Best Subset Selection
 library('leaps')
 
-<<>>
 # For Ridge Regression
 library('glmnet')
 @
@@ -114,7 +112,6 @@ library('glmnet')
 \pagebreak
 
 \begin{homeworkProblem}
-
     Suppose that \(Y_i = \beta_0 + \sum_{j = 1}^p x_{ij} \beta_j + e_i\) where
     \(e_1, \ldots, e_n\) are i.i.d. distributed from a \(\N(0, \sigma^2_e)\).
     \\
@@ -153,6 +150,7 @@ library('glmnet')
 
 \begin{homeworkProblem}
     Suppose we estimate some statistics (e.g. median) based on a sample \(X\).
+    \\
 
     \part
 
@@ -213,14 +211,14 @@ fit.full <- regsubsets(medv ~ ., Boston)
 summary(fit.full)
 @
 
-    \subsubsubsection{Forward Stepwise Selection}
+    \subsubsection{Forward Stepwise Selection}
 
 <<>>=
 fit.full <- regsubsets(medv ~ ., Boston, method="forward")
 summary(fit.full)
 @
 
-    \subsubsubsection{Backward Stepwise Selection}
+    \subsubsection{Backward Stepwise Selection}
 
 <<>>=
 fit.full <- regsubsets(medv ~ ., Boston, method="backward")
