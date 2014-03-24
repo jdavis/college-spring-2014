@@ -105,6 +105,9 @@ library('leaps')
 
 # For Ridge Regression
 library('glmnet')
+
+# For Bootstrapping
+library(boot)
 @
 
 \maketitle
@@ -183,44 +186,75 @@ library('glmnet')
 # Load data & sample
 lawstat <- read.table("lawstat.dat")
 
-# Remove NAs from data
-lawstat <- na.omit(lawstat)
-
 # Sample obvseration indices
 s <- c(4,6,13,15,31,35,36,45,47,50,52,53,70,79,82)
-
-# Bootstrap 4k times
-B <- 4000
-boot <- rep(0, B)
 
 # Given data of 15 observations
 X <- lawstat[s,]
 L <- length(X$GPA)
 
-# Median of our sample, X
-median(X$GPA)
 
-# I choose you, Bootstrap!
-for (i in 1:B) {
-    obs <- round(L * runif(L, 0, 1))
-    sample <- X[obs,]
-    boot[i] <- median(sample$GPA)
+#
+# Manual Bootstrap
+#
+
+# Bootstrap 4k times
+B <- 4000
+
+boot.custom <- function() {
+    results <- rep(0, B)
+
+    # Median of our sample, X
+    median(X$GPA)
+
+    # I choose you, Bootstrap!
+    for (i in 1:B) {
+        obs <- round(L * runif(L, 0, 1))
+        sample <- X[obs,]
+        results[i] <- median(sample$GPA)
+    }
+
+    sd(results)
 }
 
-# Calculated std of median
-sd(boot)
+boot.actual <- function () {
+    # Calculate the actual value
+    actual <- rep(0, B)
+    L <- length(lawstat$GPA)
 
-actual <- rep(0, B)
-L <- length(lawstat$GPA)
+    for (i in 1:B) {
+        obs <- round(L * runif(L, 0, 1))
+        sample <- lawstat[obs,]
+        actual[i] <- median(sample$GPA)
+    }
 
-for (i in 1:B) {
-    obs <- round(L * runif(L, 0, 1))
-    sample <- lawstat[obs,]
-    actual[i] <- median(sample$GPA)
+    # Calculated vs actual
+    sd(actual)
 }
 
-# Actual std of the median of the data
-sd(actual)
+#
+# Using Boot Library
+#
+
+boot.median <- function () {
+    boot.fn <- function (data, indices) {
+        sample <- X[indices,]
+        result <- median(sample$GPA)
+        return(result)
+    }
+
+    results <- boot(data = X, statistic = boot.fn, R = B)
+    results
+}
+
+# Show calculated
+boot.custom()
+
+# Show actual
+boot.actual()
+
+# Show calcualted vs actual using boot library
+boot.median()
 @
     \part
 
