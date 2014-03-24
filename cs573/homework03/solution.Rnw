@@ -160,7 +160,15 @@ library('glmnet')
 
     \solution
 
-    Solution.
+    This is the perfect situation in which we could leverage the bootstrap.
+    The way we'd do this, is that we know we have a sample, \(X\). If we
+    randomly sample some \(B\) number of elements \textit{with replacement},
+    then we can determine a good estimate for a statistic of the population.
+    \\
+
+    Since we want to calculate the median of \(X\), we know that the median is
+    given as \(\Pr[X < M] < 0.5\) and \(\Pr[X > M] > 0.5\). This is the value
+    in which there is equal probability of being above and below it.
     \\
 
     \part
@@ -171,9 +179,49 @@ library('glmnet')
 
     \solution
 
-    Solution.
-    \\
+<<>>=
+# Load data & sample
+lawstat <- read.table("lawstat.dat")
 
+# Remove NAs from data
+lawstat <- na.omit(lawstat)
+
+# Sample obvseration indices
+s <- c(4,6,13,15,31,35,36,45,47,50,52,53,70,79,82)
+
+# Bootstrap 4k times
+B <- 4000
+boot <- rep(0, B)
+
+# Given data of 15 observations
+X <- lawstat[s,]
+L <- length(X$GPA)
+
+# Median of our sample, X
+median(X$GPA)
+
+# I choose you, Bootstrap!
+for (i in 1:B) {
+    obs <- round(L * runif(L, 0, 1))
+    sample <- X[obs,]
+    boot[i] <- median(sample$GPA)
+}
+
+# Calculated std of median
+sd(boot)
+
+actual <- rep(0, B)
+L <- length(lawstat$GPA)
+
+for (i in 1:B) {
+    obs <- round(L * runif(L, 0, 1))
+    sample <- lawstat[obs,]
+    actual[i] <- median(sample$GPA)
+}
+
+# Actual std of the median of the data
+sd(actual)
+@
     \part
 
     Suppose you were interested in a \(100(1 - \alpha)\) (pointwise) confidence
@@ -181,7 +229,7 @@ library('glmnet')
     (the joint distribution of \(X\) and \(Y\) is not bivariate normal).
     Clearly explain and derive how you would do this? Write R code that
     calculates the 95\% confidence interval for the correlation coefficient in
-    case of the lawstate.dat data.
+    case of the lawstat.dat data.
     \\
 
     \solution
