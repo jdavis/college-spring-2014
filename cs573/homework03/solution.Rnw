@@ -86,6 +86,7 @@
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\N}{\mathcal{N}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Likelihood}{\mathcal{L}}
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
@@ -127,8 +128,19 @@ library(boot)
 
     \solution
 
-    This is the solution.
+    Often it is useful to calculate the statistical parameters, \(\theta\), of
+    a model. However this can be hard to do given data from the model, \(X\).
+    Written out, the probability of getting the data we got using the
+    parameters given the data or \(\Pr[X \mid \theta]\).
     \\
+
+    The idea behind the likelihood is that we want to determine the probability
+    in the reverse and think about given the data that we got, what is most
+    likely the values of the parameters, or \(\Likelihood(\theta \mid X)\). Putting this
+    together we get:
+    \[
+        \Likelihood(\theta \mid X) = P(X \mid \theta)
+    \]
 
     \part
 
@@ -240,7 +252,7 @@ boot.median <- function () {
     boot.fn <- function (data, indices) {
         sample <- X[indices,]
         result <- median(sample$GPA)
-        return(result)
+        result
     }
 
     results <- boot(data = X, statistic = boot.fn, R = B)
