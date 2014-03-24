@@ -142,6 +142,8 @@ library(boot)
         \Likelihood(\theta \mid X) = P(X \mid \theta)
     \]
 
+    Given that we know these i.i.d. which means we can
+
     \part
 
     Assume the following prior for \(\beta\): \(\beta_1, \ldots, \beta_p\), are
