@@ -159,7 +159,7 @@ library(boot)
 
     \solution
 
-    Solution.
+    pg. 226
 
 \end{homeworkProblem}
 
