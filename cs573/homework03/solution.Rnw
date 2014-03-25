@@ -116,6 +116,9 @@ library(boot)
 \pagebreak
 
 \begin{homeworkProblem}
+    From ISLR: Chapter 6, Problem 7.
+    \\
+
     Suppose that \(Y_i = \beta_0 + \sum_{j = 1}^p x_{ij} \beta_j + e_i\) where
     \(e_1, \ldots, e_n\) are i.i.d. distributed from a \(\N(0, \sigma^2_e)\).
     \\
@@ -136,8 +139,8 @@ library(boot)
 
     The idea behind the likelihood is that we want to determine the probability
     in the reverse and think about given the data that we got, what is most
-    likely the values of the parameters, or \(\Likelihood(\theta \mid X)\). Putting this
-    together we get:
+    likely the values of the parameters, or \(\Likelihood(\theta \mid X)\).
+    Putting this together we get:
     \[
         \Likelihood(\theta \mid X) = P(X \mid \theta)
     \]
@@ -148,7 +151,8 @@ library(boot)
 
     Assume the following prior for \(\beta\): \(\beta_1, \ldots, \beta_p\), are
     i.i.d. according to a Laplace distribution with mean zero and common scale
-    parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \left\| \beta \right\| / c \right)\).
+    parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \left\| \beta
+    \right\| / c \right)\).
     \\
 
     Write out the posterior for \(\beta\) in this setting. Argue that the LASSO
