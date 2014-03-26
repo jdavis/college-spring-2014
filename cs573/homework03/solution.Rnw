@@ -292,6 +292,9 @@ boot.median()
 \pagebreak
 
 \begin{homeworkProblem}
+    From ISLR: Chapter 6, Problem 11.
+    \\
+
     Using the Boston Housing data set (in the MASS library) complete the following.
     \\
 
