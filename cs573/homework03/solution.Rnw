@@ -295,7 +295,8 @@ boot.median()
     From ISLR: Chapter 6, Problem 11.
     \\
 
-    Using the Boston Housing data set (in the MASS library) complete the following.
+    Using the Boston Housing data set (in the MASS library) complete the
+    following.
     \\
 
     \part
@@ -307,25 +308,132 @@ boot.median()
 
     \solution
 
+<<>>=
+#
+# First, some helper functions.
+#
+
+# Show the subset summary plots
+subset.basic.summary <- function (data) {
+    data.summary <- summary(data)
+
+    #
+    # Basic Line Plots
+    #
+
+    par(mfrow = c(2, 2))
+
+    # RSS
+    plot(data.summary$rss,
+         type = "l",
+         xlab = "# of Variables",
+         ylab = "Residual Sum of Squares")
+
+    # Adj R2
+    plot(data.summary$adjr2,
+         type = "l",
+         xlab = "# of Variables",
+         ylab = "Adjusted RSquared")
+
+    # Show the model with the largest AdjR2
+    p <- which.max(data.summary$adjr2)
+    points(p, data.summary$adjr2[p],
+           col = "red",
+           cex = 2,
+           pch = 20)
+
+    # C_p
+    plot(data.summary$cp,
+         type = "l",
+         xlab = "# of Variables",
+         ylab = "Cp")
+
+    # Show the model with the smallest C_p
+    p <- which.min(data.summary$cp)
+    points(p, data.summary$cp[p],
+           col = "red",
+           cex = 2,
+           pch = 20)
+
+    # BIC
+    plot(data.summary$bic,
+         type = "l",
+         xlab = "# of Variables",
+         ylab = "BIC")
+
+    # Show the model with the smallest C_p
+    p <- which.min(data.summary$bic)
+    points(p, data.summary$bic[p],
+           col = "red",
+           cex = 2,
+           pch = 20)
+}
+
+# Different Kind of Plot
+subset.summary <- function (data) {
+    data.summary <- summary(data)
+
+    # Plot using the regsubsets() plots
+    par(mfrow = c(2, 2))
+
+    # RSS
+    plot(data, scale = "r2")
+    plot(data, scale = "adjr2")
+    plot(data, scale = "Cp")
+    plot(data, scale = "bic")
+}
+@
+
+\pagebreak
+
     \subsubsection{Best Subset Selection}
 
 <<>>=
+# Calculate the best subset
 fit.full <- regsubsets(medv ~ ., Boston)
-summary(fit.full)
 @
+
+<<p3a, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
+# Show the summary information/plots for it
+subset.basic.summary(fit.full)
+@
+
+<<p3b, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
+subset.summary(fit.full)
+@
+
+\pagebreak
 
     \subsubsection{Forward Stepwise Selection}
 
 <<>>=
-fit.full <- regsubsets(medv ~ ., Boston, method="forward")
-summary(fit.full)
+fit.forward <- regsubsets(medv ~ ., Boston, method="forward")
 @
+
+<<p3c, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
+# Show the summary information/plots for it
+subset.basic.summary(fit.forward)
+@
+
+<<p3d, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
+subset.summary(fit.forward)
+@
+
+\pagebreak
 
     \subsubsection{Backward Stepwise Selection}
 
 <<>>=
-fit.full <- regsubsets(medv ~ ., Boston, method="backward")
-summary(fit.full)
+fit.back <- regsubsets(medv ~ ., Boston, method="backward")
+@
+
+<<p3e, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
+# Show the summary information/plots for it
+subset.basic.summary(fit.back)
+@
+
+<<p3f, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
+subset.summary(fit.back)
 @
 
     \subsubsection{LASSO}
