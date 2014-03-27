@@ -131,10 +131,25 @@ library(boot)
 
     \solution
 
+    First let's remind ourselves what the ordinary least squares solution is. It
+    is the set of coefficients that minimize the residual sum of squares, or:
+    \[
+        \text{RSS} = \sum_{i = 1}^{n} (Y_i - \hat{Y_i})^2
+    \]
+
+    where \(\hat{Y_i} = \hat{\beta_0} + \hat{\beta_1} x_{i1} + \cdots +
+    \hat{\beta_p} x_{ip}\), our model.
+    \\
+
+    To show that the maximum likelihood is equal to the least squares solution
+    when the error is distributed from a normal, let's look at what maximum
+    likelihood means.
+    \\
+
     Often it is useful to calculate the statistical parameters, \(\theta\), of
     a model. However this can be hard to do given data from the model, \(X\).
     Written out, the probability of getting the data we got using the
-    parameters given the data or \(\Pr[X \mid \theta]\).
+    parameters given the data or \(\Pr[\beta \mid \theta]\).
     \\
 
     The idea behind the likelihood is that we want to determine the probability
@@ -142,10 +157,175 @@ library(boot)
     likely the values of the parameters, or \(\Likelihood(\theta \mid X)\).
     Putting this together we get:
     \[
-        \Likelihood(\theta \mid X) = P(X \mid \theta)
+        \Likelihood(\theta \mid \beta_1, \ldots, \beta_n)
+        = P(\beta_1, \ldots, \beta_n \mid \theta)
     \]
 
-    Given that we know these i.i.d. which means we can
+    Given that we know these i.i.d. which means we can that our joint
+    probability is just equal to product of the probabilities, thus we get:
+    \\
+    \[
+        \begin{split}
+            \Likelihood(\theta \mid \beta_1, \ldots, \beta_n)
+            &= P(\beta_1 \mid \theta)
+            \times \cdots
+            \times P(\beta_n \mid \theta)
+            \\
+            &= \prod_{i = 1}^{n}
+            P(\beta_i \mid \theta)
+        \end{split}
+    \]
+
+    Since we know that \(e_i \dist{\N}(0, \sigma^2_e)\) and that \(e_i = Y_i -
+    \hat{Y_i}\), we can use the Normal distribution probability density
+    function which gives us:
+    \[
+        \begin{split}
+            \Likelihood(\theta \mid \beta_1, \ldots, \beta_n )
+            &= \prod_{i = 1}^{n}
+            \frac{
+                1
+            }{
+                \sigma \sqrt{2\pi}
+            }
+            \exp
+            \left(-
+                \frac{
+                    (Y_i - \hat{Y_i})^2
+                }{
+                    2\sigma^2
+                }
+            \right)
+            \\
+            &= \left(
+                    \frac{
+                        1
+                    }{
+                        \sigma \sqrt{2\pi}
+                    }
+                \right)^n
+                \prod_{i = 1}^{n}
+                \exp
+                \left(
+                    - \frac{
+                        (Y_i - \hat{Y_i})^2
+                    }{
+                        2\sigma^2
+                    }
+                \right)
+        \end{split}
+    \]
+
+    To simplify the expression, we can take the log of each side. This gives us
+    an expression that is easier to work with and we get:
+    \[
+        \begin{split}
+            \log \Likelihood(\theta \mid \beta_1, \ldots, \beta_n)
+            &= \log
+            \left[
+                \left(
+                    \frac{
+                        1
+                    }{
+                        \sigma \sqrt{2\pi}
+                    }
+                \right)^n
+                \prod_{i = 1}^{n}
+                \exp
+                \left(-
+                    \frac{
+                        (Y_i - \hat{Y_i})^2
+                    }{
+                        2\sigma^2
+                    }
+                \right)
+            \right]
+            \\
+            &= n \log
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)
+            + \sum_{i = 1}^{n}
+            \log
+            \left(
+                \exp
+                \left(
+                    - \frac{
+                        (Y_i - \hat{Y_i})^2
+                    }{
+                        2\sigma^2
+                    }
+                \right)
+            \right)
+            \\
+            &= n \log
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)
+            + \sum_{i = 1}^{n}
+            \left(
+                - \frac{
+                     (Y_i - \hat{Y_i})^2
+                }{
+                    2\sigma^2
+                }
+            \right)
+            \\
+            &= n \log
+                \left(
+                    \frac{
+                        1
+                    }{
+                        \sigma \sqrt{2\pi}
+                    }
+                \right)
+            - \frac{1}{2\sigma^2}
+            \sum_{i = 1}^{n} (Y_i - \hat{Y_i})^2
+        \end{split}
+    \]
+
+    Now since we are looking to maximize our Likelihood, or \(\Likelihood\), we
+    get the following:
+    \[
+        \begin{split}
+            \log
+            \Likelihood(\theta \mid \beta_1, \ldots, \beta_n)
+            &= n \log
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)
+            - \frac{
+                1
+            }{
+                2\sigma^2
+            }
+            \sum_{i = 1}^{n} (Y_i - \hat{Y_i})^2
+        \end{split}
+    \]
+
+    We can see that the second term is negative, thus in order to maximize \(\Likelihood\),
+    we want to minimize the second term. If we remove the constant, we then want to minimize:
+    \[
+        \sum_{i = 1}^n (Y_i - \hat{Y_i})^2
+    \]
+
+    Well, this is nice because this is our old friend, RSS, from the beginning
+    of this problem. The RSS is what the ordinary least squares aims to
+    minimize. Thus we can see that when our errors, \(e_i\), are from a Normal
+    distribution, the maximum likelihood is the same as ordinary least squares.
+    \\
 
     \part
 
