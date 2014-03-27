@@ -8,6 +8,9 @@
 \usepackage{subcaption}
 \usepackage{float}
 
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+
 \topmargin=-0.45in
 \evensidemargin=0in
 \oddsidemargin=0in
@@ -653,6 +656,10 @@ subset.summary(fit.back)
 
 \pagebreak
 
+\newcommand{\A}{{\bold A}}
+\newcommand{\Left}{{\bold L}}
+\newcommand{\Right}{{\bold R}}
+
 \begin{homeworkProblem}
     Describe how you can efficiently solve the least squares linear system
     \((\X^T \X)\beta = \X^T \Y\) (i.e., by not calculating an interverse) where
@@ -666,7 +673,34 @@ subset.summary(fit.back)
 
     \solution
 
-    Solution.
+    To improve upon the previous ways of solving the least squares linear
+    system, we can use a more advanced decomposition to handle this. There are
+    primarily two ways that are used. The first is called the Cholesky
+    decomposition that works the fastest out of two. The second is using QR
+    decomposition which is slower than Cholseky but is more numerically stable
+    than Cholesky.
+    \\
+
+    We'll show the Cholesky below which goes like this:
+    \begin{enumerate}
+        \item Calculate and let \(A = \X^T \X\).
+        \item Determine the Cholesky factorization for \(A\), let this
+            equal \(\Left \Right^T\).
+        \item Now on the right side, calculate \(b = \X^T \Y\).
+        \item Then solve \(\Left z = b\) by forward substitution
+        \item Then solve \(\Right^T \beta = z\) by back substitution.
+    \end{enumerate}
+
+    Forward/back substitution is an interative process for lower/upper triangular matrices.
+    While the link to the details can be read about below, I won't solve it here. Hopefully
+    that isn't required as the question says to ``Describe'' and not to show/solve.
+
+    \subsubsection{Reference}
+
+    \begin{enumerate}
+        \item Explanation of the forward/back substitution techniques for matrices:
+            \url{http://en.wikipedia.org/wiki/Triangular_matrix#Forward_and_back_substitution}
+    \end{enumerate}
 \end{homeworkProblem}
 
 \end{document}
