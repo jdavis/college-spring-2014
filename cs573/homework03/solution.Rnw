@@ -192,6 +192,10 @@ library(boot)
     in which there is equal probability of being above and below it.
     \\
 
+    \begin{figure}[H]
+        \includegraphics[width=\maxwidth]{bootstrap} \caption[Illustration of the Bootstrap]{Illustration of the Bootstrap.\label{fig:p2a}}
+    \end{figure}
+
     \part
 
     Write R code that calculates the standard deviation of the median given a
