@@ -363,18 +363,23 @@ library(boot)
 
     This is the perfect situation in which we could leverage the bootstrap.
     The way we'd do this, is that we know we have a sample, \(X\). If we
-    randomly sample some \(B\) number of elements \textit{with replacement},
-    then we can determine a good estimate for a statistic of the population.
+    randomly sample some \(B\) number of elements \textit{with replacement}
+    from \(X\) again, then we can determine a good estimate for a statistic of
+    the population if we iterate this a few thousand times. An illustration of
+    this is below where the median is calculated on each sample and where there
+    are \(B\) samples.
     \\
+
+    \begin{figure}[H]
+        \includegraphics[width=\maxwidth]{bootstrap.pdf}
+        \caption[Illustration of the Bootstrap]{Illustration of the Bootstrap.\label{fig:p2a}}
+    \end{figure}
+
 
     Since we want to calculate the median of \(X\), we know that the median is
     given as \(\Pr[X < M] < 0.5\) and \(\Pr[X > M] > 0.5\). This is the value
     in which there is equal probability of being above and below it.
     \\
-
-    \begin{figure}[H]
-        \includegraphics[width=\maxwidth]{bootstrap} \caption[Illustration of the Bootstrap]{Illustration of the Bootstrap.\label{fig:p2a}}
-    \end{figure}
 
     \part
 
@@ -405,9 +410,6 @@ B <- 4000
 
 boot.custom <- function() {
     results <- rep(0, B)
-
-    # Median of our sample, X
-    median(X$GPA)
 
     # I choose you, Bootstrap!
     for (i in 1:B) {
@@ -441,13 +443,18 @@ boot.actual <- function () {
 boot.median <- function () {
     boot.fn <- function (data, indices) {
         sample <- X[indices,]
-        result <- median(sample$GPA)
-        result
+        median(sample$GPA)
     }
 
     results <- boot(data = X, statistic = boot.fn, R = B)
-    results
+
+    # Calculate the median from the results
+    sd(results$t[,1])
 }
+
+#
+# Results of using the above functions
+#
 
 # Show calculated
 boot.custom()
