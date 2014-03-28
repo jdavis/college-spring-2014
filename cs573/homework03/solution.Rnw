@@ -506,7 +506,33 @@ boot.median()
 
     \solution
 
+<<eval=FALSE>>=
+library('leaps')
+library('glmnet')
+@
+
 <<>>=
+#
+# Inital setup
+#
+
+# Ensure consistent values
+set.seed(1)
+
+# Grab X and Ys
+x <- model.matrix(medv ~ ., Boston)[,-1]
+y <- Boston$medv
+
+# Test/Train
+train <- sample(1:nrow(x), nrow(x) / 2)
+test <- (-train)
+
+x.train <- x[train,]
+y.train <- y[train]
+
+x.test <- x[test,]
+y.test <- y[test]
+
 #
 # First, some helper functions.
 #
