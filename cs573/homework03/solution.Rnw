@@ -368,25 +368,30 @@ library('pls')
 
     \solution
 
-    This is the perfect situation in which we could leverage the bootstrap.
-    The way we'd do this, is that we know we have a sample, \(X\). If we
-    randomly sample some \(B\) number of elements \textit{with replacement}
-    from \(X\) again, then we can determine a good estimate for a statistic of
-    the population if we iterate this a few thousand times. An illustration of
-    this is below where the median is calculated on each sample and where there
-    are \(B\) samples.
+    We want to determine the standard deviation of the median. We know that this
+    median is of the population yet we only have a sample, \(X\). This looks
+    like a perfect situation where we can use the Bootstrap.
     \\
+
+    The Bootstrap works by taking some number of elements from our sample
+    \textit{with replacement}. The replacement part is important because if it
+    was not with replacement, we'd be introducing more variance. We do this
+    re-sampling a large number of times and let this number equal \(B\). This value
+    of \(B\) works best when it is in the thousands.
+    \\
+
+    Each time we pull out a new re-sampling of our original sample, \(X\), we calculate
+    the median of this sample. We store this and then continue on until we are done
+    with all \(B\) re-sampling. At this point, we can then calculate our standard
+    deviation. And we hope that it will be close to the true value.
+    \\
+
+    A figure of this process is below:
 
     \begin{figure}[H]
         \includegraphics[width=\maxwidth]{bootstrap.pdf}
         \caption[Illustration of the Bootstrap]{Illustration of the Bootstrap.\label{fig:p2a}}
     \end{figure}
-
-
-    Since we want to calculate the median of \(X\), we know that the median is
-    given as \(\Pr[X < M] < 0.5\) and \(\Pr[X > M] > 0.5\). This is the value
-    in which there is equal probability of being above and below it.
-    \\
 
     \part
 
@@ -397,16 +402,21 @@ library('pls')
     \solution
 
 <<>>=
-# Load data & sample
+# Load the data
 lawstat <- read.table("lawstat.dat")
 
+# Consistency...
+set.seed(1)
+
 # Sample obvseration indices
-s <- c(4,6,13,15,31,35,36,45,47,50,52,53,70,79,82)
+s <- sample(1:nrow(lawstat),
+            15,
+            replace = TRUE)
+s
 
 # Given data of 15 observations
 X <- lawstat[s,]
 L <- length(X$GPA)
-
 
 #
 # Manual Bootstrap
@@ -415,63 +425,38 @@ L <- length(X$GPA)
 # Bootstrap 4k times
 B <- 4000
 
-boot.custom <- function() {
-    results <- rep(0, B)
+results <- rep(0, B)
 
-    # I choose you, Bootstrap!
-    for (i in 1:B) {
-        obs <- round(L * runif(L, 0, 1))
-        sample <- X[obs,]
-        results[i] <- median(sample$GPA)
-    }
-
-    sd(results)
+# I choose you, Bootstrap!
+for (i in 1:B) {
+    obs <- round(L * runif(L, 0, 1))
+    sample <- X[obs,]
+    results[i] <- median(sample$GPA)
 }
 
-boot.actual <- function () {
-    # Calculate the actual value
-    actual <- rep(0, B)
-    L <- length(lawstat$GPA)
-
-    for (i in 1:B) {
-        obs <- round(L * runif(L, 0, 1))
-        sample <- lawstat[obs,]
-        actual[i] <- median(sample$GPA)
-    }
-
-    # Calculated vs actual
-    sd(actual)
-}
+sd(results)
 
 #
 # Using Boot Library
 #
 
-boot.median <- function () {
-    boot.fn <- function (data, indices) {
-        sample <- X[indices,]
-        median(sample$GPA)
-    }
-
-    results <- boot(data = X, statistic = boot.fn, R = B)
-
-    # Calculate the median from the results
-    sd(results$t[,1])
+boot.fn <- function (data, indices) {
+    sample <- X[indices,]
+    median(sample$GPA)
 }
 
-#
-# Results of using the above functions
-#
+results <- boot(data = X, statistic = boot.fn, R = B)
+results
 
-# Show calculated
-boot.custom()
+<<p2a, fig.pos="H", fig.height=6, fig.cap="Confidence interval plots">>=
+plot(results)
 
-# Show actual
-boot.actual()
+<<>>=
+# Calculate the median from the results
+sd(results$t[,1])
 
-# Show calcualted vs actual using boot library
-boot.median()
 @
+
     \part
 
     Suppose you were interested in a \(100(1 - \alpha)\) (pointwise) confidence
@@ -484,7 +469,31 @@ boot.median()
 
     \solution
 
-    Solution
+    TODO: Derivation
+
+<<>>=
+# Bootstrap 4k times
+B <- 4000
+
+boot.fn <- function (data, indices) {
+    sample <- X[indices,]
+    cor(sample$LSAT, sample$GPA)
+}
+
+results <- boot(data = X, statistic = boot.fn, R = B)
+
+results
+
+<<p2b, fig.pos="H", fig.height=6, fig.cap="Confidence interval plots">>=
+
+plot(results)
+
+<<>>=
+
+boot.ci(results, type="bca")
+
+@
+
 \end{homeworkProblem}
 
 \pagebreak
