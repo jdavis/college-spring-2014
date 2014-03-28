@@ -542,7 +542,6 @@ library('leaps')
 <<>>=
 set.seed(1)
 
-k <- 10
 p <- ncol(Boston) - 1
 
 predict.regsubsets = function(object, newdata, id, ...) {
