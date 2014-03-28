@@ -334,12 +334,14 @@ library('pls')
     distribution, the maximum likelihood is the same as ordinary least squares.
     \\
 
+    \pagebreak
+
     \part
 
     Assume the following prior for \(\beta\): \(\beta_1, \ldots, \beta_p\), are
     i.i.d. according to a Laplace distribution with mean zero and common scale
-    parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \left\| \beta
-    \right\| / c \right)\). You can assume that \(Y_i = \beta_0 + \sum_{j =
+    parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \lvert \beta
+    \rvert / c \right)\). You can assume that \(Y_i = \beta_0 + \sum_{j =
     1}^p x_{ij}\beta_j + e_i\).
     \\
 
@@ -355,44 +357,130 @@ library('pls')
     probability \(p(\beta \mid X, Y)\) is going to be proportaional to this
     posterior distirbution.  This gives us:
     \[
-        p(\beta \mid X, Y)
-        \propto f(Y \mid X, \beta) p(\beta \mid X)
-        = f(Y \mid X, \beta) p(\beta)
+        p(\beta \mid \X, \Y)
+        \propto f(\Y \mid \X, \beta) p(\beta \mid \X)
+        = f(\Y \mid \X, \beta) p(\beta)
     \]
 
-    where \(f\) is the likelihood from part (a), and \(p(\beta)\) is our
-    density. Substituting these values gives us the following:
+    where \(f\) is the likelihood from part (a) except keeping it
+    in matrix form which is \((\Y - \X \beta)^T (\Y - \X \beta)\), and
+    \(p(\beta)\) is our density. Substituting these values gives us the
+    following:
     \[
         \begin{split}
-            f(Y \mid X, \beta)p(\beta)
-            &= f(Y \mid X, \beta)
-            \prod_{i = 1}^{p}
-            \frac{1}{2c} \exp \left(- \left\| \beta_i \right\| / c \right)
-            \\
-            &=
+            f(\Y \mid \X, \beta)p(\beta)
+            =
             \left(
                 \frac{
                     1
                 }{
-                    \sigma \sqrt{2\pi}
+                    2c\sigma \sqrt{2\pi}
                 }
-            \right)^n
-            \prod_{i = 1}^{n}
+            \right)
             \exp
             \left(
                 - \frac{
-                    (Y_i - \hat{Y_i})^2
+                    (\Y - \X \beta)^T (\Y - \X \beta)
                 }{
                     2\sigma^2
                 }
+                - \lvert \beta \rvert / c
             \right)
-            \prod_{i = 1}^{p}
-            \frac{1}{2c} \exp \left(- \left\| \beta_i \right\| / c \right)
         \end{split}
     \]
 
-    \(\lambda = 2\sigma^2 / c\)
+    Like usual, let's take the log of this equation to make it easier to work
+    with:
+    \[
+        \begin{split}
+            \log f(\Y \mid \X, \beta)p(\beta)
+            &=
+            \log
+            \left[
+                \left(
+                    \frac{
+                        1
+                    }{
+                        2c\sigma \sqrt{2\pi}
+                    }
+                \right)
+                \exp
+                \left(
+                    - \frac{
+                        (\Y - \X \beta)^T (\Y - \X \beta)
+                    }{
+                        2\sigma^2
+                    }
+                    - \lvert \beta \rvert / c
+                \right)
+            \right]
+            \\
+            &=
+            \log
+            \left(
+                \frac{
+                    1
+                }{
+                    2c\sigma \sqrt{2\pi}
+                }
+            \right)
+            - \frac{
+                (\Y - \X \beta)^T (\Y - \X \beta)
+            }{
+                2\sigma^2
+            }
+            - \lvert \beta \rvert / c
+        \end{split}
+    \]
 
+    Before we move on, let's remind ourselves what the LASSO is a minimization
+    of the following in terms of \(\beta\) for a given \(\lambda\):
+    \[
+        \sum_{i = 1}^{n}
+        \left(
+            y_i - \beta_0 - \sum_{j = 1}^p \beta_j - x_{ij}
+        \right)^2
+        +
+        \lambda
+        \sum_{j = 1}^p \lvert \beta_j \rvert
+        =
+        \text{RSS}
+        +
+        \lambda
+        \sum_{j = 1}^p \lvert \beta_j \rvert
+    \]
+
+    By letting \(c = 2\sigma^2 / \lambda\) and substituting it back into our
+    equation, we get:
+    \[
+        \begin{split}
+            \log f(\Y \mid \X, \beta)p(\beta)
+            &=
+            \log
+            \left(
+                \frac{
+                    1
+                }{
+                    2c\sigma \sqrt{2\pi}
+                }
+            \right)
+            - \frac{
+                (\Y - \X \beta)^T (\Y - \X \beta) - \lambda \lvert \beta \rvert
+            }{
+                2\sigma^2
+            }
+        \end{split}
+    \]
+
+    Since we want to maximize the posterior, it's obvious that we want to
+    minimize the second term. Thus we are minimizing the numerator which is
+    exactly the same problem of the LASSO. Therefore when the prior has a
+    Laplace distribution, LASSO is the mode for \(\beta\).
+    \\
+
+    As was stated before, if we set \(c = 2\sigma^2 / \lambda\), then the
+    following holds.  Thus the tuning parameter that we want to use is then
+    \(\lambda = 2\sigma^2 / c\).
 \end{homeworkProblem}
 
 \pagebreak
