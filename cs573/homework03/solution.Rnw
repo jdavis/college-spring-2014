@@ -664,37 +664,58 @@ subset.summary(fit.back)
 
     \subsubsection{Ridge Regression}
 
+<<eval=FALSE>>=
+library('glmnet')
+
 <<>>=
+set.seed(1)
+fit.ridge.full <- glmnet(x, y,
+                         alpha = 0)
 lambda <- seq(0, 10000)
-fit.ridge <- lm.ridge(medv ~ ., data = Boston, lambda = lambda, alpha = 0)
+fit.ridge <- cv.glmnet(x.train, y.train,
+                    alpha = 0)
 
-names(fit.ridge)
-
+<<p3h, fig.pos="H", fig.height=6, fig.cap="Ridge Regression Cross Validated">>=
 # Visualize how the coefficients shrink with increasing lambda
-plot(fit.ridge,
-     type = "l",
-     xlab = "Lambda",
-     ylab = "Coefficients")
+plot(fit.ridge)
+<<>>=
+lambda.tune <- fit.ridge$lambda.min
 
-# Find minimum
-fit.matrix <- as.matrix(fit.ridge$GCV)
-m <- which.min(fit.matrix)
-
-fit.ridge$lambda[m]
-
-abline(v = fit.ridge$lambda[m])
-
-# Final result
-#traceplot(results, X = c("lambda"))
-#abline(v = results$kGCV)
-
+# Tuned lambda
+lambda.tune
 @
+
+     Now let's take a look at the errors.
+
+<<>>=
+ridge.pred <- predict(fit.ridge.full,
+                      s = lambda.tune,
+                      newx = x.test)
+
+mean((ridge.pred - y.test)^2)
+
+# Our final model
+predict(fit.ridge.full,
+        type = "coefficients",
+        s = lambda.tune)
+@
+
+
 
 \pagebreak
 
     \subsubsection{LASSO}
 
-    Solution.
+<<eval=FALSE>>=
+library('glmnet')
+
+<<>>=
+set.seed(1)
+
+fit.lasso <- glmnet(x.train, y.train,
+                    alpha = 1,
+                    lambda = lambda)
+@
 
 \pagebreak
 
@@ -716,6 +737,16 @@ validationplot(fit.pcr,
                val.type = "MSEP",
                main = "Cross Validation Scores for PCR")
 @
+
+    According to the summary and the graph, the smallest RMSEP for the
+    CV and adjCV, is the model with 13 components.
+    \\
+
+    This is the maximum number of components that can be in our model. Thus we
+    might want to trade off for a simpler model with less components. If we
+    look at the summary, it levels off around 5 components for awhile until 11
+    when it drops down until it reaches 13. Picking 5 might be a good option if
+    we want a simpler model.
 
     \part
 
