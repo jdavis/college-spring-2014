@@ -678,6 +678,7 @@ fit.ridge <- cv.glmnet(x.train, y.train,
 <<p3h, fig.pos="H", fig.height=6, fig.cap="Ridge Regression Cross Validated">>=
 # Visualize how the coefficients shrink with increasing lambda
 plot(fit.ridge)
+
 <<>>=
 lambda.tune <- fit.ridge$lambda.min
 
@@ -685,7 +686,7 @@ lambda.tune <- fit.ridge$lambda.min
 lambda.tune
 @
 
-     Now let's take a look at the errors.
+     Now let's take a look at the errors:
 
 <<>>=
 ridge.pred <- predict(fit.ridge.full,
