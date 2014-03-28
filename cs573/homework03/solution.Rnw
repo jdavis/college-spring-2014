@@ -109,9 +109,13 @@ library('leaps')
 
 # For Ridge Regression
 library('glmnet')
+library('genridge')
 
 # For Bootstrapping
-library(boot)
+library('boot')
+
+# For PCR
+library('pls')
 @
 
 \maketitle
@@ -630,18 +634,62 @@ subset.basic.summary(fit.back)
 subset.summary(fit.back)
 @
 
+\pagebreak
+
+    \subsubsection{Ridge Regression}
+
+<<>>=
+lambda <- seq(0, 10000)
+fit.ridge <- lm.ridge(medv ~ ., data = Boston, lambda = lambda, alpha = 0)
+
+names(fit.ridge)
+
+# Visualize how the coefficients shrink with increasing lambda
+plot(fit.ridge,
+     type = "l",
+     xlab = "Lambda",
+     ylab = "Coefficients")
+
+# Find minimum
+fit.matrix <- as.matrix(fit.ridge$GCV)
+m <- which.min(fit.matrix)
+
+fit.ridge$lambda[m]
+
+abline(v = fit.ridge$lambda[m])
+
+# Final result
+#traceplot(results, X = c("lambda"))
+#abline(v = results$kGCV)
+
+@
+
+\pagebreak
+
     \subsubsection{LASSO}
 
     Solution.
 
-    \subsubsection{Ridge Regression}
-
-    Solution.
+\pagebreak
 
     \subsubsection{PCR}
 
-    Solution.
-    \\
+<<eval=FALSE>>=
+library('pls')
+
+<<>>=
+fit.pcr <- pcr(medv ~ ., data = Boston,
+               scale = TRUE,
+               validation = "CV")
+
+summary(fit.pcr)
+
+<<p3g, fig.pos="H", fig.height=6, fig.cap="PCR Fit.">>=
+# Plot validation
+validationplot(fit.pcr,
+               val.type = "MSEP",
+               main = "Cross Validation Scores for PCR")
+@
 
     \part
 
