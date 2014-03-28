@@ -339,7 +339,8 @@ library('pls')
     Assume the following prior for \(\beta\): \(\beta_1, \ldots, \beta_p\), are
     i.i.d. according to a Laplace distribution with mean zero and common scale
     parameter \(c\), i.e., \(h(\beta) = \frac{1}{2c} \exp \left(- \left\| \beta
-    \right\| / c \right)\).
+    \right\| / c \right)\). You can assume that \(Y_i = \beta_0 + \sum_{j =
+    1}^p x_{ij}\beta_j + e_i\).
     \\
 
     Write out the posterior for \(\beta\) in this setting. Argue that the LASSO
@@ -350,7 +351,47 @@ library('pls')
 
     \solution
 
-    pg. 226
+    We want to determine the posterior distribution. We know that the
+    probability \(p(\beta \mid X, Y)\) is going to be proportaional to this
+    posterior distirbution.  This gives us:
+    \[
+        p(\beta \mid X, Y)
+        \propto f(Y \mid X, \beta) p(\beta \mid X)
+        = f(Y \mid X, \beta) p(\beta)
+    \]
+
+    where \(f\) is the likelihood from part (a), and \(p(\beta)\) is our
+    density. Substituting these values gives us the following:
+    \[
+        \begin{split}
+            f(Y \mid X, \beta)p(\beta)
+            &= f(Y \mid X, \beta)
+            \prod_{i = 1}^{p}
+            \frac{1}{2c} \exp \left(- \left\| \beta_i \right\| / c \right)
+            \\
+            &=
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)^n
+            \prod_{i = 1}^{n}
+            \exp
+            \left(
+                - \frac{
+                    (Y_i - \hat{Y_i})^2
+                }{
+                    2\sigma^2
+                }
+            \right)
+            \prod_{i = 1}^{p}
+            \frac{1}{2c} \exp \left(- \left\| \beta_i \right\| / c \right)
+        \end{split}
+    \]
+
+    \(\lambda = 2\sigma^2 / c\)
 
 \end{homeworkProblem}
 
