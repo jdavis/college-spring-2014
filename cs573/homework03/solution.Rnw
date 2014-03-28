@@ -598,7 +598,11 @@ sd(results$t[,1])
 
     \solution
 
-    TODO: Derivation
+    The idea is identical to above. However, instead of the median, we want the
+    confidence interval for the correlation coefficient. Once again we take
+    \(B\) replacement re-samples and then calculate the correlation of them. We
+    repeat this over and over and then can come up with the confidence
+    intervals.
 
 <<>>=
 # Bootstrap 4k times
