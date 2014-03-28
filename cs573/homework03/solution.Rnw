@@ -506,18 +506,14 @@ boot.median()
 
     \solution
 
-<<eval=FALSE>>=
-library('leaps')
-library('glmnet')
-@
+    First let's setup a few variables that we'll use through out.
 
 <<>>=
+set.seed(1)
+
 #
 # Inital setup
 #
-
-# Ensure consistent values
-set.seed(1)
 
 # Grab X and Ys
 x <- model.matrix(medv ~ ., Boston)[,-1]
@@ -532,132 +528,61 @@ y.train <- y[train]
 
 x.test <- x[test,]
 y.test <- y[test]
-
-#
-# First, some helper functions.
-#
-
-# Show the subset summary plots
-subset.basic.summary <- function (data) {
-    data.summary <- summary(data)
-
-    #
-    # Basic Line Plots
-    #
-
-    par(mfrow = c(2, 2))
-
-    # RSS
-    plot(data.summary$rss,
-         type = "l",
-         xlab = "# of Variables",
-         ylab = "Residual Sum of Squares")
-
-    # Adj R2
-    plot(data.summary$adjr2,
-         type = "l",
-         xlab = "# of Variables",
-         ylab = "Adjusted RSquared")
-
-    # Show the model with the largest AdjR2
-    p <- which.max(data.summary$adjr2)
-    points(p, data.summary$adjr2[p],
-           col = "red",
-           cex = 2,
-           pch = 20)
-
-    # C_p
-    plot(data.summary$cp,
-         type = "l",
-         xlab = "# of Variables",
-         ylab = "Cp")
-
-    # Show the model with the smallest C_p
-    p <- which.min(data.summary$cp)
-    points(p, data.summary$cp[p],
-           col = "red",
-           cex = 2,
-           pch = 20)
-
-    # BIC
-    plot(data.summary$bic,
-         type = "l",
-         xlab = "# of Variables",
-         ylab = "BIC")
-
-    # Show the model with the smallest C_p
-    p <- which.min(data.summary$bic)
-    points(p, data.summary$bic[p],
-           col = "red",
-           cex = 2,
-           pch = 20)
-}
-
-# Different Kind of Plot
-subset.summary <- function (data) {
-    data.summary <- summary(data)
-
-    # Plot using the regsubsets() plots
-    par(mfrow = c(2, 2))
-
-    # RSS
-    plot(data, scale = "r2")
-    plot(data, scale = "adjr2")
-    plot(data, scale = "Cp")
-    plot(data, scale = "bic")
-}
 @
 
 \pagebreak
 
     \subsubsection{Best Subset Selection}
 
-<<>>=
-# Calculate the best subset
-fit.full <- regsubsets(medv ~ ., Boston)
-@
+    Next let's try the best subset selection on our data:
 
-<<p3a, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
-# Show the summary information/plots for it
-subset.basic.summary(fit.full)
-@
-
-<<p3b, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
-subset.summary(fit.full)
-@
-
-\pagebreak
-
-    \subsubsection{Forward Stepwise Selection}
+<<eval=FALSE>>=
+library('leaps')
 
 <<>>=
-fit.forward <- regsubsets(medv ~ ., Boston, method="forward")
+set.seed(1)
+
+k <- 10
+p <- ncol(Boston) - 1
+
+predict.regsubsets = function(object, newdata, id, ...) {
+    form = as.formula(object$call[[2]])
+    mat = model.matrix(form, newdata)
+    coefi = coef(object, id = id)
+    mat[, names(coefi)] %*% coefi
+}
+
+best.train <- sample(c(TRUE, FALSE),
+                     nrow(Boston),
+                     rep = TRUE)
+best.test <- (!best.train)
+
+fit.best <- regsubsets(medv ~ .,
+                       data = Boston[best.train,],
+                       nvmax = p)
+
+cv.errors = rep(0, p)
+for (i in 1:p) {
+    pred = predict.regsubsets(fit.best,
+                              Boston[best.test,],
+                              id = i)
+
+    cv.errors[i] = mean((Boston$medv[best.test] - pred)^2)
+}
+
+mean.best <- mean(cv.errors)
+mean.best
 @
 
-<<p3c, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
-# Show the summary information/plots for it
-subset.basic.summary(fit.forward)
-@
+<<p3b, fig.pos="H", fig.height=6, fig.cap="Best Subset Plots">>=
+# Plot using the regsubsets() plots
+par(mfrow = c(2, 2))
 
-<<p3d, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
-subset.summary(fit.forward)
-@
-
-\pagebreak
-
-    \subsubsection{Backward Stepwise Selection}
-
-<<>>=
-fit.back <- regsubsets(medv ~ ., Boston, method="backward")
-@
-
-<<p3e, fig.pos="H", fig.height=6, fig.cap="Basic Line Plots.">>=
-# Show the summary information/plots for it
-subset.basic.summary(fit.back)
-@
-
-<<p3f, fig.pos="H", fig.height=6, fig.cap="Built-in Subset Plots.">>=
-subset.summary(fit.back)
+# RSS
+plot(fit.best, scale = "r2")
+plot(fit.best, scale = "adjr2")
+plot(fit.best, scale = "Cp")
+plot(fit.best, scale = "bic")
 @
 
 \pagebreak
@@ -671,9 +596,8 @@ library('glmnet')
 set.seed(1)
 fit.ridge.full <- glmnet(x, y,
                          alpha = 0)
-lambda <- seq(0, 10000)
 fit.ridge <- cv.glmnet(x.train, y.train,
-                    alpha = 0)
+                       alpha = 0)
 
 <<p3h, fig.pos="H", fig.height=6, fig.cap="Ridge Regression Cross Validated">>=
 # Visualize how the coefficients shrink with increasing lambda
@@ -693,7 +617,8 @@ ridge.pred <- predict(fit.ridge.full,
                       s = lambda.tune,
                       newx = x.test)
 
-mean((ridge.pred - y.test)^2)
+mean.ridge <- mean((ridge.pred - y.test)^2)
+mean.ridge
 
 # Our final model
 predict(fit.ridge.full,
@@ -713,9 +638,43 @@ library('glmnet')
 <<>>=
 set.seed(1)
 
-fit.lasso <- glmnet(x.train, y.train,
-                    alpha = 1,
-                    lambda = lambda)
+lambda <- seq(0, 10000)
+fit.lasso.full <- glmnet(x, y,
+                         alpha = 1,
+                         lambda = lambda)
+
+<<p3i, fig.pos="H", fig.height=6, fig.cap="Lasso">>=
+plot(fit.lasso.full)
+@
+
+<<>>=
+fit.lasso <- cv.glmnet(x.train, y.train,
+                       alpha = 1)
+
+<<p3j, fig.pos="H", fig.height=6, fig.cap="Cross Validated Lasso">>=
+plot(fit.lasso)
+
+<<>>=
+lambda.tune <- fit.lasso$lambda.min
+
+# Tuned lambda
+lambda.tune
+@
+
+     Now let's take a look at the errors:
+
+<<>>=
+lasso.pred <- predict(fit.lasso.full,
+                      s = lambda.tune,
+                      newx = x.test)
+
+mean.lasso <- mean((lasso.pred - y.test)^2)
+mean.lasso
+
+# Our final model
+predict(fit.lasso.full,
+        type = "coefficients",
+        s = lambda.tune)
 @
 
 \pagebreak
@@ -726,8 +685,15 @@ fit.lasso <- glmnet(x.train, y.train,
 library('pls')
 
 <<>>=
+set.seed(1)
+
+fit.pcr.full <- pcr(medv ~ ., data = Boston,
+                    scale = TRUE,
+                    validation = "CV")
+
 fit.pcr <- pcr(medv ~ ., data = Boston,
                scale = TRUE,
+               subset = train,
                validation = "CV")
 
 summary(fit.pcr)
@@ -739,6 +705,18 @@ validationplot(fit.pcr,
                main = "Cross Validation Scores for PCR")
 @
 
+<<>>=
+res <- RMSEP(fit.pcr)
+pcr.best <- which.min(res$val[1,,]) - 1
+pcr.best
+
+pcr.pred <- predict(fit.pcr,
+                    x.test,
+                    ncomp = pcr.best)
+mean.pcr <- mean((pcr.pred - y.test)^2)
+mean.pcr
+@
+
     According to the summary and the graph, the smallest RMSEP for the
     CV and adjCV, is the model with 13 components.
     \\
@@ -748,6 +726,7 @@ validationplot(fit.pcr,
     look at the summary, it levels off around 5 components for awhile until 11
     when it drops down until it reaches 13. Picking 5 might be a good option if
     we want a simpler model.
+    \\
 
     \part
 
@@ -757,7 +736,22 @@ validationplot(fit.pcr,
 
     \solution
 
-    Solution.
+    Looking at our models, we get the following values:
+
+    \begin{enumerate}
+        \item Best Subset: \(\Sexpr{mean.best}\)
+        \item Ridge: \(\Sexpr{mean.ridge}\)
+        \item Lasso: \(\Sexpr{mean.lasso}\)
+        \item PCR: \(\Sexpr{mean.pcr}\)
+    \end{enumerate}
+
+    As we can see, the Lasso and Ridge models are very close when you consider
+    the cross validated mean squared errors. With PCR just a bit higher than
+    Lasso/Ridge.  Our Best subset model is off by a large amount in comparison.
+    \\
+
+    I'd propose that we use Ridge or Lasso on this data. Given by the mean
+    square errors, they perform better than the other two methods.
 \end{homeworkProblem}
 
 \pagebreak
@@ -797,9 +791,10 @@ validationplot(fit.pcr,
         \item Then solve \(\Right^T \beta = z\) by back substitution.
     \end{enumerate}
 
-    Forward/back substitution is an interative process for lower/upper triangular matrices.
-    While the link to the details can be read about below, I won't solve it here. Hopefully
-    that isn't required as the question says to ``Describe'' and not to show/solve.
+    Forward/back substitution is an interative process for lower/upper
+    triangular matrices.  While the link to the details can be read about
+    below, I won't solve it here. Hopefully that isn't required as the question
+    says to ``Describe'' and not to show/solve.
 
     \subsubsection{Reference}
 
