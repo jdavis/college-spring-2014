@@ -103,7 +103,8 @@
     Let \(X\) represent the outcome of a roll of a 20-sided die. The values
     \(X\) between \(a = 1\) to \(b = 20\) follows a discrete uniform
     probability distribution, with \(\E[X] = \frac{a + b}{2}\) and a variance
-    of \(\frac{b^2 - 1}{12}\).
+    of \(\frac{b^2 - 1}{12}\). Thus \(\E[X] = 10.5\), \(\Var[X] = 33.25\) and
+    \(\sigma = 5.766\).
     \\
 
     Suppose you roll this die 33 times, \(n = 33\). Let \(S\) be the sum of
@@ -113,44 +114,71 @@
         Y = \frac{S}{33} - 10.5
     \]
 
-    \solution
-
-    Given the information, we know we can determine probabilities using the
-    Central Limit Theorem. CLT states that \(Z_n = \frac{S - n\mu}{\sigma
-    \sqrt{n}}\). This gives us:
-    \[
-        Y = \frac{S}{33} - 10.5 = \frac{S - 10.5n}{33} = \frac{S - 10.5n}{5.744\sqrt{n}}
-    \]
-
-    where \(n = 33\), \(\mu = 10.5\) and \(\sigma = 5.744\).
-    \\
-
     \part
 
     Determine the \(\Pr\{Y < -0.5\}\):
+    \\
+
+    \solution
     \[
-        \Pr\{Y < -0.5\}
-        = \Pr \left\{
-        \frac{
-            S_n - n \mu
-        }{
-            \sigma \sqrt{n}
-        }
-        \leq
-        \frac{
-            -0.5 - 33 (10.5)
-        }{
-            5.744 \sqrt{33}
-        }
-        \right\}
-        = \Pr \{ z < -0.5\}
-        = \Phi(-0.5)
-        = 0.0000
+        \begin{split}
+            \Pr\{Y < -0.5\}
+            &= \Pr\{Y < -0.5\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                Y - \mu
+            }{
+                \sqrt{\sigma^2/n^2}
+            }
+            \right\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                -0.5 - 10.5
+            }{
+                \sqrt{33^2/5.766^2}
+            }
+            \right\}
+            = \Pr \{ z < -0.5\}
+            = \Phi(-0.5)
+            \\
+            &= \Sexpr{pnorm(-0.5)}
+        \end{split}
     \]
 
     \part
 
     Determine the \(\Pr\{Y < -2.5\}\):
+    \\
+
+    \solution
+    \[
+        \begin{split}
+            \Pr\{Y < -2.5\}
+            &= \Pr\{Y < -2.5\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                Y - \mu
+            }{
+                \sqrt{\sigma^2/n^2}
+            }
+            \right\}
+            \\
+            &= \Pr \left\{
+            \frac{
+                -2.5 - 10.5
+            }{
+                \sqrt{33^2/5.766^2}
+            }
+            \right\}
+            = \Pr \{ z < -2.5\}
+            = \Phi(-2.5)
+            \\
+            &= \Sexpr{pnorm(-2.5)}
+        \end{split}
+    \]
 
     \part
 
@@ -159,18 +187,28 @@
 
     \begin{enumerate}[(a)]
         \addtocounter{enumi}{2}
-        \item \(Z\) is less than -0.5
-        \item \(Z\) is less than -2.5
+        \item \(Z\) is less than -0.5: \(\Phi(-0.5) = \Sexpr{pnorm(-0.5)}\)
+        \item \(Z\) is less than -2.5: \(\Phi(-2.5) = \Sexpr{pnorm(-2.5)}\)
     \end{enumerate}
 
     Simulate 1000 values for \(Y\) (by drawing 33 random variables from an
     appropriate discrete uniform distribution) and calculate the proportion of
     these 1000 values that are:
 
+<<echo=FALSE>>=
+set.seed(5123)
+p1c <- function (c) {
+    N = 10000
+    S = matrix(ceiling(runif(N*33, 0, 20)), N, 33)
+    Y = rowMeans(S) - 10.5
+    sum(Y < c) / N
+}
+@
+
     \begin{enumerate}[(a)]
         \addtocounter{enumi}{4}
-        \item less than -0.5
-        \item less than -2.5
+        \item less than -0.5: \Sexpr{p1c(-0.5)}
+        \item less than -2.5: \Sexpr{p1c(-2.5)}
     \end{enumerate}
 \end{homeworkProblem}
 
