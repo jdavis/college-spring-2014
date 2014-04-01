@@ -498,7 +498,33 @@ happyland(356)
 \pagebreak
 
 \begin{homeworkProblem}
-    Queuing theory simulation problem. (To be added by March 25.)
+    Problem 7.14 from Baron.
+    \\
+
+    Instead of answering the book questions, make a table of theoretical
+    values versus simluation values for these quantities:
+    \[
+        r, \pi_0, \pi_1, \pi_2, \sum_{k = 3}^{\infty} \pi_k,
+        \E[X], \Var[X], \E[X_s], \E[X_w], \E[R], \E[S], \E[W]
+    \]
+
+    Use the provided R code, \textbf{hw8code.R} to simulate the performance of
+    this queuing system. Your simulation should have a sample of 25,000 time
+    values, as currently set up in the code (drawing 25\% of the 100,000
+    arrivals). You will need to change the rate parameters at the beginning of
+    the code to match this queuing system.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Problem 7.23 from Baron.
+    \\
 \end{homeworkProblem}
 
 \end{document}
