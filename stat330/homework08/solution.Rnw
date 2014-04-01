@@ -455,8 +455,26 @@ happyland(356)
 
     \solution
 
-    Solution.
-    \\
+    We want the ``large t'' probability which is \(P_0\). This gives us:
+    \[
+        P_0
+        = \left(
+            S
+        \right)^{-1}
+        = \left(
+            1 + \frac{\lambda_0}{\mu_1} + \cdots
+        \right)^{-1}
+        = \left(
+            1
+            + \frac{0.5}{1}
+            + \frac{0.5}{1}\frac{0.5}{2}
+            + \frac{0.5}{1}\frac{0.5}{2}\frac{0.5}{3}
+            + \cdots
+        \right)^{-1}
+        = \left(\sum_{k = 0}^{\infty} \frac{0.5^k}{k!} \right)^{-1}
+        = e^{-0.5}
+        \approx 0.607
+    \]
 
     \part
 
