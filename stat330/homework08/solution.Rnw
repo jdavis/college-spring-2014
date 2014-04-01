@@ -371,16 +371,11 @@ happyland(356)
     This is an Exponential distribution. Thus if we let \(T = \text{time until
     first call}\), then \(T \dist{Exp}(2.5)\). We want \(\Pr[T > 1]\) thus:
     \[
-        \begin{split}
-            \Pr[T > 1]
-            &= 1 - \Pr[T < 1]
-            \\
-            &\approx 1
-            - 0.9179
-            \quad \mbox{using the above formula from (3a)}
-            \\
-            &\approx 0.0821
-        \end{split}
+        \Pr[T > 1]
+        = 1 - \Pr[T < 1]
+        \approx 1
+        - 0.9179
+        \approx 0.0821
     \]
 
     \part
