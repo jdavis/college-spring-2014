@@ -316,7 +316,7 @@ happyland(356)
     \dist{Exp}(0.5)\) where the cdf is \(F(x) = 1 - e^{-\lambda x}\).
     \[
         \begin{split}
-            P(T \geq 3) &= 1 - P(T < 3)
+            \Pr(T \geq 3) &= 1 - \Pr(T < 3)
             \\
             &= 1 - (1 - e^{-0.5 \cdot 3})
             \\
@@ -336,13 +336,13 @@ happyland(356)
 
     Let \(X = \text{\# occurrences in time } t\). We know that \(X
     \dist{Poisson}(\lambda t)\) and \(t = 5\). We want to the probability that
-    four or more calls arrive in a 5-minute period or when \(\Pr(X \geq 5)\).
-    This gives us \(X \dist{Poisson}(0.5 \cdot 5)\) where the pdf is \(P(x) =
+    four or more calls arrive in a 5-minute period or when \(\Pr(X > 5)\).
+    This gives us \(X \dist{Poisson}(0.5 \cdot 5)\) where the pdf is \(\Pr(x) =
     e^{-\lambda}\frac{\lambda^x}{x!}\) this gives us:
     \[
         \begin{split}
-            \Pr[X \geq 5]
-            &= 1 - \Pr[X < 5]
+            \Pr[X > 5]
+            &= 1 - \Pr[X \leq 5]
             \\
             &= 1
             - \Pr[X = 0]
@@ -373,8 +373,20 @@ happyland(356)
 
     \solution
 
-    Solution.
-    \\
+    This is an Exponential distribution. Thus if we let \(T = \text{time until
+    first call}\), then \(T \dist{Exp}(2.5)\). We want \(\Pr[T > 1]\) thus:
+    \[
+        \begin{split}
+            \Pr[T > 1]
+            &= 1 - \Pr[T < 1]
+            \\
+            &\approx 1
+            - 0.9179
+            \quad \mbox{using the above formula from (3a)}
+            \\
+            &\approx 0.0821
+        \end{split}
+    \]
 
     \part
 
