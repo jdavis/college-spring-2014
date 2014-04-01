@@ -315,15 +315,10 @@ happyland(356)
     3-minute period or when \(\Pr(T \geq 3)\). This gives us \(T
     \dist{Exp}(0.5)\) where the cdf is \(F(x) = 1 - e^{-\lambda x}\).
     \[
-        \begin{split}
-            \Pr(T \geq 3) &= 1 - \Pr(T < 3)
-            \\
-            &= 1 - (1 - e^{-0.5 \cdot 3})
-            \\
-            &= e^{-1.5}
-            \\
-            &\approx 0.2231
-        \end{split}
+        \Pr(T \geq 3) = 1 - \Pr(T < 3)
+        = 1 - (1 - e^{-0.5 \cdot 3})
+        = e^{-1.5}
+        \approx 0.2231
     \]
 
     \part
@@ -398,8 +393,23 @@ happyland(356)
 
     \solution
 
-    Solution.
-    \\
+    This will take the form of a Gamma distribution where \(\alpha = 3\) for
+    the 3 missed calls and \(\lambda = 0.5\). This gives \(T \dist{Gamma}(\alpha = 3,
+    \lambda = 0.5)\). We are looking for the probability that you will have
+    missed at most two calls during the trip.  Or when the 3rd call comes after
+    2 minutes, \(\Pr[T > 2]\). Using R to calculate, this gives us:
+
+<<echo=FALSE>>=
+p5 <- function (x) {
+    pgamma(x, shape=3, rate=0.5)
+}
+@
+
+<<eval=FALSE>>=
+pgamma(t, shape=3, rate=0.5)
+@
+
+    Thus \(\Pr[T > 2] = 1 - \Pr[T \leq 2] = 1 - \Sexpr{p5(2)} = \Sexpr{1 - p5(2)}\).
 
 \end{homeworkProblem}
 
