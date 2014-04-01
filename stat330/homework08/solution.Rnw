@@ -519,12 +519,9 @@ happyland(356)
     Problem 7.14 from Baron.
     \\
 
-    Instead of answering the book questions, make a table of theoretical
-    values versus simluation values for these quantities:
-    \[
-        r, \pi_0, \pi_1, \pi_2, \sum_{k = 3}^{\infty} \pi_k,
-        \E[X], \Var[X], \E[X_s], \E[X_w], \E[R], \E[S], \E[W]
-    \]
+    Instead of answering the book questions, fill in the table below
+    theoretical values versus simluation values for these quantities:
+    \\
 
     Use the provided R code, \textbf{hw8code.R} to simulate the performance of
     this queuing system. Your simulation should have a sample of 25,000 time
@@ -536,6 +533,20 @@ happyland(356)
     \solution
 
     Solution.
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c || c | c | c | c | c | c | c | c | c | c | c | c }
+            & \(r\) & \(\pi_0\) & \(\pi_1\) & \(\pi_2\) & \(\sum_{k = 3}^{\infty} \pi_k\) & \(\E[X]\)
+            & \(\Var[X]\) & \(\E[X_s]\) & \(\E[X_w]\) & \(\E[R]\) & \(\E[S]\) & \(\E[W]\)
+            \\
+            \hline
+            Theoretical & & & & & & & & & & & &
+            \\
+            \hline
+            Simulated & & & & & & & & & & & &
+        \end{tabular}
+    \end{table}
 \end{homeworkProblem}
 
 \pagebreak
