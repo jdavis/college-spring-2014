@@ -8,7 +8,7 @@ Y = rowMeans(S) - 10.5
 ## (that have roughly a standard normal distribution)
 ## Note: any difference between this distribution and standard normal
 ##    is due to the central limit theorem only being "approximately" normal.
-sum(Y < c) / N    # This gives the proportion of Y less than c (you must provide c)
+#sum(Y < c) / N    # This gives the proportion of Y less than c (you must provide c)
 
 
 #############################
@@ -16,8 +16,8 @@ sum(Y < c) / N    # This gives the proportion of Y less than c (you must provide
 #############################
 
 N <- 100000
-lambda_a <- 2
-lambda_s <- 8
+lambda_a <- 1/6
+lambda_s <- 1/20
 set.seed(2014)
 iat <- rexp(N, lambda_a)
 st <- rexp(N, lambda_s)

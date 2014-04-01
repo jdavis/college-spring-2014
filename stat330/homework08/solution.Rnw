@@ -519,6 +519,12 @@ happyland(356)
     Problem 7.14 from Baron.
     \\
 
+    Trucks arrive at a weigh station according to a Poisson process with the
+    average rate of 1 truck every 10 minutes. Inspection time is Exponential
+    with the average of 3 minutes. When a truck is on a scale, the other
+    arrived trucks stay in line waiting for their turn.
+    \\
+
     Instead of answering the book questions, fill in the table below
     theoretical values versus simluation values for these quantities:
     \\
