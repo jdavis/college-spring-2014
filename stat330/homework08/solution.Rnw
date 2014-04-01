@@ -350,6 +350,7 @@ happyland(356)
             - \Pr[X = 2]
             - \Pr[X = 3]
             - \Pr[X = 4]
+            - \Pr[X = 5]
             \\
             &\approx 1
             - 0.082
@@ -357,9 +358,10 @@ happyland(356)
             - 0.257
             - 0.213
             - 0.134
+            - 0.066
             \quad \mbox{using the above formula}
             \\
-            &\approx 0.109
+            &\approx 0.0422
         \end{split}
     \]
 
