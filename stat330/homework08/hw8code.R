@@ -16,8 +16,8 @@ Y = rowMeans(S) - 10.5
 #############################
 
 N <- 100000
-lambda_a <- 1/6
-lambda_s <- 1/20
+lambda_a <- 1/10
+lambda_s <- 1/3
 set.seed(2014)
 iat <- rexp(N, lambda_a)
 st <- rexp(N, lambda_s)
