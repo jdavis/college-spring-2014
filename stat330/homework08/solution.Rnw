@@ -556,8 +556,26 @@ pgamma(t, shape=3, rate=0.5)
 
     \solution
 
-    Solution.
-    \\
+
+    \begin{enumerate}[(a)]
+        \item \(p_0\): \(\frac{1}{S} = 0.607\)
+        \item \(p_1\): \(p_0 \frac{\lambda_0}{\mu_1} = p_0 \frac{0.5}{1} = 0.3035\)
+        \item \(p_2\): \(p_0 \frac{\lambda_0 \lambda_1}{\mu_1 \mu_2} = p_0 \frac{0.5^2}{1 \cdot 2} = 0.0759\)
+        \item \(p_3\): \(p_0 \frac{\lambda_0 \lambda_1 \lambda_2}{\mu_1 \mu_2 \mu_3}\)
+    \end{enumerate}
+
+    This gives us the pmf of
+    \[
+        p(x)
+        = p_0 \frac{
+            \lambda_0 \cdots \lambda_{x - 1}
+        }{
+            \mu_1 \cdots \mu_x
+        }
+    \]
+
+    and in this case all the \(\lambda_0, \ldots, \lambda_{x - 1} = 0.5\) and
+    \(\mu_1 = 1, \mu_2 = 2, \ldots, \mu_x = x\).
 
     \part
 
@@ -567,8 +585,26 @@ pgamma(t, shape=3, rate=0.5)
 
     \solution
 
-    Solution.
-    \\
+    We want the probability that a customer arrives when the barbershop has more than two
+    persons waiting, this is when \(P[X > 2]\), this gives us:
+    \[
+        \begin{split}
+            P[X > 2]
+            &= 1 - P[X \leq 2]
+            \\
+            &= 1
+            - P[X = 0]
+            - P[X = 1]
+            - P[X = 2]
+            \\
+            &= 1
+            - 0.607
+            - 0.3035
+            - 0.0759
+            \\
+            &= 0.0136
+        \end{split}
+    \]
 
     \part
 
@@ -579,7 +615,38 @@ pgamma(t, shape=3, rate=0.5)
 
     \solution
 
-    Solution.
+    We want the expected value of our distribution, this gives us:
+    \[
+        \begin{split}
+            \E[X]
+            &= \sum_{k = 0}^{\infty} k \cdot p(k)
+            \\
+            &= \sum_{k = 0}^{\infty} k \cdot
+            p_0 \frac{
+                \lambda_0 \cdots \lambda_{k - 1}
+            }{
+                \mu_1 \cdots \mu_k
+            }
+            \\
+            &= p_0 \sum_{k = 0}^{\infty} k \cdot
+            \frac{
+                0.5^k
+            }{
+                k!
+            }
+            \\
+            &= p_0 \sum_{k = 0}^{\infty} \cdot
+            \frac{
+                0.5^k
+            }{
+                (k - 1)!
+            }
+            \\
+            &= p_0 (0.8243)
+            \\
+            &= 0.500
+        \end{split}
+    \]
 
 \end{homeworkProblem}
 
@@ -811,7 +878,7 @@ varr <- mean(mat[6,samp])
 <<p6, echo=FALSE, fig.pos="H", fig.height=4, fig.cap="Distribution of visitors">>=
 hist(mat[5,samp],breaks = -1:max(mat[5,samp])+.5,xlab='System state',
     main='Histogram of X = number of items in system\nRed dots are Poisson(r), see p.193',prob=T)
-points(a <- 0:max(mat[5,samp]), dpois(a,r <- mean(st)/mean(iat)), col='black', pch=1, cex=1.1)
+points(a <- 1:max(mat[5,samp]), dpois(a,r <- mean(st)/mean(iat)), col='black', pch=1, cex=1.1)
 points(a <- 0:max(mat[5,samp]), dpois(a,r <- mean(st)/mean(iat)), col='red', pch=16)
 @
 \end{homeworkProblem}
