@@ -331,6 +331,8 @@ happyland <- function (K) {
 happyland(356)
 @
 
+    Everything checks out!
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -727,7 +729,36 @@ x12 <- mean(mat[7,samp])
 
     \solution
 
-    Solution.
+<<echo=FALSE>>=
+N <- 100000
+lambda_a <- 2
+lambda_s <- .2
+set.seed(2014)
+iat <- rexp(N, lambda_a)
+st <- rexp(N, lambda_s)
+mat <- matrix(0, 7, N)
+mat[1,] <- cumsum(iat)
+mat[2,] <- mat[1,]
+mat[3,] <- st
+mat[4,] <- mat[2,] + mat[3,]
+
+sep = 1
+while(any(id <- (mat[2,col2 <- (1+sep):N] < mat[4,col4 <- 1:(N-sep)]))){
+    mat[5,col2[id]] <- mat[5,col2[id]] + 1
+    sep <- sep + 1
+}
+
+mat[6,] <- mat[4,] - mat[1,]
+mat[7,] <- mat[6,] - mat[3,]
+
+samp <- sample(1:ncol(mat), N/4)   # sample 25% of random arrival times
+pi0 <- sum(mat[5,samp] == 0)/length(samp)
+ex <- mean(mat[5,samp])
+varx <- var(mat[5,samp])
+varr <- mean(mat[6,samp])
+@
+
+    After running the code, we get the following estimates: \(\pi_0 = \Sexpr{pi0}\), mean number of visitors \(= \Sexpr{ex}\), mean number of visitors
     \\
 
     \part
@@ -737,6 +768,13 @@ x12 <- mean(mat[7,samp])
     \\
 
     \solution
+
+<<p6, echo=FALSE, fig.pos="H", fig.height=5, fig.cap="Distribution of visitors">>=
+hist(mat[5,samp],breaks = -1:max(mat[5,samp])+.5,xlab='System state',
+    main='Histogram of X = number of items in system\nRed dots are Poisson(r), see p.193',prob=T)
+points(a <- 0:max(mat[5,samp]), dpois(a,r <- mean(st)/mean(iat)), col='black', pch=1, cex=1.1)
+points(a <- 0:max(mat[5,samp]), dpois(a,r <- mean(st)/mean(iat)), col='red', pch=16)
+@
 
     Solution.
 \end{homeworkProblem}
