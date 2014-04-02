@@ -232,8 +232,9 @@ p1c <- function (c) {
             tomorrow is 0.25, with no chance of it being sunny tomorrow.
     \end{enumerate}
 
-    Use the concept of steady-state probabilities to get the probability of a rainy day
-    this time next year in Happyland. Your answer should be in the form of a fraction.
+    Use the concept of steady-state probabilities to get the probability of a
+    rainy day this time next year in Happyland. Your answer should be in the
+    form of a fraction.
     \\
 
     You may check your work using a simluation, but it is not required.
@@ -264,7 +265,15 @@ p1c <- function (c) {
                 \\
                 0 & 0.75 & 0.25
             \end{pmatrix}
-            = (0.4\pi_1 + 0.5\pi_2 + 0\pi_3, 0.4\pi_1 + 0.25\pi_2 + 0.75\pi_3, 0.2\pi_1 + 0.25\pi_2 + 0.25\pi_3)
+            = (0.4\pi_1
+            + 0.5\pi_2
+            + 0\pi_3,
+            0.4\pi_1
+            + 0.25\pi_2
+            + 0.75\pi_3,
+            0.2\pi_1
+            + 0.25\pi_2
+            + 0.25\pi_3)
     \]
 
     This gives us the equations:
@@ -445,16 +454,17 @@ p5 <- function (x) {
 pgamma(t, shape=3, rate=0.5)
 @
 
-    Thus \(\Pr[T > 2] = 1 - \Pr[T \leq 2] = 1 - \Sexpr{p5(2)} = \Sexpr{1 - p5(2)}\).
+    Thus \(\Pr[T > 2] = 1 - \Pr[T \leq 2] = 1 - \Sexpr{p5(2)} = \Sexpr{1 -
+    p5(2)}\).
 
 \end{homeworkProblem}
 
 \pagebreak
 
 \begin{homeworkProblem}
-    \textit{A university barbershop}. The campus barbershop has only one barber but
-    unlimited chairs waiting for customers. No matter how many customers are in the shop,
-    arriving customers always choose to wait.
+    \textit{A university barbershop}. The campus barbershop has only one barber
+    but unlimited chairs waiting for customers. No matter how many customers
+    are in the shop, arriving customers always choose to wait.
 
     \begin{enumerate}
         \item The customers arrive according to a Poisson process. The average
@@ -643,7 +653,12 @@ x12 <- mean(mat[7,samp])
         \centering
         \begin{tabular}{| c || c | c | c | c | c | c | c |}
             \hline
-            & \(r\) & \(\pi_0\) & \(\pi_1\) & \(\pi_2\) & \(\sum_{k = 3}^{\infty} \pi_k\) & \(\E[X]\)
+            & \(r\)
+            & \(\pi_0\)
+            & \(\pi_1\)
+            & \(\pi_2\)
+            & \(\sum_{k = 3}^{\infty} \pi_k\)
+            & \(\E[X]\)
             \\
             \hline
             Theor.
@@ -665,7 +680,12 @@ x12 <- mean(mat[7,samp])
             \\
             \hline
             \hline
-            & \(\Var[X]\) & \(\E[X_s]\) & \(\E[X_w]\) & \(\E[R]\) & \(\E[S]\) & \(\E[W]\)
+            & \(\Var[X]\)
+            & \(\E[X_s]\)
+            & \(\E[X_w]\)
+            & \(\E[R]\)
+            & \(\E[S]\)
+            & \(\E[W]\)
             \\
             \hline
             Theor.
