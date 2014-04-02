@@ -66,8 +66,8 @@ hist(mat[5,samp],breaks = -1:max(mat[5,samp])+.5,xlab='System state',
 ###################################
 
 N <- 100000
-lambda_a <- 1
-lambda_s <- 1
+lambda_a <- 2
+lambda_s <- .2
 set.seed(2014)
 iat <- rexp(N, lambda_a)
 st <- rexp(N, lambda_s)
