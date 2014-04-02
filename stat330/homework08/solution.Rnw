@@ -109,7 +109,7 @@
     \\
 
     Suppose you roll this die 33 times, \(n = 33\). Let \(S\) be the sum of
-    these 33 roled values and let \(Y\) be the random variable that represents
+    these 33 rolled values and let \(Y\) be the random variable that represents
     the mean of these 33 values minus the overall mean of 10.5:
     \[
         Y = \frac{S}{33} - 10.5
