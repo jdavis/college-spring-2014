@@ -693,6 +693,52 @@ x12 <- mean(mat[7,samp])
 \begin{homeworkProblem}
     Problem 7.23 from Baron.
     \\
+
+    Internet users vist a certain website according to a queuing system with
+    the arrival rate, \(\lambda_A = 2 \mbox{min}^{-1}\) and an expected time of
+    5 minutes on the site, \(\lambda_S = 0.2 \mbox{min}^{-1}\).
+    \\
+
+    \part
+
+    Find the expected number of visitors of the website at any time.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Find the fraction of time when nobody is browsing the website.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Run the simulated code for \#5 and report the estimates for \(\pi_0\), mean
+    number of visitors, number of visitors, and mean visit time.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Comment on what distribution of visitors the website looks like based
+    on the histogram.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
