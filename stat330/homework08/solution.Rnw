@@ -558,10 +558,10 @@ pgamma(t, shape=3, rate=0.5)
 
 
     \begin{enumerate}[(a)]
-        \item \(p_0\): \(\frac{1}{S} = 0.607\)
-        \item \(p_1\): \(p_0 \frac{\lambda_0}{\mu_1} = p_0 \frac{0.5}{1} = 0.3035\)
-        \item \(p_2\): \(p_0 \frac{\lambda_0 \lambda_1}{\mu_1 \mu_2} = p_0 \frac{0.5^2}{1 \cdot 2} = 0.0759\)
-        \item \(p_3\): \(p_0 \frac{\lambda_0 \lambda_1 \lambda_2}{\mu_1 \mu_2 \mu_3}\)
+        \item \(p_0 = \frac{1}{S} = 0.607\)
+        \item \(p_1 = p_0 \frac{\lambda_0}{\mu_1} = p_0 \frac{0.5}{1} = 0.3035\)
+        \item \(p_2 = p_0 \frac{\lambda_0 \lambda_1}{\mu_1 \mu_2} = p_0 \frac{0.5^2}{1 \cdot 2} = 0.0759\)
+        \item \(p_3 = p_0 \frac{\lambda_0 \lambda_1 \lambda_2}{\mu_1 \mu_2 \mu_3}\)
     \end{enumerate}
 
     This gives us the pmf of
