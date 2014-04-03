@@ -130,29 +130,30 @@
 
     \solution
 
-    To solve this, we need to do four things. The first is that we need to find
-    a cubic polynomial
-    \[
-        f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3
-    \]
-    such that \(f(x) = f_1(x)\) for all \(x \leq \xi\). While expressing \(a_1,
-    b_1, c_1, d_1\) in terms of \(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4\).
-    \\
+    To solve this, we need to do four things.
 
-    We also need to find a cubic polynomial
-    \[
-        f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3
-    \]
-    such that \(f(x) = f_2(x)\) for all \(x > \xi\). While expressing
-    \(a_2, b_2, c_2, d_2\) in terms of \(\beta_0, \beta_1, \beta_2, \beta_3,
-    \beta_4\).
-    \\
+    \begin{enumerate}
+        \item The first is that we need to find a cubic polynomial \(f_1(x) =
+            a_1 + b_1 x + c_1 x^2 + d_1 x^3\) such that \(f(x) = f_1(x)\) for
+            all \(x \leq \xi\). While expressing \(a_1, b_1, c_1, d_1\) in
+            terms of \(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4\).
 
-    These two functions tell us that \(f(x)\) is a piecewise polynomial.
-    \\
+            We also need to find a cubic polynomial \(f_2(x) = a_2 + b_2 x +
+            c_2 x^2 + d_2 x^3\) such that \(f(x) = f_2(x)\) for all \(x >
+            \xi\). While expressing \(a_2, b_2, c_2, d_2\) in terms of
+            \(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4\).
 
-    The second thing that we need to do is to...
+            These two functions tell us that \(f(x)\) is a piecewise polynomial.
 
+        \item The second thing that we need to do is to show that \(f_1(\xi) =
+            f_2(\xi)\).  That is, \(f(x)\) is continuous at \(\xi\).
+
+        \item The third thing that we need to do is to show that \(f_1'(\xi) =
+            f_2'(\xi)\). That is, \(f'(x)\) is continuous at \(\xi\).
+
+        \item Lastly we need to show that \(f_1''(\xi) = f_2''(\xi)\). That is,
+            \(f''(x)\) is continuous at \(\xi\).
+    \end{enumerate}
 \end{homeworkProblem}
 
 \pagebreak
