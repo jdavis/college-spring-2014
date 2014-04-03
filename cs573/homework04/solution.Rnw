@@ -1,0 +1,205 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{float}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\setlength\parindent{0pt}
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength{\floatsep}{100pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}[1][]{
+    \section{Problem \arabic{homeworkProblemCounter} \; \large{#1}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#4}
+\newcommand{\hmwkDueDate}{April 4, 2014}
+\newcommand{\hmwkClass}{ComS 573}
+\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassInstructor}{De Brabanter}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{Professor\ \hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Likelihood}{\mathcal{L}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
+
+\newcommand{\X}{{\bold X}}
+\newcommand{\Y}{{\bold Y}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\begin{document}
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+@
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    From ISLR: Chapter 7, Problem 1.
+    \\
+
+    A cubic regression spline with one knot \(\xi\) can be obtained
+    using a basis of the form \(1, x, x^2, x^3, (x - \xi)^3_+\) where
+    \((x - \xi)^3\) if \(x > \xi\) and equals 0 otherwise. Show
+    that a function of the form
+    \[
+        f(x)
+        = \beta_0
+        + \beta_1 x
+        + \beta_2 x^2
+        + \beta_3 x^3
+        + \beta_4 (x - \xi)^3_+
+    \]
+    is indeed a cubic regression spline, regardless of the values of \(\beta_0,
+    \beta_1, \beta_2, \beta_3, \beta_4\).
+    \\
+
+    \solution
+
+    To solve this, we need to do four things. The first is that we need to find
+    a cubic polynomial
+    \[
+        f_1(x) = a_1 + b_1 x + c_1 x^2 + d_1 x^3
+    \]
+    such that \(f(x) = f_1(x)\) for all \(x \leq \xi\). While expressing \(a_1,
+    b_1, c_1, d_1\) in terms of \(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4\).
+    \\
+
+    We also need to find a cubic polynomial
+    \[
+        f_2(x) = a_2 + b_2 x + c_2 x^2 + d_2 x^3
+    \]
+    such that \(f(x) = f_2(x)\) for all \(x > \xi\). While expressing
+    \(a_2, b_2, c_2, d_2\) in terms of \(\beta_0, \beta_1, \beta_2, \beta_3,
+    \beta_4\).
+    \\
+
+    These two functions tell us that \(f(x)\) is a piecewise polynomial.
+    \\
+
+    The second thing that we need to do is to...
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Show that the Nadarya-Watson estimator is equal to \textbf{local constant}
+    fitting.  \textit{Hint:} Use the local polynomial cost function to start
+    and adapt where necessary.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Show that the kernel density estimate
+    \[
+        \hat{f}(x) = \frac{
+            1
+        }{
+            nh
+        }
+        \sum_{i = 1}^{n} K
+        \left(
+            \frac{
+                x - X_i
+            }{
+                h
+            }
+        \right)
+    \]
+    with kernel \(K\) and bandwidth \(h > 0\), is a bonafide density. Did you
+    really need any condition(s) on \(K\)? If so, which one(s)?
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\end{document}
