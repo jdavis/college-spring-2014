@@ -199,7 +199,17 @@
 
     \solution
 
-    Solution.
+    According to what a bona fide kernel density estimator is, it can be
+    anything as long as \(K\) satisfies these two requirements:
+
+    \begin{enumerate}
+        \item \(\int_{-\infty}^{+\infty} K(x)\dx = 1\)
+        \item And \(K(-x) = K(x)\) for all values of \(x\)
+    \end{enumerate}
+
+    The explanation is that the first requirement ensures that it is a valid
+    probability distribution function and the second ensures that the average
+    of the distribution is equal to that of the sample that was used.
 \end{homeworkProblem}
 
 \end{document}
