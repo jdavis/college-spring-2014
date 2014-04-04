@@ -7,6 +7,7 @@
 \usepackage{amsfonts}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{enumerate}
 
 \usepackage{hyperref}
 \hypersetup{colorlinks=true}
@@ -132,7 +133,7 @@
 
     To solve this, we need to do four things.
 
-    \begin{enumerate}
+    \begin{enumerate}[(a)]
         \item The first is that we need to find a cubic polynomial \(f_1(x) =
             a_1 + b_1 x + c_1 x^2 + d_1 x^3\) such that \(f(x) = f_1(x)\) for
             all \(x \leq \xi\). While expressing \(a_1, b_1, c_1, d_1\) in
@@ -154,6 +155,104 @@
         \item Lastly we need to show that \(f_1''(\xi) = f_2''(\xi)\). That is,
             \(f''(x)\) is continuous at \(\xi\).
     \end{enumerate}
+
+    \part
+
+    We need to find a new cubic polynomial \(f_1(x)\) such that \(f(x) =
+    f_1(x)\) for all \(x \leq \xi\). Given the positive constraint on the 4th basis
+    of \((x - \xi)^3_+\), we know that if \(x \geq \xi\), then the basis is equal to \(0\).
+    \\
+
+    Thus for \(f_1(x) = f(x)\), if we let \(a_1 = \beta_0, b_1 = \beta_1, c_1 = \beta_2, d_1 = \beta_3\), then it is easy to see that \(f_1(x) = f(x)\) because:
+    \[
+        \begin{split}
+            f(x)
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + \beta_4 (x - \xi)^3_+
+            \\
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + 0 \mbox{ because } x \leq \xi
+            \\
+            &= a_1
+            + b_1 x
+            + c_1 x^2
+            + d_1 x^3
+        \end{split}
+    \]
+
+    Therefore \(f_1(x) = f(x)\) for all \(x \leq \xi\).
+    \\
+
+    Now we must do the same but instead find a cubic polynomial \(f_2(x) = a_2
+    + b_2 x + c_2 x^2 + d_2 x^3\) such that \(f(x) = f_2(x)\) for all \(x \leq
+    \xi\).
+    \\
+
+    This gives us:
+    \[
+        \begin{split}
+            f(x)
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + \beta_4 (x - \xi)^3_+
+            \\
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + \beta_4 (x - \xi)^3 \quad \mbox{ because } x > \xi
+            \\
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + \beta_4 (x^3 - 3 x^2 \xi + 3 x \xi^2 - \xi^3)
+            \\
+            &= \beta_0
+            + \beta_1 x
+            + \beta_2 x^2
+            + \beta_3 x^3
+            + \beta_4 x^3 - 3 \beta_4 x^2 \xi + 3 \beta_4 x \xi^2 - \beta_4 \xi^3
+            \\
+            &= \beta_0 - \beta_4 \xi^3
+            + \beta_1 x + 3 \beta_4 x \xi^2
+            + \beta_2 x^2 - 3 \beta_4 x^2 \xi
+            + \beta_3 x^3 + \beta_4 x^3
+            \\
+            &= (\beta_0 - \beta_4 \xi^3)
+            + (\beta_1 + 3 \beta_4 \xi^2) x
+            + (\beta_2 - 3 \beta_4 \xi) x^2
+            + (\beta_3 + \beta_4) x^3
+        \end{split}
+    \]
+    where \(a_2 = \beta_0 - \beta_4 \xi^3\), \(b_2 = \beta_1 + 3 \beta_4
+    \xi^2\), \(c_2 = \beta_2 - 3 \beta_4 \xi\), and \(d_2 = \beta_3 +
+    \beta_4\).
+    \\
+
+    Thus the first part is finished.
+
+    \part
+
+    Solution.
+    \\
+
+    \part
+
+    Solution.
+    \\
+
+    \part
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
