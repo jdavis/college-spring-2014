@@ -404,6 +404,9 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Similar to Problem 11 from ISLR: Chapter 7.
+    \\
+
     Do an iterative approach to GAMs by repeatedly holding all but one
     coefficient estimate fixed at its current value, and update only the
     coefficient estimate using a simple linear regression. Continue the process
@@ -425,6 +428,11 @@
             \]
     \end{enumerate}
 
+<<>>=
+# Read in the data
+data <- read.csv('./adv.dat')
+@
+
     \part
 
     Write a for loop to repeat (3) and (4) 1,000 times. Report the estimates of
@@ -436,8 +444,81 @@
 
     \solution
 
-    Solution.
-    \\
+    First let's write some helper functions:
+<<>>=
+estimate.beta <- function (fixed, Y, X1, X2) {
+    a <- Y - fixed * X1
+    fit <- lm(a ~ X2)
+
+    # Return coefficient we want
+    fit$coef[2]
+}
+
+@
+    Now let's try the backfitting
+<<>>=
+N <- 1000
+R <- 1:N
+beta0 <- rep(NA, N)
+beta1 <- rep(NA, N)
+beta2 <- rep(NA, N)
+
+# Start off with our estimate of 0
+beta1[1] <- 0
+
+for (i in R) {
+    beta2[i] <- estimate.beta(beta1[i],
+                                  data$Y,
+                                  data$X1,
+                                  data$X2)
+
+    # Keep the lists the same size...
+    if (i != 1000) {
+        beta1[i + 1] <- estimate.beta(beta2[i],
+                                      data$Y,
+                                      data$X2,
+                                      data$X1)
+    }
+
+    # Assign beta0 manually
+    fit <- lm(data$Y ~ I(beta1[i] * data$X1) + I(beta2[i] * data$X2))
+    beta0[i] <- fit$coef[1]
+}
+@
+
+    Plotting these values gives us the following:
+
+<<p2a, fig.pos="h", fig.height=5, echo=FALSE, fig.cap="Comparison of estimates over 1000 iterations">>=
+plotPartA <- function () {
+    plot(R, beta0,
+         type = "l",
+         xlab = "Value of Iteration",
+         ylab = "Coefficients",
+         ylim = c(-1, 4),
+         lwd = 3,
+         col = "palegreen",
+         main = "Backfitting Estimates")
+
+    lines(R, beta1,
+          lwd = 3,
+          col = "indianred")
+
+    lines(R, beta2,
+          lwd = 3,
+          col = "lightblue")
+
+    # Add the legend
+    legend("topright",
+           c("Beta0", "Beta1", "Beta2"),
+           lty = 1,
+           lwd = 3,
+           col = c("palegreen", "indianred", "lightblue"))
+}
+
+plotPartA()
+@
+
+\pagebreak
 
     \part
 
@@ -449,8 +530,31 @@
 
     \solution
 
-    Solution
-    \\
+    Plotting the previous plot with the added lines as black ones.
+
+<<p2b, fig.pos="h", fig.height=5, fig.cap="Comparison of estimates over 1000 iterations">>=
+fit <- lm(data$Y ~ data$X1 + data$X2)
+
+plotPartA()
+
+# Plot beta0
+abline(h = fit$coef[1],
+       lty = 2,
+       lwd = 3,
+       col = "black")
+
+# Plot beta1
+abline(h = fit$coef[2],
+       lty = 2,
+       lwd = 3,
+       col = "black")
+
+# Plot beta1
+abline(h = fit$coef[3],
+       lty = 2,
+       lwd = 3,
+       col = "black")
+@
 
     \part
 
@@ -461,7 +565,56 @@
 
     \solution
 
-    Solution.
+    It happens quite early. Below we'll determine how many iterations it took.
+    \\
+
+    One way to create a stopping criterion is to look at the difference between
+    the current and previous value. Once we reach a point where it doesn't
+    change for some tolerance \(h\), then we could stop.  The tolerance could
+    be changed depending on the situation but in our case, let's see what ours
+    looked like (starting at 2):
+
+<<>>=
+beta0.diff <- rep(NA, N)
+beta1.diff <- rep(NA, N)
+beta2.diff <- rep(NA, N)
+
+# Start at 2, we can't have a difference at index 1
+for (i in 2:N) {
+    beta0.diff[i] <- abs(beta0[i] - beta0[i - 1])
+    beta1.diff[i] <- abs(beta1[i] - beta1[i - 1])
+    beta2.diff[i] <- abs(beta2[i] - beta2[i - 1])
+}
+
+<<p2c, echo=FALSE, fig.pos="h", fig.height=4, fig.cap="Differences between current and previous estimate">>=
+plot(R, beta0.diff,
+     type = "l",
+     xlab = "Iteration",
+     ylab = "Difference",
+     ylim = c(0, 0.06),
+     xlim = c(2, 3.5),
+     lwd = 3,
+     col = "palegreen")
+
+lines(R, beta1.diff,
+      lwd = 3,
+      col = "indianred")
+
+lines(R, beta2.diff,
+      lwd = 3,
+      col = "lightblue")
+
+legend("topright",
+       c("Beta0", "Beta1", "Beta2"),
+       lty = 1,
+       lwd = 3,
+       col = c("palegreen", "indianred", "lightblue"))
+@
+
+    Thus we can see ours converged around just 3 iterations. And in our case,
+    it they converged very quickly and thus a tolerance of 0.005 would have
+    ended it properly. It might be hard to determine what will make a good
+    tolerance though.
 \end{homeworkProblem}
 
 \pagebreak
