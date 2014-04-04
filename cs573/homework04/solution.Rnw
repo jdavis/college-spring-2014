@@ -660,7 +660,7 @@ legend("topright",
             \right]^2
             \\
             &=
-            \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i^2
+            \sum_{i = 1}^{N} K_{h}(x - X_i)
         \end{split}
     \]
 
@@ -679,9 +679,9 @@ legend("topright",
             &= \frac{\int y f(x, y)}{\int f(x, y)}
             \\
             &= \frac{
-                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i Y_i^2
+                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i
             }{
-                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i^2
+                \sum_{i = 1}^{N} K_{h}(x - X_i)
             }
             \\
             &= \frac{
@@ -703,7 +703,7 @@ legend("topright",
 \begin{homeworkProblem}
     Show that the kernel density estimate
     \[
-        \hat{f}(x) = \frac{
+        f(x) = \frac{
             1
         }{
             nh
@@ -724,16 +724,171 @@ legend("topright",
     \solution
 
     According to what a bona fide kernel density estimator is, it can be
-    anything as long as \(K\) satisfies these two requirements:
+    anything as long as our density, \(f(x)\) satisfies the following:
 
-    \begin{enumerate}
-        \item \(\int_{-\infty}^{+\infty} K(x)\dx = 1\)
-        \item And \(K(-x) = K(x)\) for all values of \(x\)
+    \begin{enumerate}[(a)]
+        \item \(\int_{-\infty}^{+\infty} f(x)\dx = 1\)
+        \item And non-negative for all values (because it is a probability).
     \end{enumerate}
 
-    The explanation is that the first requirement ensures that it is a valid
-    probability distribution function and the second ensures that the average
-    of the distribution is equal to that of the sample that was used.
+    These are the basic conditions for a probability density function. Let's
+    address each one of these conditions and see what happens.
+    \\
+
+    \part
+
+    First let's take the integral of \(f(x)\):
+    \[
+        \begin{split}
+            \int_{-\infty}^{+\infty} f(x) \dx
+            &= \int_{-\infty}^{+\infty}
+            \frac{
+                1
+            }{
+                nh
+            }
+            \sum_{i = 1}^{n} K
+            \left(
+                \frac{
+                    x - X_i
+                }{
+                    h
+                }
+            \right) \dx
+            \\
+            &=
+            \frac{
+                1
+            }{
+                nh
+            }
+            \int_{-\infty}^{+\infty}
+            \sum_{i = 1}^{n} K
+            \left(
+                \frac{
+                    x - X_i
+                }{
+                    h
+                }
+            \right) \dx
+            \\
+            &=
+            \frac{
+                1
+            }{
+                nh
+            }
+            \int_{-\infty}^{+\infty}
+            \left[
+                K
+                \left(
+                    \frac{
+                        x - X_1
+                    }{
+                        h
+                    }
+                \right)
+                +
+                K
+                \left(
+                    \frac{
+                        x - X_2
+                    }{
+                        h
+                    }
+                \right)
+                +
+                \cdots
+                +
+                K
+                \left(
+                    \frac{
+                        x - X_n
+                    }{
+                        h
+                    }
+                \right)
+            \right] \dx
+            \\
+            &=
+            \frac{
+                1
+            }{
+                nh
+            }
+            \int_{-\infty}^{+\infty}
+            K
+            \left(
+                \frac{
+                    x - X_1
+                }{
+                    h
+                }
+            \right) \dx
+            +
+            \int_{-\infty}^{+\infty}
+            K
+            \left(
+                \frac{
+                    x - X_2
+                }{
+                    h
+                }
+            \right)
+            +
+            \cdots
+            +
+            \int_{-\infty}^{+\infty}
+            K
+            \left(
+                \frac{
+                    x - X_n
+                }{
+                    h
+                }
+            \right) \dx
+        \end{split}
+    \]
+
+    If we use our scaled kernel instead of having \(h\) as a parameter, we get:
+    \[
+        \begin{split}
+            \int_{-\infty}^{+\infty} f_h(x) \dx
+            &=
+            \frac{
+                1
+            }{
+                n
+            }
+            \left[
+                \int_{-\infty}^{+\infty}
+                K_h
+                \left(
+                    x - X_1
+                \right) \dx
+                +
+                \int_{-\infty}^{+\infty}
+                K_h
+                \left(
+                    x - X_2
+                \right)
+                +
+                \cdots
+                +
+                \int_{-\infty}^{+\infty}
+                K_h
+                \left(
+                    x - X_n
+                \right) \dx
+            \right]
+            \\
+            &= 1
+        \end{split}
+    \]
+
+    Thus we can easily see that the first condition that must hold is that the
+    addition of all the integrals of our kernel function must equal \(n\), or
+    that each integral of the kernel function, \(K_h\), must equal 1.
 \end{homeworkProblem}
 
 \end{document}
