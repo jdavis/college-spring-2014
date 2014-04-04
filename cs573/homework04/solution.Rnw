@@ -81,6 +81,7 @@
 \newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
 \newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
 \newcommand{\dx}{\mathrm{d}x}
+\newcommand{\dy}{\mathrm{d}y}
 \newcommand{\solution}{\textbf{\large Solution}}
 
 \newcommand{\E}{\mathrm{E}}
@@ -620,14 +621,81 @@ legend("topright",
 \pagebreak
 
 \begin{homeworkProblem}
-    Show that the Nadarya-Watson estimator is equal to \textbf{local constant}
+    Show that the Nadaraya-Watson estimator is equal to \textbf{local constant}
     fitting.  \textit{Hint:} Use the local polynomial cost function to start
     and adapt where necessary.
     \\
 
     \solution
 
-    Solution.
+    We want to show that the Nadaraya-Watson estimator is equal to the local
+    constant fitting. To do this, let's look at the normal local polynomial
+    cost function:
+    \[
+        \min_{\beta_j, j = 0, \ldots p}
+        \sum_{i = 1}^{N} K_{h}(x - X_i)
+        \left[
+            Y_i
+            - \sum_{j = 0}^{p} \beta_j X_i^j
+        \right]^2
+    \]
+
+    Let's take a look at what happens when the number of our dimensions is 0,
+    or \(p = 0\). We get:
+    \[
+        \begin{split}
+            & \min_{\beta_j, j = 0, \ldots 0}
+            \sum_{i = 1}^{N} K_{h}(x - X_i)
+            \left[
+                Y_i
+                - \sum_{j = 0}^{0} \beta_j X_i^j
+            \right]^2
+            \\
+            &=
+            \min_{\beta_0}
+            \sum_{i = 1}^{N} K_{h}(x - X_i)
+            \left[
+                Y_i
+                - \beta_0
+            \right]^2
+            \\
+            &=
+            \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i^2
+        \end{split}
+    \]
+
+    Remembering that for two random variables, say \(X\) and \(Y\) and the
+    joint pdf of \(f(x, y)\), if we want the conditional expectation, \(\E[Y
+    \mid X = x]\), then we have:
+    \[
+        \E[Y \mid X = x] = \frac{\int y f(x, y)}{\int f(x, y)} = m(x)
+    \]
+
+    Using this fact and plugging in our minimized local polynomial cost
+    function, we get:
+    \[
+        \begin{split}
+            m(x)
+            &= \frac{\int y f(x, y)}{\int f(x, y)}
+            \\
+            &= \frac{
+                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i Y_i^2
+            }{
+                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i^2
+            }
+            \\
+            &= \frac{
+                \sum_{i = 1}^{N} K_{h}(x - X_i) Y_i
+            }{
+                \sum_{i = 1}^{N} K_{h}(x - X_i)
+            }
+        \end{split}
+    \]
+
+    which is equal to the Nadaraya-Watson estimator. Thus we can see that when
+    using the local polynomial cost function and reducing the dimensions to 0,
+    we end up with the NW estimator. Basically it is a special case of the
+    local polynomial function.
 \end{homeworkProblem}
 
 \pagebreak
