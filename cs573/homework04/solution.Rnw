@@ -404,6 +404,26 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Do an iterative approach to GAMs by repeatedly holding all but one
+    coefficient estimate fixed at its current value, and update only the
+    coefficient estimate using a simple linear regression. Continue the process
+    until convergence -- that is, until the coefficient estimates stop
+    changing. The process flow is sketched below:
+
+    \begin{enumerate}
+        \item Download the \emph{adv.dat} data set \((n = 200)\) with response
+            \(Y\) and two predictors, \(X_1, X_2\) on BlackBoard.
+        \item Initialize \(\hat{\beta_1}\) (estimated coefficient of \(X_1\))
+            to take on a value of your choice, say 0.
+        \item Keeping \(\hat{\beta_1}\) fixed, fit the model:
+            \[
+                Y - \hat{\beta_1} X_1 = \beta_0 + \beta_2 X_2 + e
+            \]
+        \item Keeping \(\hat{\beta_2}\) fixed, fit the model:
+            \[
+                Y - \hat{\beta_2} X_2 = \beta_0 + \beta_1 X_1 + e
+            \]
+    \end{enumerate}
 
 \end{homeworkProblem}
 
