@@ -888,7 +888,30 @@ legend("topright",
 
     Thus we can easily see that the first condition that must hold is that the
     addition of all the integrals of our kernel function must equal \(n\), or
-    that each integral of the kernel function, \(K_h\), must equal 1.
+    that each integral of the kernel function, \(K_h\), must equal 1:
+    \[
+        \int_{-\infty}^{+\infty}
+        K
+        \left(
+        x
+        \right) \dx
+        = 1
+    \]
+
+    \part
+
+    By allowing a kernel function to be negative, that would be saying that we
+    give values around it a negative influence. Thus this condition should pass
+    onto our \(K\) function as well. Therefore:
+    \[
+        K(x) \text{ is nonnegative as well}
+    \]
+
+    \part
+
+    Lastly, there is another condition that is in Kris' notes. It says that the
+    kernel, \(K\), should also be symmetric and centered on the point. This is
+    to ensure that the average of the distribution is the same as the sample.
 \end{homeworkProblem}
 
 \end{document}
