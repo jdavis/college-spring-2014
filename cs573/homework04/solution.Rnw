@@ -374,7 +374,7 @@
     This gives \(f_2''(\xi)\):
     \[
         \begin{split}
-            f_2'(\xi)
+            f_2''(\xi)
             &= 2 (\beta_2 - 3 \beta_4 \xi)
             + 6 (\beta_3 + \beta_4) \xi
             \\
@@ -389,7 +389,7 @@
             &= 2 \beta_2
             + 6 \beta_3 \xi
             \\
-            &= f_1'(\xi)
+            &= f_1''(\xi)
         \end{split}
     \]
 
