@@ -425,6 +425,43 @@
             \]
     \end{enumerate}
 
+    \part
+
+    Write a for loop to repeat (3) and (4) 1,000 times. Report the estimates of
+    \(\hat{\beta_0}, \hat{\beta_1}\) and \(\hat{\beta_2}\) at each iteration of
+    the for loop.  Create a plot in which each of these values is displayed
+    with \(\hat{\beta_0}, \hat{\beta_1}\) and \(\hat{\beta_2}\) each shown in a
+    different color.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Compare your answers in (a) to the results of simply performing multiple
+    linear regression to predict \(Y\) using \(X_1\) and \(X_2\). Use the
+    \texttt{abline()} function to overlay those multiple linear regression
+    coefficient esitmates on the plot obtained in (a).
+    \\
+
+    \solution
+
+    Solution
+    \\
+
+    \part
+
+    On this data set, how many backfitting iterations were required in order to
+    obtain a ``good'' approximation to the multiple regression coefficient
+    estimates? What would be a good stopping criterion?
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
