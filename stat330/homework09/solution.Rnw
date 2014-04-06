@@ -100,6 +100,115 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Use this data to answer the questions below:
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{|c c c c c c c c c c c c c|}
+            \hline
+            Wolverines:
+            & 27
+            & 38
+            & 21
+            & 37
+            & 23
+            & 28
+            & 23
+            & 24
+            & 34
+            & 26
+            & 20
+            & 21
+            \\
+            \hline
+            Cornhuskers:
+            & 38
+            & 27
+            & 56
+            & 49
+            & 29
+            & 35
+            & 69
+            & 45
+            & 77
+            & 27
+            & 54
+            & 42
+            \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \part
+
+    Draw a back to back stem and leaf display of the two point distributions.
+    Put Wolverines on the left. Also include a legend.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Construct a frequency table and histogram for the Cornhuskers' point
+    distribution. Your table should have the following column headings:
+    points, frequency, relative frequency. Choose a 10-point interval -- large
+    enough so the data are grouped together but yields enough intervals to
+    adequately show features of the distribution.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    From this histogram, describe the Cornhuskers' point distribution. Is it
+    unimodal or bimodal? Is it symmetric or skewed? If skewed, in what
+    direction?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    For both the Cornhuskers and the Wolverines, calculate the first quartile,
+    the second quartile (median), the third quartile, the range, and the
+    interquartile range (IQR).
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Construct side-by-side boxplots comparing the data. Make the axis range
+    from 20 to 80 points in increments of 10. Based on the boxplots, are there
+    any \emph{unusual} observations for either school?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Calculate the sample mean, sample variance, and sample deviation for each
+    school.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
