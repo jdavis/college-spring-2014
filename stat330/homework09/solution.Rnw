@@ -139,6 +139,16 @@
         \end{tabular}
     \end{table}
 
+<<echo=FALSE>>=
+data.wolverines <- c(27, 38, 21, 37, 23, 28, 23, 24, 34, 26, 20, 21)
+data.cornhuskers <- c(38, 27, 56, 49, 29, 35, 69, 45, 77, 27, 54, 42)
+
+data <- data.frame(Wolverines = data.wolverines,
+                   Cornhuskers = data.cornhuskers)
+
+box.stats <- boxplot.stats(data$W)
+@
+
     \part
 
     Draw a back to back stem and leaf display of the two point distributions.
@@ -197,8 +207,14 @@
 
     \solution
 
-    Solution.
+    See Figure~\ref{fig:p1e}.
     \\
+
+<<p1e, cache=TRUE, fig.pos="h", fig.height=5, echo=FALSE, fig.cap="Wolverines vs Cornhuskers">>=
+boxplot(data$Wolverines, data$Cornhuskers,
+     names = c('Wolverines', 'Cornhuskers'),
+     ylab = 'Y')
+@
 
     \part
 
