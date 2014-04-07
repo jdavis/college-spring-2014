@@ -214,6 +214,46 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Below are the ages of all 44 US presidents at inauguration:
+    \\
+
+    42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52, 54, 54,
+    54, 54, 54, 55, 55 55, 55, 56, 56, 56, 57, 57, 57, 57, 58, 60, 61, 61, 61,
+    62, 64, 64, 65, 68, 69
+    \\
+
+    \part
+
+    Construct a stem and leaf plot of this data (use interval size of 5).
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Do you think that these data come from a normal distribution? Justify your
+    answer.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Given your answer for (2b), which is more appropriate to use to describe
+    this data set, the mean and standard deviation or the median and IQR?
+    Explain.  \emph{Hint:} See top part of pg. 217 and the beginning of 8.2.6
+    of Baron.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
