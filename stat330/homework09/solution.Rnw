@@ -207,7 +207,10 @@ box.stats <- boxplot.stats(data$W)
 
     \solution
 
-    See Figure~\ref{fig:p1e}.
+    See Figure~\ref{fig:p1e}. I'd say the only unusual observation is the time
+    that the Cornhuskers scored 77 points in a single game. That's 11
+    touchdowns and pretty crazy. It is unusualy but (obviously) it can happen
+    rarely.
     \\
 
 <<p1e, cache=TRUE, fig.pos="h", fig.height=5, echo=FALSE, fig.cap="Wolverines vs Cornhuskers">>=
@@ -224,7 +227,30 @@ boxplot(data$Wolverines, data$Cornhuskers,
 
     \solution
 
-    Solution.
+    We'll denote the statistic as having a subscript \(w\) for Wolverines and a
+    subscript \(c\) for the Cornhuskers.
+    \\
+
+    The sample mean is given to be \(\bar{X} = \frac{1}{n}\sum_{i = 1}^{n}
+    X_i\). This gives us:
+    \[
+        \bar{X}_w = \Sexpr{mean(data$Wolverines)}, \quad
+        \bar{X}_c = \Sexpr{mean(data$Cornhuskers)}
+    \]
+
+    The sample variance is given to be \(s^2 = \frac{1}{n - 1}\sum_{i = 1}^{n}
+    (X_i - \bar{X})^2\). This gives us:
+    \[
+        s^2_w = \Sexpr{var(data$Wolverines)}, \quad
+        s^2_c = \Sexpr{var(data$Cornhuskers)}
+    \]
+
+    The sample deviation is then \(s = \sqrt{s^2}\). This gives us:
+    \[
+        s_w = \Sexpr{sd(data$Wolverines)}, \quad
+        s_c = \Sexpr{sd(data$Cornhuskers)}
+    \]
+
 \end{homeworkProblem}
 
 \pagebreak
