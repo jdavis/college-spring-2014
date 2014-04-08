@@ -270,9 +270,15 @@ boxplot(data$Wolverines, data$Cornhuskers,
     \\
 
     42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52, 54, 54,
-    54, 54, 54, 55, 55 55, 55, 56, 56, 56, 57, 57, 57, 57, 58, 60, 61, 61, 61,
+    54, 54, 54, 55, 55, 55, 55, 56, 56, 56, 57, 57, 57, 57, 58, 60, 61, 61, 61,
     62, 64, 64, 65, 68, 69
     \\
+
+<<echo=FALSE>>=
+data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
+          54, 54, 54, 54, 54, 55, 55, 55, 55, 56, 56, 56, 57, 57, 57, 57, 58,
+          60, 61, 61, 61, 62, 64, 64, 65, 68, 69)
+@
 
     \part
 
@@ -281,7 +287,9 @@ boxplot(data$Wolverines, data$Cornhuskers,
 
     \solution
 
-    Solution.
+    By tipping the stem plot on its side, this gives us the histogram. It looks
+    very symmetrical and very unimodal. Thus the histogram ends up looking
+    quite a bit like the Normal distribution.
     \\
 
     \part
@@ -292,8 +300,25 @@ boxplot(data$Wolverines, data$Cornhuskers,
 
     \solution
 
-    Solution.
-    \\
+    Where the first number is the range 0 to 4 and the second range is 5 to 9.
+    Thus the first 4 has ages of 42 and 43.
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{r | l}
+            4 & 23
+            \\
+            4 & 6677899
+            \\
+            5 & 0111112244444
+            \\
+            5 & 555566677778
+            \\
+            6 & 0111244
+            \\
+            6 & 589
+        \end{tabular}
+    \end{table}
 
     \part
 
@@ -305,7 +330,14 @@ boxplot(data$Wolverines, data$Cornhuskers,
 
     \solution
 
-    Solution.
+    We know that the median is far more robust than the mean when it comes to
+    outliers. If our data had a lot of them, we might want to look at using the
+    median to accurately capture the majority of the data.
+    \\
+
+    However, our data doesn't appear to have any significant potential
+    outliers. Therefore I'd say ysing the mean and IQR would be the best way to
+    describe our data.
 \end{homeworkProblem}
 
 \pagebreak
