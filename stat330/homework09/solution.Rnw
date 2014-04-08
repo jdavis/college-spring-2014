@@ -157,8 +157,13 @@ box.stats <- boxplot.stats(data$W)
 
     \solution
 
-    Solution.
-    \\
+<<>>=
+data$Wolverines
+stem(data$Wolverines)
+
+data$Cornhuskers
+stem(data$Cornhuskers, scale = 2)
+@
 
     \part
 
@@ -171,8 +176,13 @@ box.stats <- boxplot.stats(data$W)
 
     \solution
 
-    Solution.
-    \\
+<<p1c, cache=TRUE, fig.pos="h", fig.height=4, echo=FALSE, fig.cap="Histogram of Cornhuskers">>=
+hist(data$Cornhuskers, breaks = 5)
+@
+
+<<echo=FALSE>>=
+cbind( Freq=table(data$Cornhuskers), Cumul=cumsum(table(data$Cornhuskers)), relative=prop.table(table(data$Cornhuskers)))
+@
 
     \part
 
