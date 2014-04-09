@@ -469,7 +469,36 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
 
     \solution
 
-    Solution.
+    We know that the pdf of the uniform distribution is:
+    \[
+        f(x) = \left\{
+            \begin{array}{ll}
+                \frac{1}{b - a} & \quad x \in [a, b]
+                \\
+                0 & \quad \text{otherwise}
+            \end{array}
+        \right.
+    \]
+
+    Given a sample, \(X = X_1, \ldots, X_n\), the likelihood is then:
+    \[
+        \begin{split}
+            \Likelihood(a, b \mid X)
+            &= \prod_{i = 1}^{n} f(X_i)
+            \\
+            &= \prod_{i = 1}^{n}
+            \frac{1}{b - a}
+            \\
+            &= \frac{1}{(b - a)^n}
+        \end{split}
+    \]
+
+    When thinking about this in terms of our sample, we know that we will have
+    a range of values. Therefore it should be somewhat obvious that we can
+    guarantee with probability 1 that if we choose the parameters such that \(a
+    = \min(X_1, \ldots, X_n)\) and \(b = \max(X_1, \ldots, X_n)\), that all our
+    samples will fall within the range \(a\) to \(b\) and the likelihood is
+    maximized.
 \end{homeworkProblem}
 
 \end{document}
