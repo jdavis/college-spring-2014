@@ -158,13 +158,34 @@ box.stats <- boxplot.stats(data$W)
 
     \solution
 
-<<>>=
-data$Wolverines
-stem(data$Wolverines)
+    For reading the Wolverines data, the middle column indicates the tens digit
+    and the left column indicates the ones digit. For example, there were three
+    games in which the Wolverines scored 30 or more points, 34, 37, and 38
+    points.
+    \\
 
-data$Cornhuskers
-stem(data$Cornhuskers, scale = 2)
-@
+    The same holds for the Cornhuskers, except in the opposite direction. So
+    the Cornhuskers scored more than 70 only once when they scored 77.
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{r |c| l}
+            Wolverines & & Cornhuskers
+            \\
+            \hline
+            011334678 & 2 & 779
+            \\
+            478 & 3 & 58
+            \\
+            & 4 & 259
+            \\
+            & 5 & 46
+            \\
+            & 6 & 9
+            \\
+            & 7 & 7
+        \end{tabular}
+    \end{table}
 
     \part
 
@@ -194,7 +215,7 @@ cbind( Freq=table(data$Cornhuskers), Cumul=cumsum(table(data$Cornhuskers)), rela
 
     \solution
 
-    Solution.
+    It isn't symmetric.
     \\
 
     \part
@@ -288,19 +309,6 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
 
     \solution
 
-    By tipping the stem plot on its side, this gives us the histogram. It looks
-    very symmetrical and very unimodal. Thus the histogram ends up looking
-    quite a bit like the Normal distribution.
-    \\
-
-    \part
-
-    Do you think that these data come from a normal distribution? Justify your
-    answer.
-    \\
-
-    \solution
-
     Where the first number is the range 0 to 4 and the second range is 5 to 9.
     Thus the first 4 has ages of 42 and 43.
 
@@ -320,6 +328,19 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
             6 & 589
         \end{tabular}
     \end{table}
+
+    \part
+
+    Do you think that these data come from a normal distribution? Justify your
+    answer.
+    \\
+
+    \solution
+
+    By tipping the stem plot on its side, this gives us the histogram. It looks
+    very symmetrical and very unimodal. Thus the histogram ends up looking
+    quite a bit like the Normal distribution.
+    \\
 
     \part
 
