@@ -346,6 +346,25 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
     Problem 9.4 from Baron on pg. 301
     \\
 
+    A sample of 3 observations (\(X_1 = 0.4, X_2 = 0.7, X_3 = 0.9\)) is
+    collected from a continuous distribution with density:
+
+    \[
+        f(x) = \left\{
+            \begin{array}{ll}
+                \theta x^{\theta - 1} & \quad 0 < x < 1
+                \\
+                0 & \quad \text{otherwise}
+            \end{array}
+        \right.
+    \]
+
+    Estimate \(\theta\) by your favorite method.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
