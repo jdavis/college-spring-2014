@@ -90,6 +90,7 @@
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
+\newcommand{\Likelihood}{\mathcal{L}}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
@@ -359,7 +360,19 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
         \right.
     \]
 
-    Estimate \(\theta\) by your favorite method.
+    \part
+
+    Estimate \(\theta\) using moment of methods.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Estimate \(\theta\) using maximum likelihood.
     \\
 
     \solution
@@ -373,13 +386,54 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
     Problem 9.3, part c, from Baron on pg. 300
     \\
 
-    Estimate the parameter \(\mu\) if a sample from Normal(\(\mu, \sigma\))
-    distribution is observed, and we already know \(\sigma\).
+    Estimate the parameter \(\mu\) using maximum likelihood if a sample from
+    Normal(\(\mu, \sigma\)) distribution is observed, and we already know
+    \(\sigma\).
     \\
 
     \solution
 
-    Solution.
+    We know \(\sigma\) and have a sample \(X = X_1, \ldots, X_n\). We also know
+    that the density for a normal distribution is given as:
+    \[
+        f(x) = \frac{
+            1
+        }{
+            \sqrt{2 \pi} \sigma
+        }
+        \exp
+        \left(
+            - \frac{
+                1
+            }{
+                2 \sigma^2
+            }
+            (x - \mu)^2
+        \right)
+    \]
+
+    So if we determine our likelihood function, we want to maximize the probability
+    given our sample and statistic to determine \(\mu\). This gives us:
+    \[
+        \Likelihood(\mu \mid \sigma, X_1, \ldots, X_n)
+    \]
+
+    since we assume our sample is i.i.d., we get:
+    \[
+        \begin{split}
+            \Likelihood(\mu \mid \sigma, X_1, \ldots, X_n)
+            &= \prod_{i = 1}^{n} f(X_i)
+        \end{split}
+    \]
+
+    we can simplify this by taking the log likelihood, and this becomes:
+    \[
+        \begin{split}
+            \log \Likelihood(\mu \mid \sigma, X_1, \ldots, X_n)
+            &= \prod_{i = 1}^{n} \log f(X_i)
+        \end{split}
+    \]
+
 \end{homeworkProblem}
 
 \pagebreak
@@ -388,8 +442,8 @@ data <- c(42, 43, 46, 46, 47, 47, 48, 49, 49, 50, 51, 51, 51, 51, 51, 52, 52,
     Problem 9.3, part a, from Baron on pg. 300
     \\
 
-    Estimate the parameters \(a\) and \(b\) if a sample from Uniform(\(a, b\))
-    distribution is observed.
+    Estimate the parameters \(a\) and \(b\) using maximum likelihood if a
+    sample from Uniform(\(a, b\)) distribution is observed.
     \\
 
     \solution
