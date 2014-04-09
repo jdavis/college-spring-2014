@@ -146,8 +146,6 @@ data.cornhuskers <- c(38, 27, 56, 49, 29, 35, 69, 45, 77, 27, 54, 42)
 
 data <- data.frame(Wolverines = data.wolverines,
                    Cornhuskers = data.cornhuskers)
-
-box.stats <- boxplot.stats(data$W)
 @
 
     \part
@@ -202,6 +200,8 @@ box.stats <- boxplot.stats(data$W)
 hist(data$Cornhuskers, breaks = 5)
 @
 
+    Here is the frequency table:
+
 <<echo=FALSE>>=
 cbind( Freq=table(data$Cornhuskers), Cumul=cumsum(table(data$Cornhuskers)), relative=prop.table(table(data$Cornhuskers)))
 @
@@ -215,7 +215,7 @@ cbind( Freq=table(data$Cornhuskers), Cumul=cumsum(table(data$Cornhuskers)), rela
 
     \solution
 
-    It isn't symmetric.
+    It sort of is bimodal. It is skewed a bit to the left.
     \\
 
     \part
@@ -227,8 +227,46 @@ cbind( Freq=table(data$Cornhuskers), Cumul=cumsum(table(data$Cornhuskers)), rela
 
     \solution
 
-    Solution.
-    \\
+<<echo=FALSE>>=
+WB <- boxplot.stats(data$Wolverines)
+CB <- boxplot.stats(data$Cornhuskers)
+
+W1qr <- WB$stats[2]
+C1qr <- CB$stats[2]
+
+W2qr <- WB$stats[3]
+C2qr <- CB$stats[3]
+
+W3qr <- WB$stats[4]
+C3qr <- CB$stats[4]
+
+W4qr <- WB$stats[5]
+C4qr <- CB$stats[5]
+@
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{r |c| l}
+            Stat & Wolverines & Cornhuskers
+            \\
+            \hline
+            1st Quartile & \Sexpr{W1qr} & \Sexpr{C1qr}
+            \\
+            2nd Quartile & \Sexpr{W2qr} & \Sexpr{C2qr}
+            \\
+            3rd Quartile & \Sexpr{W3qr} & \Sexpr{C3qr}
+            \\
+            4th Quartile & \Sexpr{W4qr} & \Sexpr{C4qr}
+            \\
+            Range
+            & \Sexpr{min(data$Wolverines)} - \Sexpr{max(data$Wolverines)}
+            & \Sexpr{min(data$Cornhuskers)} - \Sexpr{max(data$Cornhuskers)}
+            \\
+            IQR = \(Q_3 - Q_1\)
+            & \Sexpr{W3qr - W1qr}
+            & \Sexpr{C3qr - C1qr}
+            \\
+        \end{tabular}
+    \end{table}
 
     \part
 
