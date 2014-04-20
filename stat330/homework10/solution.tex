@@ -135,9 +135,56 @@
     Problem 9.7a from Baron on pg. 301. Answer in the back of the book.
     \\
 
+    Let there be a server that serves concurrent users. Let the average number
+    of concurrent users at 100 randomly selected times be 37.7 with a standard
+    deviation of \(\sigma = 9.2\).
+    \\
+
+    Construct a 90\% confidence interval for the expectation of the number of
+    concurrent users.
+    \\
+
     \solution
 
-    Solution.
+    We use the standard equation for confidence interval when the mean when
+    \(\sigma\) is known. We know that \(\bar{X} = 37.7\), \(n = 100\), and
+    \(\alpha = 0.1\). This gives us a \(z_{\alpha / 2} = z_{0.05} = 1.645\) by
+    using a table.  This gives us:
+    \begin{align*}
+        \bar{X} \pm z_{\alpha / 2}
+        \frac{
+            \sigma
+        }{
+            \sqrt{n}
+        }
+        &=
+        37.7 \pm 1.645
+        \frac{
+            9.2
+        }{
+            10
+        }
+        \\
+        &=
+        37.7
+        \pm 1.645
+        \frac{
+            9.2
+        }{
+            10
+        }
+        \\
+        &=
+        37.7
+        \pm
+        1.513
+        \\
+        &=
+        \left[
+            36.19,
+            39.21
+        \right]
+    \end{align*}
 \end{homeworkProblem}
 
 \pagebreak
