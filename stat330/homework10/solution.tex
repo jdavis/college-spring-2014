@@ -292,7 +292,53 @@
 
     \solution
 
-    Solution.
+    This is a confidence interval for differene of means. This gives us \(\alpha = 0.1\),
+    so \(z_{\alpha / 2} = z_{0.05} = 1.645\) then:
+    \begin{align*}
+        \bar{x}_1 - \bar{x}_2
+        \pm z_{\alpha / 2}
+        \sqrt{
+            \frac{
+                s^2_1
+            }{
+                n_1
+            }
+            +
+            \frac{
+                s^2_2
+            }{
+                n_2
+            }
+        }
+        &=
+        4.2 - 3.4
+        \pm 1.645
+        \sqrt{
+            \frac{
+                49
+            }{
+                30
+            }
+            +
+            \frac{
+                32
+            }{
+                39
+            }
+        }
+        \\
+        &=
+        0.8
+        \pm
+        2.58
+        \\
+        &=
+        \left[
+            -1.78,
+            3.38
+        \right]
+    \end{align*}
+
 \end{homeworkProblem}
 
 \pagebreak
