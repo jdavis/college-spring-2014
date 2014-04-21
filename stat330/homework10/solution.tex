@@ -85,6 +85,7 @@
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
+\newcommand{\tdist}{\(t\)-distribution}
 \newcommand{\Likelihood}{\mathcal{L}}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
@@ -353,10 +354,40 @@
 
     Construct a 90\% confidence interval for the average salary of an
     entry-level computer engineer.
+    \\
 
     \solution
 
-    Solution.
+    We have a small sample size, so we need to use the {\tstat}. Using our
+    sample, this gives us: \(\bar{X} = 50\), \(\alpha = 0.10\), \(s = 20\).
+    Using a \(t\) table, know our {\tstat} has 2 degrees of freedom which gives
+    \(t_{0.05} = 2.353\). Thus:
+    \begin{align*}
+        \bar{X} \pm t_{\alpha / 2}
+        \frac{
+            s
+        }{
+            \sqrt{n}
+        }
+        &=
+        50 \pm 2.920
+        \frac{
+            20
+        }{
+            \sqrt{3}
+        }
+        \\
+        &=
+        50
+        \pm
+        33.72
+        \\
+        &=
+        \left[
+            16.3,
+            83.7
+        \right]
+    \end{align*}
 \end{homeworkProblem}
 
 \pagebreak
