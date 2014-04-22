@@ -1,0 +1,322 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{enumerate}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Homework\ \#10}
+\newcommand{\hmwkDueDate}{April 23, 2014}
+\newcommand{\hmwkClass}{Stat330}
+\newcommand{\hmwkClassTime}{Section A}
+\newcommand{\hmwkClassInstructor}{Mr. Lanker}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate\ at 3:10pm}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
+\newcommand{\zstat}{\(z\)-statistic}
+\newcommand{\tdist}{\(t\)-distribution}
+\newcommand{\Likelihood}{\mathcal{L}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    An experimenter tested for differences in attitudes toward smoking before
+    and after a film on lung cancer was shown. The experimenter tested to see
+    if there was a difference between attitudes that people held about smoking
+    before and after viewing the film (either less or more favorable).  She
+    found a difference which was significant between the 0.02 and 0.05 levels.
+    \\
+
+    \part
+
+    Let \(\mu_1\) and \(\mu_2\) represent the mean attitude towards smoking before
+    viewing the film and after viewing the film, respectively. What are the assumed
+    hypotheses (null and alternative)?
+    \\
+
+    \solution
+
+    The hypotheses are as follows:
+    \[
+        H_0 : \mu_1 = \mu_2
+        \quad
+        vs.
+        \quad
+        H_a : \mu_1 \neq \mu_2
+    \]
+
+    \part
+
+    What level of significance indicates the greater degree of significance,
+    0.05 or 0.02, i.e. for which level of significance will the experimenter be
+    more confidence in rejecting null hypothesis in favor of the alternative?
+    \\
+
+    \solution
+
+    A lower value is better as it indicates a smaller possibility of the value
+    being that extreme.
+    \\
+
+    \part
+
+    If her \(\alpha\) level is 0.05, will she reject \(H_0\) in favor of
+    \(H_a\)?
+    \\
+
+    \solution
+
+    Yes, if her significance is between 0.05 and 0.02 and her \(\alpha\) level is
+    0.05, then that means that the level of significance is less than
+    \(\alpha\) which is when we reject the \(H_0\).
+    \\
+
+    \part
+
+    Will she reject \(H_0\) in favor of \(H_a\) if she employs the 0.01 level?
+    \\
+
+    \solution
+
+    No, since our value is between 0.05 and 0.02, an \(\alpha\) value of 0.01
+    is too small and we can't reject \(H_0\).
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    The mean yield of corn in the US is about 120 bushels per acre (from 1989).
+    A survey of 50 farmers this year gives a sample mean yield of \(\bar{x} =
+    123.6\) bushels per acre.  We want to know whether this is good evidence
+    that the national mean this year is not 120 bushels per acre.  Assume that
+    the sample is i.i.d. from the entire population and that the standard
+    deviation of the yield in this population is \(\sigma = 10\) bushels per
+    acre.
+    \\
+
+    Give the {\pval} for the test of
+    \[
+        H_0 : \mu = 120
+        \quad
+        vs.
+        \quad
+        H_a : \mu \neq 120
+    \]
+
+    Are you convinced that the population mean is not 120 bushels per acre? Use
+    the 0.05 significance level in making your decision.
+    \\
+
+    \solution
+
+    First let's calculate the {\zstat}, which gives us:
+    \[
+        Z
+        = \frac{
+            \bar{X} - \mu
+        }{
+            \sigma / \sqrt{n}
+        }
+        = \frac{
+            123.6 - 120
+        }{
+            10 / \sqrt{50}
+        }
+        = \frac{
+            123.6 - 120
+        }{
+            10 / \sqrt{50}
+        }
+        = 2.55
+    \]
+
+    This gives us a {\pval} of 0.015. Since this value is less than \(0.05\),
+    we have moderate evidence that we can reject the null hypothesis and thus
+    we accept that we have evidence that \(\mu \neq 120\).
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    In the past, the mean score of the seniors at South High on the ACT exam
+    has been 20.0.  This year a special preparation course is offered, and all
+    43 seniors planning to take the ACT enroll in the course. The mean of their
+    ACT scores is 21.1. Assume that the ACT scores vary normally with \(\sigma
+    = 6\).
+    \\
+
+    Is the outcome good evidence that this class's true mean is not 20? State
+    your hypotheses, compute the {\pval}, and assess the amount of evidence.
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    A computer has a random number generator designed to produce random numbers that are uniformly
+    distributed within the interval from 0 to 1. If this is true, the numbers come from a population
+    with \(\mu = \frac{1}{2}\) and \(\sigma^2 = \frac{1}{12}\).
+    \\
+
+    A command to generate one million random numbers results in a sample mean
+    of 0.4992894. Assume that the population variance remains fixed. We want to
+    use the results of this experiment to test if \(\mu\) is in fact one-half.
+    \\
+
+    \part
+
+    State the hypotheses for this test.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Calculate the value of the {\zstat}.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Compute the {\pval}.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Is the result significant at the \(\alpha = 0.05\) level?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Is the result significant at the \(\alpha = 0.01\) level?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    I performed this test in R, which has a decent random number generator. Are
+    you surprised about the result of this experiment? Why or why not?
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    \textbf{Extra Credit:} Now what if I told you that I generated 100 sets of
+    one million random numbers and used the lowest sample mean of the 100 sets
+    for this problem, now are you surprised about the result? Why or why not?
+    \\
+
+    \solution
+
+    Solution.
+\end{homeworkProblem}
+
+
+\end{document}
