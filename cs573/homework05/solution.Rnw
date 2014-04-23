@@ -204,6 +204,49 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    \part
+
+    Make an R program that solves the LS-SVM for non-linear regression given the parameters
+    \(\gamma\) and bandwidth \(h\) for the following Gaussian kernel (do not
+    implement the cross-validation procedure):
+    \[
+        K(X_i, X_j) = \frac{
+            1
+        }{
+            \sqrt{2 \pi}
+        }
+        \exp \left(
+        - \frac{
+            \left\| X_i - X_j \right|^2_2
+        }{
+            2h^2
+        }
+        \right)
+    \]
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Try your program on the following functions (i.e., experiment with some
+    values of \(\gamma\) and \(h\)):
+
+<<eval=FALSE>>=
+X <- seq(0, 1, length.out = 200)
+Y <- (sin(2*pi*(x-0.5)))^2 + rnorm(200, 0, 0.2)
+@
+
+    Describe the effect when two tuning parameters \(\gamma\) and \(h\) change.
+    Finally try the values \(\gamma = 9.4365\) and \(h = 0.1606\). Does this
+    seem like a good fit to you?
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
