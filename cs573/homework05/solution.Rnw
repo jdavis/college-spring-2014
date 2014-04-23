@@ -199,6 +199,59 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Inspired by Problem 7 from Chapter 9 in ISLR.
+    \\
+
+    Use a support vector classification in order to predict whether a given car gets
+    high or low gas mileage baesd on the \emph{Auto} dataset. You can download the
+    data set on the ISL website.
+    \\
+
+    \part
+
+    Create a class variable that takes on a ``1'' for cars with gas mileage
+    above the median, and a ``1'' for cars with gas mileage below the median.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Fit a support vector classifier with linear kernel to the data with various
+    values of cost (i.e., the parameter \(C\) from class), in order to predict
+    whether a car gets high or low gas mileage.  Report the cross-validation
+    errors associated with different values of this parameter. Comment on the
+    results.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Now repeat (b), this time using SVMs with radial basis and polynomial
+    kernels, with different values of gamma, degree and cost. Comment on your
+    results.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    \part
+
+    Which kernel function do you prefer and why?
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
