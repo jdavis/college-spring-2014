@@ -57,7 +57,7 @@
     \exitProblemHeader{homeworkProblemCounter}
 }
 
-\newcommand{\hmwkTitle}{Homework\ \#9}
+\newcommand{\hmwkTitle}{Homework\ \#5}
 \newcommand{\hmwkDueDate}{April 25, 2014}
 \newcommand{\hmwkClass}{ComS 573}
 \newcommand{\hmwkClassTime}{10am}
