@@ -162,6 +162,12 @@
             \\
         \end{tabular}
     \end{table}
+<<echo=FALSE>>=
+X1 <- c(3, 3, 6, 6, 1, 0, 0, -1)
+X2 <- c(1, -1, 1, -1, 0, 1, -1, 0)
+color <- c(rep('red', 4), rep('green', 4))
+class <- c(1, 1, 1, 1, -1, -1, -1, -1)
+@
 
     \part
 
@@ -172,8 +178,34 @@
 
     \solution
 
-    Solution.
-    \\
+<<p1a, fig.pos="H", fig.height=5, fig.cap="Plot of the data">>=
+plot(X1, X2,
+     ylim = c(-4, 4),
+     xlim = c(-4, 8),
+     col = color)
+
+# Red Margin
+abline(v = 3, lty = 2)
+
+# Green Margin
+abline(v = 1, lty = 2)
+
+# Hyperplane
+abline(v = 2, lty = 1)
+
+# Normals, Red Class
+segments(X1[1], X2[1],
+         2, X2[1],
+         lty = 6)
+segments(X1[2], X2[2],
+         2, X2[2],
+         lty = 6)
+
+# Normals, Green Class
+segments(X1[5], X2[5],
+         2, X2[5],
+         lty = 6)
+@
 
     \part
 
