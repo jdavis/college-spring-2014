@@ -215,8 +215,6 @@
     we accept that we have evidence that \(\mu \neq 120\).
 \end{homeworkProblem}
 
-\pagebreak
-
 \begin{homeworkProblem}
     In the past, the mean score of the seniors at South High on the ACT exam
     has been 20.0.  This year a special preparation course is offered, and all
@@ -270,9 +268,10 @@
 \pagebreak
 
 \begin{homeworkProblem}
-    A computer has a random number generator designed to produce random numbers that are uniformly
-    distributed within the interval from 0 to 1. If this is true, the numbers come from a population
-    with \(\mu = \frac{1}{2}\) and \(\sigma^2 = \frac{1}{12}\).
+    A computer has a random number generator designed to produce random numbers
+    that are uniformly distributed within the interval from 0 to 1. If this is
+    true, the numbers come from a population with \(\mu = \frac{1}{2}\) and
+    \(\sigma^2 = \frac{1}{12}\) and \(\sigma = 0.289\).
     \\
 
     A command to generate one million random numbers results in a sample mean
@@ -287,8 +286,14 @@
 
     \solution
 
-    Solution.
-    \\
+    The hypotheses are:
+    \[
+        H_0 : \mu = 0.5
+        \quad
+        vs.
+        \quad
+        H_a : \mu \neq 0.5
+    \]
 
     \part
 
@@ -297,8 +302,26 @@
 
     \solution
 
-    Solution.
-    \\
+    The value of the {\zstat} is:
+    \[
+        Z
+        = \frac{
+            \bar{X} - \mu
+        }{
+            \sigma / \sqrt{n}
+        }
+        = \frac{
+            0.4992894 - 0.5
+        }{
+            0.289 / \sqrt{1000000}
+        }
+        = \frac{
+            -0.0007106
+        }{
+            0.000289
+        }
+        = -2.459
+    \]
 
     \part
 
@@ -307,7 +330,7 @@
 
     \solution
 
-    Solution.
+    Using a standard Z table, this gives us the {\pval} \(= 0.019\).
     \\
 
     \part
@@ -317,7 +340,7 @@
 
     \solution
 
-    Solution.
+    Yes, because the {\pval} is less than our \(\alpha\) of 0.05.
     \\
 
     \part
@@ -327,7 +350,7 @@
 
     \solution
 
-    Solution.
+    No, because the {\pval} is greater than our \(\alpha\) of 0.01.
     \\
 
     \part
@@ -338,7 +361,9 @@
 
     \solution
 
-    Solution.
+    Yes, you'd think that 1 million random numbers would be enough to say that
+    our \(\mu\) value is 0.5. But using our {\pval} we have significant
+    evidence to reject \(H_0\) and thus accept \(H_a\) that \(\mu \neq 0.5\).
     \\
 
     \part
@@ -350,7 +375,11 @@
 
     \solution
 
-    Solution.
+    By calculating the mean 100 times, it is likely that we will get one set of
+    sample values that allows us to reject \(H_0\). By taking the minimum of
+    all of these means, we are basically just selecting the sample that gave us
+    the most extreme value. Thus I'm not surprised anymore because we picked
+    the mean that was most extreme thus making the {\pval} as low as possible.
 \end{homeworkProblem}
 
 
