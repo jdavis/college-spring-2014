@@ -223,6 +223,10 @@ segments(X1[5], X2[5],
          lty = 6)
 @
 
+    Now if we want the hyperplane, we know that a hyperplane equation is given
+    as \(\beta_0 + \beta_1 X_1 + \beta_2 X_2 = 0\) as given in the book by
+    equation (9.1).
+
     \part
 
     Calculate the margin.
