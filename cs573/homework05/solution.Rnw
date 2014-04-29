@@ -101,6 +101,7 @@
 \begin{document}
 
 <<echo=FALSE, warning=FALSE, message=FALSE>>=
+library('e1071')
 @
 
 \maketitle
@@ -178,10 +179,25 @@ class <- c(1, 1, 1, 1, -1, -1, -1, -1)
 
     \solution
 
-<<p1a, fig.pos="H", fig.height=5, fig.cap="Plot of the data">>=
+    Here is a basic graph of the data:
+
+<<p1a, echo=FALSE, fig.pos="H", fig.height=5, fig.cap="Plot of the data">>=
 plot(X1, X2,
      ylim = c(-4, 4),
      xlim = c(-4, 8),
+     pch = 19,
+     col = color)
+@
+
+
+    It is somewhat obvious that to maximize the margin, we will have three
+    support vectors. The below graph shows the margin as well as the separator:
+
+<<p1b, echo=FALSE, fig.pos="H", fig.height=5, fig.cap="Data with hyperplane.">>=
+plot(X1, X2,
+     ylim = c(-4, 4),
+     xlim = c(-4, 8),
+     pch = 19,
      col = color)
 
 # Red Margin
@@ -234,21 +250,30 @@ segments(X1[5], X2[5],
     Inspired by Problem 7 from Chapter 9 in ISLR.
     \\
 
-    Use a support vector classification in order to predict whether a given car gets
-    high or low gas mileage baesd on the \emph{Auto} dataset. You can download the
-    data set on the ISL website.
+    Use a support vector classification in order to predict whether a given car
+    gets high or low gas mileage baesd on the \emph{Auto} dataset. You can
+    download the data set on the ISL website.
     \\
+
+<<>>=
+# Load the Auto data
+library('ISLR')
+@
 
     \part
 
     Create a class variable that takes on a ``1'' for cars with gas mileage
-    above the median, and a ``1'' for cars with gas mileage below the median.
+    above the median, and a ``-1'' for cars with gas mileage below the median.
     \\
 
     \solution
 
-    Solution.
-    \\
+<<>>=
+mpg.median <- median(Auto$mpg)
+mpg.median
+new.var = ifelse(Auto$mpg > mpg.median, 1, 0)
+new.var
+@
 
     \part
 
