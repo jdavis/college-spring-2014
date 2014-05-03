@@ -521,13 +521,25 @@ class <- c(1, 1, 1, 1, -1, -1, -1, -1)
 
     Here is the data after the feature mapping:
 
-<<p7b, echo=FALSE, fig.pos="H", fig.height=5, fig.width=5, fig.cap="Plot of the data in the feature space">>=
+<<p7b, echo=FALSE, fig.align="center", fig.pos="H", fig.height=5, fig.width=5, fig.cap="Plot of the data in the feature space">>=
 plot(X1.space, X2.space,
      ylim = c(-2, 12),
      xlim = c(-2, 12),
      pch = 19,
      col = color)
 @
+
+    \part
+
+    Find the equation of the separating hyperplane in this feature space and
+    the corresponding Lagrange multiplies \(\alpha\) both \emph{without}
+    solving a QP problem. Plot the separating hyperplane on the plot from (b)
+    as well.
+    \\
+
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \end{document}
