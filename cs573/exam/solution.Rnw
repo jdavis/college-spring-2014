@@ -102,6 +102,7 @@
 
 \pagebreak
 
+\setcounter{homeworkProblemCounter}{6}
 \begin{homeworkProblem}
     We want to determine the posterior distribution. We know that the
     probability \(p(\beta \mid X, Y)\) is going to be proportional to this
