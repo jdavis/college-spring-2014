@@ -59,7 +59,7 @@
 \newcommand{\hmwkTitle}{Final Exam}
 \newcommand{\hmwkDueDate}{May 5, 2014}
 \newcommand{\hmwkClass}{ComS 573}
-\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassTime}{11:45am}
 \newcommand{\hmwkClassInstructor}{Professor De Brabanter}
 \newcommand{\hmwkAuthorName}{Josh Davis}
 
@@ -337,6 +337,197 @@
 \pagebreak
 
 \begin{homeworkProblem}
+    Suppose you have the following data:
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c | c | c | c}
+            \hline
+            Observation
+            & \(X_1\)
+            & \(X_2\)
+            & Class
+            \\
+            \hline
+            1
+            & 2
+            & 2
+            & +1
+            \\
+            2
+            & 2
+            & -2
+            & +1
+            \\
+            3
+            & -2
+            & -2
+            & +1
+            \\
+            4
+            & -2
+            & 2
+            & +1
+            \\
+            5
+            & 1
+            & 1
+            & -1
+            \\
+            6
+            & 1
+            & 1
+            & -1
+            \\
+            7
+            & -1
+            & -1
+            & -1
+            \\
+            8
+            & -1
+            & 1
+            & -1
+            \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \part
+
+    Show that the original data is not linearly separable by making a sketch.
+    \\
+
+    \solution
+
+<<echo=FALSE>>=
+X1 <- c(2, 2, -2, -2, 1, 1, -1, -1)
+X2 <- c(2, -2, -2, 2, 1, -1, -1, 1)
+color <- c(rep('red', 4), rep('green', 4))
+class <- c(1, 1, 1, 1, -1, -1, -1, -1)
+@
+
+    Here is a basic graph of the data where Red represents the +1 class and
+    Green represents the -1 class. As we can see, there is no way to draw a
+    line around this data.
+
+<<p7a, echo=FALSE, fig.pos="H", fig.height=5, fig.cap="Plot of the data">>=
+plot(X1, X2,
+     ylim = c(-4, 4),
+     xlim = c(-4, 4),
+     pch = 19,
+     col = color)
+@
+
+    \part
+
+    Make a sketch of the problem when applying the feature mapping \(\varphi\)
+    to the original data.
+    \\
+
+    \solution
+
+    Applying \(\varphi\) to our data, we put our \(X_1\) and \(X_2\) through
+    the equation if the condition holds. If not, we just use the original data
+    points. This gives us the following data:
+
+    \begin{table}[ht]
+        \centering
+        \begin{tabular}{c | c | c | c | c | c | c}
+            \hline
+            Observation
+            & \(X_1\)
+            & \(X_2\)
+            & Class
+            & \(\sqrt{X_1^2 + X_2^2} > 2\)
+            & new \(X_1\)
+            & new \(X_2\)
+            \\
+            \hline
+            1
+            & 2
+            & 2
+            & +1
+            & \(\sqrt{8} > 2\)
+            & 2
+            & 2
+            \\
+            2
+            & 2
+            & -2
+            & +1
+            & \(\sqrt{8} > 2\)
+            & 10
+            & 6
+            \\
+            3
+            & -2
+            & -2
+            & +1
+            & \(\sqrt{8} > 2\)
+            & 6
+            & 6
+            \\
+            4
+            & -2
+            & 2
+            & +1
+            & \(\sqrt{8} > 2\)
+            & 6
+            & 10
+            \\
+            5
+            & 1
+            & 1
+            & -1
+            & \(\sqrt{2} < 2\)
+            & 1
+            & 1
+            \\
+            6
+            & 1
+            & -1
+            & -1
+            & \(\sqrt{2} < 2\)
+            & 1
+            & -1
+            \\
+            7
+            & -1
+            & -1
+            & -1
+            & \(\sqrt{2} < 2\)
+            & -1
+            & -1
+            \\
+            8
+            & -1
+            & 1
+            & -1
+            & \(\sqrt{2} < 2\)
+            & -1
+            & 1
+            \\
+            \hline
+        \end{tabular}
+    \end{table}
+
+<<echo=FALSE>>=
+X1.space <- c(2, 10, 6, 6, 1, 1, -1, -1)
+X2.space <- c(2, 6, 6, 10, 1, -1, -1, 1)
+color <- c(rep('red', 4), rep('green', 4))
+class <- c(1, 1, 1, 1, -1, -1, -1, -1)
+@
+
+    Here is the data after the feature mapping:
+
+<<p7b, echo=FALSE, fig.pos="H", fig.height=5, fig.width=5, fig.cap="Plot of the data in the feature space">>=
+plot(X1.space, X2.space,
+     ylim = c(-2, 12),
+     xlim = c(-2, 12),
+     pch = 19,
+     col = color)
+@
 \end{homeworkProblem}
 
 \end{document}
