@@ -1,0 +1,336 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{fancyvrb}
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+\newenvironment{homeworkProblem}{
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+\newcommand{\hmwkTitle}{Final Exam}
+\newcommand{\hmwkDueDate}{May 5, 2014}
+\newcommand{\hmwkClass}{ComS 573}
+\newcommand{\hmwkClassTime}{10am}
+\newcommand{\hmwkClassInstructor}{Professor De Brabanter}
+\newcommand{\hmwkAuthorName}{Josh Davis}
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ at\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\solution}{\textbf{\large Solution}}
+
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+\newcommand{\Std}{\mathrm{Std}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Likelihood}{\mathcal{L}}
+\newcommand{\dist}[1]{\sim \mathrm{#1}}
+\newcommand{\pval}{\(p\)-value}
+\newcommand{\tstat}{\(t\)-statistic}
+
+\newcommand{\X}{{\bold X}}
+\newcommand{\Y}{{\bold Y}}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    We want to determine the posterior distribution. We know that the
+    probability \(p(\beta \mid X, Y)\) is going to be proportional to this
+    posterior distribution  This gives us:
+    \[
+        p(\beta \mid \X, \Y)
+        \propto f(\Y \mid \X, \beta) p(\beta \mid \X)
+        = f(\Y \mid \X, \beta) p(\beta)
+    \]
+
+    We were given the distribution of our \(\beta_i\), which is:
+    \[
+        p(\beta)
+        = \prod_{i = 1}^{d} p(\beta_i)
+        = \prod_{i = 1}^{d}
+        \frac{
+            1
+        }{
+            \sqrt{
+                2c\pi
+            }
+        }
+        \exp \left(
+            - \frac{
+                \beta_i^2
+                }{
+                    2c
+                }
+        \right)
+        = \left(
+            \frac{
+                1
+            }{
+                \sqrt{
+                    2c\pi
+                }
+            }
+        \right)^d
+        \exp \left(
+            - \frac{
+                1
+            }{
+                2c
+            }
+            \sum_{i = 1}^{d} \beta_i^2
+        \right)
+    \]
+
+    Using our values:
+    \[
+        \begin{split}
+            f(\Y \mid \X, \beta)p(\beta)
+            &=
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)^n
+            \exp
+            \left(
+                - \frac{
+                    1
+                }{
+                    2\sigma^2
+                }
+                \sum_{i = 1}^{n} (Y_i - \hat{Y_i})^2
+            \right)
+            \left(
+                \frac{
+                    1
+                }{
+                    \sqrt{
+                        2c\pi
+                    }
+                }
+            \right)^d
+            \exp \left(
+                - \frac{
+                    1
+                }{
+                    2c
+                }
+                \sum_{i = 1}^{d} \beta_i^2
+            \right)
+            \\
+            &=
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)^n
+            \left(
+                \frac{
+                    1
+                }{
+                    \sqrt{
+                        2c\pi
+                    }
+                }
+            \right)^d
+            \exp
+            \left(
+                - \frac{
+                    1
+                }{
+                    2\sigma^2
+                }
+                \sum_{i = 1}^{n}
+                \left[
+                    (Y_i - \hat{Y_i})^2
+                \right]
+                - \frac{
+                    1
+                }{
+                    2c
+                }
+                \sum_{i = 1}^{d} \beta_i^2
+            \right)
+        \end{split}
+    \]
+
+    Let's take the log to simplify things a bit:
+    \[
+        \begin{split}
+            \log f(\Y \mid \X, \beta)p(\beta)
+            &=
+            \log
+            \left[
+                \left(
+                    \frac{
+                        1
+                    }{
+                        \sigma \sqrt{2\pi}
+                    }
+                \right)^n
+                \left(
+                    \frac{
+                        1
+                    }{
+                        \sqrt{
+                            2c\pi
+                        }
+                    }
+                \right)^d
+                \exp
+                \left(
+                    - \frac{
+                        1
+                    }{
+                        2\sigma^2
+                    }
+                    \sum_{i = 1}^{n}
+                    \left[
+                        (Y_i - \hat{Y_i})^2
+                    \right]
+                    - \frac{
+                        1
+                    }{
+                        2c
+                    }
+                    \sum_{i = 1}^{d} \beta_i^2
+                \right)
+            \right]
+            \\
+            &=
+            n
+            \left(
+                \frac{
+                    1
+                }{
+                    \sigma \sqrt{2\pi}
+                }
+            \right)
+            +
+            d \left(
+                \frac{
+                    1
+                }{
+                    \sqrt{
+                        2c\pi
+                    }
+                }
+            \right)
+            -
+            \left(
+                \frac{
+                    1
+                }{
+                    2\sigma^2
+                }
+                \sum_{i = 1}^{n}
+                \left[
+                    (Y_i - \hat{Y_i})^2
+                \right]
+                + \frac{
+                    1
+                }{
+                    2c
+                }
+                \sum_{i = 1}^{d} \beta_i^2
+            \right)
+        \end{split}
+    \]
+
+    By maximizing that, it is obvious that we want to minimize the second part,
+    thus we want to minimize:
+    \[
+        \frac{
+            1
+        }{
+            2\sigma^2
+        }
+        \left(
+            \text{RSS}
+            + \frac{
+                \sigma^2
+            }{
+                c
+            }
+            \sum_{i = 1}^{d} \beta_i^2
+        \right)
+    \]
+
+    Well all be darned, that's just the Ridge Regression formula with \(\lambda
+    = \sigma^2/c\). {\tt =]}
+\end{homeworkProblem}
+
+\end{document}
