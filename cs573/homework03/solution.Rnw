@@ -204,8 +204,7 @@ library('pls')
                 }
             \right)
             \\
-            &= \left(
-                    \frac{
+            &= \left( \frac{
                         1
                     }{
                         \sigma \sqrt{2\pi}
@@ -354,8 +353,8 @@ library('pls')
     \solution
 
     We want to determine the posterior distribution. We know that the
-    probability \(p(\beta \mid X, Y)\) is going to be proportaional to this
-    posterior distirbution.  This gives us:
+    probability \(p(\beta \mid X, Y)\) is going to be proportional to this
+    posterior distribution  This gives us:
     \[
         p(\beta \mid \X, \Y)
         \propto f(\Y \mid \X, \beta) p(\beta \mid \X)
