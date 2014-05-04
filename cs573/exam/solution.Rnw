@@ -565,8 +565,21 @@ plot(X1.space, X2.space,
 
     \solution
 
-    Solution.
-    \\
+    First let's simplify the left side to see how 
+    \[
+        \begin{split}
+            \sum_{i = 1}^n \Cov(\hat{Y}_i, Y_i)
+            &= \Tr(\Cov(\hat{Y}, Y))
+            \\
+            &= \Tr(\Cov(Y, Y)\X(\X^T \X)^{-1} \X^T)
+            \\
+            &= \Tr(\sigma^2_e \X(\X^T \X)^{-1} \X^T)
+            \\
+            &= \sigma^2_e \Tr(\X(\X^T \X)^{-1} \X^T)
+            \\
+            &= \sigma^2_e \Tr(\W)
+        \end{split}
+    \]
 
     This shows that for the linear smoother that \(\sum_{i = 1}^n
     \Cov(\hat{Y}_i, Y_i) = \Tr(\W) \sigma^2_e\) are equal.
@@ -585,7 +598,7 @@ plot(X1.space, X2.space,
             \\
             &= \sigma^2_e \sum_{i = 1}^{d} \I_{ii}
             \\
-            &= \sigma^2_e (1_1 + \ldots + 1_d)
+            &= \sigma^2_e (1_1 + \cdots + 1_d)
             \\
             &= \sigma^2_e (d)
         \end{split}
