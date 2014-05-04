@@ -90,7 +90,10 @@
 \newcommand{\dist}[1]{\sim \mathrm{#1}}
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
+\DeclareMathOperator{\Tr}{trace}
 
+\newcommand{\I}{{\bold I}}
+\newcommand{\W}{{\bold W}}
 \newcommand{\X}{{\bold X}}
 \newcommand{\Y}{{\bold Y}}
 
@@ -409,7 +412,7 @@ class <- c(1, 1, 1, 1, -1, -1, -1, -1)
 
     Here is a basic graph of the data where Red represents the +1 class and
     Green represents the -1 class. As we can see, there is no way to draw a
-    line around this data.
+    line separating this data.
 
 <<p7a, echo=FALSE, fig.pos="H", fig.height=5, fig.cap="Plot of the data">>=
 plot(X1, X2,
@@ -540,6 +543,58 @@ plot(X1.space, X2.space,
     \solution
 
     Solution.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Let \(\Y = (Y_1, \ldots, Y_n)^T\) and \(\hat{\Y} = \hat{m}(x_1), \ldots,
+    \hat{m}(x_n))^T\). Show for the linear smoother \(\hat{\Y} = \W\Y\) that
+    \[
+        \sum_{i = 1}^n \Cov(\hat{Y}_i, Y_i) = \Tr(\W) \sigma^2_e
+    \]
+    where \(\sigma^2_e\) denotes the error variance. Explain in words what you
+    have proved in terms of effective degrees of freedom.
+    \\
+
+    \solution
+
+    Solution.
+    \\
+
+    This shows that for the linear smoother that \(\sum_{i = 1}^n
+    \Cov(\hat{Y}_i, Y_i) = \Tr(\W) \sigma^2_e\) are equal.
+    \\
+
+    To see the relationship to effective degrees of freedom, let's calculate
+    what the right side equals:
+    \[
+        \begin{split}
+            \Tr(\W) \sigma^2_e
+            &= \Tr(\X(\X^T \X)^{-1} \X^T) \sigma^2_e
+            \\
+            &= \Tr((\X^T \X) (\X^T \X)^{-1}) \sigma^2_e \quad \text{by the properties of $\Tr$}
+            \\
+            &= \Tr(\I) \sigma^2_e \quad \text{where $\I$ is an identity matrix}
+            \\
+            &= \sigma^2_e \sum_{i = 1}^{d} \I_{ii}
+            \\
+            &= \sigma^2_e (1_1 + \ldots + 1_d)
+            \\
+            &= \sigma^2_e (d)
+        \end{split}
+    \]
+
+    This is called effective degrees of freedom because since we are performing
+    regularization on our data, \(d\) becomes the number of parameters we are
+    using. This is different than the entire dimensionality of the data because
+    ``effectively'' only a few parameters are having an effect.
 \end{homeworkProblem}
 
 \end{document}
