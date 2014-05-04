@@ -565,7 +565,7 @@ plot(X1.space, X2.space,
 
     \solution
 
-    First let's simplify the left side to see how 
+    First let's simplify the left side to see how
     \[
         \begin{split}
             \sum_{i = 1}^n \Cov(\hat{Y}_i, Y_i)
@@ -592,9 +592,9 @@ plot(X1.space, X2.space,
             \Tr(\W) \sigma^2_e
             &= \Tr(\X(\X^T \X)^{-1} \X^T) \sigma^2_e
             \\
-            &= \Tr((\X^T \X) (\X^T \X)^{-1}) \sigma^2_e \quad \text{by the properties of $\Tr$}
+            &= \Tr((\X^T \X) (\X^T \X)^{-1}) \sigma^2_e \quad\quad \text{by the properties of $\Tr$}
             \\
-            &= \Tr(\I) \sigma^2_e \quad \text{where $\I$ is an identity matrix}
+            &= \Tr(\I) \sigma^2_e \quad\quad \text{where $\I$ is an identity matrix}
             \\
             &= \sigma^2_e \sum_{i = 1}^{d} \I_{ii}
             \\
