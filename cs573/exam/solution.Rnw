@@ -548,7 +548,14 @@ plot(X1.space, X2.space,
 \pagebreak
 
 \begin{homeworkProblem}
+    Prove or disprove that least squares support vector machines for regression
+    is a linear smoother. (\emph{Hint:} Start by solving the lienar system for
+    \(b\) and \(\alpha\)).
+    \\
 
+    \solution
+
+    Solution.
 \end{homeworkProblem}
 
 \pagebreak
