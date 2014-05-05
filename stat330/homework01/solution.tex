@@ -412,9 +412,8 @@
     employee knows Fortran. Draw a Venn diagram.
     \\
 
-    \solution
-
-    \vspace{1in}
+    \solution (Drawing)
+    \\
 
     \part
 
@@ -422,15 +421,11 @@
     \\
 
     \solution
-
     \[
-        \begin{split}
-            \Pr{(\neg \mbox{F})} &= 1 - \Pr{(\mbox{F})}
-            \\
-            &= 1 - .6
-            \\
-            &= .4
-        \end{split}
+        \Pr{(\neg \mbox{B})}
+        = 1 - \Pr{(\mbox{B})}
+        = 1 - .6
+        = .4
     \]
 
     \part
@@ -439,17 +434,12 @@
     \\
 
     \solution
-
     \[
-        \begin{split}
-            \Pr{(\neg \mbox{F} \land \neg \mbox{C})} &= 1 - \Pr(\mbox{F} \lor \mbox{C})
-            \\
-            &= 1 - (\Pr(\mbox{F}) + \Pr(\mbox{C}) - \Pr(\mbox{F} \cap \mbox{C}))
-            \\
-            &= 1 - (.6 + .7 - .5)
-            \\
-            &= .2
-        \end{split}
+        \Pr{(\neg (\mbox{B} \land \mbox{C}))}
+        = 1 - \Pr(\mbox{B} \land \mbox{C})
+        = 1 - \Pr(\mbox{B} \cap \mbox{C})
+        = 1 - (.5)
+        = .5
     \]
 
     \part
@@ -458,19 +448,13 @@
     \\
 
     \solution
-
     \[
-        \begin{split}
-            \Pr{(\mbox{F} \land \neg \mbox{C})} &= \Pr{(F)} - \Pr{(\mbox{both})}
-            \\
-            &= .6 - .5
-            \\
-            &= .1
-        \end{split}
+        \Pr{(\mbox{B} \land \neg \mbox{C})}
+        = \Pr{(B)} - \Pr{(\mbox{both})}
+        = .6 - .5
+        = .1
     \]
 \end{homeworkProblem}
-
-\pagebreak
 
 \begin{homeworkProblem}
     Total 60 students attending University. 9 were living off campus, 36 were
@@ -479,17 +463,11 @@
 
     Let \(A\) be the event denoting undergraduates and \(B\) denote living off campus.
     \[
-        \begin{split}
-            A &= 36
-            \\
-            B &= 9
-            \\
-            \overline{A} &= 60 - 36 = 24
-            \\
-            \overline{B} &= 60 - 9 = 51
-            \\
-            A \cap B &= 3
-        \end{split}
+        A = 36, \quad
+        B = 9, \quad
+        \overline{A} = 60 - 36 = 24, \quad
+        \overline{B} = 60 - 9 = 51, \quad
+        A \cap B = 3
     \]
 
     \part
@@ -498,17 +476,12 @@
     \\
 
     \solution
-
     \[
-        \begin{split}
-            A \cap \overline{B} &= A \setminus B
-            \\
-            &= 36 - 9 + 3
-            \\
-            &= 30
-        \end{split}
+        A \cap \overline{B}
+        = A \setminus B
+        = 36 - 9 + 3
+        = 30
     \]
-    \\
 
     \part
 
@@ -516,15 +489,11 @@
     \\
 
     \solution
-
     \[
-        \begin{split}
-            \overline{A} \cap \overline{B} &= \overline{A} \setminus B
-            \\
-            &= 24 - 9 + 3
-            \\
-            &= 18
-        \end{split}
+        \overline{A} \cap \overline{B}
+        = \overline{A} \setminus B
+        = 24 - 9 + 3
+        = 18
     \]
 \end{homeworkProblem}
 
