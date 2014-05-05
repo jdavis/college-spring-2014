@@ -79,9 +79,9 @@
 \newcommand{\dx}{\mathrm{d}x}
 \newcommand{\solution}{\textbf{\large Solution}}
 
-\newcommand{\E}{\mathrm{E}}
+\DeclareMathOperator{\E}{\mathrm{E}}
 \newcommand{\Var}{\mathrm{Var}}
-\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator{\Cov}{\mathrm{Cov}}
 \newcommand{\Bias}{\mathrm{Bias}}
 \newcommand{\Std}{\mathrm{Std}}
 \newcommand{\N}{\mathcal{N}}
@@ -770,13 +770,131 @@ plot(svm.fit, d,
 
 \begin{homeworkProblem}
     Prove or disprove that least squares support vector machines for regression
-    is a linear smoother. (\emph{Hint:} Start by solving the lienar system for
+    is a linear smoother. (\emph{Hint:} Start by solving the linear system for
     \(b\) and \(\alpha\)).
     \\
 
     \solution
 
-    Solution.
+    Let's derive the LSSVM like we did in class.
+    \\
+
+    Instead of using inequality constraints, let's use equality constraints
+    instead. This becomes:
+    \[
+        \min_{w, b}
+        \quad
+        \frac{
+            1
+        }{
+            2
+        }
+        w^T w
+        + \gamma
+        \frac{1}{2}
+        \sum_{i = 1}^N \xi^2_i
+    \]
+
+    such that
+    \[
+        Y_i (w^T \varphi(x_i) + b) = 1 - \xi_i
+    \]
+
+    Our problem is no longer QP, we lose the interpretation and now we can
+    solve it with a linear system.
+    \\
+
+    Let's calculate our Lagrangians:
+    \[
+        \Likelihood(w, b, \xi; \alpha)
+        =
+        \frac{
+            1
+        }{
+            2
+        }
+        w^T w
+        + \gamma
+        \frac{1}{2}
+        \sum_{i = 1}^N \xi^2_i
+        -
+        \sum_{k = 1}^N
+        \left[
+            Y_k(w^T \varphi(x_k) + b) - 1 + \xi_k
+        \right]
+    \]
+
+    This gives us the following:
+    \[
+        \begin{split}
+            \frac{\partial \Likelihood}{\partial w}
+            = 0
+            & \Rightarrow
+            w = \sum_{k = 1}^N \alpha_k Y_k \varphi(x_k)
+            \\
+            \frac{\partial \Likelihood}{\partial b}
+            = 0
+            & \Rightarrow
+            b = \sum_{k = 1}^N \alpha_k Y_k
+            \\
+            \frac{\partial \Likelihood}{\partial \xi_k}
+            = 0
+            & \Rightarrow
+            \alpha_k = \gamma \xi_k
+            \\
+            \frac{\partial \Likelihood}{\partial \alpha_k}
+            = 0
+            & \Rightarrow
+            1 - \xi_k = Y_i (w^T \varphi(x_i) + b)
+        \end{split}
+    \]
+
+    Then the linear system becomes:
+    \[
+        \begin{bmatrix}
+            0 & \Y^T
+            \\
+            \Y & \Omega + \frac{\I}{\gamma}
+        \end{bmatrix}
+        \begin{bmatrix}
+            b
+            \\
+            \alpha
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            0
+            \\
+            1_n
+        \end{bmatrix}
+    \]
+
+    Using Linear Algebra-fu, we get
+    \[
+        b = \frac{
+            1^T (\Omega + \frac{1}{\gamma} \I_N) ^{-1} Y
+        }{
+            1^T (\Omega + \frac{1}{\gamma} \I_N) ^{-1} 1_N
+        }
+    \]
+    \[
+        a = (Y - 1_n b) (\Omega + \frac{1}{\gamma}\I_n)^{-1}
+    \]
+
+    Like we mentioned in class, our model becomes:
+
+    \[
+        f(x)
+        =
+        \sum_{k = 1}^N \alpha K(x, x_k) + b
+    \]
+
+    where we use a kernel \(K(x_k, x_l) = \varphi(x_k)^T \varphi(x_l)\).
+    \\
+
+    I'm in over my head because my linear algebra-fu is lacking. But if we were
+    to continue, we'd see that our model is a linear combination of \(Y\). This
+    is a linear smoother and we'd be done.
 \end{homeworkProblem}
 
 \pagebreak
