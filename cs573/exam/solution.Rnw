@@ -91,7 +91,10 @@
 \newcommand{\pval}{\(p\)-value}
 \newcommand{\tstat}{\(t\)-statistic}
 \DeclareMathOperator{\Tr}{trace}
+\DeclareMathOperator{\Sv}{sv}
 
+\newcommand{\A}{{\bold A}}
+\newcommand{\B}{{\bold B}}
 \newcommand{\I}{{\bold I}}
 \newcommand{\W}{{\bold W}}
 \newcommand{\X}{{\bold X}}
@@ -100,6 +103,10 @@
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
 
 \begin{document}
+
+<<echo=FALSE, warning=FALSE, message=FALSE>>=
+library('e1071')
+@
 
 \maketitle
 
@@ -542,7 +549,221 @@ plot(X1.space, X2.space,
 
     \solution
 
-    Solution.
+    Based on the plot, we know that we don't have to solve a QP problem because
+    it is obvious which points are the SVMs. In this case, we have two:
+    \[
+        \Sv_1 =
+        \begin{pmatrix}
+            1
+            \\
+            1
+        \end{pmatrix},
+        \quad
+        \Sv_2 =
+        \begin{pmatrix}
+            2
+            \\
+            2
+        \end{pmatrix}
+    \]
+
+    Our hyperplane is then:
+    \[
+        H
+        = w^T x + b = 0
+        = (w_1, w_2)
+        \begin{pmatrix}
+            X_1
+            \\
+            X_2
+        \end{pmatrix}
+        + b = 0
+    \]
+
+    For all our \(\Sv\)s, \(Y_i[w^T X_i + b] = 1\). This gives us:
+    \begin{equation}
+        (w_1, w_2)
+        \begin{pmatrix}
+            2
+            \\
+            2
+        \end{pmatrix}
+        + b = 1
+        \label{eq:1}
+    \end{equation}
+    \begin{equation}
+        (w_1, w_2)
+        \begin{pmatrix}
+            1
+            \\
+            1
+        \end{pmatrix}
+        + b = -1
+        \label{eq:2}
+    \end{equation}
+
+    Well shucks, we have three unknowns and only two equations. We'll need
+    another one. As was mentioned in lecture, we can know that the cross
+    product of the vector between our two points is going to be perpendicular
+    to our final plane or also parallel to \(w\). If we go with the latter,
+    we get:
+
+    \[
+        \A \times \B = \vec{0}
+    \]
+
+    Using our two points, \(\Sv_1\) and \(\Sv_2\), we can calculate the vector
+    as follows
+    \[
+        \A
+        =
+        \begin{pmatrix}
+            \Sv_{2x} - \Sv_{1x}
+            \\
+            \Sv_{2y} - \Sv_{1y}
+            \\
+            0
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            2 - 1
+            \\
+            2 - 1
+            \\
+            0
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            1
+            \\
+            1
+            \\
+            0
+        \end{pmatrix}
+    \]
+
+    and then using \(w\), we get our next vector
+    \[
+        \B =
+        \begin{pmatrix}
+            w_1
+            \\
+            w_2
+            \\
+            0
+        \end{pmatrix}
+    \]
+
+    The cross product is then
+    \[
+        \A \times \B
+        =
+        \begin{pmatrix}
+            \A_2 \B_3 - \A_3 \B_2
+            \\
+            \A_3 \B_1 - \A_1 \B_3
+            \\
+            \A_1 \B_2 - \A_2 \B_1
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0
+            \\
+            0
+            \\
+            1 w_2 - 1 w_1
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            0
+            \\
+            0
+            \\
+            0
+        \end{pmatrix}
+    \]
+
+    This gives us our third equation
+    \begin{equation}
+        w_2 = w_1
+        \label{eq:3}
+    \end{equation}
+
+    We can then subtract~\eqref{eq:2} from~\eqref{eq:1}. Which will give us:
+    \[
+        (2 w_1 + 2 w_2 - 1) - (w_1 + w_1 + 1)
+        = w_1 + w_2 = 2
+    \]
+
+    Then using~\eqref{eq:3} we can see that \(w_1 = 1\) and \(w_2 = 1\). Then
+    substituting these back into~\eqref{eq:1} gives:
+    \[
+        2 w_1 + 2 w_2 + b
+        = 2 + 2 + b
+        = 4 + b
+        = 1
+    \]
+
+    Thus \(b = -3\).
+    \\
+
+    Using our Lagrangian formula where \(w = \sum_{i = 1}^n \alpha_i Y_i x_i\),
+    this gives:
+    \[
+        \begin{pmatrix}
+            w_1
+            \\
+            w_2
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            1
+            \\
+            1
+        \end{pmatrix}
+        =
+        \alpha_1 Y_1 x_1
+        +
+        \alpha_2 Y_2 x_2
+        =
+        -\alpha_1
+        \begin{pmatrix}
+            1
+            \\
+            1
+        \end{pmatrix}
+        +
+        \alpha_2
+        \begin{pmatrix}
+            2
+            \\
+            2
+        \end{pmatrix}
+    \]
+
+    Knowing this, we can then use our last Lagrangian where \(\alpha_1 Y_1 +
+    \alpha_2 + Y_2 = 0\) and get two equations:
+    \begin{equation}
+        2 \alpha_2 - \alpha_1 = 1
+        \label{eq:a1}
+    \end{equation}
+    \begin{equation}
+        \alpha_2 = \alpha_1
+        \label{eq:a2}
+    \end{equation}
+
+    Solving these gives us \(\alpha_1 = 1\) and \(\alpha_2 = 1\).
+    \\
+
+    Graphing our hyperplane on our previous plot we get:
+
+<<p7c, echo=FALSE, fig.align="center", fig.pos="H", fig.height=5, fig.width=5, fig.cap="Plot of our SVM">>=
+d <- data.frame(X1 = X1.space, X2 = X2.space, y = as.factor(class))
+svm.fit <- svm(y ~ ., data = d, kernel = "linear", cost = 10, scale = FALSE)
+plot(svm.fit, d,
+     xlim = c(-1, 4),
+     ylim = c(-1, 8))
+@
 \end{homeworkProblem}
 
 \pagebreak
