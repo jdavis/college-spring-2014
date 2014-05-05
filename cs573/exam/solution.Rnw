@@ -801,10 +801,7 @@ plot(svm.fit, d,
     \]
 
     Our problem is no longer QP, we lose the interpretation and now we can
-    solve it with a linear system.
-    \\
-
-    Let's calculate our Lagrangians:
+    solve it with a linear system.  Let's calculate our Lagrangians:
     \[
         \Likelihood(w, b, \xi; \alpha)
         =
@@ -893,8 +890,11 @@ plot(svm.fit, d,
     \\
 
     I'm in over my head because my linear algebra-fu is lacking. But if we were
-    to continue, we'd see that our model is a linear combination of \(Y\). This
-    is a linear smoother and we'd be done.
+    to continue, we'd plug in your values for \(\alpha\) and \(b\). Then we
+    would move around the values a bit. Then we'd be able to see that our model
+    is a linear combination of \(Y\) similar to problem 9. We'd have something
+    similar to \(f = \W \Y\). This is a linear smoother and that would conclude
+    the proof.
 \end{homeworkProblem}
 
 \pagebreak
