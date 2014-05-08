@@ -426,8 +426,8 @@ base::source('./hw6prob4.R')
 base::source('./hw6prob5.R')
 @
 
-    Thus the probability was \(\Sexpr{H/N}\) which means that \(\Sexpr{H}\) found
-    their way home and the rest died.
+    Thus the probability was \(\Sexpr{H/N}\) which means that \(\Sexpr{H}\)
+    found their way home and the rest died.
 
 \end{homeworkProblem}
 
