@@ -454,6 +454,9 @@ base::source('./hw6prob5.R')
 <<>>=
 base::source('./hw6prob6.R')
 @
+
+    As we can see, the true values are very close to the simulated values as
+    given by the difference for each iteration.
 \end{homeworkProblem}
 
 \end{document}
