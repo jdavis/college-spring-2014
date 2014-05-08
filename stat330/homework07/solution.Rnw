@@ -436,7 +436,7 @@ x <- dog(100)
     \solution
 
     We need to calculate 3 iterations of our \(P\) probability transition
-    matrix. This gives us the following where \(P^{k + 1}\) indicates the
+    matrix. This gives us the following where \(P^{k}\) indicates the
     matrix after \(k\) hours:
     \[
         P =
@@ -463,22 +463,14 @@ x <- dog(100)
             \\
             0 & 0.5 & 0.5
         \end{pmatrix}, \quad
-        P^4 =
-        \begin{pmatrix}
-            0.0625 & 0.5 & 0.4375
-            \\
-            0 & 0.5 & 0.5
-            \\
-            0 & 0.5 & 0.5
-        \end{pmatrix},
     \]
 
     We want the starting probabilty that nobody is in the lab, which is the
     first row, or \((1, 0, 0)P^4\). Thus the probabilities are:
     \[
-        \text{0 students} = 0.0625, \quad
+        \text{0 students} = 0.125, \quad
         \text{1 student} = 0.5, \quad
-        \text{2 students} = 0.4375
+        \text{2 students} = 0.375
     \]
 
     \part
@@ -762,10 +754,10 @@ x <- pgamma(8, shape = 5, rate = 0.5)
     probability that \(\Pr(T = 10)\). Using R, we know that this is:
 
 <<eval=FALSE>>=
-pgamma(10, shape = 3, rate = 0.25)
+1 - pgamma(10, shape = 3, rate = 0.25)
 
 <<echo=FALSE>>=
-x <- pgamma(10, shape = 3, rate = 0.25)
+x <- 1 - pgamma(10, shape = 3, rate = 0.25)
 @
 
     Thus this gives us the probability that Todd won't have to change his diet
