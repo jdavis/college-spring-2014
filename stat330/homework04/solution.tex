@@ -420,7 +420,11 @@
     \(\Pr(E \mid R) \dist{Poisson}(4)\). Thus this gives us:
 
     \[
-        \Pr(E \mid R) \dist{Poisson}(4) = p(8) = e^{-4}\frac{4^8}{8!} \approx .030
+        \begin{split}
+            \Pr(E \mid R) \dist{Poisson}(10) = p(8) &= e^{-10}\frac{10^8}{8!} \approx .113
+            \\
+            \Pr(E \mid \overline{R}) \dist{Poisson}(4) = p(8) &= e^{-4}\frac{4^8}{8!} \approx .030
+        \end{split}
     \]
 
     We know that Baye's Rule is that \(\Pr(E \mid R) \Pr(R) = \Pr(R \mid E)
@@ -448,18 +452,18 @@
             }
             \\
             &= \frac{
-                (.030) (.6)
+                (.113) (.6)
             }{
-                (.030) (.6) + (1 - .030) (.4)
+                (.113) (.6) + (.030) (.4)
             }
             \\
             &= \frac{
-                .018
+                .0678
             }{
-                .406
+                .0798
             }
             \\
-            &\approx .044
+            &\approx .850
         \end{split}
     \]
 
@@ -515,11 +519,11 @@
     \solution
 
     We want the probability that he makes 15 shots in a row until his first miss,
-    or \(P[X = 16]\). This gives:
+    or \(P[X > 15]\). This gives:
     \\
 
     \[
-        P[X = 16] = P(16) = (1 - p)^{16 - 1}p = (.854)^{15}(.146) \approx .014
+        P[X > 15] = 1 - P[X < 15] = 1 - (1 - p)^{15} = 1 - (.854)^{15} \approx .0937
     \]
 
     \part
@@ -566,9 +570,10 @@
 
     \solution
 
-    This problem takes the form of the Poisson distribution. We have a rate
-    and a value that has one of the units of the rate. Thus we can calculate
-    our lambda, \(\lambda = (12 / 10) (3) = 3.6\) occurences (earthquakes).
+    Let \(X\) be the number of earthquakes in Alaska. This problem takes the
+    form of the Poisson distribution. We have a rate and a value that has one
+    of the units of the rate. Thus we can calculate our lambda, \(\lambda = (12
+    / 10) (3) = 3.6\) occurences (earthquakes).
     \\
 
     We know the pmf of a Poisson distribution is: \(P(x) =
@@ -612,9 +617,10 @@
 
     \solution
 
-    This problem takes the form of the Poisson distribution. We have a rate
-    and a value that has one of the units of the rate. Thus we can calculate
-    our lambda, \(\lambda = (1.5) (0.4) = .6\) occurences (blemishes).
+    Let \(X\) be the number of blemishes on the paper. This problem takes the
+    form of the Poisson distribution. We have a rate and a value that has one
+    of the units of the rate. Thus we can calculate our lambda, \(\lambda =
+    (1.5) (0.4) = .6\) occurences (blemishes).
     \\
 
     We know the pmf of a Poisson distribution is: \(P(x) =
@@ -644,8 +650,9 @@
 
     \solution
 
-    If we think about attend as a success and missing lecture as a failure,
-    then this takes the form of a Binomial distribution.
+    Let \(X\) be the number of 30 lectures you miss. If we think about attend
+    as a success and missing lecture as a failure, then this takes the form of
+    a Binomial distribution.
     \\
 
     This gives us the equation of \(p(x) = \binom{30}{x} p^x q^{30 - x}\)
